@@ -1,0 +1,19 @@
+.TH "IncomingDataQueue::SyncSourcesIterator" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IncomingDataQueue::SyncSourcesIterator \- iterator through the list of synchronizations sources in this session 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+iterator through the list of synchronizations sources in this session
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

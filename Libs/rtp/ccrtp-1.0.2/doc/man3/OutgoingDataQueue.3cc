@@ -1,0 +1,191 @@
+.TH "OutgoingDataQueue" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OutgoingDataQueue \- A generic outgoing RTP data queue supporting multiple destinations. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <oqueue.h>\fP
+.PP
+Inherits \fBOutgoingDataQueueBase\fP, and \fBDestinationListHandler\fP.
+.PP
+Inherited by \fBRTPDataQueue\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisSending\fP () const"
+.br
+.RI "\fIDetermine if outgoing packets are waiting to send.\fP"
+.ti -1c
+.RI "void \fBputData\fP (uint32 stamp, const unsigned char *data=NULL, size_t len=0)"
+.br
+.RI "\fIThis is used to create a data packet in the send queue.\fP"
+.ti -1c
+.RI "void \fBsetMark\fP (bool mark)"
+.br
+.RI "\fISet marker bit for the packet in which the next data provided will be send.\fP"
+.ti -1c
+.RI "bool \fBgetMark\fP () const"
+.br
+.RI "\fIGet wheter the mark bit will be set in the next packet.\fP"
+.ti -1c
+.RI "size_t \fBsetPartial\fP (uint32 timestamp, unsigned char *data, size_t offset, size_t max)"
+.br
+.RI "\fISet partial data for an already queued packet.\fP"
+.ti -1c
+.RI "void \fBsetSchedulingTimeout\fP (\fBmicrotimeout_t\fP to)"
+.br
+.RI "\fISet the default scheduling timeout to use when no data packets are waiting to be sent.\fP"
+.ti -1c
+.RI "void \fBsetExpireTimeout\fP (\fBmicrotimeout_t\fP to)"
+.br
+.RI "\fISet the 'expired' timer for expiring packets pending in the send queue which have gone unsent and are already 'too late' to be sent now.\fP"
+.ti -1c
+.RI "uint32 \fBgetSendPacketCount\fP () const"
+.br
+.RI "\fIGet the total number of packets sent so far.\fP"
+.ti -1c
+.RI "uint32 \fBgetSendOctetCount\fP () const"
+.br
+.RI "\fIGet the total number of octets (payload only) sent so far.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBmicrotimeout_t\fP \fBgetSchedulingTimeout\fP ()"
+.br
+.RI "\fIThis computes the timeout period for scheduling transmission of the next packet at the 'head' of the send buffer.\fP"
+.ti -1c
+.RI "size_t \fBdispatchDataPacket\fP ()"
+.br
+.RI "\fIThis function is used by the service thread to process the next outgoing packet pending in the sending queue.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A generic outgoing RTP data queue supporting multiple destinations.
+.PP
+\fBTodo: \fP
+.in +1c
+Add CSRC interface. 
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "size_t OutgoingDataQueue::dispatchDataPacket ()\fC [protected]\fP"
+.PP
+This function is used by the service thread to process the next outgoing packet pending in the sending queue.
+.PP
+\fBReturns: \fP
+.in +1c
+number of bytes sent. 0 if silent, <0 if error. 
+.SS "\fBmicrotimeout_t\fP OutgoingDataQueue::getSchedulingTimeout ()\fC [protected]\fP"
+.PP
+This computes the timeout period for scheduling transmission of the next packet at the 'head' of the send buffer.
+.PP
+If no packets are waiting, a default timeout is used. This actually forms the 'isPending()' timeout of the rtp receiver in the service thread.
+.PP
+\fBReturns: \fP
+.in +1c
+timeout until next packet is scheduled to send. 
+.SS "uint32 OutgoingDataQueue::getSendOctetCount () const\fC [inline]\fP"
+.PP
+Get the total number of octets (payload only) sent so far.
+.PP
+\fBReturns: \fP
+.in +1c
+total number of payload octets sent in RTP packets. 
+.SS "uint32 OutgoingDataQueue::getSendPacketCount () const\fC [inline]\fP"
+.PP
+Get the total number of packets sent so far.
+.PP
+\fBReturns: \fP
+.in +1c
+total number of packets sent 
+.SS "bool OutgoingDataQueue::isSending ()"
+.PP
+Determine if outgoing packets are waiting to send.
+.PP
+\fBReturns: \fP
+.in +1c
+true if there are packets waiting to be send. 
+.SS "void OutgoingDataQueue::putData (uint32 stamp, const unsigned char * data = NULL, size_t len = 0)"
+.PP
+This is used to create a data packet in the send queue.
+.PP
+Sometimes a 'NULL' or empty packet will be used instead, and these are known as 'silent' packets. 'Silent' packets are used simply to 'push' the scheduler along more accurately by giving the appearence that a next packet is waiting to be sent and to provide a valid timestamp for that packet.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIstamp\fP\fP
+Timestamp for expected send time of packet. 
+.TP
+\fB\fIdata\fP\fP
+Value or NULL if special 'silent' packet. 
+.TP
+\fB\fIlen\fP\fP
+May be 0 to indicate a default by payload type. 
+.SS "void OutgoingDataQueue::setExpireTimeout (\fBmicrotimeout_t\fP to)\fC [inline]\fP"
+.PP
+Set the 'expired' timer for expiring packets pending in the send queue which have gone unsent and are already 'too late' to be sent now.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIto\fP\fP
+timeout to expire unsent packets in milliseconds. 
+.SS "void OutgoingDataQueue::setMark (bool mark)\fC [inline]\fP"
+.PP
+Set marker bit for the packet in which the next data provided will be send.
+.PP
+When transmitting audio, should be set for the first packet of a talk spurt. When transmitting video, should be set for the last packet for a video frame.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fImark\fP\fP
+Marker bit value for next packet. 
+.SS "size_t OutgoingDataQueue::setPartial (uint32 timestamp, unsigned char * data, size_t offset, size_t max)"
+.PP
+Set partial data for an already queued packet.
+.PP
+This is often used for multichannel data.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fItimestamp\fP\fP
+Timestamp of packet. 
+.TP
+\fB\fIdata\fP\fP
+Buffer to copy from. 
+.TP
+\fB\fIoffset\fP\fP
+Offset to copy from. 
+.TP
+\fB\fImax\fP\fP
+Maximum data size. 
+.PP
+\fBReturns: \fP
+.in +1c
+Number of packet data bytes set. 
+.SS "void OutgoingDataQueue::setSchedulingTimeout (\fBmicrotimeout_t\fP to)\fC [inline]\fP"
+.PP
+Set the default scheduling timeout to use when no data packets are waiting to be sent.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIto\fP\fP
+timeout in milliseconds. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

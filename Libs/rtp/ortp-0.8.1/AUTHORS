@@ -1,0 +1,6 @@
+Simon MORLAT (simon dot morlat at linphone dot org) is the author the oRTP library.
+
+Eloquant (linphone at eloquant dot com) wrotes:
+	- porting of RTP library (oRTP) on Win32
+	
+Lovadina Nicola < lovadina dot nicola dot 10272 at unimo dot it > works on RTCP support.

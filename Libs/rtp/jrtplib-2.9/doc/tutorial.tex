@@ -1,0 +1,279 @@
+\documentstyle[12pt,a4]{article}
+
+\begin{document}
+
+\author{Jori Liesenborgs (jori@lumumba.luc.ac.be)}
+\title{JRTPLIB (v2.9) - TUTORIAL}
+\date{12th July 2004}
+\maketitle
+
+\section{Getting started}
+
+\subsection{Creating a session}
+
+To be able to do anything useful with the library, you'll have to create a RTP
+session. To do this, you have to create a variable of type RTPSession and call
+its Create member. The function 'Create' takes one parameter which specifies
+the portbase for the session. So a simple (and totally useless) program would
+look something like this:
+    \begin{verbatim}
+
+    #include "rtpsession.h"
+        
+    int main(void)
+    {
+            RTPSession sess;
+        
+        sess.Create(5000);
+        return 0;
+    }
+    \end{verbatim}
+
+\subsection{Errors}
+
+What if something goes wrong and the session can't be created ? Well, in the
+library, all functions returning an 'int' return a negative value if an error
+occurred, so you can detect if a function was successfull or not. Now, an
+'int' is probably not the most understandable error message and that's why the
+library has the function RTPGetErrorString. This takes the return value of a
+function as an argument and returns a pointer to a string which describes the
+error. We could change the previous program to write out what happened:
+    \begin{verbatim}
+    #include <stdio.h>
+    #include "rtpsession.h"
+        
+    int main(void)
+    {
+        RTPSession sess;
+        int status;
+        char *msg;
+            
+        status = sess.Create(5000);
+        msg = RTPGetErrorString(status);
+        printf("%s\n",msg);
+        return 0;
+    }
+    \end{verbatim}
+
+\subsection{Other initialization}
+
+One thing you'll probably need to initialize is the timestamp unit, since this
+value is needed for various calculations. The timestamp unit can be set through
+the use of the RTPSession member function SetTimestampUnit. This function takes
+one argument: the timestamp unit in seconds.
+    
+    
+    For example, if you're using the session to send 8000Hz sampled audio,
+you'd normally use the number of samples as RTP timestamp. Since the timestamp
+would then increment by 8000 each second, the timestamp unit would be 1/8000
+seconds. This is the default value which is used in the library. For 44100Hz
+sampling, the code would look something like this:
+        \begin{verbatim}
+        sess.SetTimestampUnit(1.0/44100.0);
+        \end{verbatim}
+        
+\section{Sending and receiving data}
+
+\subsection{Specifying destinations}
+
+Before you can send data, you must specify to which destinations each packet
+should be sent. You can specify this using the RTPSession member functions
+AddDestination, DeleteDestination and ClearDestinations. For example:
+        \begin{verbatim}
+        unsigned long addr = ntohl(inet\_addr("127.0.0.1"));
+        sess.AddDestination(addr,5000);
+        \end{verbatim}
+
+would prepare the session to send data to the local host, to port 5000. Note
+that the 'ntohl' function had to be used because 'inet\_addr' returns an
+address in network byte order and the parameters functions has to be in host
+byte order.
+
+\subsection{Sending RTP packets}
+
+When you have entered the destinations for the RTP packets, you can start to
+send data to all destinations by using the SendPacket member function of
+RTPSession. This is an overloaded member function. In one version you have
+to pass the RTP payload type, the 'mark' flag, and the timestamp increment
+as parameters. Here's an example:
+        \begin{verbatim}
+        sess.SendPacket("1234567890",10,0,false,10);
+        \end{verbatim}
+The first parameter is the data which has to be sent, the second is the length
+of the data. Next come the payload type and the 'mark' flag. Finally, the last
+argument specifies the amount by which the timestamp should be incremented.
+
+
+If you often need the same payload type, 'mark' flag and timestamp increment,
+you can use the second version of the function. To use it, you must first
+specify default values for those parameters. This can be done with the
+RTPSession member functions SetDefaultPayloadType, SetDefaultMark and
+SetDefaultTimeStampIncrement. Then, you can use the SendPacket function without
+the last three arguments. For example, once you've entered the default values
+        \begin{verbatim}
+        sess.SetDefaultPayloadType(0);
+        sess.SetDefaultMark(false);
+        sess.SetDefaultTimeStampIncrement(10);
+        \end{verbatim}
+you can do exactly what the previous example of SendPacket did, by simply doing
+this:
+        \begin{verbatim}
+        sess.SendPacket("1234567890",10);
+        \end{verbatim}
+
+\subsection{Receiving RTP packets}
+
+First of all, you should call the RTPSession member function PollData on a
+regular basis. This function processes incoming RTP and RTCP packets. To
+access the received RTP packets, you'll typically iterate over the different
+participants in the session and get each one's RTP packets. You can iterate
+over the participants using the functions GotoFirstSource and GotoNextSource.
+If you're only interested in the participants which have data you didn't get
+yet, you can use GotoFirstSourceWithData and GotoNextSourceWithData. All of
+these functions return true if there's a source available and false if not.
+When a source is available, you can use the function GetNextPacket to get a
+RTP packet from this source. When you don't need the RTP packet anymore, make
+sure you delete it. Here's some example code:
+        \begin{verbatim}
+        if (sess.GotoFirstSourceWithData())
+        {
+            do
+            {
+                RTPPacket *pack;
+                
+                pack = sess.GetNextPacket();
+                
+                // process packet
+                
+                delete pack;
+                
+            } while (sess.GotoNextSourceWithData());
+        }
+        \end{verbatim}
+
+For a description about the RTPPacket class, you should take a look at the
+reference manual (manual.txt).
+
+\subsection{Receive modes}
+
+There are three receive modes. A receive mode determines which incoming
+packets are accepted and which are ignored. You can set the receive mode by
+using the RTPSession member function SetReceiveMode.
+    
+    
+    The first mode, RECEIVEMODE\_ALL, is the default. When you've enabled
+this mode simply all incoming packets are accepted.
+    
+    
+    The second mode, RECEIVEMODE\_IGNORESOME, accepts all incoming packets
+except the ones which are coming from certain senders. You can determine which
+packets are ignored by using AddToIgnoreList, DeleteFromIgnoreList and
+ClearIgnoreList.
+    
+    
+    The last mode, RECEIVEMODE\_ACCEPTSOME, ignores all incoming packets
+except the ones which are coming from certain senders. You can specify which
+packets are accepted by using AddToAcceptList, DeleteFromAcceptList and
+ClearAcceptList.
+
+
+The AddTo... and DeleteFrom... functions take three arguments. The first one
+is the IP address of the involved sender. The second one is a flag. If set to
+true, all packets originating from the previous IP address are ignored or
+accepted and the third parameter is ignored. If set to false, the third
+parameter specifies a port number. When this is the case, only packets with
+the specified IP-port combination are ignored or accepted.
+    
+    
+    An important note is that the port which has to be specified is the
+port from which the RTP packets originate and this does not have to be the RTP
+portbase. More important, in this library those ports are not the same ! The
+port from which packets are sent can be retrieved by the function GetSendPort.
+
+\subsection{Multicasting}
+
+\subsubsection{Sending to a multicast group}
+
+To be able to send to a multicast group you don't have to do anything special.
+You can simply add the multicast address for that group to the list of
+destinations and RTP and RTCP data will automatically be sent to it.
+    
+    
+    The only thing that probably needs to be set is the Time To Live (TTL)
+field for multicast packets. This is a field in the IP header which controls
+how far (how many hops) a packet can travel. The value is initialized to one
+so normally a multicast packet will not leave the local network. If you do
+require this, you can alter the value by using the RTPSession member function
+SetMulticastTTL.
+
+\subsubsection{Receicing from a multicast group}
+
+You must first join a multicast group to be able to receive packets which are
+sent to it. You can control from which multicast groups you want to receive
+data by using the functions JoinMulticastGroup, LeaveMulticastGroup and
+LeaveAllMulticastGroups. The first two of these functions take a multicast
+IP address as an argument.
+
+\subsection{About sending and receiving RTCP packets}
+
+You don't have to worry about sending and receiving RTCP packets. The library
+takes care of this. The only thing you have to make sure is that the PollData
+is called on a regular basis. During a poll, the library reads incoming RTCP
+packets and processes the information. It also checks if it's time to send
+RTCP packets and if so, it sends them. This check is also performed when you
+call the SendPacket function.
+
+\section{Control information}
+
+\subsection{Own information}
+
+You can set your local information by using the following member functions of
+RTPSession: SetLocalName, SetLocalEMail, SetLocalLocation, SetLocalPhone,
+SetLocalTool and SetLocalNote. All of these functions take two parameters: the
+first one is a 'char *' to the data, the second one specifies how many bytes
+of the data should be used. For example,
+        \begin{verbatim}
+        rtpsess.SetLocalEMail("user@myhost.org",15);
+        \end{verbatim}
+could be used to set the local E-mail address.
+
+
+You can specify which information should be sent by using the following
+RTPSession member functions: EnableSendName, EnableSendEMail,
+EnableSendLocation, EnableSendPhone, EnableSendTool and EnableSendNote. All of
+these functions take a boolean as argument. This argument specifies whether or
+not to send certain information about the current session.
+
+\subsection{Other sessions' information}
+
+To retrieve the information about other participating RTP sessions, you have
+to specify which source's information you want. You can do this by iterating
+over the sources using the GotoFirst... and GotoNext... functions, as was
+described in section 2.3. Then, you can do a call to the RTPSession member
+function GetCurrentSourceInfo. This function returns a data structure of type
+RTPSourceData. You can use this to look at the available information about
+the source.
+    
+    
+    There is another way to retrieve information about a source. To be
+able to use it, you already have to know the sychronization source identifier
+(SSRC) of the source. You can then call the RTPSession member function
+GetSourceInfo. This function takes a SSRC as argument and returns a data
+structure of type RTPSourceData.
+    
+    
+    For more information about the RTPSourceData class and all of its
+member functions, you should take a look at the reference manual, which
+can be found in the file 'manual.txt'.
+
+\section{Handlers}
+
+You can specify handlers for certain types of events. For example: when a
+source joins the session, when a source times out, when SSRC identifiers
+collide, ...
+    
+    
+    For more information about the use of handlers you should take a look
+at the reference manual (manual.txt).
+
+\end{document}

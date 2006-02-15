@@ -1,0 +1,30 @@
+.TH "ext.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ext.h \- ccRTP Stack extensions. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cc++/socket.h>\fP
+.br
+\fC#include <ccrtp/ioqueue.h>\fP
+.br
+\fC#include <ccrtp/channel.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPDuplex\fP"
+.br
+.RI "\fIA peer associated RTP socket pair for physically connected peer hosts. RTP peer host over UDP.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+ccRTP Stack extensions.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

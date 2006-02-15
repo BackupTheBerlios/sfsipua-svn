@@ -1,0 +1,44 @@
+.TH "IncomingDataQueueBase" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IncomingDataQueueBase \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <queuebase.h>\fP
+.PP
+Inherits \fBRTPQueueBase\fP.
+.PP
+Inherited by \fBIncomingDataQueue\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetMaxRecvPacketSize\fP (size_t maxsize)"
+.br
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "void IncomingDataQueueBase::setMaxRecvPacketSize (size_t maxsize)\fC [inline]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fImaxsize\fP\fP
+maximum length of received RTP data packets, in octets. Defaults to the value returned by getDefaultMaxRecvPacketSize().
+.PP
+\fBNote: \fP
+.in +1c
+This method sets a filter for incoming packets. Setting higher values does not necessarily imply higher memory usage (this method does not set any buffer size). 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

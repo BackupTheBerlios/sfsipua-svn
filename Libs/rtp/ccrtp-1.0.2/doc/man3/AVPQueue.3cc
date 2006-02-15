@@ -1,0 +1,62 @@
+.TH "AVPQueue" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AVPQueue \- This class, an RTP/RTCP queue, adds audio/video profile (AVP) specific methods to the generic RTCP service queue (\fBQueueRTCPManager\fP). 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cqueue.h>\fP
+.PP
+Inherits \fBQueueRTCPManager\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetControlBandwidth\fP (float fraction)"
+.br
+.RI "\fISpecify the bandwith available for control (RTCP) packets.\fP"
+.ti -1c
+.RI "float \fBgetControlBandwidth\fP () const"
+.br
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBAVPQueue\fP (uint32 ssrc, uint32 size=RTPDataQueue::defaultMembersHashSize, \fBRTPApplication\fP &app=defaultApplication())"
+.br
+.RI "\fILocal SSRC is given instead of computed by the queue.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+This class, an RTP/RTCP queue, adds audio/video profile (AVP) specific methods to the generic RTCP service queue (\fBQueueRTCPManager\fP).
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "void AVPQueue::setControlBandwidth (float fraction)\fC [inline]\fP"
+.PP
+Specify the bandwith available for control (RTCP) packets.
+.PP
+This method sets the global control bandwidth for both sender and receiver reports. As recommended in RFC 1890, 1/4 of the total control bandwidth is dedicated to senders, whereas 3/4 are dedicated to receivers.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIfraction\fP\fP
+fraction of the session bandwidth, between 0 and 1
+.PP
+\fBNote: \fP
+.in +1c
+If this method is not called, it is assumed that the control bandwidth is equal to 5% of the session bandwidth. Note also that the RFC RECOMMENDS the 5%. 
+.PP
+Reimplemented from \fBQueueRTCPManager\fP.
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

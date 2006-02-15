@@ -1,0 +1,29 @@
+.TH "RTPSessionBase" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPSessionBase \- Generic RTP protocol stack for exchange of realtime data. RTP protocol stack based on Common C++. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtp.h>\fP
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+Generic RTP protocol stack for exchange of realtime data. RTP protocol stack based on Common C++.
+.PP
+This stack uses the concept of packet send and receive queues to schedule and buffer outgoing packets and to arrange or reorder incoming packets as they arrive.
+.PP
+This is a template class that allows customization of two aspects: the underlying network and the control protocol. The RTPDataChannel and RTCPChannel template parameters specify the socket types to use. The ServiceQueue template parameter specify which packet queue is used.
+.PP
+RTPSessionBase objects do not have any threading policy, thus allowing to customize this aspect in derived classes (see SingleThreadRTPSession or RTPSessionPoolBase).
+.PP
+\fBAuthor: \fP
+.in +1c
+David Sugar <dyfet@ostel.com> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

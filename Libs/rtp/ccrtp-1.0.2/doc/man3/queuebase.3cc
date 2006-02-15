@@ -1,0 +1,37 @@
+.TH "Base classes for RTP queues." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Base classes for RTP queues. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBAppDataUnit\fP"
+.br
+.RI "\fIInterface (envelope) to data received over RTP packets.\fP"
+.ti -1c
+.RI "class \fBAppDataUnit\fP"
+.br
+.RI "\fIInterface (envelope) to data received over RTP packets.\fP"
+.ti -1c
+.RI "class \fBIncomingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBIncomingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBOutgoingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBOutgoingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBRTPQueueBase\fP"
+.br
+.RI "\fIA virtual base class for RTP queue hierarchies.\fP"
+.ti -1c
+.RI "class \fBRTPQueueBase\fP"
+.br
+.RI "\fIA virtual base class for RTP queue hierarchies.\fP"
+.in -1c

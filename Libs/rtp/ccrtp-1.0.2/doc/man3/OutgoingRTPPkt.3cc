@@ -1,0 +1,191 @@
+.TH "OutgoingRTPPkt" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OutgoingRTPPkt \- RTP packets being sent. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtppkt.h>\fP
+.PP
+Inherits \fBRTPPacket\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBOutgoingRTPPkt\fP (const uint32 *const csrcs, uint16 numcsrc, const unsigned char *const hdrext, uint32 hdrextlen, const unsigned char *const data, size_t datalen)"
+.br
+.RI "\fIConstruct a new packet to be sent, containing several contributing source identifiers, header extensions and payload.\fP"
+.ti -1c
+.RI "\fBOutgoingRTPPkt\fP (const uint32 *const csrcs, uint16 numcsrc, const unsigned char *const data, size_t datalen)"
+.br
+.RI "\fIConstruct a new packet to be sent, containing several contributing source identifiers and payload.\fP"
+.ti -1c
+.RI "\fBOutgoingRTPPkt\fP (const unsigned char *const data, size_t datalen)"
+.br
+.RI "\fIConstruct a new packet (with no contributing sources and no header extension) to be sent.\fP"
+.ti -1c
+.RI "void \fBsetPayloadType\fP (\fBPayloadType\fP pt)"
+.br
+.ti -1c
+.RI "void \fBsetSeqNum\fP (uint16 seq)"
+.br
+.ti -1c
+.RI "void \fBsetTimestamp\fP (uint32 pts)"
+.br
+.ti -1c
+.RI "void \fBsetSSRC\fP (uint32 ssrc) const"
+.br
+.RI "\fISet synchronization source numeric identifier.\fP"
+.ti -1c
+.RI "void \fBsetSSRCNetwork\fP (uint32 ssrc) const"
+.br
+.RI "\fISet synchronization source numeric identifier.\fP"
+.ti -1c
+.RI "void \fBsetMarker\fP (bool mark)"
+.br
+.RI "\fISpecify the value of the marker bit.\fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const OutgoingRTPPkt &p) const"
+.br
+.RI "\fIOutgoing packets are equal if their sequence numbers match.\fP"
+.ti -1c
+.RI "bool \fBoperator!=\fP (const OutgoingRTPPkt &p) const"
+.br
+.RI "\fIOutgoing packets are not equal if their sequence numbers differ.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+RTP packets being sent.
+.PP
+This class is intented to construct packet objects just before they are inserted into the sending queue, so that they are processed in a understandable and format independent manner inside the stack.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "OutgoingRTPPkt::OutgoingRTPPkt (const uint32 *const csrcs, uint16 numcsrc, const unsigned char *const hdrext, uint32 hdrextlen, const unsigned char *const data, size_t datalen)"
+.PP
+Construct a new packet to be sent, containing several contributing source identifiers, header extensions and payload.
+.PP
+A new copy in memory (holding all this components along with the fixed header) is created.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIcsrcs\fP\fP
+array of countributing source 32-bit identifiers, in host order. 
+.TP
+\fB\fInumcsrc\fP\fP
+number of CSRC identifiers in the array. 
+.TP
+\fB\fIhdrext\fP\fP
+whole header extension. 
+.TP
+\fB\fIhdrextlen\fP\fP
+size of whole header extension, in octets. 
+.TP
+\fB\fIdata\fP\fP
+payload. 
+.TP
+\fB\fIdatalen\fP\fP
+payload length, in octets.
+.PP
+\fBNote: \fP
+.in +1c
+For efficiency purposes, since this constructor is valid for all packets but is too complex for the common case, two simpler others are provided. 
+.SS "OutgoingRTPPkt::OutgoingRTPPkt (const uint32 *const csrcs, uint16 numcsrc, const unsigned char *const data, size_t datalen)"
+.PP
+Construct a new packet to be sent, containing several contributing source identifiers and payload.
+.PP
+A new copy in memory (holding all this components along with the fixed header) is created.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIcsrcs\fP\fP
+array of countributing source 32-bit identifiers, in host order. 
+.TP
+\fB\fInumcsrc\fP\fP
+number of CSRC identifiers in the array. 
+.TP
+\fB\fIdata\fP\fP
+payload. 
+.TP
+\fB\fIdatalen\fP\fP
+payload length, in octets. 
+.SS "OutgoingRTPPkt::OutgoingRTPPkt (const unsigned char *const data, size_t datalen)"
+.PP
+Construct a new packet (with no contributing sources and no header extension) to be sent.
+.PP
+A new copy in memory (holding the whole packet) is created.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIdata\fP\fP
+payload. 
+.TP
+\fB\fIdatalen\fP\fP
+payload length, in octets. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "void OutgoingRTPPkt::setMarker (bool mark)\fC [inline]\fP"
+.PP
+Specify the value of the marker bit.
+.PP
+By default, the marker bit of outgoing packets is false/0. This method allows to explicity specify and change that value.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fImark\fP\fP
+value for the market bit. 
+.SS "void OutgoingRTPPkt::setPayloadType (\fBPayloadType\fP pt)\fC [inline]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpt\fP\fP
+Packet payload type. 
+.SS "void OutgoingRTPPkt::setSeqNum (uint16 seq)\fC [inline]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIseq\fP\fP
+Packet sequence number, in host order. 
+.SS "void OutgoingRTPPkt::setSSRC (uint32 ssrc) const\fC [inline]\fP"
+.PP
+Set synchronization source numeric identifier.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+32-bit Synchronization SouRCe numeric identifier, in host order. 
+.SS "void OutgoingRTPPkt::setSSRCNetwork (uint32 ssrc) const\fC [inline]\fP"
+.PP
+Set synchronization source numeric identifier.
+.PP
+Special version to save endianness conversion.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+32-bit Synchronization SouRCe numeric identifier, in network order. 
+.SS "void OutgoingRTPPkt::setTimestamp (uint32 pts)\fC [inline]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpts\fP\fP
+Packet timestamp, in host order. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

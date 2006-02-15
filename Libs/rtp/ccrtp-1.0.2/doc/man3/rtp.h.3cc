@@ -1,0 +1,33 @@
+.TH "rtp.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rtp.h \- Generic and audio/video profile specific RTP interface of ccRTP. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ccrtp/cqueue.h>\fP
+.br
+\fC#include <ccrtp/channel.h>\fP
+.br
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef SingleThreadRTPSession \fBRTPSession\fP"
+.br
+.RI "\fIUses two pairs of sockets for RTP data and RTCP transmission/reception. UDP/IPv4 RTP Session scheduled by one thread of execution.\fP"
+.ti -1c
+.RI "typedef \fBRTPSession\fP \fBRTPSocket\fP"
+.br
+.RI "\fIAlias for RTPSession.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Generic and audio/video profile specific RTP interface of ccRTP.
+.PP
+ The classes and types in this header provide general RTP functionality (following RFC 1889/draft-ietf-avt-rtp-new) as well as audio/video RTP profile specific functionality (following RFC 1890/draft-ietf-avt-profile-new).
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

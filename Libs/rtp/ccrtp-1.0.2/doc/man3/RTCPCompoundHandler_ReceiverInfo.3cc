@@ -1,0 +1,53 @@
+.TH "RTCPCompoundHandler::ReceiverInfo" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::ReceiverInfo \- Struct for the data contained in a receiver info block. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint8 \fBfractionLost\fP"
+.br
+.RI "\fIpacket fraction lost.\fP"
+.ti -1c
+.RI "uint8 \fBlostMSB\fP"
+.br
+.RI "\fIcumulative lost MSB of 3 octets.\fP"
+.ti -1c
+.RI "uint16 \fBlostLSW\fP"
+.br
+.RI "\fIcumulative lost two LSB.\fP"
+.ti -1c
+.RI "uint32 \fBhighestSeqNum\fP"
+.br
+.RI "\fIhighest sequence number.\fP"
+.ti -1c
+.RI "uint32 \fBjitter\fP"
+.br
+.RI "\fIarrival jitter.\fP"
+.ti -1c
+.RI "uint32 \fBlsr\fP"
+.br
+.RI "\fIlast sender report timestamp.\fP"
+.ti -1c
+.RI "uint32 \fBdlsr\fP"
+.br
+.RI "\fIdelay since last sender report.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for the data contained in a receiver info block.
+.PP
+Receiver info blocks can be found in SR (sender report) or RR (receiver report) RTCP packets. 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

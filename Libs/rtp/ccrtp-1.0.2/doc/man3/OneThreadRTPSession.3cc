@@ -1,0 +1,25 @@
+.TH "OneThreadRTPSession" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OneThreadRTPSession \- This template class adds the threading aspect to the \fBRTPSessionBase\fP template in one of the many possible ways. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtp.h>\fP
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+This template class adds the threading aspect to the \fBRTPSessionBase\fP template in one of the many possible ways.
+.PP
+It inherits from a single execution thread that schedules sending of outgoing packets and receipt of incoming packets.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

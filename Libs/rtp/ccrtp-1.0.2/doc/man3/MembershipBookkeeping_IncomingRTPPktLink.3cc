@@ -1,0 +1,58 @@
+.TH "MembershipBookkeeping::IncomingRTPPktLink" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MembershipBookkeeping::IncomingRTPPktLink \- Incoming RTP data packets control structure within the incoming packet queue class. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetRecvTime\fP (const timeval &t)"
+.br
+.RI "\fISet the time this packet was received at.\fP"
+.ti -1c
+.RI "timeval \fBgetRecvTime\fP () const"
+.br
+.RI "\fIGet the time this packet was received at.\fP"
+.ti -1c
+.RI "uint32 \fBgetTimestamp\fP () const"
+.br
+.RI "\fIGet timestamp of this packet.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Incoming RTP data packets control structure within the incoming packet queue class.
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "uint32 MembershipBookkeeping::IncomingRTPPktLink::getTimestamp () const\fC [inline]\fP"
+.PP
+Get timestamp of this packet.
+.PP
+The timestamp of incoming packets is filtered so that the timestamp this method provides for the first packet received from every source starts from 0.
+.PP
+\fBReturns: \fP
+.in +1c
+32 bit timestamp starting from 0 for each source. 
+.SS "void MembershipBookkeeping::IncomingRTPPktLink::setRecvTime (const timeval & t)\fC [inline]\fP"
+.PP
+Set the time this packet was received at.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIt\fP\fP
+time of reception. 
+.PP
+\fBNote: \fP
+.in +1c
+this has almost nothing to do with the 32-bit timestamp contained in the packet header. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

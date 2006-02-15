@@ -1,0 +1,28 @@
+.TH "ioqueue.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ioqueue.h \- Generic RTP input/output queues. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ccrtp/iqueue.h>\fP
+.br
+\fC#include <ccrtp/oqueue.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPDataQueue\fP"
+.br
+.RI "\fIA packet queue handler for building different kinds of RTP protocol systems. RTP data queue handler.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Generic RTP input/output queues.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

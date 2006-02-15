@@ -1,0 +1,55 @@
+.TH "RTCPCompoundHandler" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler \- low level structs and RTCP packet parsing and building methods. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+Inherited by \fBQueueRTCPManager\fP\fC [protected]\fP.
+.PP
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "bool \fBcheckCompoundRTCPHeader\fP (size_t len)"
+.br
+.RI "\fIPerform RTCP compound packet header validity check as specified in draft-ietv-avt-rtp-new.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+low level structs and RTCP packet parsing and building methods.
+.PP
+Intended to be used, through inheritance, in RTCP management classes, such as \fBQueueRTCPManager\fP.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org>  
+.PP
+\fBTodo: \fP
+.in +1c
+ Improve the design to better encapsulate RTCP structures.  
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "bool RTCPCompoundHandler::checkCompoundRTCPHeader (size_t len)\fC [protected]\fP"
+.PP
+Perform RTCP compound packet header validity check as specified in draft-ietv-avt-rtp-new.
+.PP
+This method follows appendix A.2. Correct version, payload type, padding bit and length of every RTCP packet in the compound are verified.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIlen\fP\fP
+length of the RTCP compound packet in  the reception buffer 
+.PP
+\fBReturns: \fP
+.in +1c
+whether the header is valid. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

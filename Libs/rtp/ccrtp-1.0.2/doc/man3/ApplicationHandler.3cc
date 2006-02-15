@@ -1,0 +1,25 @@
+.TH "ApplicationHandler" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ApplicationHandler \- Application objects modification methods. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+Inherited by \fBMembershipBookkeeping\fP.
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+Application objects modification methods.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

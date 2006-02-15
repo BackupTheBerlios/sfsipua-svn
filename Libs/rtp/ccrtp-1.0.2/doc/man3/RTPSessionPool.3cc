@@ -1,0 +1,31 @@
+.TH "RTPSessionPool" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPSessionPool \- This class is a base class for classes that define a group of RTP sessions that will be served by one or more execution threads. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <pool.h>\fP
+.PP
+Inherits RTPSessionBaseHandler.
+.PP
+Inherited by SingleRTPSessionPool.
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+This class is a base class for classes that define a group of RTP sessions that will be served by one or more execution threads.
+.PP
+Derived classes are responsible for serving each RTP session with a thread at least.
+.PP
+In order to use the RTP session 'pool' you just have to build \fBRTPSessionBase\fP objects for each RTP session (instead of RTPSession objects). Then, add the \fBRTPSessionBase\fP objects to an RTP session 'pool' and call startRunning() method of the session pool.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,221 @@
+.TH "RTPDataQueue" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPDataQueue \- A packet queue handler for building different kinds of RTP protocol systems. RTP data queue handler. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ioqueue.h>\fP
+.PP
+Inherits \fBIncomingDataQueue\fP, and \fBOutgoingDataQueue\fP.
+.PP
+Inherited by \fBQueueRTCPManager\fP, and \fBRTPDuplex\fP.
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBTos\fP { \fBtosBestEffort\fP, \fBtosEnhanced\fP }"
+.br
+.RI "\fI\fBrtp.h\fP cc++/rtp.h Type of network service the application uses.\fP"
+.in -1c
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetTypeOfService\fP (\fBTos\fP tos)"
+.br
+.RI "\fISpecify the kind of service the application expects to use.\fP"
+.ti -1c
+.RI "void \fBstartStack\fP ()"
+.br
+.RI "\fIMake Start public.\fP"
+.ti -1c
+.RI "bool \fBisActive\fP () const"
+.br
+.RI "\fIGet active connection state flag.\fP"
+.ti -1c
+.RI "uint32 \fBgetCurrentTimestamp\fP () const"
+.br
+.RI "\fIGet the timestamp that should be given for a packet whose payload sampling instant corresponds to the current system time.\fP"
+.ti -1c
+.RI "void \fBsetSessionBandwidth\fP (uint32 bw)"
+.br
+.RI "\fISpecify the bandwidth of the current session.\fP"
+.ti -1c
+.RI "void \fBsetTimeclock\fP ()"
+.br
+.RI "\fISet the packet timeclock for synchronizing timestamps.\fP"
+.ti -1c
+.RI "timeout_t \fBgetTimeclock\fP () const"
+.br
+.RI "\fIGet the packet timeclock for synchronizing timestamps.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPDataQueue\fP (uint32 size=defaultMembersHashSize)"
+.br
+.RI "\fIConstructor.\fP"
+.ti -1c
+.RI "\fBRTPDataQueue\fP (uint32 *ssrc, uint32 size=defaultMembersHashSize)"
+.br
+.RI "\fIUsing this constructor you can start a session with the given ssrc, instead of the usual randomly generated one.\fP"
+.ti -1c
+.RI "virtual \fB~RTPDataQueue\fP ()"
+.br
+.RI "\fIThe queue destructor flushes the queue and stops all services.\fP"
+.ti -1c
+.RI "virtual void \fBtimerTick\fP ()"
+.br
+.RI "\fIA plugin point for timer tick driven events.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A packet queue handler for building different kinds of RTP protocol systems. RTP data queue handler.
+.PP
+The queue manages both incoming and outgoing RTP packets, as well as synchronization and transmission/reception timers. By making the queue handler a seperate base class it becomes possible to define RTP classes for RTP profiles and sessions of different types.
+.PP
+Outgoing packets are sent via the \fBOutgoingDataQueue::putData\fP method.
+.PP
+Incoming packets can be retrieved via \fBIncomingDataQueue::getData\fP method.
+.PP
+\fBAuthor: \fP
+.in +1c
+David Sugar <dyfet@ostel.com> 
+.PP
+.SH "MEMBER ENUMERATION DOCUMENTATION"
+.PP 
+.SS "enum RTPDataQueue::Tos"
+.PP
+\fBrtp.h\fP cc++/rtp.h Type of network service the application uses.
+.PP
+If the application uses enhanced network service, for instance Integrated Services or Differentiated Services, it \fIhas not\fP to ensure fair competition with TCP, provided that the requested service is actually being delivered. Whenever the application uses best-effort service or the requested enhanced service is not actually being delivered, it \fIhas\fP to ensure fair competition with TCP. By default, best-effot is assumed.
+.PP
+\fBNote: \fP
+.in +1c
+Although not required, RTP packets are always sent on top of UDP segments. No other underlying transport protocol is supported at present.
+.PP
+\fBTodo: \fP
+.in +1c
+ implement fair competition with tcp  
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fI\fItosBestEffort\fP \fP\fP
+Best-effort network service.
+.TP
+\fB\fI\fItosEnhanced\fP \fP\fP
+Enhanced network service.
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "RTPDataQueue::RTPDataQueue (uint32 size = defaultMembersHashSize)\fC [protected]\fP"
+.PP
+Constructor.
+.PP
+This will generate a random application SSRC identifier.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsize\fP\fP
+an estimation of the number of participants in the session 
+.SS "RTPDataQueue::RTPDataQueue (uint32 * ssrc, uint32 size = defaultMembersHashSize)\fC [protected]\fP"
+.PP
+Using this constructor you can start a session with the given ssrc, instead of the usual randomly generated one.
+.PP
+This is necessary when you need to initiate several sessions having the same SSRC identifier, for instance, to implement layered encoding, in which case each layer is managed through a different session but all sessions share the same SSRC identifier.
+.PP
+\fBWarning: \fP
+.in +1c
+This doesn't seem to be a good solution
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+Synchronization SouRCe identifier for this session 
+.TP
+\fB\fIsize\fP\fP
+an estimation of the number of participants in the  session 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "uint32 RTPDataQueue::getCurrentTimestamp ()"
+.PP
+Get the timestamp that should be given for a packet whose payload sampling instant corresponds to the current system time.
+.PP
+The timestamp applications should provide for each packet represents the sampling instant of its payload and should not be a reading of the system clock. Nevertheless, the internal operation of the RTP stack relies on the accuracy of the provided timestamp, since several computations assume that there is a certain degree of correspondence between the timestamp and the system clock.
+.PP
+It is recommended that applications use this method in order to \fIperiodically adjust the RTP timestamp\fP.
+.PP
+In particular, it is advisable getting the timestamp corresponding to the first sampling instant or any instant after a period of inactivity through a call to this method.
+.PP
+Applications should use the nominal sampling or any other value provided by the coder in order to compute the next timestamps with minimum computational requirement.
+.PP
+For instance, an application using an RTP profile that specifies a fixed sampling rate of 8 Khz with eight bits per sample, continuously transmitting audio blocks 80 octets long, would transmit 100 packets every second. Every packet would carry a timestamp 80 units greater than the previous one. So, the first timestamp would be obtained from this method, whereas the following ones would be computed adding 80 every time. Also the timestamp should be increased for every block whether it is put in the queue or dropped.
+.PP
+The aforementioned increment can be obtained from the RTPDataQueue::getTimestampIncrement() method rather than computing it by hand in the application.
+.PP
+\fBNote: \fP
+.in +1c
+Frame based applications must follow a specific timestamping method, probably specified in a profile.
+.PP
+\fBNote: \fP
+.in +1c
+You should take into account that by default ccRTP assumes that the application begins sampling at the queue creation time. Moreover, the first sampling instant is assigned a 'user visible' timestamp of 0, although the RTP stack will then add internally a ramdom offset unknown to the application. That is to say, the application may count samples from 0 in order to get the timestamp for the next packet, provided that the first sampling instant is the same as the queue creation time. Nevertheless, this simpler way of starting will not be as accurate as it would be if the application got at least the first timestamp through getCurrentTimestamp. \fIWe provide this option since ccRTP interface is evolving, but we admit that it is ugly, we could remove this option or even replace uint32 timestamps with a restrictively regulated object; suggestions are gladly welcomed\fP 
+.SS "timeout_t RTPDataQueue::getTimeclock () const\fC [inline]\fP"
+.PP
+Get the packet timeclock for synchronizing timestamps.
+.PP
+\fBReturns: \fP
+.in +1c
+runtime in milliseconds since last set. 
+.SS "bool RTPDataQueue::isActive () const\fC [inline]\fP"
+.PP
+Get active connection state flag.
+.PP
+\fBReturns: \fP
+.in +1c
+true if connection 'active'. 
+.SS "void RTPDataQueue::setSessionBandwidth (uint32 bw)\fC [inline]\fP"
+.PP
+Specify the bandwidth of the current session.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIbw\fP\fP
+bandwidth of the current session, in bits/s.
+.PP
+\fBSee also: \fP
+.in +1c
+\fBAVPQueue::setControlBandwidth()\fP 
+.SS "void RTPDataQueue::setTypeOfService (\fBTos\fP tos)\fC [inline]\fP"
+.PP
+Specify the kind of service the application expects to use.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fItos\fP\fP
+type of service the application expects to use
+.PP
+\fBNote: \fP
+.in +1c
+If enhanced service is specified but packet loss is high (the requested service does not appear to actually be delivered) ccRTP defaults to best-effort suitable behaviour: guarantee fair competition with TCP.
+.PP
+\fBTodo: \fP
+.in +1c
+ Implement fair competition with tcp  
+.SS "void RTPDataQueue::startStack ()\fC [inline]\fP"
+.PP
+Make Start public.
+.PP
+Start queue service. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,134 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "mrtprecv"=..\mrtprecv\mrtprecv.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "mrtpsend"=..\mrtpsend\mrtpsend.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "oRTP"=.\oRTP.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "rtprecv"=..\rtprecv\rtprecv.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "rtpsend"=..\rtpsend\rtpsend.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "testtimer"=..\testtimer\testtimer.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "tevrtprecv"=..\tevrtprecv\tevrtprecv.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "tevrtpsend"=..\tevrtpsend\tevrtpsend.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name oRTP
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

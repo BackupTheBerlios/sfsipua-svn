@@ -1,0 +1,315 @@
+.TH "QueueRTCPManager" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+QueueRTCPManager \- Adds generic management of RTCP functions to an RTP data queue. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cqueue.h>\fP
+.PP
+Inherits \fBRTPDataQueue\fP, and \fBRTCPCompoundHandler\fP.
+.PP
+Inherited by \fBAVPQueue\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTCPSenderInfo\fP * \fBgetMRSenderInfo\fP (\fBSyncSource\fP &src)"
+.br
+.RI "\fIGet the most recent sender report received from a synchronization source.\fP"
+.ti -1c
+.RI "RTCPReceiverInfo * \fBgetMRReceiverInfo\fP (\fBSyncSource\fP &srcFrom)"
+.br
+.RI "\fIAsk for the info in the most recent receiver report about the local source received from the source given as parameter.\fP"
+.ti -1c
+.RI "void \fBsetLeavingDelay\fP (\fBmicrotimeout_t\fP delay)"
+.br
+.RI "\fISet how much time the stack will wait before deleting a synchronization source that has sent an RTCP BYE packet.\fP"
+.ti -1c
+.RI "void \fBsetEnd2EndDelay\fP (\fBmicrotimeout_t\fP t)"
+.br
+.RI "\fIThis method sets the maximum end to end delay allowed.\fP"
+.ti -1c
+.RI "void \fBsetSendersControlFraction\fP (float fraction)"
+.br
+.RI "\fISpecify the fraction of the total control bandwith to be dedicated to senders reports.\fP"
+.ti -1c
+.RI "uint32 \fBgetSendRTCPPacketCount\fP () const"
+.br
+.RI "\fIGet the total number of RTCP packets sent until now.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBcontrolTransmissionService\fP ()"
+.br
+.RI "\fIBuild and send RTCP packets following timing rules (including the 'timer reconsideration' algorithm).\fP"
+.ti -1c
+.RI "void \fBcontrolReceptionService\fP ()"
+.br
+.RI "\fIProcess incoming RTCP packets pending in the control reception socket.\fP"
+.ti -1c
+.RI "bool \fBcheckSSRCInRTCPPkt\fP (SyncSourceLink &sourceLink, bool is_new, InetAddress &na, tpport_t tp)"
+.br
+.RI "\fIAppy collision and loop detection and correction algorithm when receiving RTCP packets.\fP"
+.ti -1c
+.RI "virtual void \fBonGotSR\fP (\fBSyncSource\fP &source, SendReport &SR, uint8 blocks)"
+.br
+.RI "\fIPlug-in for processing (acquire information carried in) an incoming RTCP Sender Report.\fP"
+.ti -1c
+.RI "virtual void \fBonGotRR\fP (\fBSyncSource\fP &source, RecvReport &RR, uint8 blocks)"
+.br
+.RI "\fIPlug-in for processing (acquire information carried in) an incoming RTCP Receiver Report.\fP"
+.ti -1c
+.RI "bool \fBonGotSDES\fP (\fBSyncSource\fP &source, RTCPPacket &pkt)"
+.br
+.ti -1c
+.RI "virtual bool \fBonGotSDESChunk\fP (\fBSyncSource\fP &source, SDESChunk &chunk, size_t len)"
+.br
+.RI "\fIPlug-in for handling of SDES chunks.\fP"
+.ti -1c
+.RI "virtual void \fBonGotAPP\fP (\fBSyncSource\fP &, \fBRTCPCompoundHandler::APPPacket\fP &, size_t)"
+.br
+.RI "\fIPlug-in for handling of APP (application specific) RTCP packets.\fP"
+.ti -1c
+.RI "uint32 \fBgetLastSendPacketCount\fP () const"
+.br
+.RI "\fIGet the number of data packets sent at the time the last SR was generated.\fP"
+.ti -1c
+.RI "void \fBsetPrevMembersNum\fP (uint32 n)"
+.br
+.ti -1c
+.RI "size_t \fBdispatchBYE\fP (const std::string &reason)"
+.br
+.RI "\fIThis method is used to send an RTCP BYE packet.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Adds generic management of RTCP functions to an RTP data queue.
+.PP
+Extends an RTP data i/o queue adding management of RTCP functions:
+.PP
+Provide feedback on the quality of the data distribution.
+.PP
+Convey the CNAME (persistent transport-level identifier) for every RTP source.
+.PP
+Control the sending rate of RTCP packets
+.PP
+Convey minimal control information about the participants
+.PP
+This class implements generic RTCP behaviour (as specified in RFC 1889/draft-ietf-avt-rtp-new) and may be specialized for specific profiles (see \fBAVPQueue\fP) or particular RTCP extensions.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "bool QueueRTCPManager::checkSSRCInRTCPPkt (SyncSourceLink & sourceLink, bool is_new, InetAddress & na, tpport_t tp)\fC [protected]\fP"
+.PP
+Appy collision and loop detection and correction algorithm when receiving RTCP packets.
+.PP
+Follows section 8.2 in draft-ietf-avp-rtp-new.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsourceLink\fP\fP
+link to the source object. 
+.TP
+\fB\fIis_new\fP\fP
+whether the source has been just recorded. 
+.TP
+\fB\fIna\fP\fP
+RTCP packet network address. 
+.TP
+\fB\fItp\fP\fP
+RTCP packet source transport port.
+.PP
+\fBReturns: \fP
+.in +1c
+whether the packet must not be discarded. 
+.SS "size_t QueueRTCPManager::dispatchBYE (const std::string & reason)\fC [protected, virtual]\fP"
+.PP
+This method is used to send an RTCP BYE packet.
+.PP
+An RTCP BYE packet is sent when one of the the following circumstances occur:
+.TP
+when leaving the session
+.TP
+when we have detected that another synchronization source in the same session is using the same SSRC identifier as us.
+.PP
+Try to post a BYE message. It will send a BYE packet as long as at least one RTP or RTCP packet has been sent before. If the number of members in the session is more than 50, the algorithm described in section 6.3.7 of draft-ietf-avt-rtp-new is applied in order to avoid a flood of BYE messages.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIreason\fP\fP
+reason to specify in the BYE packet. 
+.PP
+Reimplemented from \fBRTPQueueBase\fP.
+.SS "RTCPReceiverInfo* QueueRTCPManager::getMRReceiverInfo (\fBSyncSource\fP & srcFrom)"
+.PP
+Ask for the info in the most recent receiver report about the local source received from the source given as parameter.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrcFrom\fP\fP
+Source of the receiver info. 
+.PP
+\fBReturns: \fP
+.in +1c
+most recent receiver info received from src. 
+.PP
+\fBReturn values: \fP
+.in +1c
+.TP
+\fB\fINULL\fP\fP
+when no receiver report has been received from the specified source. 
+.SS "\fBRTCPSenderInfo\fP* QueueRTCPManager::getMRSenderInfo (\fBSyncSource\fP & src)"
+.PP
+Get the most recent sender report received from a synchronization source.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrc\fP\fP
+Synchronization source of the sender info. 
+.PP
+\fBReturns: \fP
+.in +1c
+Most recent sender info received from src. 
+.PP
+\fBReturn values: \fP
+.in +1c
+.TP
+\fB\fINULL\fP\fP
+when no sender report has been received from the specified source. 
+.SS "virtual void QueueRTCPManager::onGotAPP (\fBSyncSource\fP &, \fBRTCPCompoundHandler::APPPacket\fP &, size_t)\fC [inline, protected, virtual]\fP"
+.PP
+Plug-in for handling of APP (application specific) RTCP packets.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fI-\fP\fP
+Synchronization source of this packet. 
+.TP
+\fB\fI-\fP\fP
+RTCP APP packet struct. 
+.TP
+\fB\fI-\fP\fP
+Length of the app data packet, including ssrc. name and app. specific data. 
+.SS "virtual void QueueRTCPManager::onGotRR (\fBSyncSource\fP & source, RecvReport & RR, uint8 blocks)\fC [protected, virtual]\fP"
+.PP
+Plug-in for processing (acquire information carried in) an incoming RTCP Receiver Report.
+.PP
+The default implementation in this class only processes the receiver report blocks about the local source.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+Synchronization source this report comes from. 
+.TP
+\fB\fIRR\fP\fP
+Receiver report structure 
+.TP
+\fB\fIblocks\fP\fP
+Number of report blocks in the packet 
+.SS "bool QueueRTCPManager::onGotSDES (\fBSyncSource\fP & source, RTCPPacket & pkt)\fC [protected]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+Synchronization source of SDES RTCP packet. 
+.TP
+\fB\fIpkt\fP\fP
+SDES RTCP packet received. 
+.SS "virtual bool QueueRTCPManager::onGotSDESChunk (\fBSyncSource\fP & source, SDESChunk & chunk, size_t len)\fC [protected, virtual]\fP"
+.PP
+Plug-in for handling of SDES chunks.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+Synchronization source of SDES chunk. 
+.TP
+\fB\fIchunk\fP\fP
+SDES chunk structure. 
+.TP
+\fB\fIlen\fP\fP
+Length of chunk, in octets. 
+.SS "virtual void QueueRTCPManager::onGotSR (\fBSyncSource\fP & source, SendReport & SR, uint8 blocks)\fC [protected, virtual]\fP"
+.PP
+Plug-in for processing (acquire information carried in) an incoming RTCP Sender Report.
+.PP
+The default implementation in this class only processes the sender information and the receiver report blocks about the local source.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+Synchronization source this report comes from. 
+.TP
+\fB\fISR\fP\fP
+Sender report structure. 
+.TP
+\fB\fIblocks\fP\fP
+Number of report blocks in the packet. 
+.SS "void QueueRTCPManager::setEnd2EndDelay (\fBmicrotimeout_t\fP t)\fC [inline]\fP"
+.PP
+This method sets the maximum end to end delay allowed.
+.PP
+If the processing delay plus the trip time for a packet is greater than the end to end delay, the packet is discarded, and the application cannot get it.
+.PP
+This is a way of setting an upper bound to the end to end delay, computed as the elapsed time between the packet timestamping at the sender side, and the picking of the packet at the receiver side.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIt\fP\fP
+maximum end to end delay allowed. A value of 0 implies there is no limit and is the default 
+.SS "void QueueRTCPManager::setLeavingDelay (\fBmicrotimeout_t\fP delay)\fC [inline]\fP"
+.PP
+Set how much time the stack will wait before deleting a synchronization source that has sent an RTCP BYE packet.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIdelay\fP\fP
+delay in microseconds.
+.PP
+\fBNote: \fP
+.in +1c
+The default delay is 1000000 microseconds 
+.SS "void QueueRTCPManager::setPrevMembersNum (uint32 n)\fC [inline, protected]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIn\fP\fP
+Number of members. 
+.SS "void QueueRTCPManager::setSendersControlFraction (float fraction)\fC [inline]\fP"
+.PP
+Specify the fraction of the total control bandwith to be dedicated to senders reports.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIfraction\fP\fP
+fraction of bandwidth, must be between 0 an 1.This method sets the fraction of the global control bandwidth that will be dedicated to senders reports. Of course, \fC1 - fraction\fP will be dedicated to receivers reports.
+.PP
+\fBSee also: \fP
+.in +1c
+setControlBandwidth 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

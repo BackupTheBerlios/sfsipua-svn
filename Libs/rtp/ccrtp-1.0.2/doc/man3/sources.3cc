@@ -1,0 +1,56 @@
+.TH "Participants and synchronization sources." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Participants and synchronization sources. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBParticipant\fP"
+.br
+.RI "\fIA class of objects representing remote participants (RTP applications) in a multimedia session.\fP"
+.ti -1c
+.RI "class \fBParticipant\fP"
+.br
+.RI "\fIA class of objects representing remote participants (RTP applications) in a multimedia session.\fP"
+.ti -1c
+.RI "class \fBRTPApplication\fP"
+.br
+.RI "\fIAn RTP application, holding identifying RTCP SDES item values. Represents local participants.\fP"
+.ti -1c
+.RI "class \fBRTPApplication\fP"
+.br
+.RI "\fIAn RTP application, holding identifying RTCP SDES item values. Represents local participants.\fP"
+.ti -1c
+.RI "class \fBSDESItemsHolder\fP"
+.br
+.RI "\fIHolds the SDES items and related information from a participant in an RTP application.\fP"
+.ti -1c
+.RI "class \fBSDESItemsHolder\fP"
+.br
+.RI "\fIHolds the SDES items and related information from a participant in an RTP application.\fP"
+.ti -1c
+.RI "class \fBSyncSource\fP"
+.br
+.RI "\fISynchronization source in an RTP session.\fP"
+.ti -1c
+.RI "class \fBSyncSource\fP"
+.br
+.RI "\fISynchronization source in an RTP session.\fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPApplication\fP & \fBdefaultApplication\fP ()"
+.br
+.RI "\fIGet the \fBRTPApplication\fP object for the 'default' application (the only one used be common applications -those that only implement one 'RTP application').\fP"
+.in -1c
+.SH "FUNCTION DOCUMENTATION"
+.PP 
+.SS "\fBRTPApplication\fP& defaultApplication ()"
+.PP
+Get the \fBRTPApplication\fP object for the 'default' application (the only one used be common applications -those that only implement one 'RTP application').
+.PP
+Note that this application object differs from all the others that may be defined in that it is automatically constructed by the ccRTP stack and its CNAME is automatically assigned (as user@host), whereas the other application objects' CNAME is provided to its constructor. 

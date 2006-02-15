@@ -1,0 +1,27 @@
+.TH "Members" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Members \- members and senders accounting 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtp.h>\fP
+.PP
+Inherited by \fBMembershipBookkeeping\fP\fC [private]\fP.
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+members and senders accounting
+.PP
+Records the number of members as well as active senders. For now, it is too simple.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

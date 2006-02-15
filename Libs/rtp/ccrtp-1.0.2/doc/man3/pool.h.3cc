@@ -1,0 +1,28 @@
+.TH "pool.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pool.h \- Pools of RTP sessions. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <list>\fP
+.br
+\fC#include <ccrtp/rtp.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPSessionPool\fP"
+.br
+.RI "\fIThis class is a base class for classes that define a group of RTP sessions that will be served by one or more execution threads.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Pools of RTP sessions.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

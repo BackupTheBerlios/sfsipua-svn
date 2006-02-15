@@ -1,0 +1,82 @@
+This is ccrtp.info, produced by makeinfo version 4.3 from ccrtp.texi.
+
+INFO-DIR-SECTION Development
+START-INFO-DIR-ENTRY
+* GNU ccRTP: (ccrtp).        GNU ccRTP Real-Time Transport Protocol Framework.
+END-INFO-DIR-ENTRY
+
+   GNU ccRTP is a C++ class framework for the development of Real Time
+Transport Protocol (RTP) based applications. It is based on GNU Common
+C++.
+
+   Copyright (C) 2001, 2002 Federico Montesino Pouzols
+<fedemp@altern.org>.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+
+Indirect:
+ccrtp.info-1: 818
+ccrtp.info-2: 39055
+ccrtp.info-3: 87600
+
+Tag Table:
+(Indirect)
+Node: Top818
+Node: Introduction2006
+Ref: Introduction-Footnote-15267
+Node: Distribution5344
+Node: ccRTP Overview6036
+Node: Simple Transmitter9338
+Node: Simple Receiver10052
+Node: Using ccRTP11047
+Node: RTP Sessions13538
+Node: Initiating Sessions14132
+Node: Sending Data16058
+Node: Receiving Data17429
+Node: Closing Sessions18287
+Node: Payload Types and Formats18830
+Ref: Payload Types and Formats-Footnote-122100
+Node: Participants22219
+Node: RTP Packets Extensions25458
+Node: RTCP Packets Extensions25836
+Node: Handling Events26146
+Node: RTP Packets Arrival26791
+Node: RTP Packets Expiration27224
+Node: RTCP Packets Arrival27427
+Node: Synchronization Source States28025
+Node: SSRC Collisions28242
+Node: Specialized Payload Formats28433
+Node: Standards Tracking28701
+Node: Upgrading29485
+Ref: Upgrading-Footnote-132466
+Ref: Upgrading-Footnote-232570
+Ref: Upgrading-Footnote-332672
+Node: ccRTP Internals32687
+Node: Internals Overview33032
+Node: Collisions and Loops33377
+Node: Algorithms in the Standard34572
+Node: A.135373
+Node: A.235959
+Node: A.336122
+Node: A.436267
+Node: A.536404
+Node: A.636543
+Node: A.736820
+Node: A.838129
+Node: Related Work38240
+Node: Future Work38584
+Node: Licenses38709
+Node: GNU General Public License39055
+Node: GNU Free Documentation License58321
+Node: GNU ccRTP Linking Exception80735
+Node: Class and Data Type Index82053
+Node: Method and Function Index83655
+Node: Concept Index87600
+
+End Tag Table

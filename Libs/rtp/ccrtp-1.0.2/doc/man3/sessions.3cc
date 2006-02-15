@@ -1,0 +1,29 @@
+.TH "RTP sessions." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTP sessions. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBOneThreadRTPSession\fP"
+.br
+.RI "\fIThis template class adds the threading aspect to the \fBRTPSessionBase\fP template in one of the many possible ways.\fP"
+.ti -1c
+.RI "class \fBRTPSessionBase\fP"
+.br
+.RI "\fIGeneric RTP protocol stack for exchange of realtime data. RTP protocol stack based on Common C++.\fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef SingleThreadRTPSession \fBRTPSession\fP"
+.br
+.RI "\fIUses two pairs of sockets for RTP data and RTCP transmission/reception. UDP/IPv4 RTP Session scheduled by one thread of execution.\fP"
+.ti -1c
+.RI "typedef \fBRTPSession\fP \fBRTPSocket\fP"
+.br
+.RI "\fIAlias for RTPSession.\fP"
+.in -1c

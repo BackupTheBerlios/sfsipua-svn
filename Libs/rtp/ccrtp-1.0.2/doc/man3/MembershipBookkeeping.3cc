@@ -1,0 +1,113 @@
+.TH "MembershipBookkeeping" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MembershipBookkeeping \- Controls the group membership in the current session. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+Inherits \fBSyncSourceHandler\fP, \fBParticipantHandler\fP, \fBApplicationHandler\fP, \fBConflictHandler\fP, and \fBMembers\fP.
+.PP
+Inherited by \fBIncomingDataQueue\fP\fC [protected]\fP.
+.PP
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBMembershipBookkeeping\fP (uint32 initialSize=defaultMembersHashSize)"
+.br
+.RI "\fIThe initial size is a hint to allocate the resources needed in order to keep the members' identifiers and associated information.\fP"
+.ti -1c
+.RI "virtual \fB~MembershipBookkeeping\fP ()"
+.br
+.RI "\fIPurges all RTPSource structures created during the session, as well as the hash table and the list of sources.\fP"
+.ti -1c
+.RI "\fBSyncSourceLink\fP * \fBgetLink\fP (const \fBSyncSource\fP &source) const"
+.br
+.ti -1c
+.RI "bool \fBisMine\fP (const \fBSyncSource\fP &source) const"
+.br
+.RI "\fIGet whether a synchronization source is recorded in this membership controller.\fP"
+.ti -1c
+.RI "bool \fBisRegistered\fP (uint32 ssrc)"
+.br
+.RI "\fIReturns whether there is already a synchronizacion source with 'ssrc' SSRC identifier.\fP"
+.ti -1c
+.RI "\fBSyncSourceLink\fP * \fBgetSourceBySSRC\fP (uint32 ssrc, bool &created)"
+.br
+.RI "\fIGet the description of a source by its \fCssrc\fC identifier.\fP"
+.ti -1c
+.RI "bool \fBBYESource\fP (uint32 ssrc)"
+.br
+.RI "\fIMark the source identified by \fCssrc\fP as having sent a BYE packet.\fP"
+.ti -1c
+.RI "bool \fBremoveSource\fP (uint32 ssrc)"
+.br
+.RI "\fIRemove the description of the source identified by \fCssrc\fP.\fP"
+.ti -1c
+.RI "void \fBsetMembersCount\fP (uint32 n)"
+.br
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Controls the group membership in the current session.
+.PP
+For now, this class implements only a hash table of members, but its design and relation with other classes is intented to support group membership sampling in case scalability problems arise.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "MembershipBookkeeping::MembershipBookkeeping (uint32 initialSize = defaultMembersHashSize)\fC [protected]\fP"
+.PP
+The initial size is a hint to allocate the resources needed in order to keep the members' identifiers and associated information.
+.PP
+Although ccRTP will reallocate resources when it becomes necessary, a good hint may save a lot of unpredictable time penalties.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIinitialSize\fP\fP
+an estimation of how many participants the session will consist of. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "bool MembershipBookkeeping::BYESource (uint32 ssrc)\fC [protected]\fP"
+.PP
+Mark the source identified by \fCssrc\fP as having sent a BYE packet.
+.PP
+It is not deleted until a timeout expires, so that in case some packets from this source arrive a bit later the source is not inserted again in the table of known sources.
+.PP
+\fBReturns: \fP
+.in +1c
+true if the source had been previously identified. false if it was not in the table of known sources. 
+.SS "\fBSyncSourceLink\fP* MembershipBookkeeping::getSourceBySSRC (uint32 ssrc, bool & created)\fC [protected]\fP"
+.PP
+Get the description of a source by its \fCssrc\fC identifier.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+SSRC identifier, in network order.  
+.TP
+\fB\fIcreated\fP\fP
+whether a new source has been created. 
+.PP
+\fBReturns: \fP
+.in +1c
+Pointer to the \fBSyncSource\fP object identified by \fCssrc\fC. 
+.SS "bool MembershipBookkeeping::removeSource (uint32 ssrc)\fC [protected]\fP"
+.PP
+Remove the description of the source identified by \fCssrc\fP.
+.PP
+\fBReturns: \fP
+.in +1c
+whether the source has been actually removed or it did not exist. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

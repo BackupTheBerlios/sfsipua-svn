@@ -1,0 +1,52 @@
+.TH "sources.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sources.h \- Sources of synchronization and participants related clases. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string>\fP
+.br
+\fC#include <ccrtp/rtcppkt.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBParticipant\fP"
+.br
+.RI "\fIA class of objects representing remote participants (RTP applications) in a multimedia session.\fP"
+.ti -1c
+.RI "class \fBParticipantsIterator\fP"
+.br
+.RI "\fIIterator through the list of participants in this session.\fP"
+.ti -1c
+.RI "class \fBRTPApplication\fP"
+.br
+.RI "\fIAn RTP application, holding identifying RTCP SDES item values. Represents local participants.\fP"
+.ti -1c
+.RI "class \fBSDESItemsHolder\fP"
+.br
+.RI "\fIHolds the SDES items and related information from a participant in an RTP application.\fP"
+.ti -1c
+.RI "class \fBSyncSource\fP"
+.br
+.RI "\fISynchronization source in an RTP session.\fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPApplication\fP & \fBdefaultApplication\fP ()"
+.br
+.RI "\fIGet the \fBRTPApplication\fP object for the 'default' application (the only one used be common applications -those that only implement one 'RTP application').\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Sources of synchronization and participants related clases.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,246 @@
+AC_INIT(configure.in)
+
+RTP_CFLAGS="-O2"
+RTP_TARGETS=dummymsg
+RTP_ARFLAGS=
+RTP_LDFLAGS=
+RTP_VXWORKS="// Not VxWorks version"
+RTP_FILIO="// Don't have <sys/filio.h>"
+RTP_ENDIAN="// Little endian system"
+RTP_SOCKLEN="// Last argument of getsockname is 'int'"
+RTP_MCAST="// No multicasting support"
+
+dnl ---------------------------------------------------------------------------
+dnl Check if we're going to build the VxWorks version
+dnl At this point, the configuration for this platform is still left to the
+dnl user by editing the Makefile
+dnl ---------------------------------------------------------------------------
+
+AC_MSG_CHECKING(if target platform is VxWorks)
+if test "$target" = "vxworks" ; then
+	AC_MSG_RESULT(yes)
+	RTP_VXWORKS="#define RTP_VXWORKS"
+	RTP_ENDIAN="#define RTP_BIG_ENDIAN"
+	RTP_MCAST="//#define RTP_MULTICAST // uncomment this define if multicasting is supported"
+	RTP_ARFLAGS="qc"
+	RTP_LDFLAGS="-shared -soname"
+	RTP_TARGETS="sharedlib staticlib"
+	CXX="c++"
+	
+	cat << EOF
+
+IMPORTANT NOTE FOR VXWORKS!
+
+  The configure script has now created a basic Makefile. However, it is most
+  likely that this makefile will not generate the libraries. Therefore, you
+  should edit the Makefile somewhat, to make it work for your specific
+  configuration.
+  Also, you probably want to take a look at the file 'rtpconfig_unix.h'.
+  You should verify that the system you want to compile the libraries for
+  is indeed big endian. Also, if multicasting is supported on that system,
+  you can uncomment the RTP_MULTICAST define.
+
+EOF
+
+else
+    	AC_MSG_RESULT(no)
+
+dnl PROCESS OTHER PLATFORMS
+    	
+dnl ---------------------------------------------------------------------------
+dnl Some compiler checks
+dnl ---------------------------------------------------------------------------
+
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_CC_C_O
+if test "$ac_cv_prog_cc_c_o" = no ; then
+	AC_MSG_ERROR(Compiler must be able to handle flags -c and -o simultaneously)
+fi
+
+
+dnl ---------------------------------------------------------------------------
+dnl Check if 'ld' exists and which syntax to use
+dnl ---------------------------------------------------------------------------
+
+USE_LD=no
+AC_CHECK_PROGS(RTP_LD,ld,"notfound")
+if test "$RTP_LD" != notfound ; then
+	AC_MSG_CHECKING(arguments for ld)
+	echo "int main(void){return 0;}" > configtest.c
+	if eval $CC -c -o configtest.o configtest.c 2>/dev/null; then
+		
+		dnl Check format gnu ld uses
+		if eval $RTP_LD -shared -soname conftest -o conftest.so configtest.o 2>/dev/null; then
+			RTP_LDFLAGS="-shared -soname"
+			USE_LD=yes
+		
+		dnl Check solaris format
+		elif eval $RTP_LD -G -h conftest -o conftest.so configtest.o 2>/dev/null; then
+			RTP_LDFLAGS="-G -h"
+			USE_LD=yes
+		fi
+	fi	
+	
+	if test "$USE_LD" = yes ; then
+		AC_MSG_RESULT($RTP_LDFLAGS)
+	else
+		AC_MSG_RESULT(unknown)
+	fi
+		
+	rm -rf configtest.o configtest.c conftest.so 2>/dev/null
+fi
+
+if test "$USE_LD" = yes ; then
+	RTP_TARGETS="sharedlib"
+else
+	AC_MSG_WARN(Won't be able to generate shared library)
+fi
+
+if test "$USE_LD" = yes; then
+	AC_MSG_CHECKING(if we can link against libstdc++)
+	echo "int main(void){return 0;}" > configtest.c
+	if eval $CC -c -o configtest.o configtest.c 2>/dev/null; then
+		if eval $RTP_LD $RTP_LDFLAGS conftest -o conftest.so configtest.o -lstdc++ 2>/dev/null; then
+			RTP_LDFLAGS="-lstdc++ $RTP_LDFLAGS"
+			AC_MSG_RESULT(yes)
+		else
+			AC_MSG_RESULT(no)
+		fi
+	fi
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl Check if 'ar' exists and which syntax to use
+dnl ---------------------------------------------------------------------------
+
+USE_AR=no
+AC_CHECK_PROGS(RTP_AR,ar,"notfound")
+if test "$RTP_AR" != notfound ; then
+	AC_MSG_CHECKING(arguments for ar)
+	echo "int main(void){return 0;}" > configtest.c
+	if eval $CC -c -o configtest.o configtest.c 2>/dev/null; then
+		
+		dnl Check format gnu ar uses
+		if eval $RTP_AR qc conftest.a configtest.o 2>/dev/null; then
+			RTP_ARFLAGS="qc"
+			USE_AR=yes
+		
+		dnl Check solaris format
+		elif eval $RTP_AR -r -u -c conftest.a configtest.o 2>/dev/null; then
+			RTP_ARFLAGS="-r -u -c"
+			USE_AR=yes
+		fi
+	fi	
+	
+	if test "$USE_AR" = yes ; then
+		AC_MSG_RESULT($RTP_ARFLAGS)
+	else
+		AC_MSG_RESULT(unknown)
+	fi
+		
+	rm -rf configtest.o configtest.c conftest.a 2>/dev/null
+fi
+
+if test "$USE_AR" = yes ; then
+	if test "$RTP_TARGETS" != dummymsg ; then
+		RTP_TARGETS="$RTP_TARGETS staticlib"
+	else
+		RTP_TARGETS=staticlib
+	fi
+else
+	AC_MSG_WARN(Won't be able to generate static library)
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl Check if sys/filio.h exists (used on solaris)
+dnl ---------------------------------------------------------------------------
+
+AC_CHECK_HEADER(sys/filio.h,[RTP_FILIO="#define RTP_HAVE_SYS_FILIO"])
+
+dnl ---------------------------------------------------------------------------
+dnl Check if it's a big endian or little endian system
+dnl Note that we must be careful when a cross-compiler is being used...
+dnl ---------------------------------------------------------------------------
+
+if test "$cross_compiling" = yes ; then
+	cat << EOF
+
+ASSUMING TARGET IS BIG ENDIAN:
+
+  The script detected a cross-compiler on your system. This can mean that
+  there really is a cross-compiler installed, or that for some other reason,
+  a simple program could not be run. You should check the config.log file
+  to verify this.
+  Since we are assuming a cross-compiler, we won't be able to actually test
+  any program. More important, we cannot test if the system is big or little
+  endian.
+  For now, big endian is assumed. If this assumption should be wrong, you will
+  have to comment the appropriate line in 'rtpconfig_unix.h'
+
+EOF
+	RTP_ENDIAN="#define RTP_BIG_ENDIAN // comment this if the target is a little endian system"
+else
+	AC_C_BIGENDIAN
+	if test "$ac_cv_c_bigendian" = yes; then
+		RTP_ENDIAN="#define RTP_BIG_ENDIAN"
+	fi
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl Check what the last argument for getsockname is
+dnl ---------------------------------------------------------------------------
+
+AC_MSG_CHECKING(last argument of getsockname)
+AC_TRY_COMPILE([
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	int getsockname(int s, struct sockaddr *name,unsigned int *namelen);],[
+	],[
+	AC_MSG_RESULT(unsigned int)
+	RTP_SOCKLEN="#define RTP_SOCKLENTYPE_UINT"],
+	AC_MSG_RESULT("int"))
+
+dnl ---------------------------------------------------------------------------
+dnl Check if multicast options are known
+dnl ---------------------------------------------------------------------------
+
+AC_MSG_CHECKING(if necessary options for multicasting are available)
+AC_TRY_COMPILE([
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	#include <netinet/in.h>],[
+	int testval;
+	struct ip_mreq mreq;
+	testval = IP_MULTICAST_TTL;
+	testval = IP_ADD_MEMBERSHIP;
+	testval = IP_DROP_MEMBERSHIP;],[
+	AC_MSG_RESULT(yes)
+	RTP_MCAST="#define RTP_MULTICAST"],
+	AC_MSG_RESULT("no"))
+
+
+dnl END PROCESSING OTHER PLATFORMS
+
+fi
+
+AC_ARG_ENABLE(fpic,[  --enable-fpic           enable -fpic compiler switch],
+	      [
+	      RTP_CFLAGS="$RTP_CFLAGS -fpic"
+	      ])
+AC_ARG_ENABLE(fPIC,[  --enable-fPIC           enable -fPIC compiler switch],
+	      [
+	      RTP_CFLAGS="$RTP_CFLAGS -fPIC"
+	      ])
+		
+AC_SUBST(RTP_CFLAGS)
+AC_SUBST(RTP_ARFLAGS)
+AC_SUBST(RTP_LDFLAGS)
+AC_SUBST(RTP_TARGETS)
+AC_SUBST(RTP_VXWORKS)
+AC_SUBST(RTP_FILIO)
+AC_SUBST(RTP_ENDIAN)
+AC_SUBST(RTP_SOCKLEN)
+AC_SUBST(RTP_MCAST)
+AC_OUTPUT(Makefile rtpconfig_unix.h)
+

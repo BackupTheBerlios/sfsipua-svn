@@ -1,0 +1,123 @@
+.TH "RTCP compound packets manipulation." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCP compound packets manipulation. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTCPCompoundHandler\fP"
+.br
+.RI "\fIlow level structs and RTCP packet parsing and building methods.\fP"
+.ti -1c
+.RI "class \fBRTCPCompoundHandler\fP"
+.br
+.RI "\fIlow level structs and RTCP packet parsing and building methods.\fP"
+.ti -1c
+.RI "class \fBRTCPReceiverReport\fP"
+.br
+.RI "\fIReport block information of SR/RR RTCP reports.\fP"
+.ti -1c
+.RI "class \fBRTCPSenderInfo\fP"
+.br
+.RI "\fISender block information of SR RTCP reports.\fP"
+.ti -1c
+.RI "class \fBRTCPSenderInfo\fP"
+.br
+.RI "\fISender block information of SR RTCP reports.\fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBSDESItemType\fP { \fBSDESItemTypeEND\fP =  0, \fBSDESItemTypeCNAME\fP, \fBSDESItemTypeNAME\fP, \fBSDESItemTypeEMAIL\fP, \fBSDESItemTypePHONE\fP, \fBSDESItemTypeLOC\fP, \fBSDESItemTypeTOOL\fP, \fBSDESItemTypeNOTE\fP, \fBSDESItemTypePRIV\fP, \fBSDESItemTypeH323CADDR\fP, \fBSDESItemTypeLast\fP =  SDESItemTypeH323CADDR }"
+.br
+.RI "\fISDES items that may be carried in a Source DEScription RTCP packet.\fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "timeval \fBNTP2Timeval\fP (uint32 msw, uint32 lsw)"
+.br
+.RI "\fIConvert a NTP timestamp, expressed as two 32-bit long words, into a timeval value.\fP"
+.ti -1c
+.RI "uint32 \fBtimevalIntervalTo65536\fP (timeval &t)"
+.br
+.RI "\fIConvert a time interval, expressed as a timeval, into a 32-bit time interval expressed in units of 1/65536 seconds.\fP"
+.in -1c
+.SH "ENUMERATION TYPE DOCUMENTATION"
+.PP 
+.SS "enum SDESItemType"
+.PP
+SDES items that may be carried in a Source DEScription RTCP packet.
+.PP
+CNAME is mandatory in each RTCP compound packet (except when splitted for partial encryption), the others are optional and have different sending frequencies, though with recommended default values. 
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fI\fISDESItemTypeEND\fP \fP\fP
+END of SDES item list.
+.TP
+\fB\fI\fISDESItemTypeCNAME\fP \fP\fP
+Canonical end-point identifier.
+.TP
+\fB\fI\fISDESItemTypeNAME\fP \fP\fP
+Personal NAME of the user.
+.TP
+\fB\fI\fISDESItemTypeEMAIL\fP \fP\fP
+EMAIL address of the user.
+.TP
+\fB\fI\fISDESItemTypePHONE\fP \fP\fP
+Phone number of the user.
+.TP
+\fB\fI\fISDESItemTypeLOC\fP \fP\fP
+Location where the user is.
+.TP
+\fB\fI\fISDESItemTypeTOOL\fP \fP\fP
+Application or tool.
+.TP
+\fB\fI\fISDESItemTypeNOTE\fP \fP\fP
+Comment usually reporting state.
+.TP
+\fB\fI\fISDESItemTypePRIV\fP \fP\fP
+Private extension.
+.TP
+\fB\fI\fISDESItemTypeH323CADDR\fP \fP\fP
+H323 callable address.
+.TP
+\fB\fI\fISDESItemTypeLast\fP \fP\fP
+Last defined code.
+.SH "FUNCTION DOCUMENTATION"
+.PP 
+.SS "timeval NTP2Timeval (uint32 msw, uint32 lsw)"
+.PP
+Convert a NTP timestamp, expressed as two 32-bit long words, into a timeval value.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fImsw\fP\fP
+Integer part of NTP timestamp. 
+.TP
+\fB\fIlsw\fP\fP
+Fractional part of NTP timestamp. 
+.PP
+\fBReturns: \fP
+.in +1c
+timeval value corresponding to the given NTP timestamp. 
+.SS "uint32 timevalIntervalTo65536 (timeval & t)"
+.PP
+Convert a time interval, expressed as a timeval, into a 32-bit time interval expressed in units of 1/65536 seconds.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIt\fP\fP
+Timeval interval. 
+.PP
+\fBReturns: \fP
+.in +1c
+32-bit value corresponding to the given timeval interval. 

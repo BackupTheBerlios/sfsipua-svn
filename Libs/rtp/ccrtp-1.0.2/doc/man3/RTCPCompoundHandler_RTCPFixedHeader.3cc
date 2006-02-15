@@ -1,0 +1,45 @@
+.TH "RTCPCompoundHandler::RTCPFixedHeader" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::RTCPFixedHeader \- Fixed RTCP packet header. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned char \fBversion\fP:2"
+.br
+.RI "\fIVersion, currently 2.\fP"
+.ti -1c
+.RI "unsigned char \fBpadding\fP:1"
+.br
+.RI "\fIPadding bit.\fP"
+.ti -1c
+.RI "unsigned char \fBblock_count\fP:5"
+.br
+.RI "\fINumber of RR, SR, or SDES chunks.\fP"
+.ti -1c
+.RI "uint8 \fBtype\fP"
+.br
+.RI "\fItype of RTCP packet.\fP"
+.ti -1c
+.RI "uint16 \fBlength\fP"
+.br
+.RI "\fInumber of 32-bit words in the packet (*minus one*).\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Fixed RTCP packet header.
+.PP
+First 32-bit word in any RTCP packet. 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

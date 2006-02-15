@@ -1,0 +1,16 @@
+.TH "todo" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+todo \- Todo List
+.IP "Class \fBOutgoingDataQueue\fP " 1c
+Add CSRC interface.
+.PP
+.IP "Class \fBParticipant\fP " 1c
+ implement reference counting from sources, so that when a source is destroyed, we know if the \fBParticipant\fP should be destroyed. 
+.PP
+.IP "Class \fBRTCPCompoundHandler\fP " 1c
+ Improve the design to better encapsulate RTCP structures. 
+.PP
+.IP "Member \fBRTPDataQueue::setTypeOfService\fP(Tos tos) " 1c
+ Implement fair competition with tcp  

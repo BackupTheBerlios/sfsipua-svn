@@ -1,0 +1,143 @@
+This is ccrtp.info, produced by makeinfo version 4.3 from ccrtp.texi.
+
+INFO-DIR-SECTION Development
+START-INFO-DIR-ENTRY
+* GNU ccRTP: (ccrtp).        GNU ccRTP Real-Time Transport Protocol Framework.
+END-INFO-DIR-ENTRY
+
+   GNU ccRTP is a C++ class framework for the development of Real Time
+Transport Protocol (RTP) based applications. It is based on GNU Common
+C++.
+
+   Copyright (C) 2001, 2002 Federico Montesino Pouzols
+<fedemp@altern.org>.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+
+File: ccrtp.info,  Node: Concept Index,  Prev: Method and Function Index,  Up: Top
+
+Concept Index
+*************
+
+* Menu:
+
+* /dev/urandom <1>:                      A.6.
+* /dev/urandom:                          ccRTP Overview.
+* A.1:                                   A.1.
+* A.2:                                   A.2.
+* A.3:                                   A.3.
+* A.4:                                   A.4.
+* A.5:                                   A.5.
+* A.6:                                   A.6.
+* A.7:                                   A.7.
+* A.8:                                   A.8.
+* Algoritms in the Standard:             Algorithms in the Standard.
+* APP:                                   RTCP Packets Arrival.
+* Audio/Video Working Group:             Introduction.
+* C++:                                   Introduction.
+* ccRTP Internals:                       ccRTP Internals.
+* ccRTP Overview:                        ccRTP Overview.
+* class framework:                       Introduction.
+* clock rate:                            Payload Types and Formats.
+* Closing Sessions:                      Closing Sessions.
+* CNAME <1>:                             Participants.
+* CNAME:                                 Initiating Sessions.
+* collision:                             SSRC Collisions.
+* Collisions and Loops:                  Collisions and Loops.
+* Common C++:                            Introduction.
+* demo program:                          ccRTP Overview.
+* distribution:                          Distribution.
+* FDL, GNU Free Documentation License:   GNU Free Documentation License.
+* free software:                         Distribution.
+* Future, Future Work:                   Future Work.
+* GNU ccRTP Linking Exception:           GNU ccRTP Linking Exception.
+* GNU FDL:                               Distribution.
+* GNU GPL:                               Distribution.
+* H.245:                                 Payload Types and Formats.
+* Handling Events:                       Handling Events.
+* IANA:                                  Payload Types and Formats.
+* IETF <1>:                              Standards Tracking.
+* IETF:                                  Introduction.
+* IETF standards:                        Standards Tracking.
+* Initiating Sessions:                   Initiating Sessions.
+* Internals Overview:                    Internals Overview.
+* Internet Ingeneering Task Force:       Introduction.
+* Introduction:                          Introduction.
+* join:                                  Initiating Sessions.
+* linking exception:                     Distribution.
+* loop detection:                        ccRTP Overview.
+* MD5 <1>:                               A.6.
+* MD5 <2>:                               ccRTP Overview.
+* MD5:                                   Introduction.
+* MIME:                                  Payload Types and Formats.
+* multicast:                             Initiating Sessions.
+* Participant:                           Participants.
+* Payload Formats:                       Payload Types and Formats.
+* payload type:                          Upgrading.
+* Payload Types:                         Payload Types and Formats.
+* PCMU:                                  Initiating Sessions.
+* philosophy:                            Distribution.
+* PRIV:                                  Initiating Sessions.
+* Random numbers <1>:                    A.6.
+* Random numbers:                        ccRTP Overview.
+* Receiving Data:                        Receiving Data.
+* reconsideration:                       ccRTP Overview.
+* Related work:                          Related Work.
+* reverse reconsideration:               ccRTP Overview.
+* RR:                                    RTCP Packets Arrival.
+* RTCP APP:                              RTCP Packets Arrival.
+* RTCP compound packets:                 Initiating Sessions.
+* RTCP Packet Arrival:                   RTCP Packets Arrival.
+* RTCP packets:                          Initiating Sessions.
+* RTCP Packets Extensions:               RTCP Packets Extensions.
+* RTCP RR:                               RTCP Packets Arrival.
+* RTCP SDES:                             RTCP Packets Arrival.
+* RTCP SR <1>:                           RTCP Packets Arrival.
+* RTCP SR:                               ccRTP Overview.
+* RTP clock rate:                        Payload Types and Formats.
+* RTP Packet Arrival:                    RTP Packets Arrival.
+* RTP Packets Expiration:                RTP Packets Expiration.
+* RTP Packets Extensions:                RTP Packets Extensions.
+* RTP parameters:                        Payload Types and Formats.
+* RTP Sessions:                          RTP Sessions.
+* RTP timestamp offset:                  Sending Data.
+* rtphello:                              ccRTP Overview.
+* rtplisten:                             ccRTP Overview.
+* SDES:                                  RTCP Packets Arrival.
+* SDES item:                             Initiating Sessions.
+* SDP:                                   Payload Types and Formats.
+* Secure RTP:                            Standards Tracking.
+* Sending Data:                          Sending Data.
+* Session control:                       Payload Types and Formats.
+* Session Description Protocol:          Payload Types and Formats.
+* Simple Receiver:                       Simple Receiver.
+* Simple Transmitter:                    Simple Transmitter.
+* sockets:                               Introduction.
+* Source of Synchronization:             Participants.
+* Specialized Payload Formats:           Specialized Payload Formats.
+* SR <1>:                                RTCP Packets Arrival.
+* SR:                                    ccRTP Overview.
+* SRE Extension:                         RTCP Packets Arrival.
+* SRTP:                                  Standards Tracking.
+* SSRC collision:                        SSRC Collisions.
+* SSRC Collision:                        SSRC Collisions.
+* SSRC collision:                        ccRTP Overview.
+* Standards tracking:                    Standards Tracking.
+* static payload type:                   Initiating Sessions.
+* synchronization:                       Introduction.
+* Synchronization Source States:         Synchronization Source States.
+* system services:                       Introduction.
+* threading:                             Introduction.
+* timer reconsideration:                 ccRTP Overview.
+* timestamp clock rate:                  Payload Types and Formats.
+* timestamp offset:                      Sending Data.
+* Upgrading:                             Upgrading.
+* Using ccRTP:                           Using ccRTP.
+
+

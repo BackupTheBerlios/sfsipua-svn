@@ -1,0 +1,273 @@
+.TH "IncomingDataQueue" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IncomingDataQueue \- Queue for incoming RTP data packets in an RTP session. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+Inherits \fBIncomingDataQueueBase\fP, and \fBMembershipBookkeeping\fP.
+.PP
+Inherited by \fBRTPDataQueue\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "const \fBAppDataUnit\fP * \fBgetData\fP (uint32 stamp, const \fBSyncSource\fP *src=NULL)"
+.br
+.RI "\fIRetreive data from a specific timestamped packet if such a packet is currently available in the receive buffer.\fP"
+.ti -1c
+.RI "bool \fBisWaiting\fP (const \fBSyncSource\fP *src=NULL) const"
+.br
+.RI "\fIDetermine if packets are waiting in the reception queue.\fP"
+.ti -1c
+.RI "uint32 \fBgetFirstTimestamp\fP (const \fBSyncSource\fP *src=NULL) const"
+.br
+.RI "\fIGet timestamp of first packet waiting in the queue.\fP"
+.ti -1c
+.RI "void \fBsetMinValidPacketSequence\fP (uint8 packets)"
+.br
+.RI "\fIWhen receiving packets from a new source, it may be convenient to reject a first few packets before we are really sure the source is valid.\fP"
+.ti -1c
+.RI "uint8 \fBgetMinValidPacketSequence\fP () const"
+.br
+.RI "\fIGet the minimun number of consecutive packets that must be received from a source before accepting its data packets.\fP"
+.ti -1c
+.RI "void \fBsetMaxPacketDropout\fP (uint16 packets)"
+.br
+.RI "\fIIt also prevents packets sent after a restart of the source being immediately accepted.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBIncomingDataQueue\fP (uint32 size)"
+.br
+.ti -1c
+.RI "bool \fBcheckSSRCInIncomingRTPPkt\fP (SyncSourceLink &sourceLink, bool is_new, InetAddress &na, tpport_t tp)"
+.br
+.RI "\fIApply collision and loop detection and correction algorithm when receiving RTP data packets.\fP"
+.ti -1c
+.RI "void \fBsetSourceExpirationPeriod\fP (uint8 intervals)"
+.br
+.RI "\fISet the number of RTCP intervals that the stack will wait to change the state of a source from stateActive to stateInactive, or to delete the source after being in stateInactive.\fP"
+.ti -1c
+.RI "size_t \fBtakeInDataPacket\fP ()"
+.br
+.RI "\fIThis function is used by the service thread to process the next incoming packet and place it in the receive list.\fP"
+.ti -1c
+.RI "void \fBrenewLocalSSRC\fP ()"
+.br
+.ti -1c
+.RI "IncomingDataQueue::IncomingRTPPktLink * \fBgetWaiting\fP (uint32 timestamp, const \fBSyncSource\fP *src=NULL)"
+.br
+.RI "\fIThis is used to fetch a packet in the receive queue and to expire packets older than the current timestamp.\fP"
+.ti -1c
+.RI "bool \fBrecordReception\fP (SyncSourceLink &srcLink, const \fBIncomingRTPPkt\fP &pkt)"
+.br
+.RI "\fILog reception of a new RTP packet from this source.\fP"
+.ti -1c
+.RI "void \fBrecordExtraction\fP (const \fBIncomingRTPPkt\fP &pkt)"
+.br
+.RI "\fILog extraction of a packet from this source from the scheduled reception queue.\fP"
+.ti -1c
+.RI "virtual void \fBonNewSyncSource\fP (const \fBSyncSource\fP &)"
+.br
+.RI "\fIVirtual called when a new synchronization source has joined the session.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Queue for incoming RTP data packets in an RTP session.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "IncomingDataQueue::IncomingDataQueue (uint32 size)\fC [protected]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsize\fP\fP
+initial size of the membership table. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "bool IncomingDataQueue::checkSSRCInIncomingRTPPkt (SyncSourceLink & sourceLink, bool is_new, InetAddress & na, tpport_t tp)\fC [protected]\fP"
+.PP
+Apply collision and loop detection and correction algorithm when receiving RTP data packets.
+.PP
+Follows section 8.2 in draft-ietf-avt-rtp-new.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsourceLink\fP\fP
+link to the source object. 
+.TP
+\fB\fIis_new\fP\fP
+whether the source has been just recorded. 
+.TP
+\fB\fIna\fP\fP
+data packet network address. 
+.TP
+\fB\fItp\fP\fP
+data packet source transport port.
+.PP
+\fBReturns: \fP
+.in +1c
+whether the packet must not be discarded. 
+.SS "const \fBAppDataUnit\fP* IncomingDataQueue::getData (uint32 stamp, const \fBSyncSource\fP * src = NULL)"
+.PP
+Retreive data from a specific timestamped packet if such a packet is currently available in the receive buffer.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIstamp\fP\fP
+Data unit timestamp. 
+.TP
+\fB\fIsrc\fP\fP
+Optional synchronization source selector. 
+.PP
+\fBReturns: \fP
+.in +1c
+data retrieved from the reception buffer. 
+.SS "uint32 IncomingDataQueue::getFirstTimestamp (const \fBSyncSource\fP * src = NULL) const"
+.PP
+Get timestamp of first packet waiting in the queue.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrc\fP\fP
+optional source selector. 
+.PP
+\fBReturns: \fP
+.in +1c
+timestamp of first arrival packet. 
+.SS "IncomingDataQueue::IncomingRTPPktLink* IncomingDataQueue::getWaiting (uint32 timestamp, const \fBSyncSource\fP * src = NULL)\fC [protected]\fP"
+.PP
+This is used to fetch a packet in the receive queue and to expire packets older than the current timestamp.
+.PP
+\fBReturns: \fP
+.in +1c
+packet buffer object for current timestamp if found. 
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fItimestamp\fP\fP
+timestamp requested. 
+.TP
+\fB\fIsrc\fP\fP
+optional source selector 
+.PP
+\fBNote: \fP
+.in +1c
+if found, the packet is removed from the reception queue 
+.SS "bool IncomingDataQueue::isWaiting (const \fBSyncSource\fP * src = NULL) const"
+.PP
+Determine if packets are waiting in the reception queue.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrc\fP\fP
+Optional synchronization source selector. 
+.PP
+\fBReturns: \fP
+.in +1c
+True if packets are waiting. 
+.SS "virtual void IncomingDataQueue::onNewSyncSource (const \fBSyncSource\fP &)\fC [inline, protected, virtual]\fP"
+.PP
+Virtual called when a new synchronization source has joined the session.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fI-\fP\fP
+new synchronization source 
+.SS "void IncomingDataQueue::recordExtraction (const \fBIncomingRTPPkt\fP & pkt)\fC [protected]\fP"
+.PP
+Log extraction of a packet from this source from the scheduled reception queue.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpkt\fP\fP
+Packet extracted from the queue. 
+.SS "bool IncomingDataQueue::recordReception (SyncSourceLink & srcLink, const \fBIncomingRTPPkt\fP & pkt)\fC [protected]\fP"
+.PP
+Log reception of a new RTP packet from this source.
+.PP
+Usually updates data such as the packet counter, the expected sequence number for the next packet and the time the last packet was received at.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrcLink\fP\fP
+Link structure for the synchronization source of this packet. 
+.TP
+\fB\fIpkt\fP\fP
+Packet just created and to be logged
+.PP
+\fBReturns: \fP
+.in +1c
+whether, according to the source state and statistics, the packet is considered valid and must be inserted in the incoming packets queue. 
+.SS "void IncomingDataQueue::setMinValidPacketSequence (uint8 packets)\fC [inline]\fP"
+.PP
+When receiving packets from a new source, it may be convenient to reject a first few packets before we are really sure the source is valid.
+.PP
+This method sets how many data packets must be received in sequence before the source is considered valid and the stack starts to accept its packets.
+.PP
+\fBNote: \fP
+.in +1c
+the default (see defaultMinValidPacketSequence()) value for this parameter is 0, so that no packets are rejected (data packets are accepted from the first one).
+.PP
+\fBNote: \fP
+.in +1c
+this validation is performed after the generic header validation and the additional validation done in onRTPPacketRecv().
+.PP
+\fBNote: \fP
+.in +1c
+if any valid RTCP packet is received from this source, it will be immediatly considered valid regardless of the number of sequential data packets received.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpackets\fP\fP
+number of sequential packet required 
+.SS "void IncomingDataQueue::setSourceExpirationPeriod (uint8 intervals)\fC [inline, protected]\fP"
+.PP
+Set the number of RTCP intervals that the stack will wait to change the state of a source from stateActive to stateInactive, or to delete the source after being in stateInactive.
+.PP
+Note that this value should be uniform accross all participants and SHOULD be fixed for a particular profile.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIintervals\fP\fP
+number of RTCP report intervals
+.PP
+\fBNote: \fP
+.in +1c
+If RTCP is not being used, the RTCP interval is assumed to be the default: 5 seconds. 
+.in -1c
+.in +1c
+The default for this value is, as RECOMMENDED, 5. 
+.SS "size_t IncomingDataQueue::takeInDataPacket ()\fC [protected]\fP"
+.PP
+This function is used by the service thread to process the next incoming packet and place it in the receive list.
+.PP
+\fBReturns: \fP
+.in +1c
+number of payload bytes received. <0 if error. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

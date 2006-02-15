@@ -1,0 +1,17 @@
+.TH "Generic RTP input/output queues." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Generic RTP input/output queues. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPDataQueue\fP"
+.br
+.RI "\fIA packet queue handler for building different kinds of RTP protocol systems. RTP data queue handler.\fP"
+.ti -1c
+.RI "class \fBRTPDataQueue\fP"
+.br
+.RI "\fIA packet queue handler for building different kinds of RTP protocol systems. RTP data queue handler.\fP"
+.in -1c

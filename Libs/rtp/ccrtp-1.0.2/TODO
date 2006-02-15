@@ -1,0 +1,47 @@
+- simplified incoming queue for only 1 source / or a low number of
+sources.
+
+- preallocated buffers mode for scheduling queue.
+
+- QueueRTCPManager::expireSSRCs
+
+- remove conflicting addresses after 10 RTCP report intervals 
+
+- add separated collision and loop counters?
+
+- check robust handling of payload change
+
+- BYE packets are always sent with a preceding _empty_ RR. Add more info.
+
+
+API additions:
+
+- Add user interface for RTP header extensions  
+
+- Interface for CSRC list and RTCP reports about CSRCs, for RTP mixers
+
+- provide/improve NTP-RTP mapping interface
+
+- encryption: no, full, RTP and non-SDES RTCP packets: provide
+'setEncryptionMode' method and virtuals for encryption
+implementation. setKey method.
+
+More TODO:
+
+- Test ccRTP following RFC 3158: ``RTP Testing Strategies'', 
+
+- adaptive jitter buffer schemes
+
+- Address the enhanced/best-effort service issue
+
+- QueueRTCPManager::QueueRTCPManager(..): path MTU is always assumed to be 1500
+
+Experimental things, close everything up here before looking down here:
+
+- Implement SSRC sampling algorithm
+
+- Consider SRTP, (SAVP profile)
+
+- Consider RTCP Feedback profile (AVPF profile)
+
+Last change: 31 Oct, 2002

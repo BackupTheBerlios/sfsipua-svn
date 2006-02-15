@@ -1,0 +1,51 @@
+.TH "StaticPayloadFormat" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+StaticPayloadFormat \- Static payload format objects. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <formats.h>\fP
+.PP
+Inherits \fBPayloadFormat\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBStaticPayloadFormat\fP (\fBStaticPayloadType\fP type)"
+.br
+.RI "\fIConstructor.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Static payload format objects.
+.PP
+Class of payload formats objects for payload types statically assigned. Because these payloads have an RTP clock rate assigned, it is not specified to the constructor. A call to StaticPayloadFormat(sptPCMU) will set the proper clock rate and any other parameters for that static payload type.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "StaticPayloadFormat::StaticPayloadFormat (\fBStaticPayloadType\fP type)"
+.PP
+Constructor.
+.PP
+Builds a payload format from a static payload binding identifier, assigning the numeric identifier and RTP clock rate statically bounded.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fItype\fP\fP
+Numeric identifier in the range 0-96. 
+.PP
+\fBNote: \fP
+.in +1c
+some identifiers are reserved. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

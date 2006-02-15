@@ -1,0 +1,31 @@
+.TH "RTCPCompoundHandler::RRBlock" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::RRBlock \- Struct for a receiver info block in a SR (sender report) or an RR (receiver report) RTCP packet. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBssrc\fP"
+.br
+.RI "\fIsource identifier.\fP"
+.ti -1c
+.RI "\fBReceiverInfo\fP \fBrinfo\fP"
+.br
+.RI "\fIinfo about the source.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for a receiver info block in a SR (sender report) or an RR (receiver report) RTCP packet.
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

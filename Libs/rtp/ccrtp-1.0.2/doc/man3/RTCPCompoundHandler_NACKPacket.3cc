@@ -1,0 +1,35 @@
+.TH "RTCPCompoundHandler::NACKPacket" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::NACKPacket \- Struct for Negative ACKnowledgements (NACK) RTCP packet. Specific for H.261 sessions (see RFC 2032). 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBssrc\fP"
+.br
+.RI "\fIssrc identifier of source.\fP"
+.ti -1c
+.RI "uint16 \fBfsn\fP"
+.br
+.RI "\fIFirst Sequence Number lost.\fP"
+.ti -1c
+.RI "uint16 \fBblp\fP"
+.br
+.RI "\fIBitmask of following Lost Packets.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for Negative ACKnowledgements (NACK) RTCP packet. Specific for H.261 sessions (see RFC 2032).
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

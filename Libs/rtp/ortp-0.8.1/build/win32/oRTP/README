@@ -1,0 +1,19 @@
+What is it ?
+************
+
+MS VisualC++ Workspace and Projects to build oRTP (and test tools) on Win32 systems.
+
+What are the build prequisites ?
+********************************
+
+Install some Win32 libraries on your system:
+- Download all glib, libiconv, libintl, pkgconfig related files from http://www.gimp.org/~tml/gimp/win32/downloads.html
+- Unzip all files under a same root. You should now have both source files and libraries (dlls).
+- Add directory paths for include files and library files to MSVC. 
+
+
+How to build ?
+**************
+
+- Open the oRTP Workspace in the oRTP directory (~\linphone\oRTP\build\win32\oRTP\oRTP).
+- Projects (oRTP + one for each test tool) are all added to this workspace.

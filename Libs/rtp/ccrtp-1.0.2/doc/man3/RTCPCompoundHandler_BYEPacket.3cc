@@ -1,0 +1,31 @@
+.TH "RTCPCompoundHandler::BYEPacket" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::BYEPacket \- Struct for BYE (leaving session) RTCP packets. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBssrc\fP"
+.br
+.RI "\fIssrc identifier of source leaving.\fP"
+.ti -1c
+.RI "uint8 \fBlength\fP"
+.br
+.RI "\fI[optional] length of reason.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for BYE (leaving session) RTCP packets.
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,36 @@
+.TH "channel.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+channel.h \- Definition of socket classes for different underlying transport and/or network protocols that can be used to instantiate the TRTPSessionBase template. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ccrtp/base.h>\fP
+.br
+\fC#include <sys/ioctl.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPBaseUDPIPv4Socket\fP"
+.br
+.RI "\fIA UDP/IPv4 socket class targetted at RTP stacks.\fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBRTPBaseUDPIPv4Socket\fP \fBSingleRTPChannel\fP"
+.br
+.RI "\fIMay be used in applications where using the same socket for both sending and receiving is not a limitation.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Definition of socket classes for different underlying transport and/or network protocols that can be used to instantiate the TRTPSessionBase template.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

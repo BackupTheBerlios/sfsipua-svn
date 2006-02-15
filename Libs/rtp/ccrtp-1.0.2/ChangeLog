@@ -1,0 +1,409 @@
+2003-06-09  David Sugar <dyfet@ostel.com>
+
+	* m4/ost_endian.m4: updated for modern autoconf/automake systems
+	* acconfig.h: eliminated
+	* configure.in: updated based on modern autoconf issues
+	* reconfig: support for macosx and multi-version autoconf
+	* Release 1.0.2
+
+2003-05-14  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/ccrtp/sources.h: SyncSource::isSender made const.
+	* doc/ccrtp.texi: fixes and additions.
+
+2003-05-10  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* configure.in, acconfig.h, src/queue.cpp: removed the
+	AC_CHECK_FILE for /dev/urandom so as to allow cross-compilation.
+	* demo/rtplisten.cpp: modified to recognize mcast addresses.
+	* src/ccrtp/ext.h: fixed RTPDuplex::getNextDataPacketSize so that
+	it compiles even though UDPReceive::getReceiver is not const,
+	which will not be an issue with cc++2 versions newer than 1.0.9.
+
+2003-04-24  David Sugar <dyfet@gnu.org>
+
+	* Some compile checks and 1.0.1 release (corrected timeline).
+
+2003-04-04  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/ccrtp/channel.h: (RTPBaseUDPIPv4Socket::join): call
+	Socket::join, instead of UDPSocket::join in order to avoid
+	conflicts with the new join added to releases of common c++ later
+	than 1.0.8.
+	* win32/msvcpp/demo/rtphello.dsp, win32/msvcpp/demo/rtpsend.cpp,
+	win32/msvcpp/demo/rtplisten.dsp: link ws2_32.lib.
+	* src/source.cpp: avoid access violation in the win32 version of
+	findusername, from Christian Steindl.
+	
+2003-04-02  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/ccrtp/rtp.h: (TRTPSocketBase::endSocket): free cso and dso.
+
+2003-03-24  David Sugar <dyfet@gnu.org>
+
+	* What the heck, it's long overdue...1.0.0 release
+
+2003-03-22  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* win32/msvcpp/ccrtp1.dsp: fixed debug project linking settings.
+	* src/outqueue.cpp: (OutgoingDataQueue::getSchedulingTimeout)
+	avoid overflow when calculating next send time.
+	
+2003-02-03  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/ccrtp/rtp.h: fixes for multicast methods of TRTPSessionBase.
+
+2003-01-25  David Sugar <dyfet@gnu.org>
+	* configure.in updated for new pre-release
+	* ext.h fixed for older gcc compile
+
+2003-01-12  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* doc/fdl.texi, doc/fdlnotice.texi: updated to FDL 1.2.
+	* src/ccrtp/formats.h, src/ccrtp/rtppkt.h, src/ccrtp/rtcppkt.h,
+	src/ccrtp/iqueue.h, src/ccrtp/oqueue.h, src/queue.cpp: fixes for
+	ANSI C++ warnings.
+	* src/ccrtp/rtp.h, src/ccrtp/ext.h, src/socket.cpp,
+	src/ccrtp/channel.h, src/ccrtp/socket.h: socket.h renamed to
+	channel.h in order to avoid name conflict with cc++2/socket.h's
+	man page.
+	* src/queue.cpp: (RTPDataQueue::getCurrentTimestamp): fixed
+	signed/unsigned bug, reported by Guillaume Fraysse.
+	* configure.in, src/Makefile.am, demo/Makefile.am,
+	phone/Makefile.am: gcc flags for ANSI C++.
+
+2002-11-27 David Sugar <sugar@gnu.org>
+	* modify spec file for rpm build
+	* release 1.0pre1 prep work
+
+2002-11-24 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/cc++/rtp is now src/ccrtp.
+	* src/queue.cpp, src/control.cpp, src/cc++/rtp/ioqueue.h: use size
+	parameter for IncomingDataQueue constructor.
+	* demo/rtplisten.cpp: added onNewSyncSource redefinition.
+	* src/incqueue, src/controll.cpp: check that onNewSyncSource is
+	called only once for any source.
+	
+2002-11-03 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/control.cpp: (takeInControlPacket): source stats init.
+	* src/cc++/rtp/rtcppkt.h, src/control.cpp: new methods for
+	RTCPPacket: getLength and getSSRC.
+
+2002-10-31 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/cc++/rtp/queuebase.h, src/queue.cpp, src/outqueue.cpp,
+	src/control.cpp: added localSSRCNetwork and reladed methods.
+	* demo/rtplisten.cpp: added onGotGoodbye virtual redefinition.
+	* src/control.cpp: (takeInControlPacket), (getOnlyBye), (getBye)
+	fixed.
+	
+2002-10-28 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/source.cpp, src/cc++/rtp/sources.h: participants
+	implementation completed.
+	* src/cc++/rtp/rtp.h: send BYE in session destructor.
+	* src/control.cpp: fixed RTCP header init. bug in dispatchBYE.
+	
+2002-10-27 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/cc++/rtp/iqueue.h, src/members.cpp: SR and RR info are
+	stores as unsigned char* instead of void*
+	* src/private.h: added tags for rtpsend and rtplisten demos.
+	
+2002-10-26 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/cc++/queuebase.h: include only pointer.h instead of template.h.
+	* src/cc++/iqueue.h, src/incqueue.h, src/control.h: store jitter
+	as float.
+
+2002-10-24 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/cc++/queuebase.h: added getDefaultMaxSendSegmentSize() and
+	getMaxSendSegmentSize() to OutgoingDataQueueBase.
+	* src/outqueue.cpp: (OutgoingDataQueue::putData) segment data blocks
+	depending on getMaxSendSegmentSize.
+	* doc/ccrtp.texi: extended "Sending Data" subsection.
+	* src/cc++/rtp/iqueue.h: initSequence now inits maxSeqNum and 
+	badSeqNum.
+	
+2002-10-23 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* src/control.cpp: BYE packets are now correctly sent with a 
+	preceding RR in the compound.
+	* src/cc++/cqueue.h, src/control.cpp: new method
+	QueueRTCPManager::sendControlToDestinations.
+	* src/cc++/iqueue.h: initialize Members::members to 1.
+	
+2002-10-22 Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* doc/Makefile.am, doc/srcmodel.txt, doc/srcmodel.dia,
+	doc/ccrtp.texi: added initial manual.
+	* doc/Doxyfile: added ../demo to EXAMPLE_PATH.
+	
+	* src/cc++/rtp/ioqueue.h: added getDefaultSessionBandwidth and
+	getSessionBandwidth to QueueRTCPManager.
+	* src/queue.cpp: added defaultSessionBw constant.
+	* src/control.cpp computeRTCPInterval now takes into account the
+	session total bandwith.	
+	
+2002-10-21  Federico Montesino Pouzols  <fedemp@altern.org>
+
+	* ccRTP has been rewritten. This changelog summarizes the most
+	important changes. Read it from bottom up.
+
+	* src/cc++/rtp/cqueue.h, src/control.cpp: getSDES splitted into
+	onGotSDES and a new virtual: onGotSDESChunk.
+	* src/cc++/rtp.h, control.cpp: added/updated onGotSR, onGotRR,
+	onGotAPP, onGotRRSRExtension and onSSRCCollision plug-in to
+	QueueRTCPManager class.
+
+	* src/cc++/rtp/oqueue.h, src/cc++/rtp/iqueue.h, src/cc++/cqueue.h:
+	readData, writeData, readControl and writeControl virtuals from
+	RTPQueue renamed to recvData, sendData, recvControl and
+	sendControl, respectively. recvData now provided the source
+	transport address. Added new getNextDataPacketSize virtual.
+
+	* src/cc++/rtp/pool.h, src/pool.cpp: added experimental "RTP
+	session pool" implementation.
+
+	* src/cc++/rtp/rtp.h: T_RTPSocket has been replaced with
+	TRTPSessionBase, which does not include any threading mechanism
+	and uses the new socket classes defined in
+	src/cc++/rtp/socket.h. New template class
+	SingleThreadRTPSession. Its run method is implemented using the
+	new QueueRTCPManager::controlReceptionService,
+	QueueRTCPManager::controlTransmissionService,
+	IncomingDataQueue::takeInDataPacket
+	OutgoingDataQueue::dispatchDataPacket.
+
+	* src/cc++/rtp/cqueue.h: added class AVPQueue.
+	* src/cc++/rtp/socket.h: new class RTPBaseUDPIPv4Socket, and template
+	class DualRTPChannel.
+	* src/cc++/rtp/oqueue.h, src/outqueue.cpp: new class
+	DestinationListHandler.
+	* src/cc++/rtp/iqueue.h, src/incqueue.cpp: class IncomingDataQueue
+	splitted from the old RTPQueue class.
+	* src/cc++/rtp/iqueue.h, src/outqueue.cpp: class OutgoingDataQueue
+	spllited from the old RTPQueue class.
+	* src/cc++/rtp/iqueue.h: MembershipControl is now
+	MembershipBookkeeping, inherits from the xxxHandler classes and
+	defines nested structures IncomingRTPPktLink and SyncSourceLink,
+	for packets/sources lists and hash table.	
+	* src/cc++/rtp/iqueue.h: new classes SyncSourceHandler, 
+	ParticipantHandler, ApplicationHandler and ConflictHandler.
+	* src/cc++/rtp/queuebase.h, src/data.cpp: new class AppDataUnit
+	* src/cc++/rtp/queuebase.h, src/queue.cpp: new class RTPQueueBase.
+	* src/cc++/rtp/queuebase.h, src/outqueue.cpp: new class 
+	OutgoingDataQueueBase.
+	* src/cc++/rtp/queuebase.h, src/incqueue.cpp: new class
+	IncomingDataQueueBase.
+
+	* src/cc++/rtp/sources.h, src/source.cpp: new classes SDESItemsHolder,
+	RTPApplication and Participant. RTPSource has been replaced with
+	SyncSource.
+	* src/cc++/rtp/rtcppkt.h, src/rtcppkt.cpp: RTCPCompoundHandler
+	moved and updated. New classes RTCPReceiverInfo and
+	RTCPSenderInfo.
+	* src/c++/rtp/rtppkt.h, src/rtppkt.cpp: RTPPacket, IncomingRTPPkt and 
+	OutgoingRTPPkt moved and updated.
+	* src/cc++/rtp/formats.h, src/rtppkt.cpp: Added new PayloadType
+	typedef, and classes PayloadFormat, DynamicPayloadFormat and
+	StaticPayloadFormat. The old PayloadType enumeration is now called
+	StaticPayloadType and has been changed.
+	* src/cc++/rtp/base.h: common consts and routines.
+	
+	* src/incqueue.cpp, src/outqueue.cpp: splitted from queue.cpp with
+	a lot of new stuff.
+	* src/packet.cpp: splitted into rtppkt.cpp and rtcppkt.cpp
+	* win32/msvcpp/: added GNUccRTP workspace for ccRTP, and ccRTPdemo
+	workspace for demos.
+	* win32/mingw32/: added mingw32 cross-compiling makefile.
+	* demo/: Makefile.am and demos updated for CC++ 2 and ccRTP 1.0.
+	* phone/: updated for 1.0.
+	* doc/Doxyfile, doc/Doxyman: added src/cc++/rtp to INPUT.
+	* doc/fdl.texi, fdlnotice.texi, doc/gpl.texi, doc/srcmodel.txt,
+	doc/srcmodel.dia: added for ccRTP manual.
+	* Makefile.am: added COPYING.addendum to EXTRA_DIST, and -Wall.
+	* acconfig.h: HAVE_DEV_URANDOM.
+	* configure.in, src/Makefile.am, src/rtp.h, src/rtpext.h:
+	public headers splitted and moved to src/cc++/rtp/.
+	* configure.in: REQUIRES="1.0.0", check for /dev/urandom and
+	cleaned up some headers checks.
+
+2002-07-29  David Sugar <dyfet@ostel.com> (from 0.9.1 to 0.9.2)
+
+	* Updated build for Hammer (x86-64) support.
+
+2002-02-18  David Sugar <dyfet@ostel.com> (from 0.7.2 to 0.7.3)
+
+	* Solaris target compile support.
+
+2001-12-28  David Sugar <dufet@ostel.com> (from 0.7.1 to 0.7.2)
+
+	* src/rtp.h: header fixups for newer Common C++
+
+	* application of Debian patch for gcc 3.0.
+
+2001-11-28  Federico Montesino <p5087@quintero.fie.us.es> (from 0.6.2 to 0.6.3)
+
+	* src/members.cpp: fixed a bug in RTPSource::addNewSource(uint32)
+	(the collision list was wrongly modified when inserting new
+	sources).
+
+	* src/queue.cpp: fixed a serious bug (incomplete initialization)
+	in RTPQueue::RTPQueue(int, uint32) and RTPQueue::initQueue.
+
+	* UDPIPv4Socket now inherits from both UDPReceive and UDPTransmit,
+	instead of only UDPSocket. Inheriting only from UDPSocket is an
+	error I introduced in 0.6.0. This change is necessary to avoid
+	receiving/transmitting collisions, specially when two applications
+	in the same host talk to each other through the same port numbers.
+	
+	* src/socket.cpp: UDPIPv4Socket::Connect(const InetAddress&,
+	tpport_t) removed as a result of the change listed up here.
+	
+	* demo/Makefile.am, demo/rtpsend.cpp and demo/rtplisten.cpp: added
+	new demo apps
+	
+	* COPYING.addendum: added (the same as the Common C++ one)
+
+	* src/rtp.h: rearranged Members class.
+
+	* src/control.cpp: QueueRTCPManager::getOnlyBye() has been filled
+	in.
+	
+	* src/rtp.h, src/control.cpp: static const data members initialization
+	moved from rtp.h to control.cpp to avoid VC++ complaints.
+
+	* src/rtp.h: T_RTPSocket::leaveGroup(const InetMcastAddress&) fixed
+	(now calls to setMulticast(false), instead of setMulticast(true)).
+
+	* src/rtp.h: Template T_RTPSocket updated from __EXPORT to 
+	CCXX_CLASS_EXPORT
+	
+	* src/rtp.h, control.cpp and packet.cpp: RTP_VERSION is now called
+	CCRTP_VERSION to avoid name conflicts with other stacks
+
+	* src/rtp.h and src/queue.h: the "data" parameter of putPacket is
+	now const.
+
+2001-11-27  David Sugar <dyfet@ostel.com> (from 0.7.0 to 0.7.1)
+	* fixed memory leaks in sdes and bye string builds.
+	* added functional virtuals for session control start and stop.
+	* created start of "phone" user agent.
+
+2001-11-02  David Sugar <dyfet@ostel.com> (from 0.6.2 to 0.7.0)
+	* addition of namespace support and changes for Common C++ 1.9.0.
+
+2001-10-15  David Sugar <dyfet@ostel.com> (from 0.6.1 to 0.6.2)
+        * fixed include files in demo apps.
+
+2001-10-14  E. Stuart Hicks <eshicks@hotmail.com> (from 0.6.1 to 0.6.2)
+	* minor patch to compile on older gcc releases.
+
+2001-10-07  David Sugar <dyfet@ostel.com> (from 0.6.0 to 0.6.1)
+	* ccRTP becomes a GNU package.
+
+2001-09-20  David Sugar <dyfet@ostel.com> (from 0.6.0 to 0.6.1)
+	* new virtuals to trap and filter packet queue expiration.
+	
+2001-09-02  Federico Montesino <p5087@quintero.fie.us.es> (from 0.5.1 to 0.6.0)
+
+	* configure.in: added check for nana support
+	(configure --with-nana, for testing), stdlib.h and sys/utsname.h
+
+	* src/Makefile.am: updated to make the following:
+
+	* src/rtpext.h: new public header containing the declarations
+	needed to make low level packet filtering and stack extensions.
+
+	* rtp.h: many new methods and changes in the class hierarchy (to
+	add MembershipControl, QueueRTCPManager and the template
+	T_RTPSocket)
+
+	* New files src/members.cpp, src/data.cpp and src/source.cpp with
+	the implementation of MembershipControl, RTPData and RTPSource
+	classes, respectively
+
+	* src/control.cpp: now includes the implementation of
+	QueueRTCPManager.
+
+	* src/socket.cpp: now includes the implementation of UDPIPv4Socket
+	and could include the implementation of other kind of socket
+	classes used to instantiate T_RTPSocket.
+
+	* Rearranged the doxygen tags and configuration (and changes in
+	src/private.h) so that the introductory README, the TODO list and
+	the examples under demo/ are included in the documentation. Added
+	some comments both for API and implementation.
+
+2001-08-22  David Sugar <dyfet@ostel.com> (from 0.5.0 to 0.5.1)
+
+	* expose private packet structures externally.
+	
+2001-06-21  David Sugar <dyfet@ostel.com> (from 0.4.1 to 0.5.0)
+
+	* added const for address handlers.
+	* added queue Purge function.
+	* extended queue i/o services and support for sequence and 
+	  timestamp initialization/signatures.
+	* added millisecond timeclock for stack time synhronization.
+	* added RTCP event messages as virtuals.
+
+2001-04-23  David Sugar <dyfet@ostel.com> (from 0.4.0 to 0.4.1)
+
+	* added virtual handler for timer tick driven code.
+	* added	patches and demo apps from Federico.
+	
+from 0.3.2 to 0.4.0  David Sugar <dyfet@ostel.com>
+
+	* fixed version test.
+	* added virtual handler to process packet "events".
+
+from 0.3.1 to 0.3.2  David Sugar <dyfet@ostel.com>
+
+	* some win32 things.
+	* new common c++ version check.
+
+from 0.3.0 to 0.3.1  David Sugar <dyfet@ostel.com>
+
+	* some header fixups.
+
+from 0.2.2 to 0.3.0  David Sugar <dyfet@ostel.com>
+
+	* merged with Common C++ updates and new Common C++ UDP classes.
+
+from 0.2.1 to 0.2.2  David Sugar <dyfet@ostel.com>
+
+	* use of sequence and marker checks to allow application to
+	determine if assembled multi-sequence packets are "complete" or
+	missing data.
+
+	* reorganized class structure to allow more malleable assembly of
+	different kinds of RTP session classes.
+
+from 0.2.0 to 0.2.1  David Sugar <dyfet@ostel.com>
+
+	* add support to strip "padding" on receiver side.
+	* add packet reassembly of multi-segment packets.
+	* add getPayloadSize capability.
+	* add setPartial to update a pending (multi-channel) frame.
+	* RTPSocket "broken" constructor fixed.
+
+from 0.1.0 to 0.2.0  David Sugar <dyfet@ostel.com>
+
+	* set SO_REUSEADDR for rtcp socket.
+	* added RTCP scheduling points to service thread.
+	* added expiration of outgoing packets which have been "delayed"
+	or "blocked".
+	* handling of sending to blocked or conjested outbound socket
+	queues.
+	* RTPSocket uses non-blocking send for conjuestion test.
+
+from 0.0.1 to 0.1.0  David Sugar <dyfet@ostel.com>
+
+	* restructured class hierarchy to add new RTPQueue so that we have
+	a generic base for creating different RTP socket types.
+	* RTPDuplex added.

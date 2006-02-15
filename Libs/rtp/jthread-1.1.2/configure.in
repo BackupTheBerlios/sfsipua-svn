@@ -1,0 +1,25 @@
+AC_INIT(configure.in)
+AM_INIT_AUTOMAKE(jthread,1.1.2)
+
+if test "BLA$CXXFLAGS" = "BLA" ; then
+	dnl CXXFLAGS="-g -Werror -Wall"
+	CXXFLAGS="-O2 "
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl Set language to C++ and do libtool stuff
+dnl ---------------------------------------------------------------------------
+
+AC_LANG(C++)
+
+AM_PROG_LIBTOOL
+
+dnl ---------------------------------------------------------------------------
+dnl Finish up...
+dnl ---------------------------------------------------------------------------
+
+AC_OUTPUT(Makefile \
+	  src/Makefile \
+          doc/Makefile \
+	  )
+

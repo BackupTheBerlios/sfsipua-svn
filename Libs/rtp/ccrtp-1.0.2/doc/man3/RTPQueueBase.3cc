@@ -1,0 +1,61 @@
+.TH "RTPQueueBase" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPQueueBase \- A virtual base class for RTP queue hierarchies. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <queuebase.h>\fP
+.PP
+Inherited by \fBIncomingDataQueueBase\fP\fC [virtual]\fP, and \fBOutgoingDataQueueBase\fP\fC [virtual]\fP.
+.PP
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPQueueBase\fP (uint32 *ssrc=NULL)"
+.br
+.ti -1c
+.RI "virtual size_t \fBdispatchBYE\fP (const std::string &)"
+.br
+.RI "\fIA plugin point for posting of BYE messages.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A virtual base class for RTP queue hierarchies.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "RTPQueueBase::RTPQueueBase (uint32 * ssrc = NULL)\fC [protected]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+If not null, the local SSRC identifier for this session. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "virtual size_t RTPQueueBase::dispatchBYE (const std::string &)\fC [inline, protected, virtual]\fP"
+.PP
+A plugin point for posting of BYE messages.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fI-\fP\fP
+reason to leave the RTP session. 
+.PP
+\fBReturns: \fP
+.in +1c
+number of octets sent. 
+.PP
+Reimplemented in \fBQueueRTCPManager\fP.
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

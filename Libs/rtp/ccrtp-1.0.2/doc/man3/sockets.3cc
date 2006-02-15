@@ -1,0 +1,29 @@
+.TH "Underlying transport protocol socket classes." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Underlying transport protocol socket classes. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBDualUDPIPv4Socket\fP"
+.br
+.RI "\fIA socket class based on two UDP/IPv4 sockets.\fP"
+.ti -1c
+.RI "class \fBRTPBaseUDPIPv4Socket\fP"
+.br
+.RI "\fIA UDP/IPv4 socket class targetted at RTP stacks.\fP"
+.ti -1c
+.RI "class \fBRTPBaseUDPIPv4Socket\fP"
+.br
+.RI "\fIA UDP/IPv4 socket class targetted at RTP stacks.\fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBRTPBaseUDPIPv4Socket\fP \fBSingleRTPChannel\fP"
+.br
+.RI "\fIMay be used in applications where using the same socket for both sending and receiving is not a limitation.\fP"
+.in -1c

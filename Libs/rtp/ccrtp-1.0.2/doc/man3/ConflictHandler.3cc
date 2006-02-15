@@ -1,0 +1,56 @@
+.TH "ConflictHandler" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ConflictHandler \- To track addresses of sources conflicting with the local one. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+Inherited by \fBMembershipBookkeeping\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "ConflictingTransportAddress * \fBsearchDataConflict\fP (InetAddress na, tpport_t dtp)"
+.br
+.ti -1c
+.RI "ConflictingTransportAddress * \fBsearchControlConflict\fP (InetAddress na, tpport_t ctp)"
+.br
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+To track addresses of sources conflicting with the local one.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "ConflictingTransportAddress* ConflictHandler::searchControlConflict (InetAddress na, tpport_t ctp)"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIna\fP\fP
+Inet network address. 
+.TP
+\fB\fIctp\fP\fP
+Data transport port. 
+.SS "ConflictingTransportAddress* ConflictHandler::searchDataConflict (InetAddress na, tpport_t dtp)"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIna\fP\fP
+Inet network address. 
+.TP
+\fB\fIdtp\fP\fP
+Data transport port. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

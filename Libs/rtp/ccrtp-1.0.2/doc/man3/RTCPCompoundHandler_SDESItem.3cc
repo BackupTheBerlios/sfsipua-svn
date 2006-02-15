@@ -1,0 +1,35 @@
+.TH "RTCPCompoundHandler::SDESItem" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::SDESItem \- Struct for an item description of a SDES packet. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint8 \fBtype\fP"
+.br
+.RI "\fIitem identifier.\fP"
+.ti -1c
+.RI "uint8 \fBlen\fP"
+.br
+.RI "\fIitem len in octets.\fP"
+.ti -1c
+.RI "char \fBdata\fP [1]"
+.br
+.RI "\fIitem content.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for an item description of a SDES packet.
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

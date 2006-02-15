@@ -1,0 +1,94 @@
+.TH "PayloadFormat" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PayloadFormat \- Base payload format class. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <formats.h>\fP
+.PP
+Inherited by \fBDynamicPayloadFormat\fP, and \fBStaticPayloadFormat\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBPayloadType\fP \fBgetPayloadType\fP () const"
+.br
+.RI "\fIGet payload type numeric identifier carried in RTP packets.\fP"
+.ti -1c
+.RI "uint32 \fBgetRTPClockRate\fP () const"
+.br
+.RI "\fIGet RTP clock rate for this payload format.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBPayloadFormat\fP ()"
+.br
+.RI "\fIPayloadFormat must not be used but as base class.\fP"
+.ti -1c
+.RI "virtual \fB~PayloadFormat\fP ()"
+.br
+.RI "\fIPayloadFormat must not be used but as base class.\fP"
+.ti -1c
+.RI "void \fBsetPayloadType\fP (\fBPayloadType\fP pt)"
+.br
+.RI "\fISet payload type numeric identifier carried in RTP packets.\fP"
+.ti -1c
+.RI "void \fBsetRTPClockRate\fP (uint32 rate)"
+.br
+.RI "\fISet RTP clock rate.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Base payload format class.
+.PP
+The properties of a payload format that, as an RTP stack, ccRTP takes into account are the payload type (numeric identifier) and the RTP clock rate.
+.PP
+This is a base class for both \fBStaticPayloadFormat\fP and \fBDynamicPayloadFormat\fP.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "\fBPayloadType\fP PayloadFormat::getPayloadType () const\fC [inline]\fP"
+.PP
+Get payload type numeric identifier carried in RTP packets.
+.PP
+\fBReturns: \fP
+.in +1c
+payload type numeric identifier. 
+.SS "uint32 PayloadFormat::getRTPClockRate () const\fC [inline]\fP"
+.PP
+Get RTP clock rate for this payload format.
+.PP
+\fBReturns: \fP
+.in +1c
+RTP clock rate in Hz. 
+.SS "void PayloadFormat::setPayloadType (\fBPayloadType\fP pt)\fC [inline, protected]\fP"
+.PP
+Set payload type numeric identifier carried in RTP packets.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpt\fP\fP
+payload type number. 
+.SS "void PayloadFormat::setRTPClockRate (uint32 rate)\fC [inline, protected]\fP"
+.PP
+Set RTP clock rate.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIrate\fP\fP
+RTP clock rate in Hz. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

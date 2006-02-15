@@ -1,0 +1,47 @@
+.TH "OutgoingDataQueueBase" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OutgoingDataQueueBase \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <queuebase.h>\fP
+.PP
+Inherits \fBRTPQueueBase\fP.
+.PP
+Inherited by \fBOutgoingDataQueue\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetMaxSendSegmentSize\fP (size_t size)"
+.br
+.RI "\fISet maximum payload segment size before fragmenting sends.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "void OutgoingDataQueueBase::setMaxSendSegmentSize (size_t size)\fC [inline]\fP"
+.PP
+Set maximum payload segment size before fragmenting sends.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsize\fP\fP
+Maximum payload size. 
+.PP
+\fBReturns: \fP
+.in +1c
+Whether segment size was successfully set. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

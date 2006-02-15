@@ -1,0 +1,36 @@
+.TH "rtppkt.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+rtppkt.h \- RTP packets handling. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ccrtp/base.h>\fP
+.br
+\fC#include <ccrtp/formats.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBIncomingRTPPkt\fP"
+.br
+.RI "\fIRTP packets received from other participants.\fP"
+.ti -1c
+.RI "class \fBOutgoingRTPPkt\fP"
+.br
+.RI "\fIRTP packets being sent.\fP"
+.ti -1c
+.RI "class \fBRTPPacket\fP"
+.br
+.RI "\fIA base class for both \fBIncomingRTPPkt\fP and \fBOutgoingRTPPkt\fP.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+RTP packets handling.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

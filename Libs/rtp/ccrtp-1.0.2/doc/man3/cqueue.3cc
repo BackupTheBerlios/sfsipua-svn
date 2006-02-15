@@ -1,0 +1,21 @@
+.TH "Generic RTCP control queues." 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Generic RTCP control queues. \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBAVPQueue\fP"
+.br
+.RI "\fIThis class, an RTP/RTCP queue, adds audio/video profile (AVP) specific methods to the generic RTCP service queue (\fBQueueRTCPManager\fP).\fP"
+.ti -1c
+.RI "class \fBQueueRTCPManager\fP"
+.br
+.RI "\fIAdds generic management of RTCP functions to an RTP data queue.\fP"
+.ti -1c
+.RI "class \fBQueueRTCPManager\fP"
+.br
+.RI "\fIAdds generic management of RTCP functions to an RTP data queue.\fP"
+.in -1c

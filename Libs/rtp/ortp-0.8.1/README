@@ -1,0 +1,59 @@
+What is it ?
+************
+
+oRTP is a LGPL licensed C library implementing the RTP protocol (rfc1889). It is available
+for most unix clones (primilarly Linux and HP-UX), and Microsoft Windows.
+
+What are the build prequisites ?
+********************************
+glib > 2.0.0 (http://www.gtk.org) is mandatory.
+
+How do you I test ?
+*******************
+
+There are shorts and easy to understand programs given with the library. There are good example
+to understand how to use oRTP api.
+- rtpsend : sends a stream from a file on disk.
+- rtprecv : receives a stream and writes it to disk.
+- mrtpsend: sends multiple streams from a file on disk to a range of remote port.
+- mrtprecv:	receives mutiple streams on a range of local ports and writes them on disk.
+
+
+Is there some documentation ?
+*****************************
+
+See the gtk-doc generated API documentation in docs/html. Program examples are a very good
+starting point.
+
+
+What are the actual features ?
+******************************
+
+There are very few for the moment:
+	-portability: should be portable on all unices with glib. It works without glib on HP-UX.
+	-sends rtp packets through ipv4 networks.
+	-receives rtp packets according to the rfc. Timestamp and sequence number are checked
+		to re-compose the incoming stream. Jitter compensation is done.
+
+What are the planned features ?
+*******************************
+	- RTCP.
+
+
+In which application oRTP is being used ?
+*****************************************
+	- linphone (http://www.linphone.org) was the first.
+	- the OCMP platform (a Hewlett Packard product).
+
+How to compile my program using ortp ?
+**************************************
+gcc -o myprogram -I/usr/include/ortp `pkg-config --cflags glib-2.0` myprogram.c -lortp \
+			`pkg-config --libs glib-2.0`
+
+should work if you configured ortp with --prefix=/usr
+
+What about Windows port ?
+*************************
+There are instructions and Microsoft Visual C++ project files in build/win32/oRTP.
+
+

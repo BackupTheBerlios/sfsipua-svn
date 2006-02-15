@@ -1,0 +1,17 @@
+.TH "ccRTP Extension classes" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ccRTP Extension classes \- 
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBRTPDuplex\fP"
+.br
+.RI "\fIA peer associated RTP socket pair for physically connected peer hosts. RTP peer host over UDP.\fP"
+.ti -1c
+.RI "class \fBRTPDuplex\fP"
+.br
+.RI "\fIA peer associated RTP socket pair for physically connected peer hosts. RTP peer host over UDP.\fP"
+.in -1c

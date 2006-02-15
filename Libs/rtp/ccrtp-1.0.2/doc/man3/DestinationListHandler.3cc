@@ -1,0 +1,47 @@
+.TH "DestinationListHandler" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DestinationListHandler \- This class handles a list of destination addresses. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <oqueue.h>\fP
+.PP
+Inherited by \fBOutgoingDataQueue\fP\fC [protected]\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "bool \fBisSingleDestination\fP () const"
+.br
+.RI "\fIGet whether there is only a destination in the list.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "bool \fBaddDestinationToList\fP (const InetAddress &ia, tpport_t data, tpport_t control)"
+.br
+.RI "\fILocks the object before modifying it.\fP"
+.ti -1c
+.RI "bool \fBremoveDestinationFromList\fP (const InetAddress &ia, tpport_t dataPort, tpport_t controlPort)"
+.br
+.RI "\fILocks the object before modifying it.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+This class handles a list of destination addresses.
+.PP
+Stores network addresses as InetAddress objects.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

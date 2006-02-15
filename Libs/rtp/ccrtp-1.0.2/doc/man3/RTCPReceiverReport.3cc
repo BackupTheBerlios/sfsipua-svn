@@ -1,0 +1,23 @@
+.TH "RTCPReceiverReport" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPReceiverReport \- Report block information of SR/RR RTCP reports. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+Report block information of SR/RR RTCP reports.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

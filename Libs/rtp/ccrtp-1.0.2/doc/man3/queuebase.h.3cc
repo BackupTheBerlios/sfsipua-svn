@@ -1,0 +1,40 @@
+.TH "queuebase.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+queuebase.h \- Base classes for RTP queues. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <cc++/pointer.h>\fP
+.br
+\fC#include <ccrtp/rtppkt.h>\fP
+.br
+\fC#include <ccrtp/sources.h>\fP
+.br
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBAppDataUnit\fP"
+.br
+.RI "\fIInterface (envelope) to data received over RTP packets.\fP"
+.ti -1c
+.RI "class \fBIncomingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBOutgoingDataQueueBase\fP"
+.br
+.ti -1c
+.RI "class \fBRTPQueueBase\fP"
+.br
+.RI "\fIA virtual base class for RTP queue hierarchies.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Base classes for RTP queues.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

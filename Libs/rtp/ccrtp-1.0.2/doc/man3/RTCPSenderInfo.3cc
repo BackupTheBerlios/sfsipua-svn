@@ -1,0 +1,54 @@
+.TH "RTCPSenderInfo" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPSenderInfo \- Sender block information of SR RTCP reports. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBgetNTPTimestampInt\fP () const"
+.br
+.RI "\fIGet integer part of the NTP timestamp of this packet.\fP"
+.ti -1c
+.RI "uint32 \fBgetNTPTimestampFrac\fP () const"
+.br
+.RI "\fIGet fractional part of the NTP timestamp of this packet.\fP"
+.ti -1c
+.RI "uint32 \fBgetPacketCount\fP () const"
+.br
+.RI "\fIGet count of sent data packets.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Sender block information of SR RTCP reports.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "uint32 RTCPSenderInfo::getNTPTimestampFrac () const\fC [inline]\fP"
+.PP
+Get fractional part of the NTP timestamp of this packet.
+.PP
+\fBSee also: \fP
+.in +1c
+\fBNTP2Timeval\fP 
+.SS "uint32 RTCPSenderInfo::getNTPTimestampInt () const\fC [inline]\fP"
+.PP
+Get integer part of the NTP timestamp of this packet.
+.PP
+\fBSee also: \fP
+.in +1c
+\fBNTP2Timeval\fP 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

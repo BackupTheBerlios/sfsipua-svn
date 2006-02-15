@@ -1,0 +1,879 @@
+--------------------------------------------------------------------------------
+                                                                  12th July 2004
+
+
+
+                         JRTPLIB (v2.9) -  REFERENCE MANUAL
+
+
+
+
+1.    General Information
+
+1.1   Description	
+
+JRTPLIB (Jori's RTP Library) is an object oriented library for the use of RTP
+(Real-Time Transport Protocol). Normally, it should follow the specifications
+according to RFC 1889. This textfile describes the classes and functions 
+which form the interface of the library. If some of the used terms aren't
+clear, you should consult RFC 1889.
+
+1.2   Author & contact
+
+The library was written completely from scratch by Jori Liesenborgs. Any
+comments, bugreports, ideas for improvements,... can be sent to the following
+e-mail address:	
+	jori@lumumba.luc.ac.be
+
+1.3   Platforms
+
+The library uses the socket mechanism for network communications. This means
+it can be compiled (perhaps with some minor modifications) and used on 
+various platforms. It has been tested on a Linux platform and on a Windows
+platform (using the Winsock library). It's also known to work on Solaris,
+HP-UX, FreeBSD and VxWorks platforms.
+
+1.4   Important general information
+
+All of the functions with return type 'int', return 0 or more on success. 
+Thus, with these functions an error is always indicated by a negative number.
+
+1.5   What the library doesn't do
+
+An important remark is that the library will not necessarily filter out 
+duplicate packets. The packets from one sender which are in the received packets
+queue after a call to 'Poll', won't be duplicates of other packets in the queue.
+Once out of the queue, however, there is no guarantee that some accepted packet 
+won't have been received already. 
+There is a good reason for this: the application using the library probably has
+more information about which packets are expected. Using this information it's 
+possible to filter out duplicate packets using less memory than would be 
+required inside the library.
+
+1.6   Copyright & disclaimer
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the "Software"),
+  to deal in the Software without restriction, including without limitation
+  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+  and/or sell copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+
+
+
+2.    class RTPSession
+
+2.1   Description
+
+This class is used to set up a RTP session.
+
+2.2   Member functions
+
+ - int Create(int localportbase)
+	This function attempts to create a RTP session with a given portbase.
+	It creates an initial timestamp and an initial packet sequence
+	number. It also creates a local synchronization source identifier
+	(SSRC). When doing this, the list of illegal SSRCs is checked. This
+	list can be modified by the functions AddIllegalLocalSSRC,
+	DeleteIllegalLocalSSRC and ClearInvalidLocalSSRCList. In a newly 
+	created session, there are no destinations to send the RTP and RTCP 
+	packets to. Destinations can be set by the functions AddDestination, 
+	DeleteDestination and ClearDestinations.
+
+ - int GetPortBase()
+	Returns the portbase of this session.
+
+ - int GetLocalSSRC(unsigned long *ssrc)
+	This function retrieves the local synchronization source identifier.
+
+ - int Destroy()
+	Destroys the session. All info is destroyed, including destinations,
+	default values for SendPacket, invalid local SSRC values,...	
+
+ - int GetRTPSocket(RTPSOCKET *sock)
+	Retrieves the RTP socket (used for receiving RTP data). This way, 
+	the socket can be used outside the library. A practical use would be 
+	in the 'select' function.
+
+ - int GetRTCPSocket(RTPSOCKET *sock)
+	Retrieves the RTCP socket (used for receiving RTCP data). This way, 
+	the socket can be used outside the library. A practical use would 
+	be in the 'select' function.
+
+ - int GetSendSocket(RTPSOCKET *sock)
+	Retrieves the socket which is used for sending the RTP data. This 
+	way, the socket can be used outside the library. A practical use 
+	would be in the 'select' function.
+ 
+ - int GetSendPort()
+	Retrieves the port to which the sending socket was bound.
+
+ - int GetLocalIP(unsigned long *ip)
+ 	Puts the local IP address which is used by the library in 'ip'.
+
+ - int SetToS(int tos)
+ 	Set the IP type of service (ToS) field for outgoing RTP and RTCP
+	packets.
+ 
+ - int AddDestination(unsigned long remoteIP,int remoteportbase)
+ 	Adds a destination to send RTP and RTCP data to.
+
+ - int DeleteDestination(unsigned long remoteIP,int remoteportbase)
+	Deletes a destination from the list of destinations.
+	
+ - void ClearDestinations()
+	Clears the list of destinations.
+
+ - bool SupportsMulticasting()
+	Returns 'true' if the library is compiled with multicasting support,
+	otherwise the function returns 'false'.
+
+ - int JoinMulticastGroup(unsigned long mcastIP)
+ 	This function attempts to join the multicast group specified by the
+ 	address in 'mcastIP'. Note that you only have to join a multicast
+ 	group to receive packets which are sent to it. You don't have to be
+ 	in a group to send packets to it.
+
+ - int LeaveMulticastGroup(unsigned long mcastIP)
+ 	This function attempts to leave the multicast group specified by the
+ 	address in 'mcastIP'
+
+ - void LeaveAllMulticastGroups()
+ 	Leaves all multicast groups to which the session was previously joined
+ 	through the use of JoinMulticastGroup
+ 	
+ - int SetMulticastTTL(unsigned char ttl)
+ 	Use this function to change the Time To Live (TTL) field for multicast
+ 	packets. The TTL field is a field in the IP header which determines
+ 	the lifetime for a packet (normally, this the maximum number of hops
+ 	for a packet).
+	
+ - int SendPacket(void *data,int len)
+	Sends a RTP packet with a payload containing of 'len' bytes of 
+	'data'. To be able to use this function, you must first set the
+	default values for the payload type, the mark bit and the timestamp
+	increment value. These default values can be set with the functions
+	SetDefaultPayloadType, SetDefaultMark and SetDefaultTimeStampIncrement.
+
+ - int SendPacket(void *data,int len,unsigned char pt,bool mark,unsigned long timestampinc)
+	Sends a RTP packet with a payload containing of 'len' bytes of 
+	'data'. The packet type is specified by 'pt', the mark bit by 'mark'
+	and the timestamp increment by 'timestampinc'. The values set by
+	SetDefaultPayloadType, SetDefaultMark and SetDefaultTimeStampIncrement
+	are ignored.
+	
+ - int SendPacket(void *data,int len,unsigned short hdrextID,void *hdrextdata,int numhdrextwords)
+	Sends a RTP packet with a payload containing of 'len' bytes of
+	'data'. To be able to use this function, you must first set the
+	default values for the payload type, the mark bit and the timestamp
+	increment value. These default values can be set with the functions
+	SetDefaultPayloadType, SetDefaultMark and SetDefaultTimeStampIncrement.
+	This function also causes a RTP header extension to be included in the
+	packet. This extension has identifier 'hdrextID' and the length of the
+	extension data is specified in 32-bit words by 'numhdrextwords'. The
+	data itself is contained in 'hdrextdata'.
+
+ - int SendPacket(void *data,int len,unsigned char pt,bool mark,unsigned long timestampinc,unsigned short hdrextID,void *hdrextdata,int numhdrextwords)
+	Sends a RTP packet with a payload containing of 'len' bytes of
+	'data'. The packet type is specified by 'pt', the mark bit by 'mark'
+	and the timestamp increment by 'timestampinc'. The values set by
+	SetDefaultPayloadType, SetDefaultMark and SetDefaultTimeStampIncrement
+	are ignored. This function also causes a RTP header extension to be
+	included in the packet. This extension has identifier 'hdrextID' and
+	the length of the extension data is specified in 32-bit words by
+	'numhdrextwords'. The data itself is contained in 'hdrextdata'.
+
+ - void SetDefaultPayloadType(unsigned char pt)
+	Sets the default packet type.
+
+ - void SetDefaultMark(bool mark)
+	Sets the default value for the mark bit.
+
+ - void SetDefaultTimeStampIncrement(unsigned long inc)
+	Sets the default timestamp increment value.
+
+ - int IncrementTimeStamp(unsigned long inc)
+	Increments the current timestamp with value 'inc'.
+
+ - int IncrementTimeStampDefault()
+	Increments the current timestamp with the default value, set by the
+	function SetDefaultTimeStampIncrement.
+
+ - int PollData()
+	Checks for data on RTP and RTCP ports. If any data is present, it's
+	immediately processed. To retrieve RTP packets or info gathered from
+	RTCP packets, you can use the functions GotoFirstSource, GotoNextSource,
+	GotoFirstSourceWithData, GotoNextSourceWithData, GetNextPacket,
+	GetCurrentSourceInfo and GetSourceInfo. After calling PollData, you
+	should always use one of the GotoFirst functions before one of the
+	GotoNext functions, as the list of participating sources may have 
+	changed: sources could have joined the session or may have left the
+	session. 
+	Note that currently own RTCP packets are always discarded.
+
+ - bool GotoFirstSource()
+	This function goes sets a pointer to the first participating source.
+	You can use this function to start an iteration over the participating
+	sources. It returns 'true' if there are any participating sources,
+	otherwise the function returns 'false'.
+	
+ - bool GotoNextSource()
+	You can use this function to iterate over the participating sources.
+	If there is a source that hasn't been processed yet, the function
+	returns 'true'. If all sources were covered, 'false' is returned.
+
+ - bool GotoFirstSourceWithData()
+	This function is similar to GotoFirstSource, but it skips sources
+	that haven't got any data pending on their input queues. Returns
+	'true' is a source with data on its queue exists. Returns 'false'
+	otherwise.
+
+ - bool GotoNextSourceWithData()
+	This function is similar to GotoNextSource, but it skips sources
+	that haven't got any data pending on their input queues. If there
+	aren't any sources left to process 'false' is returned. If another
+	source was found, 'true' is returned.
+
+ - RTPPacket *GetNextPacket()
+	When iterating over the participating sources with GotoFirst and
+	GotoNext functions, you can use this function to extract a packet
+	from the current source's queue. If data is available, the function
+	returns an instance of the class RTPPacket containing the data. 
+	Otherwise, NULL is returned. If a packet is returned, it must be
+	destroyed by a call to 'delete' when it is no longer needed.
+
+ - RTPSourceData *GetCurrentSourceInfo()
+	When iterating over the participating sources with GotoFirst and
+	GotoNext functions, you can use this function to get information
+	about the current source. If the iteration has stopped NULL is
+	returned, otherwise the function returns an instance of the class 
+	RTPSourceData containing the info about the current source.
+
+ - RTPSourceData *GetSourceInfo(unsigned long ssrc)
+	Retrieves information about the participating source with 
+	synchronization source identifier 'ssrc'. If there is an entry for
+	that source, an instance of the class RTPSourceData is returned.
+	Otherwise the function returns NULL.
+
+ - int AddInvalidLocalSSRC(unsigned long ssrc)
+	Adds the synchronization source identifier 'ssrc' to the list of
+	invalid local sychronization source identifiers. This list is checked
+	when the local SSRC identifier is created.
+
+ - int RemoveInvalidLocalSSRC(unsigned long ssrc)
+	Removes an entry from the list of invalid local SSRCs.
+
+ - void ClearInvalidLocalSSRCList()
+	Clears the list of invalid local SSRCs.
+
+ - int AddCSRC(unsigned long csrc)
+	Adds an entry to the list of contributing sources. Info about these
+	sources can be set with SetCSRC functions.
+
+ - int DeleteCSRC(unsigned long csrc)
+	Deletes an entry from the list of contributing sources.
+
+ - void ClearCSRCList()
+	Clears the list of contributing sources.
+
+ - int SetReceiveMode(int mode)
+	Sets the receive mode. The parameter 'mode' has three legal values:
+	* RECEIVEMODE_ALL 
+		Accept all incoming data on RTP and RTCP ports.
+	* RECEIVEMODE_IGNORESOME
+		Ignore packets from the ip-port pairs in the ignore list, but
+		accept all other packets.		
+	* RECEIVEMODE_ACCEPTSOME
+		Ignore all packets, except those whose ip-port origin is
+		found in the accept list.
+	The ignore list can be modified with the function AddToIgnoreList,
+	DeleteFromIgnoreList and ClearIgnoreList. The accept list can be
+	modified with AddToAcceptList, DeleteFromAcceptList and 
+	ClearAcceptList.
+		
+ - int AddToIgnoreList(unsigned long remoteIP,bool allports,int portbase)
+	Adds an origin to the ignore list. If 'allports' is true, all
+	data from address 'remoteIP' is ignored, no matter what port it
+	came from. This function will have no noticable effect until the
+	receive mode is set to RECEIVEMODE_IGNORESOME.
+
+ - int DeleteFromIgnoreList(unsigned long remoteIP,bool allports,int portbase)
+	Deletes an entry from the ignore list with the specified parameters.
+	
+ - void ClearIgnoreList()
+	Clears the ignore list.
+
+ - int AddToAcceptList(unsigned long remoteIP,bool allports,int portbase)
+	Adds an origin to the accept list. If 'allports' is true, all
+	data from address 'remoteIP' is accepted, no matter what port it
+	came from. This function will have no noticable effect until the
+	receive mode is set to RECEIVEMODE_ACCEPTSOME.
+
+ - int DeleteFromAcceptList(unsigned long remoteIP,bool allports,int portbase)
+	Deletes an entry with the specified parameters from the accept list.
+
+ - void ClearAcceptList()
+	Clears the accept list.
+
+ - int SetMaxPacketSize(int m)
+	Sets the maximum size that a RTP or RTCP packet can have. This size
+	does not include IP or UDP header sizes. It defaults to 1100.
+
+ - void SetSessionBandwidth(double bw)
+	Sets the bandwidth the session is supposed to use. The parameter
+	is treated in units of bits per second (bps). This value is used to
+	calculate the interval at which RTCP packets should be sent. The
+	default value is 64000 bps.	
+	
+ - void SetTimestampUnit(double t)
+	Sets the value in seconds to which one timestamp unit corresponds. 
+	The default is 1/8000 sec.
+
+ - void SetControlTrafficFragment(double frag)
+	Sets the fragment of the session bandwidth that the RTCP packets
+	may occupy. This value is used to calculate the the interval at
+	which RTCP packets should be sent. The default value is 5/100.
+	
+ - int SetLocalName(char *s,int len)
+	Sets the name of the local participant. The name is specified in
+	parameter 's' and has length 'len'.
+	
+ - int SetLocalEMail(char *s,int len)
+	Sets the e-mail address of the local participant. The address is 
+	specified in parameter 's' and has length 'len'.
+
+ - int SetLocalLocation(char *s,int len)
+	Sets the location of the local participant. The location is specified
+	in parameter 's' and has length 'len'.
+
+ - int SetLocalPhone(char *s,int len)
+	Sets the telephone number of the local participant. The number is 
+	specified in parameter 's' and has length 'len'.
+
+ - int SetLocalTool(char *s,int len)
+	Sets the tool name for the local participant. The tool is specified 
+	in parameter 's' and has length 'len'.
+
+ - int SetLocalNote(char *s,int len)
+	Sets a note for the local participant. The note is specified in 
+	parameter 's' and has length 'len'.
+
+ - int SetCSRC_CNAME(unsigned long csrc,char *s,int len)
+	Sets the canonical name (CNAME) for the contributing source with 
+	identifier 'csrc'. The name is specified by 's' and has length 'len'.
+
+ - int SetCSRCName(unsigned long csrc,char *s,int len)
+	Sets the name for the contributing source with identifier 'csrc'.
+	The name is specified by 's' and has length 'len'.
+
+ - int SetCSRCEMail(unsigned long csrc,char *s,int len)
+	Sets the e-mail address for the contributing source with identifier 
+	'csrc'.	The address is specified by 's' and has length 'len'.
+
+ - int SetCSRCLocation(unsigned long csrc,char *s,int len)
+	Sets the location for the contributing source with identifier 'csrc'.
+	The location is specified by 's' and has length 'len'.
+
+ - int SetCSRCPhone(unsigned long csrc,char *s,int len)
+	Sets the telephone number for the contributing source with identifier
+	'csrc'.	The number is specified by 's' and has length 'len'.
+
+ - int SetCSRCTool(unsigned long csrc,char *s,int len)
+	Specifies a tool for the contributing source with identifier 'csrc'.
+	The tool name is specified by 's' and has length 'len'.
+
+ - int SetCSRCNote(unsigned long csrc,char *s,int len)
+	Sets a note for the contributing source with identifier 'csrc'.	The 
+	note is specified by 's' and has length 'len'.
+
+ - void EnableSendName(bool val)
+	Specifies if the name (either local or for a CSRC) should be sent
+	to other participants.
+	
+ - void EnableSendEMail(bool val)
+	Specifies if the e-mail address (either local or for a CSRC) should 
+	be sent to other participants.
+	
+ - void EnableSendLocation(bool val)
+	Specifies if the location (either local or for a CSRC) should be 
+	sent to other participants.
+	
+ - void EnableSendPhone(bool val)
+	Specifies if the phone number (either local or for a CSRC) should be 
+	sent to other participants.
+	
+ - void EnableSendTool(bool val)
+	Specifies if tool information (either local or from a CSRC) should 
+	be sent	to other participants.
+	
+ - void EnableSendNote(bool val)
+	Specifies if notes (either local or from a CSRC) should be sent
+	to other participants.
+	
+ - void SetLocalSSRCCollisionHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler for collisions with the local SSRC identifier. The
+	parameter 'usrdata' will be passed when calling this handler. Set the
+	handler to NULL to disable.
+
+ - void SetSSRCCollisionHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler for collisions between SSRC identifiers, other than
+	the local SSRC identifier. The parameter 'usrdata' will be passed 
+	when calling this handler. Set the handler to NULL to disable.
+
+ - void SetNewSourceHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler to call when a source has joined the session. The
+	parameter 'usrdata' will be passed when calling this handler. Set the
+	handler to NULL to disable.
+
+ - void SetInvalidSDESTypeHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler that will be called when a RTCP packet with an illegal 
+	SDES type arrives. The parameter 'usrdata' will be passed when calling 
+	this handler. Set the handler to NULL to disable.
+
+ - void SetSSRCDepartureHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler to call when a source leaves the session. The
+	parameter 'usrdata' will be passed when calling this handler. Set the
+	handler to NULL to disable.
+	
+ - void SetSSRCTimeoutHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler to call when a source leaves the session due to a
+	timeout. The parameter 'usrdata' will be passed when calling this 
+	handler. Set the handler to NULL to disable.
+
+ - void SetReceiveRTCPAPPHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler to call when application specific data arrives. The
+	parameter 'usrdata' will be passed when calling this handler. Set the
+	handler to NULL to disable.
+
+ - void SetTransmitRTCPAPPHandler(RTPExceptionHandler handler,void *usrdata)
+	Sets the handler to call when the library will send RTCP data. Using
+	this handler you can then pass application specific data to be included
+	in the RTCP packet. The parameter 'usrdata' will be passed when calling
+	this handler. Set the handler to NULL to disable.
+
+ - void SetRTCPPacketHandler(RTPExceptionHandler handler,void *usrdata)
+ 	Sets the handler to be called for each incoming RTCP packet (also
+ 	invalid ones!). The parameter 'usrdata' will be passed when calling
+ 	this handler. Set the handler to NULL to disable.
+
+ - void ClearHandlers()
+	Clears all handlers.
+
+ - void SetAcceptOwnPackets(bool accept)
+	Specifies if received packets which originated from your own session
+	should be accepted or discarded. Accepting them can be useful for
+	debugging purposes: you can make the session send packets to itself.
+	By default, the packets are discarded. Note that own RTCP packets 
+	currently are always discarded.
+
+ - bool GetAcceptOwnPackets()
+	Returns true if own packets are accepted, false otherwise.
+
+	
+
+3.    Class RTPPacket
+
+3.1   Description
+
+Instances of this class contain RTP packet data. They are returned by a call
+to the member function GetNextPacket of the class RTPSession or by a call to
+the member function ExtractPacket of the class RTPSourceData.
+
+3.2   Member functions
+
+ - unsigned long GetSSRC()
+	Gets the synchronization source identifier from the origin of this
+	packet.
+
+ - unsigned long GetExtendedSequenceNumber()
+	Gets the extended sequence number of the packet. Note that the 
+	sequence numbers start from a random offset, as speficied in RFC 1889.
+
+ - unsigned long GetTimeStamp()
+	Gets the timestamp of the packet. The timestamp starts at a random
+	offset.
+
+ - int GetPayloadLength()
+	Gets the length of the payload (the actual data contained in the
+	RTP packet)
+
+ - unsigned char *GetRawPacket()
+	Returns a pointer to the raw packet data.
+
+ - unsigned char *GetPayload()
+	Returns a pointer to the payload, the actual data of the RTP packet.
+
+ - unsigned char GetPayloadType()
+ 	Returns the payload type of the packet.
+
+ - bool IsMarked()
+ 	Returns 'true' if the marker bit in the RTP header was set, 'false'
+ 	otherwise.
+ 	
+ - int GetNumberOfCSRCs()
+ 	Returns the number of CSRC identifiers contained in the packet.
+ 	
+ - unsigned long GetCSRC(int pos)
+ 	Returns a CSRC identifier which was contained in the packet. 'pos'
+ 	is valid if it is greater or equal to zero and smaller than the
+ 	value returned by a call to 'GetNumberOfCSRCs'.
+
+ - bool HasHeaderExtension()
+ 	Returns 'true' if the RTP packet has a header extension, 'false'
+ 	otherwise.
+
+ - unsigned short GetHeaderExtensionID()
+	If the packet has a header extension, this function returns the
+	identifier of the header extension.
+
+ - int GetHeaderExtensionLength()
+ 	Returns the length, in number of bytes, of the header extension
+ 	data.
+
+ - unsigned char *GetHeaderExtensionData()
+ 	Returns the data contained in the header extension.
+ 	
+
+4.    Class RTPSourceData
+
+4.1   Description
+
+This class contains information about a participating source. A packet that
+is returned by the member functions GetCurrentSourceInfo or GetSourceInfo
+of the class RTPSession, must NOT be deleted.
+
+4.2   Member functions
+
+ - RTPPacket *ExtractPacket()
+	Extracts a packet from the packet queue of this source. If no packets
+	are available, NULL is returned. If a packet is returned, it must be
+	destroyed by a call to 'delete' when it is no longer needed.
+
+ - void FlushPackets()
+	Deletes all pending packets on the queue.
+
+ - unsigned long GetSSRC()
+	Returns the synchronization source identifier of this source.
+
+ - unsigned long GetIP()
+	Returns the IP address of this source.
+
+ - bool HasData()
+	Returns 'true' if there are any packets on the packet queue. Otherwise
+	'false' is returned.
+
+ - void SetTimestampUnit(double tsunit)
+ 	Sets the timestamp unit for the RTP packets coming from this source.
+
+ - double GetTimestampUnit()
+	Retrieves the value of the timestamp unit which is used for calculations
+	involving this source. When a new source had joined in, its timestamp
+	unit is initialized to that of the local session.
+ 
+ - bool SR_HasInfo()
+	Returns 'true' if there were sender reports received from this
+	source. If the participating source is not a sender of RTP data,
+	this will always return 'false'.
+
+ - void SR_GetNTPTimestamp(unsigned long *msw,unsigned long *lsw)
+	Gets the NTP timestamp that was specified in the last received
+	sender report.
+
+ - unsigned long SR_GetRTPTimestamp()
+	Gets the timestamp that was last mentioned in a sender report.
+
+ - unsigned long SR_GetPacketCount()
+	Gets the packet count of this source according to the information
+	from the last sender report.
+
+ - unsigned long SR_GetByteCount()
+	Gets the byte (octet) count of this source according to the 
+	information from the last sender report.
+
+ - struct timeval SR_GetReceiveTime()
+ 	This returns the time when the last sender report was received. You
+ 	can use the 'getntptime' function to transform this value into NTP
+ 	time format, but be careful: this function returns values in network
+ 	byte order!
+
+ - bool RR_HasInfo()
+	Returns 'true' if the source has sent any receiver reports about
+	the local source. Otherwise it returns false.
+
+ - float RR_GetFractionLost()
+	Gets the fraction of lost packets which originated from this source.
+	This value is calculated from receiver reports.
+
+ - long RR_GetPacketsLost()
+	Gets the number of lost packets which originated from this source.
+	This value is read from receiver reports.
+	
+ - unsigned long RR_GetExtendedHighestSequenceNumber()
+	Gets the extended highest sequence number of the packets that this
+	source received from the local source. Its value is read from 
+	receiver reports.
+
+ - unsigned long RR_GetJitter()
+	Returns the amount of jitter in timestamp units that this source
+	noticed when receiving packets from the local source. The value is
+	read from receiver reports.
+
+ - unsigned long RR_GetLastSRTimestamp()
+	Returns the time at which the current source received the last
+	sender report from the local source. The high 16 bits are in fact
+	the low 16 bits of the most significant 32 bit word of the NTP
+	timestamp. The low 16 bits are the high 16 bits of the fractional
+	part (32 bits) of the NTP timestamp. So this value is in fact the
+	middle 32 bits of the whole 64 bit NTP timestamp. If no sender
+	reports were received, the value is zero.
+
+ - unsigned long RR_GetDelaySinceLastSR()
+	Returns the time that has elapsed since the current source received
+	a sender report from the local source. The value is given in
+	1/65536 seconds. If no sender reports were received, the value is 
+	zero.
+
+ - struct timeval RR_GetReceiveTime()
+ 	This returns the time when the last receiver report was received. You
+ 	can use the 'getntptime' function to transform this value into NTP
+ 	time format, but be careful: this function returns values in network
+ 	byte order!
+ 	
+ - bool INF_HasSentData()
+	Returns 'true' if the current source has sent RTP data. Otherwise
+	the function returns 'false'.
+
+ - long INF_GetNumPacketsReceived()
+	Returns the number of packets received from this source.
+
+ - unsigned long INF_GetBaseSequenceNumber()
+	The sequence number of RTP packets starts at a random offset. This
+	function returns this base sequence number. It is just the lowest
+	extended sequence number that was present in RTP packets.
+
+ - unsigned long INF_GetExtendedHighestSequenceNumber()
+	Returns the extended highest sequence number received from this
+	source.
+	
+ - unsigned long INF_GetJitter()
+	Returns the amount of jitter in timestamp units that the local
+	source noticed when receiving packets from this source.
+	
+ - struct timeval INF_GetRoundTripTime()
+	This function gives an approximation of the round-trip-time, as
+	suggested in RFC 1889.
+
+ - char *SDES_GetCNAME(int *len)
+	Returns the CNAME (canonical name) of this source. The length is
+	set in 'len'.
+ 
+ - char *SDES_GetName(int *len)
+	Returns the name of this source. The length is set in 'len'.
+ 
+ - char *SDES_GetEMail(int *len)
+	Returns the email address of this source. The length is set in 'len'.
+
+ - char *SDES_GetLocation(int *len)
+	Returns the location of this source. The length is set in 'len'.
+
+ - char *SDES_GetPhone(int *len)
+	Returns the phone number for this source. The length is set in 'len'.
+
+ - char *SDES_GetTool(int *len)
+	Returns tool information for this source. The length is set in 'len'.
+
+ - char *SDES_GetNote(int *len)
+	Returns a note from this source. The length is set in 'len'.
+
+
+
+5.    Exception handlers
+
+5.1   Description
+
+In the class RTPSession, you can set exception handlers for various types
+of events. If you look at those functions in the class description, you will
+see that all of these function take a parameter of type RTPExceptionHandler
+and a paramater of type void (the so called 'usrdata' parameter). The
+parameter of type RTPExceptionHandler should be a function with the following
+format:
+
+	void MyHandler(int exceptiontype,void *exceptiondata,void *usrdata)
+
+You may also use the value NULL for this parameter. In this case, the handler
+will be disabled. The parameter 'usrdata' is the pointer that was specified
+when the handler was set. The contents of 'exceptiondata' will differ
+according to the type of event that has occurred. The possibilities will
+be discussed below, together with the possible exception types.
+
+5.2   Exception types
+
+When the handler is called, the parameter 'exceptiontype' contains the type
+of event that has occurred. These are the posible values:
+	* RTP_EXCEPTION_LOCALSSRCCOLLISION
+		There has been a collision with the local synchronization
+		source identifier. The parameter 'exceptiondata' is of type
+		RTPExcepSSRCCollision. For a description of the contents,
+		see the part about the exception structures.		
+	* RTP_EXCEPTION_SSRCCOLLISION
+		There has been a collision between synchronization source 
+		identifiers, other than the local identifier. The parameter 
+		'exceptiondata' is of type RTPExcepSSRCCollision. For a 
+		description of the contents, see the part about the exception 
+		structures.		
+	* RTP_EXCEPTION_NEWSOURCE
+		A new source has joined the session. The 'exceptiondata'
+		parameter is of type RTPExcepSSRC. For a description of the 
+		contents, see the part about the exception structures.
+	* RTP_EXCEPTION_INVALIDSDESTYPE
+		A RTCP packet containing an invalid SDES type has arrived. The
+		parameter 'exceptiondata' is of type RTPExcepInvalSDESType. For 
+		a description of the contents, see the part about the exception 
+		structures.
+	* RTP_EXCEPTION_SSRCDEPARTURE
+		A certain source has left the session. The 'exceptiondata'
+		parameter is of type RTPExcepSSRC. For a description of the 
+		contents, see the part about the exception structures.
+	* RTP_EXCEPTION_SSRCTIMEOUT
+		A certain source has left the session due to a timeout. The 
+		'exceptiondata' parameter is of type RTPExcepSSRC. For a 
+		description of the contents, see the part about the exception 
+		structures.
+	* RTP_EXCEPTION_RECEIVERTCPAPPDATA
+		Application specific data has arrived. The parameter
+		'exceptiondata' is of type RTPExcepAppData. For a description
+		of the contents, see the part about the exception structures.
+	* RTP_EXCEPTION_TRANSMITRTCPAPPDATA
+		The library asks for application specific data. The parameter
+		'exceptiondata' is of type RTPExcepAppData. For a description
+		of the contents, see the part about the exception structures.
+	* RTP_EXCEPTION_RTCPPACKET
+		If this handler is enabled, your handler will be called for
+		each received RTCP packet. This way, you can examine the raw
+		RTCP data yourself if necessary. The parameter 'exceptiondata'
+		is of type RTPExcepRTCPPacket. For a description of the
+		contents, see the part about the exception structures.
+
+5.3   Structures 
+
+The data that is specified in the parameter 'exceptiondata' is contained in
+one of the structures that will be described here. If you want to save the
+data, you must make a copy of it somehow, and not just save a pointer to it,
+as the data may be altered or deleted after the handler is called. The used
+structures are these:
+
+ - RTPExcepSSRCCollision
+	This structure has the following members:
+		* unsigned long ssrc
+			The synchronization source identifier of the colliding
+			sources.
+		* unsigned long ip
+			The IP address of the source that caused the collision.
+		* bool rtpdata
+			This member is 'true' if the collision occurred when
+			processing RTP data. It is false if it happened while
+			processing RTCP data.
+		* int port
+			The port from which the RTP or RTCP data originated.
+
+ - RTPExcepSSRC
+	The structure has only one member:
+		* unsigned long ssrc
+			The sychronization source identifier of a certain source.
+
+ - RTPExcepInvalSDESType
+	The structure has the following members:
+		* unsigned long ssrc
+			The syncronization source identifier of the source to 
+			which the source description data belongs.
+		* int sdestype
+			The number of the type that was specified.
+		* unsigned char *sdesdata
+			A pointer to the source description data. The data does
+			not include the SDES header.
+		* int datalen
+			The length of the data, in bytes.
+
+ - RTPExcepAppData
+	The structure has the following members:
+		* unsigned char subtype
+			Contains the subtype of the application specific data.
+		* unsigned long src
+			Contains the SSRC or CSRC identifier to which this
+			data is relevant.
+		* unsigned char name[4]
+			Specifies a user defined name for this data.
+		* unsigned char *data
+			The data itself.
+		* int numwords
+			The length of the data, specified in 32-bit words.
+		* bool validdata
+			Specifies if the data is valid; only used when the
+			library asks for application specific data to send.
+		* int prevreturnval
+			When passing application specific data to the library,
+			the library uses this member to tell the handler if
+			the previous data was handled correctly. A negative
+			value indicates an error.
+	
+	Receiving application specific data:
+	
+		For each RTCP application specific data block, the library
+		will call the appropriate handler and will pass an instance
+		of the RTPExcepAppData structure. Members 'validdata' and
+		'prevreturnval' are not used. The members are in host byte
+		order. The data, however, is passed in the exact way as it
+		arrived, without doing any conversions (which would be
+		impossible anyway, since the library does not know about
+		the meaning of that data).
+		
+	Sending application specific data:
+	
+		When the handler for sending application specific RTCP data
+		has been set, this handler will be called by the library when
+		RTCP packets are generated. The library will pass an instance
+		of the RTPExcepAppData structure, which the application can
+		fill in to specify the data to send. Each time RTCP packets
+		are generated, the library will keep calling this handler
+		until the RTPExcepAppData member 'validdata' is set to
+		'false'. When this is the case, the rest of the structure is
+		ignored, so only set it to 'false' when all the application
+		specific data has already been sent. The 'prevreturnval'
+		indicates if there was an error with the previous data.
+		The library sets default values for several members:
+			subtype 	-> 0
+			src             -> own SSRC
+			name		-> four spaces
+			data		-> NULL
+			numwords	-> 0
+			validdata	-> false
+		The members should be supplied in host byte order, the library
+		will do the necessary conversions. However, the data is passed
+		exactly as it was received, since the library can't possibly
+		know how to interpret that data.
+
+ - RTPExcepRTCPPacket
+ 	The structure has four members:
+		* unsigned char *packet
+			The raw RTCP packet data. No conversions were done, so
+			you'll have to take the endianness into account if you
+			want to process the data.
+		* int packetlen
+			The length of the RTCP packet.
+		* unsigned long sourceip
+			The IP address of the sender of the packet.
+		* int sourceport
+			The port from which this packet was sent.
+ 		
+----------------------------------------------------------------------------------

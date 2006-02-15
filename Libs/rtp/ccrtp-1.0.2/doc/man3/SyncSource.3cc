@@ -1,0 +1,114 @@
+.TH "SyncSource" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SyncSource \- Synchronization source in an RTP session. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sources.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBState\fP { \fBstateUnknown\fP, \fBstatePrevalid\fP, \fBstateActive\fP, \fBstateInactive\fP, \fBstateLeaving\fP }"
+.br
+.RI "\fISynchronization source states during an RTP session.\fP"
+.in -1c
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBSyncSource\fP (uint32 ssrc)"
+.br
+.ti -1c
+.RI "bool \fBisSender\fP () const"
+.br
+.RI "\fIWhether this source sends RTP data packets.\fP"
+.ti -1c
+.RI "\fBParticipant\fP * \fBgetParticipant\fP () const"
+.br
+.RI "\fIGet the participant this synchronization source is asociated to.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBSyncSource\fP (const SyncSource &source)"
+.br
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Synchronization source in an RTP session.
+.PP
+Each synchronization source in an RTP session is identified by a 32-bit numeric SSRC identifier. Each SyncSource object is related to a \fBParticipant\fP object, which can be retrieved through the \fBgetParticipant()\fP method.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER ENUMERATION DOCUMENTATION"
+.PP 
+.SS "enum SyncSource::State"
+.PP
+Synchronization source states during an RTP session.
+.PP
+In general, new synchronization sources are not considered valid until multiple valid data packets or a valid RTCP compound packet has been received from the new source (
+.PP
+\fBSee also: \fP
+.in +1c
+ \fBIncomingDataQueue::setMinValidPacketSequence()\fP). Thus, the source will probably be in \fBstatePrevalid\fP before reaching one of the two states that indicate a valid source: \fBstateActive\fP and \fBstateInactive\fP.A valid participant is in stateActive state if RTP and/or RTCP packets are currently being received from it. If, after a small number of RTCP report intervals (see \fBIncomingDataQueue::setSourceExpirationPeriod()\fP ), no packets are received, it will reach the stateInactive state. If, after a small number of RTCP report intervals, no packet is received from an inactive source, it will be deleted.
+.PP
+If RTCP is being used, after receiving a BYE RTCP packet from a synchronization source, it will reach the stateLeaving state and will be deleted after a delay (see \fBQueueRTCPManager::setLeavingDelay()\fP).
+.PP
+Sources in statePrevalid and stateLeaving are not counted for the number of session members estimation. 
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fI\fIstateUnknown\fP \fP\fP
+No valid packet has been received.
+.TP
+\fB\fI\fIstatePrevalid\fP \fP\fP
+Some packets have been received, but source validity not yet guaranteed.
+.TP
+\fB\fI\fIstateActive\fP \fP\fP
+We currently receive packets (data or control) from this source.
+.TP
+\fB\fI\fIstateInactive\fP \fP\fP
+Was active in the near past but no packet from this source has been received lately.
+.TP
+\fB\fI\fIstateLeaving\fP \fP\fP
+An RTCP BYE has been received from the source.
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "SyncSource::SyncSource (uint32 ssrc)"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIssrc\fP\fP
+SSRC identifier of the source, unique in each session. 
+.SS "SyncSource::SyncSource (const SyncSource & source)\fC [protected]\fP"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+The RTPSource object being copied 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "\fBParticipant\fP* SyncSource::getParticipant () const\fC [inline]\fP"
+.PP
+Get the participant this synchronization source is asociated to.
+.PP
+\fBReturn values: \fP
+.in +1c
+.TP
+\fB\fINULL\fP\fP
+if the stack has not been yet able to identify the participant this source is associated to. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

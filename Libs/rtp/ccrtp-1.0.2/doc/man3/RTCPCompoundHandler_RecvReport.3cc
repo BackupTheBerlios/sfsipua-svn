@@ -1,0 +1,31 @@
+.TH "RTCPCompoundHandler::RecvReport" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::RecvReport \- raw structure of the source and every receiver report in an SR or RR RTCP packet. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBssrc\fP"
+.br
+.RI "\fIsource identifier.\fP"
+.ti -1c
+.RI "\fBRRBlock\fP \fBblocks\fP [1]"
+.br
+.RI "\fIreceiver report blocks.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+raw structure of the source and every receiver report in an SR or RR RTCP packet.
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

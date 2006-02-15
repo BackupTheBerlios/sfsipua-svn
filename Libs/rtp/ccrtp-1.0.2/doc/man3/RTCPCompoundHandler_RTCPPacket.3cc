@@ -1,0 +1,92 @@
+.TH "RTCPCompoundHandler::RTCPPacket" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::RTCPPacket \- Struct representing general RTCP packet headers as they are sent through the network. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum \fBType\fP { \fBtSR\fP =  200, \fBtRR\fP, \fBtSDES\fP, \fBtBYE\fP, \fBtAPP\fP, \fBtFIR\fP =  192, \fBtNACK\fP =  193, \fBtXR\fP }"
+.br
+.RI "\fI\fBrtp.h\fP cc++/rtp.h\fP"
+.in -1c
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBgetLength\fP () const"
+.br
+.RI "\fIGet the packet length specified in its header, in octets and in host order.\fP"
+.ti -1c
+.RI "uint32 \fBgetSSRC\fP () const"
+.br
+.RI "\fIGet the SSRC identifier specified in the packet header, in host order.\fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBRTCPFixedHeader\fP \fBfh\fP"
+.br
+.RI "\fIFixed RTCP header.\fP"
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "} \fBinfo\fP"
+.br
+.RI ""
+.br
+.RI "\fIUnion for SR, RR, SDES, BYE and APP.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct representing general RTCP packet headers as they are sent through the network.
+.PP
+This struct consists of a fixed header, always at the beginning of any RTCP packet, and a union for all the RTCP packet types supported. 
+.PP
+.SH "MEMBER ENUMERATION DOCUMENTATION"
+.PP 
+.SS "enum RTCPCompoundHandler::RTCPPacket::Type"
+.PP
+\fBrtp.h\fP cc++/rtp.h
+.PP
+RTCP packet types. They are registered with IANA. 
+.PP
+\fBEnumeration values: \fP
+.in +1c
+.TP
+\fB\fI\fItSR\fP \fP\fP
+Sender Report.
+.TP
+\fB\fI\fItRR\fP \fP\fP
+Receiver Report.
+.TP
+\fB\fI\fItSDES\fP \fP\fP
+Source DEScription.
+.TP
+\fB\fI\fItBYE\fP \fP\fP
+End of participation.
+.TP
+\fB\fI\fItAPP\fP \fP\fP
+APPlication specific.
+.TP
+\fB\fI\fItFIR\fP \fP\fP
+Full Intra-frame request.
+.TP
+\fB\fI\fItNACK\fP \fP\fP
+Negative ACK.
+.TP
+\fB\fI\fItXR\fP \fP\fP
+Extended Report.
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

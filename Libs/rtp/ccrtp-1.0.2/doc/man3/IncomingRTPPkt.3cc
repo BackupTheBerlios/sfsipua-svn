@@ -1,0 +1,86 @@
+.TH "IncomingRTPPkt" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+IncomingRTPPkt \- RTP packets received from other participants. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtppkt.h>\fP
+.PP
+Inherits \fBRTPPacket\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBIncomingRTPPkt\fP (const unsigned char *block, size_t len)"
+.br
+.RI "\fIBuild an RTP packet object from a data buffer.\fP"
+.ti -1c
+.RI "bool \fBisHeaderValid\fP ()"
+.br
+.RI "\fIGet validity of this packet.\fP"
+.ti -1c
+.RI "uint32 \fBgetSSRC\fP () const"
+.br
+.RI "\fIGet synchronization source numeric identifier.\fP"
+.ti -1c
+.RI "bool \fBoperator==\fP (const IncomingRTPPkt &p) const"
+.br
+.RI "\fITwo incoming packets are equal if they come from sources with the same SSRC and have the same sequence number.\fP"
+.ti -1c
+.RI "bool \fBoperator!=\fP (const IncomingRTPPkt &p) const"
+.br
+.RI "\fITwo incoming packets are not equal if they come from different sources or have different sequence numbers.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+RTP packets received from other participants.
+.PP
+This class is intented to construct a packet object just after every packet is received by the scheduled queue, so that they are processed in an understandable and format independent manner inside the stack.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "IncomingRTPPkt::IncomingRTPPkt (const unsigned char * block, size_t len)"
+.PP
+Build an RTP packet object from a data buffer.
+.PP
+This constructor first performs a generic RTP data packet header check, whose result can be checked via \fBisHeaderValid()\fP.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIblock\fP\fP
+pointer to the buffer the whole packet is stored in. 
+.TP
+\fB\fIlen\fP\fP
+length of the whole packet, expressed in octets.
+.PP
+\fBNote: \fP
+.in +1c
+If check fails, the packet object is incomplete. checking \fBisHeaderValid()\fP is recommended before using a new \fBRTPPacket\fP object. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "uint32 IncomingRTPPkt::getSSRC () const\fC [inline]\fP"
+.PP
+Get synchronization source numeric identifier.
+.PP
+\fBReturns: \fP
+.in +1c
+32-bits Synchronization SouRCe numeric identifier, in host order. 
+.SS "bool IncomingRTPPkt::isHeaderValid ()\fC [inline]\fP"
+.PP
+Get validity of this packet.
+.PP
+\fBReturns: \fP
+.in +1c
+whether the header check performed at construction time ended successfully. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

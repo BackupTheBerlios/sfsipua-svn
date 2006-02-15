@@ -1,0 +1,49 @@
+.TH "RTPBaseUDPIPv4Socket" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPBaseUDPIPv4Socket \- A UDP/IPv4 socket class targetted at RTP stacks. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <channel.h>\fP
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPBaseUDPIPv4Socket\fP (const InetAddress &ia, tpport_t port)"
+.br
+.RI "\fIConstructor for receiver.\fP"
+.ti -1c
+.RI "size_t \fBgetNextPacketSize\fP () const"
+.br
+.RI "\fIGet size of next datagram waiting to be read.\fP"
+.ti -1c
+.RI "\fBRTPBaseUDPIPv4Socket\fP ()"
+.br
+.RI "\fIConstructor for transmitter.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A UDP/IPv4 socket class targetted at RTP stacks.
+.PP
+This class provides a flat interface that all the services required by an RTP stack.
+.PP
+It can be used in two ways:
+.PP
+To instantiate the DualSocket template, which will be used to instantiate an RTP stack template (such as TRTPSessionBase).
+.PP
+To directly instantiate an RTP stack template (such as TRTPSessionBase).
+.PP
+This class offers an example of the interface that other classes should provide in order to specialize the ccRTP stack for different underlying protocols.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,43 @@
+.TH "RTCPCompoundHandler::SenderInfo" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTCPCompoundHandler::SenderInfo \- Struct for the sender info block in a SR (sender report) RTCP packet. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtcppkt.h>\fP
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint32 \fBNTPMSW\fP"
+.br
+.RI "\fINTP timestamp higher octets.\fP"
+.ti -1c
+.RI "uint32 \fBNTPLSW\fP"
+.br
+.RI "\fINTP timestamp lower octets.\fP"
+.ti -1c
+.RI "uint32 \fBRTPTimestamp\fP"
+.br
+.RI "\fIRTP timestamp.\fP"
+.ti -1c
+.RI "uint32 \fBpacketCount\fP"
+.br
+.RI "\fIcumulative packet counter.\fP"
+.ti -1c
+.RI "uint32 \fBoctetCount\fP"
+.br
+.RI "\fIcumulative octet counter.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Struct for the sender info block in a SR (sender report) RTCP packet.
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,21 @@
+.TH "RTPApplication::ParticipantsIterator" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPApplication::ParticipantsIterator \- Iterator through the list of participants in this session. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sources.h>\fP
+.PP
+.SH "DETAILED DESCRIPTION"
+.PP 
+Iterator through the list of participants in this session.
+.PP
+Somehow resembles and standard const_iterator 
+.PP
+
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

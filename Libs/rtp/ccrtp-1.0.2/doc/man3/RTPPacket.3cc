@@ -1,0 +1,325 @@
+.TH "RTPPacket" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPPacket \- A base class for both \fBIncomingRTPPkt\fP and \fBOutgoingRTPPkt\fP. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <rtppkt.h>\fP
+.PP
+Inherited by \fBIncomingRTPPkt\fP, and \fBOutgoingRTPPkt\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPPacket\fP (const unsigned char *const block, size_t len, bool duplicate=false)"
+.br
+.RI "\fIConstructor, construct a packet object given the memory zone its content (header and payload) is stored.\fP"
+.ti -1c
+.RI "\fBRTPPacket\fP (size_t hdrlen, size_t plen)"
+.br
+.RI "\fIConstruct a packet object without specifying its real content yet.\fP"
+.ti -1c
+.RI "uint32 \fBgetHeaderSize\fP () const"
+.br
+.RI "\fIGet the length of the header, including contributing sources identifiers and header extension, if present.\fP"
+.ti -1c
+.RI "const uint8 *const \fBgetPayload\fP () const"
+.br
+.ti -1c
+.RI "uint32 \fBgetPayloadSize\fP () const"
+.br
+.ti -1c
+.RI "\fBPayloadType\fP \fBgetPayloadType\fP () const"
+.br
+.ti -1c
+.RI "uint16 \fBgetSeqNum\fP () const"
+.br
+.ti -1c
+.RI "uint32 \fBgetTimestamp\fP () const"
+.br
+.ti -1c
+.RI "uint8 \fBgetProtocolVersion\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisPadded\fP () const"
+.br
+.RI "\fIAsk whether the packet contains padding bytes at the end.\fP"
+.ti -1c
+.RI "uint8 \fBgetPaddingSize\fP () const"
+.br
+.RI "\fIGet the number of octets padding the end of the payload section.\fP"
+.ti -1c
+.RI "bool \fBisMarked\fP () const"
+.br
+.RI "\fIAsk whether the packet is marked (for isntance, is a new talk spurt in some audio profiles).\fP"
+.ti -1c
+.RI "bool \fBisExtended\fP () const"
+.br
+.RI "\fIAsk whether the packet contains header extensions.\fP"
+.ti -1c
+.RI "uint16 \fBgetCSRCsCount\fP () const"
+.br
+.RI "\fIGet the number of contributing sources specified in the packet header.\fP"
+.ti -1c
+.RI "const uint32 * \fBgetCSRCs\fP () const"
+.br
+.RI "\fIGet the 32-bit identifiers of the contributing sources for the packet as an array, of length \fBgetCSRCsCount()\fP.\fP"
+.ti -1c
+.RI "uint16 \fBgetHdrExtUndefined\fP () const"
+.br
+.RI "\fIGet the first 16 bits (in network order) of the header of the RTP header extension.\fP"
+.ti -1c
+.RI "uint32 \fBgetHdrExtSize\fP () const"
+.br
+.RI "\fIGet the length (in octets) of the data contained in the header extension.\fP"
+.ti -1c
+.RI "const unsigned char * \fBgetHdrExtContent\fP () const"
+.br
+.RI "\fIGet the content of the header extension.\fP"
+.ti -1c
+.RI "const unsigned char *const \fBgetRawPacket\fP () const"
+.br
+.RI "\fIGet the raw packet as it will be sent through the network.\fP"
+.ti -1c
+.RI "uint32 \fBgetRawPacketSize\fP () const"
+.br
+.RI "\fIGet the raw packet length, including header, extension, payload and padding.\fP"
+.in -1c
+.SS "Protected Methods"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~RTPPacket\fP ()"
+.br
+.RI "\fIDestructor, free the buffer provided in the constructor.\fP"
+.ti -1c
+.RI "void \fBendPacket\fP ()"
+.br
+.RI "\fIFree memory allocated for the packet.\fP"
+.ti -1c
+.RI "RTPFixedHeader * \fBgetHeader\fP () const"
+.br
+.RI "\fIReturn low level structure for the header of the packet.\fP"
+.ti -1c
+.RI "const RTPHeaderExt * \fBgetHeaderExt\fP () const"
+.br
+.RI "\fIGet a pointer to RTPHeaderExt pointing after the RTP header (fixed part plus contributing sources).\fP"
+.ti -1c
+.RI "uint32 \fBgetRawTimestamp\fP () const"
+.br
+.RI "\fIObtain the absolute timestamp carried in the packet header.\fP"
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint16 \fBcachedSeqNum\fP"
+.br
+.RI "\fIPacket sequence number in host order.\fP"
+.ti -1c
+.RI "uint32 \fBcachedTimestamp\fP"
+.br
+.RI "\fIPacket timestamp in host order (includes initial shift).\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A base class for both \fBIncomingRTPPkt\fP and \fBOutgoingRTPPkt\fP.
+.PP
+Provides common low level header structures and related methods. This class provides an interface that allows for partial and generic manipulation of RTP data packets. Values are returned in host order, except raw structures, which are returned as they are sent through the network.
+.PP
+\fBAuthor: \fP
+.in +1c
+David Sugar <dyfet@ostel.com> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "RTPPacket::RTPPacket (const unsigned char *const block, size_t len, bool duplicate = false)"
+.PP
+Constructor, construct a packet object given the memory zone its content (header and payload) is stored.
+.PP
+Commonly used to build RTPPacket objects from incoming data.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIblock\fP\fP
+whole packet 
+.TP
+\fB\fIlen\fP\fP
+total length (header + payload + padding) of the  packet  
+.TP
+\fB\fIduplicate\fP\fP
+whether to memcopy the packet. At present, this feature is not used. 
+.PP
+\fBNote: \fP
+.in +1c
+used in \fBIncomingRTPPkt\fP. 
+.SS "RTPPacket::RTPPacket (size_t hdrlen, size_t plen)"
+.PP
+Construct a packet object without specifying its real content yet.
+.PP
+Commonly used for outgoing packets. Header fields and payload must be filled in by another methods or by a derived constructor.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIhdrlen\fP\fP
+length of the header (including CSRC and extension). 
+.TP
+\fB\fIplen\fP\fP
+payload length. 
+.PP
+\fBNote: \fP
+.in +1c
+used in \fBOutgoingRTPPkt\fP. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "const uint32* RTPPacket::getCSRCs () const\fC [inline]\fP"
+.PP
+Get the 32-bit identifiers of the contributing sources for the packet as an array, of length \fBgetCSRCsCount()\fP.
+.PP
+\fBReturns: \fP
+.in +1c
+An array of CSRC identifiers as they are in the packet (in network order). 
+.SS "const unsigned char* RTPPacket::getHdrExtContent () const\fC [inline]\fP"
+.PP
+Get the content of the header extension.
+.PP
+\fBReturns: \fP
+.in +1c
+NULL if the packet has no header extension, otherwise a pointer to the packet header extension content. 
+.SS "uint32 RTPPacket::getHdrExtSize () const\fC [inline]\fP"
+.PP
+Get the length (in octets) of the data contained in the header extension.
+.PP
+Note that this length does not include the four octets at the beginning of the header extension.
+.PP
+\fBReturns: \fP
+.in +1c
+0 if the packet has no header extension, otherwise the length.
+.PP
+\fBNote: \fP
+.in +1c
+0 is a valid value for this field, so \fBRTPPacket::isExtended()\fP should be used. 
+.SS "uint16 RTPPacket::getHdrExtUndefined () const\fC [inline]\fP"
+.PP
+Get the first 16 bits (in network order) of the header of the RTP header extension.
+.PP
+Its meaning is undefined at this level.
+.PP
+\fBReturns: \fP
+.in +1c
+0 if the packet has no header extension, otherwise the first 16 bits of the header extension, in network order.
+.PP
+\fBNote: \fP
+.in +1c
+0 could be a valid value for the first 16 bits, in that case \fBRTPPacket::isExtended()\fP should be use. 
+.SS "RTPFixedHeader* RTPPacket::getHeader () const\fC [inline, protected]\fP"
+.PP
+Return low level structure for the header of the packet.
+.PP
+\fBReturns: \fP
+.in +1c
+RTPFixedHeader pointer to the header of the packet. 
+.SS "const RTPHeaderExt* RTPPacket::getHeaderExt () const\fC [inline, protected]\fP"
+.PP
+Get a pointer to RTPHeaderExt pointing after the RTP header (fixed part plus contributing sources).
+.PP
+No check for for the X bit is done.
+.PP
+\fBReturns: \fP
+.in +1c
+header extension if present, garbage if not. 
+.SS "uint32 RTPPacket::getHeaderSize () const\fC [inline]\fP"
+.PP
+Get the length of the header, including contributing sources identifiers and header extension, if present.
+.PP
+\fBReturns: \fP
+.in +1c
+number of octets. 
+.SS "uint8 RTPPacket::getPaddingSize () const\fC [inline]\fP"
+.PP
+Get the number of octets padding the end of the payload section.
+.PP
+\fBReturns: \fP
+.in +1c
+Padding length in octets. 
+.SS "const uint8* const RTPPacket::getPayload () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+pointer to the payload section of the packet. 
+.SS "uint32 RTPPacket::getPayloadSize () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+lenght of the payload section, in octets. 
+.SS "\fBPayloadType\fP RTPPacket::getPayloadType () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+value of the PT header field. 
+.SS "uint8 RTPPacket::getProtocolVersion () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+RTP protocol version of packet. 
+.SS "const unsigned char* const RTPPacket::getRawPacket () const\fC [inline]\fP"
+.PP
+Get the raw packet as it will be sent through the network.
+.PP
+\fBReturns: \fP
+.in +1c
+memory zone where the raw packet structure is stored in. 
+.SS "uint32 RTPPacket::getRawPacketSize () const\fC [inline]\fP"
+.PP
+Get the raw packet length, including header, extension, payload and padding.
+.PP
+\fBReturns: \fP
+.in +1c
+size of the raw packet structure. 
+.SS "uint32 RTPPacket::getRawTimestamp () const\fC [inline, protected]\fP"
+.PP
+Obtain the absolute timestamp carried in the packet header.
+.PP
+\fBReturns: \fP
+.in +1c
+32-bit timestamp in host order. 
+.SS "uint16 RTPPacket::getSeqNum () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+value of the sequence number header field, in host order. 
+.SS "uint32 RTPPacket::getTimestamp () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+packet timestamp in host order. 
+.SS "bool RTPPacket::isExtended () const\fC [inline]\fP"
+.PP
+Ask whether the packet contains header extensions.
+.PP
+\fBReturns: \fP
+.in +1c
+true if the header extension bit is 1. 
+.SS "bool RTPPacket::isMarked () const\fC [inline]\fP"
+.PP
+Ask whether the packet is marked (for isntance, is a new talk spurt in some audio profiles).
+.PP
+\fBReturns: \fP
+.in +1c
+true is the header marker bit is 1. 
+.SS "bool RTPPacket::isPadded () const\fC [inline]\fP"
+.PP
+Ask whether the packet contains padding bytes at the end.
+.PP
+\fBReturns: \fP
+.in +1c
+true if the header padding bit is 1. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

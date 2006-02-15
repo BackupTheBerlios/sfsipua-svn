@@ -1,0 +1,101 @@
+.TH "Participant" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Participant \- A class of objects representing remote participants (RTP applications) in a multimedia session. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sources.h>\fP
+.PP
+Inherits \fBSDESItemsHolder\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "const std::string & \fBgetSDESItem\fP (\fBSDESItemType\fP type) const"
+.br
+.RI "\fIGet the value of an SDES item.\fP"
+.ti -1c
+.RI "const std::string & \fBgetPRIVPrefix\fP () const"
+.br
+.RI "\fIGet the prefix value for the PRIV SDES item.\fP"
+.ti -1c
+.RI "\fBParticipant\fP (const std::string &cname)"
+.br
+.RI "\fIConstruct a new participant.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+A class of objects representing remote participants (RTP applications) in a multimedia session.
+.PP
+Any RTP socket/queue class that directly or indirectly inherits from \fBQueueRTCPManager\fP (and hence has RTCP support) will represent participants from which any RTP or RTCP packet has been received through a Participant object. These Participant objects are entities such as end systems (user applications, monitors, etc), RTP mixers and RTP translators.
+.PP
+Participant objects are identified by a CNAME and provide access to all known data about the source of RTP/RTCP packets, such as the CNAME and any other SDES item. Each participant object is related to one or more synchronization objects (
+.PP
+\fBSee also: \fP
+.in +1c
+\fBSyncSource\fP).If an RTP application based on ccRTP receives packets from itself (for instance, it is included in the destination list), there will be a Participant object that corresponds to the 'local participant' (\fBRTPApplication\fP) object.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org>
+.PP
+\fBTodo: \fP
+.in +1c
+ implement reference counting from sources, so that when a source is destroyed, we know if the Participant should be destroyed.  
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "Participant::Participant (const std::string & cname)"
+.PP
+Construct a new participant.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIcname\fP\fP
+Unique CNAME identifier. 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "const std::string& Participant::getPRIVPrefix () const\fC [inline]\fP"
+.PP
+Get the prefix value for the PRIV SDES item.
+.PP
+\fBReturns: \fP
+.in +1c
+PRIV SDES item prefix as a string. 
+.PP
+\fBReturn values: \fP
+.in +1c
+.TP
+\fB\fIempty\fP\fP
+string when no PRIV SDES item has been received from this source. 
+.PP
+Reimplemented from \fBSDESItemsHolder\fP.
+.SS "const std::string& Participant::getSDESItem (\fBSDESItemType\fP type) const\fC [inline]\fP"
+.PP
+Get the value of an SDES item.
+.PP
+For instance, getSDESItem(SDESItemTypeCNAME), return the CNAME of this Participant.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fItype\fP\fP
+type of SDES item to get value of.
+.PP
+\fBReturns: \fP
+.in +1c
+value of the SDES item as a string.  
+.PP
+\fBReturn values: \fP
+.in +1c
+.TP
+\fB\fIempty\fP\fP
+string when the value is not known (no RTCP packet with the requested SDES item has been received from this source). 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

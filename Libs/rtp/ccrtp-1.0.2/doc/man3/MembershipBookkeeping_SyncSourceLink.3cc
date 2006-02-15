@@ -1,0 +1,137 @@
+.TH "MembershipBookkeeping::SyncSourceLink" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MembershipBookkeeping::SyncSourceLink \- Synchronization Source internal handler within the incoming packets queue. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fB~SyncSourceLink\fP ()"
+.br
+.RI "\fINote it deletes the source.\fP"
+.ti -1c
+.RI "\fBSyncSource\fP * \fBgetSource\fP ()"
+.br
+.RI "\fIGet the synchronization source object this link objet holds information for.\fP"
+.ti -1c
+.RI "\fBIncomingRTPPktLink\fP * \fBgetFirst\fP ()"
+.br
+.RI "\fIGet first RTP (data) packet in the queue of packets received from this socket.\fP"
+.ti -1c
+.RI "\fBIncomingRTPPktLink\fP * \fBgetLast\fP ()"
+.br
+.RI "\fIGet last RTP (data) packet in the queue of packets received from this socket.\fP"
+.ti -1c
+.RI "SyncSourceLink * \fBgetPrev\fP ()"
+.br
+.RI "\fIGet the link object for the previous RTP source.\fP"
+.ti -1c
+.RI "SyncSourceLink * \fBgetNext\fP ()"
+.br
+.RI "\fIGet the link object for the next RTP source.\fP"
+.ti -1c
+.RI "SyncSourceLink * \fBgetNextCollis\fP ()"
+.br
+.RI "\fIGet the link object for the next RTP source in the hash table entry collision list.\fP"
+.ti -1c
+.RI "void \fBsetPrevConflict\fP (InetAddress &addr, tpport_t dataPort, tpport_t controlPort)"
+.br
+.RI "\fIGet conflicting address.\fP"
+.ti -1c
+.RI "uint32 \fBgetObservedPacketCount\fP () const"
+.br
+.RI "\fIGet the total number of RTP packets received from this source.\fP"
+.ti -1c
+.RI "uint32 \fBgetObservedOctetCount\fP () const"
+.br
+.RI "\fIGet the total number of payload octets received from this source.\fP"
+.ti -1c
+.RI "uint16 \fBgetMaxSeqNum\fP () const"
+.br
+.RI "\fIGet the highest valid sequence number received.\fP"
+.ti -1c
+.RI "void \fBsetMaxSeqNum\fP (uint16 max)"
+.br
+.RI "\fISet the highest valid sequence number recived.\fP"
+.ti -1c
+.RI "bool \fBgetGoodbye\fP ()"
+.br
+.RI "\fIMark this source as having sent a BYE control packet.\fP"
+.ti -1c
+.RI "bool \fBgetHello\fP ()"
+.br
+.RI "\fIMark this source as having sent some packet.\fP"
+.ti -1c
+.RI "void \fBinitSequence\fP (uint16 seqnum)"
+.br
+.RI "\fIStart a new sequence of received packets.\fP"
+.ti -1c
+.RI "void \fBrecordInsertion\fP (const \fBIncomingRTPPktLink\fP &pl)"
+.br
+.RI "\fIRecord the insertion of an RTP packet from this source into the scheduled reception queue.\fP"
+.ti -1c
+.RI "void \fBcomputeStats\fP ()"
+.br
+.RI "\fICompute cumulative packet lost and fraction of packets lost during the last reporting interval.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Synchronization Source internal handler within the incoming packets queue.
+.PP
+Incoming packets queue objects hold a hash table and a linked list of synchronization sources. For each of these sources, there is also a linked list of incoming rtp packets, which are linked in an 'all incoming packets' list as well. \fBSyncSourceLink\fP objects hold the necessary data to maintain these data estructures, as well as source specific information and statistics for RTCP,
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "bool MembershipBookkeeping::SyncSourceLink::getGoodbye ()\fC [inline]\fP"
+.PP
+Mark this source as having sent a BYE control packet.
+.PP
+\fBReturns: \fP
+.in +1c
+whether some packet from this source had been received before (\fBgetHello()\fP has been called at least once) 
+.SS "bool MembershipBookkeeping::SyncSourceLink::getHello ()\fC [inline]\fP"
+.PP
+Mark this source as having sent some packet.
+.PP
+\fBReturns: \fP
+.in +1c
+whether no packet from this source had been received before 
+.SS "SyncSourceLink* MembershipBookkeeping::SyncSourceLink::getNextCollis ()\fC [inline]\fP"
+.PP
+Get the link object for the next RTP source in the hash table entry collision list.
+.PP
+Note that collision does not refer to SSRC collision, but hash table collision. 
+.SS "void MembershipBookkeeping::SyncSourceLink::recordInsertion (const \fBIncomingRTPPktLink\fP & pl)"
+.PP
+Record the insertion of an RTP packet from this source into the scheduled reception queue.
+.PP
+All received packets should be registered with recordReception(), but only those actually inserted into the queue should be registered via this method.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIpl\fP\fP
+Link structure for packet inserted into the queue. 
+.SS "void MembershipBookkeeping::SyncSourceLink::setMaxSeqNum (uint16 max)\fC [inline]\fP"
+.PP
+Set the highest valid sequence number recived.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fImax\fP\fP
+Sequence number. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,39 @@
+.TH "SyncSourceHandler" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+SyncSourceHandler \- \fBSyncSource\fP objects modification methods. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <iqueue.h>\fP
+.PP
+Inherited by \fBMembershipBookkeeping\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "void * \fBgetLink\fP (const \fBSyncSource\fP &source) const"
+.br
+.RI "\fIThis requires \fBSyncSource\fP - SyncSourceHandler friendship.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+\fBSyncSource\fP objects modification methods.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "void* SyncSourceHandler::getLink (const \fBSyncSource\fP & source) const\fC [inline]\fP"
+.PP
+This requires \fBSyncSource\fP - SyncSourceHandler friendship.
+.PP
+Get the SyncSourceLink corresponding to a \fBSyncSource\fP object. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,56 @@
+.TH "formats.h" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+formats.h \- Payload types and formats. 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Compounds"
+
+.in +1c
+.ti -1c
+.RI "class \fBDynamicPayloadFormat\fP"
+.br
+.RI "\fIDynamic payload format objects.\fP"
+.ti -1c
+.RI "class \fBPayloadFormat\fP"
+.br
+.RI "\fIBase payload format class.\fP"
+.ti -1c
+.RI "class \fBStaticPayloadFormat\fP"
+.br
+.RI "\fIStatic payload format objects.\fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef uint8 \fBPayloadType\fP"
+.br
+.RI "\fIRTP payload type numeric identifier.\fP"
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBStaticPayloadType\fP { \fBsptPCMU\fP =  0, \fBsptG726_32\fP =  2, \fBsptGSM\fP, \fBsptG723\fP, \fBsptDVI4_8000\fP, \fBsptDVI4_16000\fP, \fBsptLPC\fP, \fBsptPCMA\fP, \fBsptG722\fP, \fBsptL16_DUAL\fP, \fBsptL16_MONO\fP, \fBsptQCELP\fP, \fBsptMPA\fP =  14, \fBsptG728\fP, \fBsptDVI4_11025\fP, \fBsptDVI4_22050\fP, \fBsptG729\fP, \fBsptCELB\fP =  25, \fBsptJPEG\fP, \fBsptNV\fP =  28, \fBsptH261\fP =  31, \fBsptMPV\fP, \fBsptMP2T\fP, \fBsptH263\fP }"
+.br
+.RI "\fIRTP static payload types (default bindings) defined in the AVP profile.\fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const \fBPayloadType\fP \fBptINVALID\fP = 128"
+.br
+.RI "\fIPredefined value for invalid or uninitialized payload type variables.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Payload types and formats.
+.PP
+.PP
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

@@ -1,0 +1,68 @@
+Tuesday December 20 2005 : ortp-0.8.1
+	- change session's clockrate dependant parameters upon payload type changed events at socket level 
+	- rtp_session_set_recv_buf_size() added.
+	- bugfix in rtp_session_set_remote_addr()
+
+Wednesday December 07 2005: ortp-0.8.0
+	- make package modifications
+	- make rpm added
+	- add support for different payload types for incoming and outgoing stream (which breaks api compatibility)
+	- prefix all PayloadType with payload_type_* to avoid naming conflicts
+
+Wednesday August 24 2005: ortp-0.7.1
+	- added patch for pkgconfig support from Jean-Philippe Barrette-LaPierre
+
+Monday August 8 2005: ortp-0.7.1pre5
+	- adaptive jitter buffer improvements
+	- timestamp compensated packets returned by rtp_session_recvm_with_ts
+	- new payload definitions.
+
+Tuesday August 2 2005: ortp-0.7.1pre4
+	- adaptive jitter buffer cleanups.
+	- hton24 utility function added for RTCP
+
+Tuesday July 4 2005: ortp-0.7.1pre3
+	- improve automatic jitter buffer: no more closed-loop; just estimation.
+	- merge patch for multicast from Samuel Thibault
+	- merge patch for parsing of rtcp packets from Nicola Baldo
+	- add static payload definitions for g723.1 and g729.
+
+Wednesday November 17 2004: ortp-0.7.0 series starts
+	- add automatic jitter buffer:
+		* compensate clock slides
+		* estimate the jitter and sets the minimum jitter compensation delay accordingly	
+	- posix timer simplified
+	- less system calls: use non blocking recv() and don't use select() or poll()
+	- add new functions for optimized packet sending
+	- recv() and send() are always made within the rtp_session_recv..() and rtp_session_send..()
+		functions. That means that scheduled non blocking mode does no more work as it worked before, ie 
+		that packet will be sent immediately rather than being sent on time by the scheduler as it was before.
+	- HPUX kernel target removed.
+	- scheduler always built.
+
+Tuesday August 12 2003 : ortp-0.6.3
+	- some improvements by Aymeric Moizard for Win32 build
+	- some bug fixes concerning ipv6 support.
+
+Thursday August 7 2003 : ortp-0.6.2
+	- just some minor improvements for using oRTP in a C++ environment.
+
+Wednesday January 8 2003: ortp-0.6.0
+	- many bug fixes by Telisma: the most important bug concerned the windows port.
+	- some new functionnalities concerning the RTP profiles and payload management.
+	- ported to glib-2.0 .
+
+Monday September 23 2002: ortp-0.5.0
+	- ortp has been ported to the Microsoft Windows OS (version 2000 and later) by Eloquant
+		(http://www.eloquant.com)
+	- some bug fixes and improvements of the windows port have been made by Telisma 
+		(http://www.telisma.com)
+
+Wednesday June 5 2002: ortp-0.4.4
+	- Some crashing bugs fixed.
+
+Wednesday May 15 2002: ortp-0.4.3
+	- Install include files properly.
+
+Tuesday May 7 2002: ortp-0.4.2
+	- First official and public release of oRTP.

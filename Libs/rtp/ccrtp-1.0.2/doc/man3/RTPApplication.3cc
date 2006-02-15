@@ -1,0 +1,55 @@
+.TH "RTPApplication" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RTPApplication \- An RTP application, holding identifying RTCP SDES item values. Represents local participants. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sources.h>\fP
+.PP
+Inherits \fBSDESItemsHolder\fP.
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBRTPApplication\fP (const std::string &cname)"
+.br
+.RI "\fICreate a new RTP application.\fP"
+.ti -1c
+.RI "void \fBsetPRIVPrefix\fP (const std::string &val)"
+.br
+.ti -1c
+.RI "const std::string & \fBgetPRIVPrefix\fP () const"
+.br
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+An RTP application, holding identifying RTCP SDES item values. Represents local participants.
+.PP
+An application in the context of RTP: an entity that has a CNAME (unique identifier in the form of user@host.domain) as well as other RTCP SDES items (such as NAME or TOOL), and may open a number of RTP sessions. Each application is a different source of synchronization (with a potentially diferent SSRC identifier) in each RTP session it participates. All the sources of synchronization from a participant are tied together by means of the CNAME.
+.PP
+The definition of this class allows applications based on ccRTP to implement several 'RTP applications' in the same process. Each object of this class represents a local participant.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "RTPApplication::RTPApplication (const std::string & cname)"
+.PP
+Create a new RTP application.
+.PP
+If the CNAME string provided has zero length, it is guessed from the user and machine name.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIcname\fP\fP
+Local participant canonical name. 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.

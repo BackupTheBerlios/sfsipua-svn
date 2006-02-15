@@ -1,0 +1,112 @@
+.PP
+.TH "AppDataUnit" 3 "9 Jun 2003" "ccRTP" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AppDataUnit \- Interface (envelope) to data received over RTP packets. 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <queuebase.h>\fP
+.PP
+.SS "Public Methods"
+
+.in +1c
+.ti -1c
+.RI "\fBAppDataUnit\fP (const AppDataUnit &src)"
+.br
+.ti -1c
+.RI "AppDataUnit & \fBoperator=\fP (const AppDataUnit &source)"
+.br
+.RI "\fIAssignment operator.\fP"
+.ti -1c
+.RI "\fBPayloadType\fP \fBgetType\fP () const"
+.br
+.ti -1c
+.RI "const uint8 *const \fBgetData\fP () const"
+.br
+.RI "\fIGet data as it is received in RTP packets (i.e.\fP"
+.ti -1c
+.RI "size_t \fBgetSize\fP () const"
+.br
+.ti -1c
+.RI "const \fBSyncSource\fP & \fBgetSource\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisMarked\fP () const"
+.br
+.RI "\fIIs this data unid marked?.\fP"
+.ti -1c
+.RI "uint16 \fBgetSeqNum\fP () const"
+.br
+.RI "\fIGet data unit sequence number.\fP"
+.in -1c
+.SH "DETAILED DESCRIPTION"
+.PP 
+Interface (envelope) to data received over RTP packets.
+.PP
+A class of objects representing data transmitted over RTP packets. Tipically, this object will apply to received data. Data blocks received via RTP connections as well as its related objects (source, etc), are accessed through the methods of this class.
+.PP
+\fBAuthor: \fP
+.in +1c
+Federico Montesino Pouzols <fedemp@altern.org> 
+.PP
+.SH "CONSTRUCTOR & DESTRUCTOR DOCUMENTATION"
+.PP 
+.SS "AppDataUnit::AppDataUnit (const AppDataUnit & src)"
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsrc\fP\fP
+the AppDataUnit object being copied 
+.SH "MEMBER FUNCTION DOCUMENTATION"
+.PP 
+.SS "const uint8* const AppDataUnit::getData () const\fC [inline]\fP"
+.PP
+Get data as it is received in RTP packets (i.e.
+.PP
+for multi-octet encodings, octets are in network order.
+.PP
+\fBReturns: \fP
+.in +1c
+Raw pointer to data block. 
+.SS "size_t AppDataUnit::getSize () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+length of data in octets 
+.SS "const \fBSyncSource\fP& AppDataUnit::getSource () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+Source that sent this data 
+.SS "\fBPayloadType\fP AppDataUnit::getType () const\fC [inline]\fP"
+.PP
+\fBReturns: \fP
+.in +1c
+type of this data 
+.SS "bool AppDataUnit::isMarked () const\fC [inline]\fP"
+.PP
+Is this data unid marked?.
+.PP
+\fBReturns: \fP
+.in +1c
+true if marked. 
+.SS "AppDataUnit& AppDataUnit::operator= (const AppDataUnit & source)"
+.PP
+Assignment operator.
+.PP
+\fBParameters: \fP
+.in +1c
+.TP
+\fB\fIsource\fP\fP
+the AppDataUnit object being assigned 
+.PP
+\fBReturns: \fP
+.in +1c
+ the result of the assignment 
+
+.SH "AUTHOR"
+.PP 
+Generated automatically by Doxygen for ccRTP from the source code.
