@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "acmtest.h"
 #include "Acmcodec.h"
-
+#include "assert.h"
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -38,6 +38,8 @@ DWORD CAcmcodec::GetVer(char strver[20])
     return dwACMVer;
 }
 
+
+
 BOOL CALLBACK acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD fdwSupport )
 {
 	if( fdwSupport & ACMDRIVERDETAILS_SUPPORTF_CODEC ) 
@@ -60,7 +62,7 @@ BOOL CALLBACK acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD
 				fmtDetails.dwFormatTagIndex = i;
 				mmr = acmFormatTagDetails( driver, &fmtDetails, ACM_FORMATTAGDETAILSF_INDEX );
 				TRACE("uuuuuuu %u \r\n",fmtDetails.dwFormatTag);
-				if( fmtDetails.dwFormatTag == MM_MSFT_ACM_G711  )
+				if( fmtDetails.dwFormatTag == WAVE_FORMAT_ALAW   )
 				{
 					TRACE("11111111\r\n");
 				}
