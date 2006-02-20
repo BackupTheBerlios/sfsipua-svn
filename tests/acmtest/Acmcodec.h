@@ -29,7 +29,7 @@ public:
 	BOOL	static bG711;
 private:
 	
-	//	static BOOL CALLBACK acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD fdwSupport );
+	static BOOL CALLBACK acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD fdwSupport );
 };
 
 #endif // !defined(AFX_ACMCODEC_H__9D448199_1A2F_4630_B173_51B6940A8E6F__INCLUDED_)

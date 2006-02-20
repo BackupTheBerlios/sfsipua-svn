@@ -3,7 +3,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "acmtest.h"
 #include "Acmcodec.h"
 #include "assert.h"
 #ifdef _DEBUG
@@ -40,7 +39,7 @@ DWORD CAcmcodec::GetVer(char strver[20])
 
 
 
-BOOL CALLBACK acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD fdwSupport )
+BOOL CALLBACK CAcmcodec::acmDriverEnumCallback( HACMDRIVERID hadid, DWORD dwInstance, DWORD fdwSupport )
 {
 	if( fdwSupport & ACMDRIVERDETAILS_SUPPORTF_CODEC ) 
 	{

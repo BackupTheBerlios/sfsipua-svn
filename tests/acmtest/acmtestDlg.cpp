@@ -6,12 +6,17 @@
 #include "acmtestDlg.h"
 #include "Acmcodec.h"
 #include "assert.h"
+
+#include "./jrtp/rtpsession.h"
+#include "./jrtp/rtppacket.h"
+#pragma comment(lib,"./jrtplib-2.6.lib")
+#pragma comment(lib,"ws2_32")
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-
+#include "WavInOut.h"
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
 
@@ -85,6 +90,9 @@ BEGIN_MESSAGE_MAP(CAcmtestDlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, OnButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, OnButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, OnButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, OnButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, OnButton5)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -176,24 +184,24 @@ HCURSOR CAcmtestDlg::OnQueryDragIcon()
 void CAcmtestDlg::OnButton1() 
 {
 	// TODO: Add your control notification handler code here
-	DWORD dwACMVer = acmGetVersion();
-	printf("ACM version %u.%.02u build %u",
-			HIWORD(dwACMVer) >> 8,
-			HIWORD(dwACMVer) & 0x00FF,
-			LOWORD(dwACMVer));
-	if (LOWORD(dwACMVer) == 0) printf(" (Retail)");
-	printf("\n");
-
-	// show some ACM metrics
-	printf("ACM metrics:\n");
-
-	DWORD dwCodecs = 0;
-	MMRESULT mmr = acmMetrics(NULL, ACM_METRIC_COUNT_CODECS, &dwCodecs);
-	if (mmr) {
-		
-	} else {
-		printf("%lu codecs installed\n", dwCodecs);
-	}
+	//	DWORD dwACMVer = acmGetVersion();
+	//	printf("ACM version %u.%.02u build %u",
+	//			HIWORD(dwACMVer) >> 8,
+	//			HIWORD(dwACMVer) & 0x00FF,
+	//			LOWORD(dwACMVer));
+	//	if (LOWORD(dwACMVer) == 0) printf(" (Retail)");
+	//	printf("\n");
+	//
+	//	// show some ACM metrics
+	//	printf("ACM metrics:\n");
+	//
+	//	DWORD dwCodecs = 0;
+	//	MMRESULT mmr = acmMetrics(NULL, ACM_METRIC_COUNT_CODECS, &dwCodecs);
+	//	if (mmr) {
+	//		
+	//	} else {
+	//		printf("%lu codecs installed\n", dwCodecs);
+	//	}
 
 	CAcmcodec acm;
 	char strv[20];
@@ -339,4 +347,169 @@ void CAcmtestDlg::OnButton2()
 {
 	// TODO: Add your control notification handler code here
 	convertMP3();
+}
+
+
+
+void  Pause(DWORD ms)	//瑭鏃晊奀
+{
+	DWORD dwtm;
+	MSG	msg;
+	memset(&msg,0,sizeof(MSG));
+	dwtm = GetTickCount();
+	while (GetTickCount() < (dwtm+ms))
+	{
+		if (PeekMessage(&msg, 0, 0,	0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+	    }
+	}
+}
+#define bufsize 960
+RTPSession sessnd;
+int nPT,nTSTAMP;
+BOOL Mark=true;
+int Wav2RTP(char* buff, int len)
+{
+	//	size_t bufRead  = 0;
+	//
+	//	
+	//	sessnd.SetMulticastTTL(1);	//設定multicast封包TTL
+	//	sessnd.AddDestination(ntohl(inet_addr("127.0.0.1")),6900);	//指定傳送目的端
+	//	nPT=rand()%64+1;		
+	//	nTSTAMP=rand()%1000+1;	
+	//	int t=sessnd.SendPacket(buff,len,nPT,Mark,nTSTAMP);	
+	//	Sleep(5);
+	//	Mark=false;	
+	return len;
+}
+
+char recbuffer[1024];
+int recllen=0;
+int RTP2Wav(char* buff, int len)
+{
+	memcpy(buff,recbuffer,recllen);
+	return recllen;
+}
+
+void CAcmtestDlg::OnButton3() 
+{
+	// TODO: Add your control notification handler code here
+	WavInOut*		m_WaveIOObj;
+	m_WaveIOObj = WavInOut::instance();
+	
+	m_WaveIOObj->init(Wav2RTP,RTP2Wav);
+	WAV_FORMATE wavetype= WAV_PCMU;
+
+	m_WaveIOObj->stopPlaying();
+	m_WaveIOObj->stopRecording();
+
+	if(m_WaveIOObj->isWavInOpen)	m_WaveIOObj->wavInClose();
+	if(m_WaveIOObj->isWavOutOpen)	m_WaveIOObj->wavOutClose();
+
+	if(m_WaveIOObj->wavInOpen(wavetype,8,8000,1,30)!=0)
+			TRACE("Open WaveIO Error!");
+		else if ( m_WaveIOObj->startRecording()!=0 )
+			TRACE("Record Error!");
+
+		if(m_WaveIOObj->wavOutOpen(wavetype,8,8000,1,30)!=0)
+			TRACE("Open WaveOut Error!");
+		else if ( m_WaveIOObj->startPlaying()!=0 )
+			TRACE("Playing Error!");
+}
+
+#define BUFSIZE 960
+#define PACKSIZE BUFSIZE+50
+void CAcmtestDlg::OnButton4() 
+{
+	sessnd.Create(5800);
+	// TODO: Add your control notification handler code here
+	WSADATA wsadata;
+	WSAStartup(MAKEWORD(2,0),&wsadata);
+	RTPSession sess;
+	int t,h;
+	int g=0;
+	t=sess.Create(6900);
+	h=sess.JoinMulticastGroup(ntohl(inet_addr("127.0.0.1")));
+	CString tt;
+	t=sess.SetMaxPacketSize(PACKSIZE);
+	if(t!=0)AfxMessageBox("can't set size");
+
+	do
+	{
+		sess.PollData();
+		if (sess.GotoFirstSourceWithData())	
+		{		Sleep(10);
+		
+		
+			if(g==10)
+			{	
+				g=0;
+			}
+			do
+			{	
+					RTPPacket *pack;
+					pack = sess.GetNextPacket();				
+					//memcpy(Filebuf,pack->GetPayload(),BUFSIZE);//packet to buffer
+					memcpy(recbuffer,pack->GetPayload(),BUFSIZE);
+					recllen=BUFSIZE;
+					g=g+1;
+					delete pack;
+			} while (sess.GotoNextSourceWithData());
+		}
+		Pause(100);
+	}while(1);
+	WSACleanup();
+}
+
+void CAcmtestDlg::OnButton5() 
+{
+	// TODO: Add your control notification handler code here
+		CFileDialog  dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, 
+			"(*.*)|*.*|", NULL);
+		CString m_SourceFile;
+	if (dlg.DoModal() == IDOK)
+	{
+		m_SourceFile = dlg.GetPathName();	
+	}
+	FILE* source=fopen(m_SourceFile,"rb");
+	if ( source == NULL )
+	{
+		AfxMessageBox("can't access the file");
+	}
+//#ifdef win32
+ 	
+//#endif	
+	size_t bufRead  = 0;
+	Mark=true;
+	BYTE buffer[bufsize];
+	int t;
+	
+	RTPSession sessrec;
+	t=sessrec.Create(5800);
+	if(t!=0)AfxMessageBox("can't create");
+	
+	sessrec.SetMulticastTTL(1);	//設定multicast封包TTL
+	sessrec.AddDestination(ntohl(inet_addr("127.0.0.1")),6900);	//指定傳送目的端
+	//sess.AddDestination(ntohl(inet_addr("192.168.25.79")),6900);
+	if(t!=0)AfxMessageBox("can't add destination");
+	(void) fseek( source, 0, SEEK_SET );
+		while(!feof(source))
+		{
+			bufRead = fread(buffer, sizeof(BYTE), bufsize, source ); 
+			nPT=rand()%64+1;		
+			nTSTAMP=rand()%1000+1;	
+
+			t=sessrec.SendPacket(buffer,bufsize,nPT,Mark,nTSTAMP);	
+			recllen=bufsize;
+			//t=sess.SendPacket(buffer,bufsize,nPT,Mark,nTSTAMP);	
+		    if(t!=0)AfxMessageBox("can't sending");
+			Sleep(5);
+			Mark=false;			
+		}
+		(void) fflush( source ); 
+		(void) fclose( source ); 
+		AfxMessageBox("send success");
+	WSACleanup();
 }

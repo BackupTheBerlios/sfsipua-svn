@@ -41,6 +41,9 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnButton1();
 	afx_msg void OnButton2();
+	afx_msg void OnButton3();
+	afx_msg void OnButton4();
+	afx_msg void OnButton5();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
