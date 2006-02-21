@@ -17,6 +17,16 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 #include "WavInOut.h"
+
+#define bufsize 960
+#define PACKSIZE 960+50
+
+RTPSession sessnd;
+RTPSession sessrec;
+
+int nPT,nTSTAMP;
+BOOL Mark=true;
+
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
 
@@ -127,7 +137,21 @@ BOOL CAcmtestDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	
 	// TODO: Add extra initialization here
+	WSADATA wsadata;
+	WSAStartup(MAKEWORD(2,0),&wsadata);
+	int i=sessrec.Create(6900);
+	i=sessrec.JoinMulticastGroup(ntohl(inet_addr("127.0.0.1")));
+	i=sessrec.SetMaxPacketSize(PACKSIZE);
+	i=sessnd.Create(5800);
+	i=sessnd.SetMulticastTTL(1);	//設定multicast封包TTL
+	i=sessnd.AddDestination(ntohl(inet_addr("127.0.0.1")),6900);	//指定傳送目的端
 	
+	// TODO: Add your control notification handler code here
+	
+
+	//sess.AddDestination(ntohl(inet_addr("192.168.25.79")),6900);
+	//	if(t!=0)AfxMessageBox("can't add destination");
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -366,10 +390,11 @@ void  Pause(DWORD ms)	//瑭鏃晊奀
 	    }
 	}
 }
-#define bufsize 960
-RTPSession sessnd;
-int nPT,nTSTAMP;
-BOOL Mark=true;
+char recbuffer[1024];
+int recllen=0;
+#define BUFSIZE 960
+//#define PACKSIZE BUFSIZE+50
+
 int Wav2RTP(char* buff, int len)
 {
 	//	size_t bufRead  = 0;
@@ -382,15 +407,31 @@ int Wav2RTP(char* buff, int len)
 	//	int t=sessnd.SendPacket(buff,len,nPT,Mark,nTSTAMP);	
 	//	Sleep(5);
 	//	Mark=false;	
+
+	nPT=rand()%64+1;		
+	nTSTAMP=rand()%1000+1;	
+	sessnd.SendPacket(buff,len,nPT,Mark,nTSTAMP);	
+	Sleep(5);
+	Mark=false;	
+	//	memcpy(recbuffer,buff,len);
+	//	recllen=len;
 	return len;
 }
 
-char recbuffer[1024];
-int recllen=0;
+
 int RTP2Wav(char* buff, int len)
 {
-	memcpy(buff,recbuffer,recllen);
-	return recllen;
+	//memcpy(buff,recbuffer,recllen);
+	sessrec.PollData();
+	if (sessrec.GotoFirstSourceWithData())	
+	{	
+			RTPPacket *pack;
+			pack = sessrec.GetNextPacket();				
+			memcpy(buff,pack->GetPayload(),BUFSIZE);//packet to buffer
+			delete pack;
+	} 
+	sessrec.GotoNextSourceWithData();
+	return BUFSIZE;
 }
 
 void CAcmtestDlg::OnButton3() 
@@ -419,14 +460,10 @@ void CAcmtestDlg::OnButton3()
 			TRACE("Playing Error!");
 }
 
-#define BUFSIZE 960
-#define PACKSIZE BUFSIZE+50
+
 void CAcmtestDlg::OnButton4() 
 {
-	sessnd.Create(5800);
-	// TODO: Add your control notification handler code here
-	WSADATA wsadata;
-	WSAStartup(MAKEWORD(2,0),&wsadata);
+	
 	RTPSession sess;
 	int t,h;
 	int g=0;
@@ -486,7 +523,7 @@ void CAcmtestDlg::OnButton5()
 	BYTE buffer[bufsize];
 	int t;
 	
-	RTPSession sessrec;
+	
 	t=sessrec.Create(5800);
 	if(t!=0)AfxMessageBox("can't create");
 	
