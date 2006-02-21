@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test.vcproj", "{E6A7AA6D-B506-4491-A586-49A0BCEEA42C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tevrtpsend", "..\ortp-0.8.1\build\win32\oRTP\tevrtpsend\tevrtpsend.vcproj", "{8316D15B-C74F-4560-BAB8-726F9280FEFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6A7AA6D-B506-4491-A586-49A0BCEEA42C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E6A7AA6D-B506-4491-A586-49A0BCEEA42C}.Debug|Win32.Build.0 = Debug|Win32
+		{E6A7AA6D-B506-4491-A586-49A0BCEEA42C}.Release|Win32.ActiveCfg = Release|Win32
+		{E6A7AA6D-B506-4491-A586-49A0BCEEA42C}.Release|Win32.Build.0 = Release|Win32
+		{8316D15B-C74F-4560-BAB8-726F9280FEFB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8316D15B-C74F-4560-BAB8-726F9280FEFB}.Debug|Win32.Build.0 = Debug|Win32
+		{8316D15B-C74F-4560-BAB8-726F9280FEFB}.Release|Win32.ActiveCfg = Release|Win32
+		{8316D15B-C74F-4560-BAB8-726F9280FEFB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
