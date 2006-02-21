@@ -166,7 +166,7 @@ void CReceiverDlg::OnLink()
 				g=0;
 			}
 		
-			//	file.Open(tt,CFile::modeWrite);	
+			//			file.Open(tt,CFile::modeWrite);	
 			do
 				{	
 					RTPPacket *pack;
@@ -176,19 +176,19 @@ void CReceiverDlg::OnLink()
 			//		if(bTmpFile)
 						{		
 							    
-							//							file.Write(Filebuf,BUFSIZE);
+							file.Write(Filebuf,BUFSIZE);
 
-							g_ACode.DecodeAudioData ((char *)Filebuf,60,m_cOut,&iOut);
+							//g_ACode.DecodeAudioData ((char *)Filebuf,60,m_cOut,&iOut);
 
 							//file.Write(m_cOut,iOut);
-							g_pOut->Play ((char *)m_cOut,iOut);
+							g_pOut->Play ((char *)Filebuf,BUFSIZE);
 							g=g+1;
 						
 							//bTmpFile=false;
 						}
 					delete pack;
 				} while (sess.GotoNextSourceWithData());
-		//	file.Close();
+				//			file.Close();
 		}	
 		Pause(100);
 	}while(1);

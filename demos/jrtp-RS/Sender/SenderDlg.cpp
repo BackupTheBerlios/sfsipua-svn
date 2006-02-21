@@ -140,9 +140,10 @@ void CSenderDlg::OnSend()
 			nPT=rand()%64+1;		
 			nTSTAMP=rand()%1000+1;	
 
-			g_ACode.EncodeAudioData ((char*)buffer,bufsize,m_cBufOut,&iOut);
-			t=sess.SendPacket(m_cBufOut,iOut,nPT,Mark,nTSTAMP);	
-			//t=sess.SendPacket(buffer,bufsize,nPT,Mark,nTSTAMP);	
+			//g_ACode.EncodeAudioData ((char*)buffer,bufsize,m_cBufOut,&iOut);
+			//t=sess.SendPacket(m_cBufOut,iOut,nPT,Mark,nTSTAMP);	
+			
+			t=sess.SendPacket(buffer,bufsize,nPT,Mark,nTSTAMP);	
 		    if(t!=0)AfxMessageBox("can't sending");
 			Sleep(5);
 			Mark=false;			
