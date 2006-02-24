@@ -1,0 +1,448 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_LOGON DIALOG DISCARDABLE  0, 0, 253, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Logon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_EDIT_LOGON_USERURI,58,7,120,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LOGON_SERVER,58,24,120,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_LOGON_TRANSPORT,58,41,48,53,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,196,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,196,24,50,14
+    LTEXT           "User URI",IDC_STATIC,26,10,30,8
+    LTEXT           "Server Address",IDC_STATIC,7,27,49,8
+    LTEXT           "Transport",IDC_STATIC,25,43,31,8
+END
+
+IDD_DIALOG_WATCHER DIALOG DISCARDABLE  0, 0, 186, 68
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Incoming Watcher"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "Allow",IDC_BUTTON_WATCHER_ALLOW,129,7,50,14
+    PUSHBUTTON      "Block",IDC_BUTTON_WATCHER_BLOCK,129,24,50,14
+    CONTROL         "Add the user as a buddy",IDC_CHECK_WATCHER_ADD_BUDDY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,51,93,10
+    LTEXT           "WATCHER_NAME",IDC_STATIC_WATCHER_NAME,7,7,113,8
+    LTEXT           "WATCHER_URI",IDC_STATIC_WATCHER_URI,7,17,113,8
+    LTEXT           "has requested to watch your presence status.",
+                    IDC_STATIC,7,27,113,18
+END
+
+IDD_DIALOG_ADDRESS_NAME DIALOG DISCARDABLE  0, 0, 220, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_EDIT_ADDRESS_NAME,32,7,120,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ADDRESS_URI,32,24,120,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,163,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,163,24,50,14
+    LTEXT           "Name",IDC_STATIC,7,10,20,8
+    LTEXT           "URI",IDC_STATIC,13,27,14,8
+END
+
+IDD_DIALOG_ADDRESS DIALOG DISCARDABLE  0, 0, 220, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_EDIT_ADDRESS_URI,33,7,120,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,163,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,163,24,50,14
+    LTEXT           "URI",IDC_STATIC,13,10,14,8
+END
+
+IDD_DIALOG_NAME DIALOG DISCARDABLE  0, 0, 220, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_EDIT_ADDRESS_NAME,33,7,120,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,163,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,163,24,50,14
+    LTEXT           "Name",IDC_STATIC,7,10,20,8
+END
+
+IDD_DIALOG_SESSION DIALOG DISCARDABLE  0, 0, 186, 52
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Incoming Session"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "&Accept",IDC_BUTTON_SESSION_ACCEPT,129,7,50,14
+    PUSHBUTTON      "&Reject",IDC_BUTTON_SESSION_REJECT,129,24,50,14
+    LTEXT           "SESSION_NAME",IDC_STATIC_SESSION_NAME,7,7,113,8
+    LTEXT           "SESSION_URI",IDC_STATIC_SESSION_URI,7,17,113,8
+    LTEXT           "has requested an audio/video call.",IDC_STATIC,7,27,113,
+                    18
+END
+
+IDD_DIALOG_AUTH DIALOG DISCARDABLE  0, 0, 253, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Authentication"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "",IDC_STATIC_AUTH_REALM,5,5,200,8
+    EDITTEXT        IDC_EDIT_AUTH_USERURI,58,17,120,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_AUTH_ACCOUNT,58,33,120,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_AUTH_PASSWORD,58,49,120,14,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,196,17,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,196,34,50,14
+    LTEXT           "User URI",IDC_STATIC,26,20,30,8
+    LTEXT           "Account",IDC_STATIC,28,37,28,8
+    LTEXT           "Password",IDC_STATIC,24,53,32,8
+END
+
+IDD_DIALOG_OPTIONS DIALOGEX 0, 0, 269, 154
+STYLE DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,200,8,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,200,26,50,14
+    EDITTEXT        IDC_EDIT_OPTIONS_NAME,81,7,84,14,ES_MULTILINE | 
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_OPTIONS_NUM,81,24,87,14,ES_MULTILINE | 
+                    ES_AUTOHSCROLL
+    LTEXT           "ClientName",IDC_STATIC_OPTIONS_NAME,14,11,57,10
+    LTEXT           "ClientCurVer",IDC_STATIC_OPTIONS_NUM,14,28,60,10
+    CONTROL         "Limit Bandwidth ",IDC_CHECK_OPTIONS_APPBW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,45,68,10
+    EDITTEXT        IDC_EDIT_OPTIONS_APPBW,81,41,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "Encryption Settings",IDC_STATIC,7,95,246,43
+    LTEXT           "Audio-Video ",IDC_STATIC,15,107,58,8
+    CONTROL         "Not Supported",IDC_RADIO_AVENC_OPTIONS_UNSUPP,"Button",
+                    BS_AUTORADIOBUTTON,77,107,58,10
+    CONTROL         "Supported",IDC_RADIO_AVENC_OPTIONS_SUPP,"Button",
+                    BS_AUTORADIOBUTTON,143,107,46,10
+    CONTROL         "Required",IDC_RADIO_AVENC_OPTIONS_REQ,"Button",
+                    BS_AUTORADIOBUTTON,201,107,46,10
+    LTEXT           "T120",IDC_STATIC,15,121,58,8
+    CONTROL         "Not Supported",IDC_RADIO_T120ENC_OPTIONS_UNSUPP,"Button",
+                    BS_AUTORADIOBUTTON,77,122,58,10
+    CONTROL         "Supported",IDC_RADIO_T120ENC_OPTIONS_SUPP,"Button",
+                    BS_AUTORADIOBUTTON,143,122,46,10
+    CONTROL         "Required",IDC_RADIO_T120ENC_OPTIONS_REQ,"Button",
+                    BS_AUTORADIOBUTTON,201,122,46,10
+    CONTROL         "Negotiate T120 Media",IDC_CHECK_OPTIONS_T120,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,67,95,11
+END
+
+IDD_DIALOG_DIALPAD DIALOGEX 0, 0, 122, 74
+STYLE DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DialPad"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,72,18,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,72,34,50,14
+    PUSHBUTTON      "&1",IDC_BUTTON_DIALPAD_1,8,10,19,14
+    PUSHBUTTON      "&2",IDC_BUTTON_DIALPAD_2,28,10,19,14
+    PUSHBUTTON      "&3",IDC_BUTTON_DIALPAD_3,48,10,19,14
+    PUSHBUTTON      "&4",IDC_BUTTON_DIALPAD_4,8,24,19,14
+    PUSHBUTTON      "&5",IDC_BUTTON_DIALPAD_5,28,24,19,14
+    PUSHBUTTON      "&6",IDC_BUTTON_DIALPAD_6,48,24,19,14
+    PUSHBUTTON      "&7",IDC_BUTTON_DIALPAD_7,8,38,19,14
+    PUSHBUTTON      "&8",IDC_BUTTON_DIALPAD_8,28,38,19,14
+    PUSHBUTTON      "&9",IDC_BUTTON_DIALPAD_9,48,39,19,14
+    PUSHBUTTON      "&*",IDC_BUTTON_DIALPAD_STAR,8,53,19,14
+    PUSHBUTTON      "&0",IDC_BUTTON_DIALPAD_0,28,53,19,14
+    PUSHBUTTON      "&#",IDC_BUTTON_DIALPAD_HASH,48,53,19,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO MOVEABLE PURE 
+BEGIN
+    IDD_DIALOG_LOGON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 246
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    IDD_DIALOG_WATCHER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 61
+    END
+
+    IDD_DIALOG_ADDRESS_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOG_ADDRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOG_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOG_SESSION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 45
+    END
+
+    IDD_DIALOG_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 246
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    IDD_DIALOG_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 262
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_APP MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Log O&n...",                  ID_FILE_LOGON
+        MENUITEM "Log O&ff",                    ID_FILE_LOGOFF, GRAYED
+        MENUITEM SEPARATOR
+        POPUP "&Presence Status"
+        BEGIN
+            MENUITEM "O&ffline",                    ID_FILE_PRESENCESTATUS_OFFLINE
+
+            MENUITEM "&Online",                     ID_FILE_PRESENCESTATUS_ONLINE
+
+            MENUITEM "&Away",                       ID_FILE_PRESENCESTATUS_AWAY
+
+            MENUITEM "&Idle",                       ID_FILE_PRESENCESTATUS_IDLE
+
+            MENUITEM "&Busy",                       ID_FILE_PRESENCESTATUS_BUSY
+
+            MENUITEM "Be &Right Back",              ID_FILE_PRESENCESTATUS_BERIGHTBACK
+
+            MENUITEM "On the &Phone",               ID_FILE_PRESENCESTATUS_ONTHEPHONE
+
+            MENUITEM "Out to &Lunch",               ID_FILE_PRESENCESTATUS_OUTTOLUNCH
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Action"
+    BEGIN
+        MENUITEM "&Call...",                    ID_ACTION_CALL
+        MENUITEM "&Message...",                 ID_ACTION_MESSAGE
+        MENUITEM SEPARATOR
+        MENUITEM "&Add Buddy...",               ID_ACTION_ADDBUDDY, GRAYED
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "Tuning Wi&zard...",           ID_TOOLS_TUNINGWIZARD
+        MENUITEM SEPARATOR
+        MENUITEM "&User Search...",             ID_TOOLS_USERSEARCH, GRAYED
+        MENUITEM "&Watchers...",                ID_TOOLS_WATCHERS, GRAYED
+        MENUITEM "&Groups...",                  ID_TOOLS_GROUPS, GRAYED
+        MENUITEM "&DTMF Dialpad...",            ID_TOOLS_DTMFDIALPAD
+        MENUITEM "&Options...",                 ID_TOOLS_OPTIONS
+    END
+END
+
+IDR_MENU_IM MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Action"
+    BEGIN
+        MENUITEM "&Add Participant...",         ID_ACTION_ADDPARTICIPANT
+        , GRAYED
+    END
+END
+
+IDR_MENU_AV MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Video",                      ID_VIEW_VIDEO
+        MENUITEM SEPARATOR
+        MENUITEM "&Application Sharing",        ID_VIEW_APPSHARING
+        MENUITEM "&White Board",                ID_VIEW_WHITEBOARD
+    END
+END
+
+IDR_MENU_WATCHERS MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Actions"
+    BEGIN
+        MENUITEM "&Add Watcher...",             ID_ACTION_ADDWATCHER
+    END
+END
+
+IDR_MENU_GROUPS MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Actions"
+    BEGIN
+        MENUITEM "&Add Group...",               ID_ACTION_ADDGROUP
+    END
+END
+
+IDR_MENU_BUDDY MENU DISCARDABLE 
+BEGIN
+    POPUP " "
+    BEGIN
+        MENUITEM "&Call Buddy",                 ID_BUDDY_CALL
+        MENUITEM "&Message Buddy",              ID_BUDDY_MESSAGE
+        MENUITEM SEPARATOR
+        MENUITEM "&Refresh Buddy",              ID_BUDDY_REFRESH
+        MENUITEM "&Remove Buddy",               ID_BUDDY_REMOVE
+        MENUITEM "&Properties...",              ID_BUDDY_PROPERTIES
+    END
+END
+
+IDR_MENU_USER MENU DISCARDABLE 
+BEGIN
+    POPUP " "
+    BEGIN
+        MENUITEM "&Call User",                  ID_USER_CALL
+        MENUITEM "&Message User",               ID_USER_MESSAGE
+        MENUITEM "&Phone User",                 ID_USER_PHONE
+        MENUITEM SEPARATOR
+        MENUITEM "&Add Buddy",                  ID_USER_ADDBUDDY
+    END
+END
+
+IDR_MENU_WATCHER MENU DISCARDABLE 
+BEGIN
+    POPUP " "
+    BEGIN
+        MENUITEM "&Allow Watcher",              ID_WATCHER_ALLOW
+        MENUITEM "&Block Watcher",              ID_WATCHER_BLOCK
+        MENUITEM "&Deny Watcher",               ID_WATCHER_DENY
+        MENUITEM "&Prompt Watcher",             ID_WATCHER_PROMPT
+        MENUITEM SEPARATOR
+        MENUITEM "&Remove Watcher",             ID_WATCHER_REMOVE
+        MENUITEM "",                            ID_Menu
+    END
+END
+
+IDR_MENU_GROUP MENU DISCARDABLE 
+BEGIN
+    POPUP " "
+    BEGIN
+        MENUITEM "&Remove Group",               ID_GROUP_REMOVE
+        MENUITEM "Remove &Buddy From Group",    ID_GROUP_BUDDY_REMOVE
+        MENUITEM "&Add Buddy To Group",		ID_GROUP_BUDDY_ADD
+    END
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
