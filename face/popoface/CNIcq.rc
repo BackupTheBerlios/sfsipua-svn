@@ -1,0 +1,366 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CNIcq.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\CNIcq.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 CNIcq"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "CNIcq 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2002",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_CNICQ_DIALOG DIALOGEX 0, 0, 167, 243
+STYLE WS_MINIMIZEBOX | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "CN通信"
+MENU IDR_MAIN_MENU
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+END
+
+IDD_CHAT_DIALOG DIALOG DISCARDABLE  0, 0, 439, 296
+STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "对话"
+MENU IDR_CHAT_MENU
+FONT 9, "宋体"
+BEGIN
+    CONTROL         "发送(&S)",IDC_BTN_CHAT_SEND,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,338,241,47,26
+    PUSHBUTTON      "表情",IDC_EMOTONS,17,212,36,17
+    PUSHBUTTON      "消息",IDC_MESSAGE,59,212,35,18
+    PUSHBUTTON      "快捷回复",IDC_BTN_FASTREPLY,103,213,62,17
+    PUSHBUTTON      "侧边条",IDC_BTN_TOOLWIN,173,214,72,18
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "CNIcq Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "CNIcq\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2002\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "CNIcq.EXE\0"
+            VALUE "ProductName", "CNIcq 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_CNICQ_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 165
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 242
+    END
+
+    IDD_CHAT_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 438
+        BOTTOMMARGIN, 295
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "更换用户",                    ID_FILE_SW_USER
+        POPUP "我的状态"
+        BEGIN
+            MENUITEM "在线",                        ID_FILE_STATUS_ONLINE
+            , CHECKED
+            MENUITEM "隐身",                        ID_FILE_STATUS_HIDE
+            MENUITEM "忙碌",                        ID_MENUITEM32781
+            MENUITEM "就餐",                        ID_MENUITEM32782
+            MENUITEM "接听电话",                    ID_MENUITEM32783
+            MENUITEM "离开",                        ID_FILE_STATUS_OFFLINE
+            MENUITEM "自定义",                      65535
+            MENUITEM SEPARATOR
+            MENUITEM "设置状态",                    ID_MENUITEM32785
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "保存联系人名单",              ID_MENUITEM32786
+        MENUITEM SEPARATOR
+        MENUITEM "登录",                        ID_FILE_LOGIN
+        MENUITEM "注销",                        ID_FILE_LOGOUT
+        MENUITEM "退出",                        ID_FILE_EXIT
+    END
+    POPUP "操作(&O)"
+    BEGIN
+        MENUITEM "添加好友",                    ID_MENUITEM32787
+        MENUITEM "添加手机好友",                ID_MENUITEM32788
+        MENUITEM "添加组",                      ID_MENUITEM32789
+        MENUITEM SEPARATOR
+        MENUITEM "发送消息",                    ID_MENUITEM32790
+        MENUITEM "发送手机短信",                ID_MENUITEM32791
+        MENUITEM "发送文件或照片",              ID_MENUITEM32792
+        MENUITEM "发送邮件",                    ID_MENUITEM32793
+        MENUITEM SEPARATOR
+        MENUITEM "创建聊天室",                  ID_MENUITEM32794
+    END
+    POPUP "工具(&T)"
+    BEGIN
+        MENUITEM "好友管理",                    ID_MENUITEM32795
+        MENUITEM "分组管理",                    ID_MENUITEM32796
+        MENUITEM SEPARATOR
+        MENUITEM "人个资料",                    ID_MENUITEM32797
+        MENUITEM "系统配置",                    ID_MENUITEM32798
+        MENUITEM SEPARATOR
+        MENUITEM "邀请我的联系人",              ID_MENUITEM32799
+        MENUITEM SEPARATOR
+        MENUITEM "邮箱管理",                    ID_MENUITEM32800
+        MENUITEM "交友精灵",                    ID_MENUITEM32801
+        MENUITEM SEPARATOR
+        MENUITEM "显示分页标签",                ID_MENU_TOOLS_SHOWTAB
+        , CHECKED
+        MENUITEM "显示操作窗格",                ID_MENUITEM32803, CHECKED
+        MENUITEM "转到标签",                    65535
+        MENUITEM SEPARATOR
+        POPUP "设置主题"
+        BEGIN
+            MENUITEM "标准",                        ID_MENUITEM32805
+            MENUITEM "MSN风格",                     ID_MENUITEM32806
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "聊天记录",                    ID_MENUITEM32807
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "帮助主题",                    ID_MENUITEM32778
+        MENUITEM "常见问题",                    ID_MENUITEM32779
+        MENUITEM SEPARATOR
+        MENUITEM "关于...",                     ID_HELP_ABOUT
+    END
+END
+
+IDR_CHAT_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "关闭(&C)",                    ID_MENU_CHAT_EXIT
+    END
+END
+
+IDR_POPUP_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "systray"
+    BEGIN
+        MENUITEM "显示主窗口",                  ID_MENUITEM32809
+        MENUITEM SEPARATOR
+        MENUITEM "退出系统",                    ID_MENUITEM32810
+    END
+END
+
+IDR_MENU_REPLY MENU DISCARDABLE 
+BEGIN
+    POPUP "reply"
+    BEGIN
+        MENUITEM "哦!",                         ID_MENUITEM32816
+        MENUITEM "我知道了！",                  ID_MENUITEM32817
+        MENUITEM "不可能吧！",                  ID_MENUITEM32818
+        MENUITEM "也许是吧",                    ID_MENUITEM32819
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_DRAG                CURSOR  DISCARDABLE     "res\\drag.cur"
+IDC_FORBIDDEN           CURSOR  DISCARDABLE     "res\\forbidden.cur"
+IDC_HAND                CURSOR  DISCARDABLE     "res\\hand.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_EMOTIONS            BITMAP  DISCARDABLE     "res\\emotions.bmp"
+IDB_FORMATBAR           BITMAP  DISCARDABLE     "res\\formatba.bmp"
+IDB_FONTTYPE            BITMAP  DISCARDABLE     "res\\font.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDB_FORMATBAR TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_CHAR_BOLD
+    BUTTON      ID_CHAR_ITALIC
+    BUTTON      ID_CHAR_UNDERLINE
+    BUTTON      ID_CHAR_COLOR
+    BUTTON      ID_CHAR_EMOTION
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 CNIcq(&A)..."
+    IDS_STRING102           "我想..."
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\CNIcq.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
