@@ -1664,10 +1664,7 @@ HRESULT CRTCWin::DoRegister()
     // Enable the RTC profile object
     hr = DoEnableProfile(TRUE,
         RTCRF_REGISTER_ALL,
-        RTCRMF_BUDDY_ROAMING |
-        RTCRMF_WATCHER_ROAMING |
-        RTCRMF_PRESENCE_ROAMING |
-        RTCRMF_PROFILE_ROAMING
+        0
         );
 
     if (FAILED(hr))
@@ -1856,7 +1853,8 @@ HRESULT CRTCWin::DoEnablePresence(BOOL fEnable)
         {
 		hr = pPresence->SetPresenceData(bstrPropName, bstrPropVal);
 
-		if (FAILED(hr))
+
+		if (FAILED(hr))
 		{
 			// SetPresenceData failed                        
 			DEBUG_PRINT(("SetPresenceData failed %x", hr ));
@@ -5120,7 +5118,9 @@ void CRTCWin::OnRTCProfileEvent(
                     return;
                 }
 
-				hr = m_pProfile->put_AllowedAuth(RTCAU_NTLM | RTCAU_KERBEROS | RTCAU_USE_LOGON_CRED);
+				//hr = m_pProfile->put_AllowedAuth(RTCAU_NTLM | RTCAU_KERBEROS | RTCAU_USE_LOGON_CRED);
+				hr = m_pProfile->put_AllowedAuth(RTCAU_DIGEST);
+
 				if (FAILED(hr))
                 {
                     DEBUG_PRINT(("put_AllowedAuth failed %x", hr ));

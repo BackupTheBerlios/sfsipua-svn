@@ -1239,7 +1239,7 @@ HRESULT ShowBuddyPropertiesDialog(
     else
     {
         IRTCPresenceDevice *pDevice = NULL;               
-        IRTCPresenceDevice2 *pDevice2 = NULL;               
+        //IRTCPresenceDevice2 *pDevice2 = NULL;               
 
         while (S_OK == pEnumDev->Next(1, &pDevice, NULL))
         {
@@ -1269,7 +1269,7 @@ HRESULT ShowBuddyPropertiesDialog(
                 DEBUG_PRINT(("Device::get_PresenceData Failed 0x%8x", hr));
             }
 
-            pDevice2=NULL;
+           /* pDevice2=NULL;
             hr=pDevice->QueryInterface(__uuidof(IRTCPresenceDevice2),(LPVOID *)&pDevice2);
             if (FAILED(hr))
             {
@@ -1283,7 +1283,7 @@ HRESULT ShowBuddyPropertiesDialog(
                 {
                     DEBUG_PRINT(("Device::get_DeviceID Failed 0x%8x", hr));
                 }
-            }
+            }*/
 
              _snwprintf(wszOneDevice, MAX_XML_STRING-1,
                 L"\nDevice #%d: Status = %s, Notes = %s, Data = %s, Device ID= %s",
@@ -1309,7 +1309,7 @@ HRESULT ShowBuddyPropertiesDialog(
 
 
             SAFE_RELEASE(pDevice);
-            SAFE_RELEASE(pDevice2);
+            //SAFE_RELEASE(pDevice2);
             nDeviceCount++;
         }
 
