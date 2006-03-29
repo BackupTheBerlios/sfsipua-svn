@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>SDK Developer Documentation</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop SDK Developer Guide </b></font></td>
+        </tr>
+
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;Developer Guide<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+
+  <a name="overview" id="overview"></a><b>Overview</b>
+  <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+  <p><font size="-1">Google Desktop indexes, caches, and searches content on
+  your computer. Its Sidebar provides constant data display from multiple
+  information sources. Through the Google Desktop Software Development Kit's
+  APIs, your applications can send content to the Desktop engine for indexing and
+  storage, send search queries directly to Desktop, define new Sidebar
+  panels, communicate between different users' Sidebar panels, redefine  
+  Desktop user interface actions, and define new Desktop events.</font></p>
+
+  <p><font size="-1">For your convenience, we have divided the SDK
+  documentation into five sections, each describing the APIs for one type of
+  functionality. While some of the content, such as how to register your
+  applications with Google Desktop, will overlap between sections, the APIs
+  are sufficiently functionally distinct to justify this separation.</font></p>
+  
+  <p><font size="-1">Display or Sidebar API documentation is further
+  divided. You can implement a Sidebar plug-in as an ActiveX control, using
+  the SDK provided Helper Framework, using a Visual Studio wizard, or via
+  scripting languages such as JavaScript or VBScript. We describe and/or
+  provide tutorials for each of these implementation methods. We also
+  provide design and UI guidelines for your Sidebar panels.</font></p>
+ 
+  <p><font size="-1">Click on the appropriate item for specific API
+  documentation on:
+  <ul>
+    <li><a href="indexapi.html">Sending content to Desktop for indexing and
+    caching</a></li>
+    <li><a href="queryapi.html">Sending search queries to Desktop</a></li>
+    <li><a href="displayapi.html">Implementing new Displays</a> (Sidebar
+      panels and Notification displays)
+     <ul>
+      <li><a href="sidebar_plugin_guidelines.html">Design, UI, and testing
+             guidelines for writing Sidebar plug-ins</a></li>
+      <li><a href="script.html">Using JavaScript or VBScript to
+             write Sidebar plug-ins</a></li>
+      <li><a href="communication.html">Sending data to other Google Desktop
+             users</a></li>
+      <li><a href="activex.html">Tutorial on creating a Sidebar plug-in as an
+            ActiveX control</a></li>
+      <li><a href="framework.html">Tutorial on creating a Sidebar plug-in using
+            the Helper Framework</a></li>
+      <li><a href="quickhelper.html">Tutorial on creating a Sidebar
+            plug-in using a Visual Studio wizard</a></li>
+      </ul>
+     </li>
+     <li><a href="actionsapi.html">Defining Desktop user interface
+       actions</a></li>
+     <li><a href="eventapi.html">Receiving and Handling Desktop events</a></li>
+   </ul>
+   </font></p>
+
+   <p><font size="=1">Also, we provide documentation on the <a
+   href="gdpinstaller.html">Plug-in Installer</a>, which creates install
+   packages for plug-ins developed using scripting languages. For
+   non-script-based plug-ins, you can use the Installer to handle writing
+   the code for registering your plug-in with Google Desktop as well as the
+   code needed for installing and removing your plug-in.</font></p>
+
+
+<p></p></td>
+  </tr>
+  <tr valign="top">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+
+      </tbody></table>
+	</td>
+  </tr>
+</tbody></table>
+</body></html>
+
+
+
+
+

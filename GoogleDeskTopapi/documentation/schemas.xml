@@ -1,0 +1,299 @@
+<!-- Google Desktop Search Schemas -->
+<schemas>
+
+  <!-- Generic indexable schema. The base parent schema of all other schemas -->
+  <schema
+  name="Google.Desktop.Indexable"
+  description="Indexable entity schema"
+  >
+    <property
+    name="content"
+    description="Indexable content"
+    type="VT_BSTR"
+    required="true"
+    ></property>
+   
+    <property
+    name="format"
+    description="Mime type of the indexable content; text/plain, text/html are accepted types"
+    type="VT_BSTR"
+    required="true"
+    ></property>
+
+    <property
+    name="native_size"
+    description="The size of the original native content (in bytes)"
+    type="VT_UI8"
+    ></property>  
+    
+    <property
+    name="thumbnail"
+    description="Thumbnail image of the content"
+    type="VT_ARRAY"
+    ></property>  
+
+    <property
+    name="thumbnail_format"
+    description="Mime type of the thumbnail; image/gif, image/jpeg, image/png are accepted types"
+    type="VT_BSTR"
+    ></property>    
+  </schema> 
+
+  <!-- Generic email schema. Inherits from Google.Desktop.Indexable -->
+  <schema
+  name="Google.Desktop.Email"
+  parent="Google.Desktop.Indexable"
+  description="Generic Email schema"
+  >
+    <property
+    name="mail_header"
+    description="Mail header of the e-mail message"
+    type="VT_BSTR"
+    ></property>
+   
+    <property
+    name="from"
+    description="Sender of the email message"
+    type="VT_BSTR"
+    ></property>
+    
+    <property
+    name="subject"
+    description="Subject of the email message"
+    type="VT_BSTR"
+    ></property>
+    
+    <property
+    name="to"
+    description="Recipient(s) of the email message"
+    type="VT_BSTR"
+    ></property>
+     
+    <property
+    name="cc"
+    description="Cc field of the email message"
+    type="VT_BSTR"
+    ></property>
+   
+    <property
+    name="bcc"
+    description="Bcc field of the email message"
+    type="VT_BSTR"
+    ></property>
+   
+    <property
+    name="replyto"
+    description="ReplyTo field of the email message"
+    type="VT_BSTR"
+    ></property>
+   
+    <property
+    name="received"
+    description="Received time of the email message"
+    type="VT_DATE"
+    required="true"   
+    ></property>    
+
+    <property
+    name="folder_name"
+    description="Folder name of the email message"
+    type="VT_BSTR"
+    ></property>    
+  </schema> 
+       
+  <!-- Generic file schema. Inherits from Google.Desktop.Indexable -->  
+  <schema
+  name="Google.Desktop.File"
+  parent="Google.Desktop.Indexable"
+  description="Generic File schema"
+  >
+    <property
+    name="uri"
+    description="Uri of the file"
+    type="VT_BSTR"
+    required="true"
+    ></property>
+   
+    <property
+    name="last_modified_time"
+    description="Time of last modification"
+    type="VT_DATE"
+    required="true"
+    ></property>
+      
+    <property
+    name="title"
+    description="Title of the file"
+    type="VT_BSTR"
+    ></property>    
+
+    <property
+    name="author"
+    description="Author of the file"
+    type="VT_BSTR"
+    ></property>    
+  </schema> 
+      
+  <!-- Generic IM schema. Inherits from Google.Desktop.Indexable -->  
+  <schema
+  name="Google.Desktop.IM"
+  parent="Google.Desktop.Indexable" 
+  description="Generic Instant Message schema"
+  >
+    <property
+    name="message_time"
+    description="Time the instant message was received"
+    type="VT_DATE"
+    required="true"
+    ></property>
+          
+    <property
+    name="user_name"
+    description="Name of the user (myself)"
+    type="VT_BSTR"
+    ></property>
+       
+    <property
+    name="buddy_name"
+    description="Name of the other person in the conversation"
+    type="VT_BSTR"
+    required="true"   
+    ></property>
+    
+    <property
+    name="title"
+    description="Title associated with the instant message(s)"
+    type="VT_BSTR"
+    ></property>
+    
+    <property
+    name="conversation_id"
+    description="Identifier hint to group messages from the same conversation"
+    type="VT_UI4"
+    ></property>
+  </schema> 
+      
+  <!-- Generic web page schema. Inherits from Google.Desktop.File --> 
+  <schema
+  name="Google.Desktop.WebPage"
+  parent="Google.Desktop.File" 
+  description="Generic web page schema"
+  >
+    <property
+    name="bookmarked"
+    description="Specifies if this web page is bookmarked"
+    type="VT_BOOL"
+    ></property>
+    
+    <property
+    name="interaction_period"
+    description="Specifies the amount of time the user interacted with the web page"
+    type="VT_DATE"
+    ></property>
+  </schema> 
+
+  <!-- Generic media file schema. Inherits from Google.Desktop.File --> 
+  <schema
+  name="Google.Desktop.MediaFile"
+  parent="Google.Desktop.File" 
+  description="Generic media file schema"
+  >
+    <property
+    name="width"
+    description="Width of images and videos (in pixels)"
+    type="VT_UI4"
+    ></property>
+
+    <property
+    name="height"
+    description="Height of images and videos (in pixels)"
+    type="VT_UI4"
+    ></property>
+    
+    <property
+    name="data_rate"
+    description="Average video bit rate for video files (in bits/sec)"
+    type="VT_UI4"
+    ></property>
+    
+    <property
+    name="bit_rate"
+    description="Average audio bit rate in audio and video files (in bits/sec)"
+    type="VT_UI4"
+    ></property>
+
+    <property
+    name="channels"
+    description="Channel count for audio files"
+    type="VT_UI4"
+    ></property>
+    
+    <property
+    name="length"
+    description="Time length of music and video files (in nanosec)"
+    type="VT_UI8"
+    ></property>
+
+    <property
+    name="original_date"
+    description="Original time stamp of media file from the media device"
+    type="VT_DATE"
+    ></property>
+   
+    <property
+    name="album_title"
+    description="Album title for music files"
+    type="VT_BSTR"
+    ></property>
+
+    <property
+    name="artist"
+    description="Artist for media file"
+    type="VT_BSTR"
+    ></property>
+
+    <property
+    name="genre"
+    description="Genre/category for media file"
+    type="VT_BSTR"
+    ></property>
+
+    <property
+    name="lyrics"
+    description="Lyrics for music files"
+    type="VT_BSTR"
+    ></property>
+    
+    <property
+    name="track_number"
+    description="Number of tracks for music files"
+    type="VT_UI4"
+    ></property>
+
+    <property
+    name="comment"
+    description="Comment about the audio file"
+    type="VT_BSTR"
+    ></property>
+
+    <property
+    name="info_tip"
+    description="Info tip as reported from the shell"
+    type="VT_BSTR"
+    ></property>
+      
+    <property
+    name="year_published"
+    description="Year published for media"
+    type="VT_UI4"
+    ></property>      
+  </schema> 
+  
+  <!-- Generic text file schema. Inherits from Google.Desktop.File --> 
+  <schema
+  name="Google.Desktop.TextFile"
+  parent="Google.Desktop.File" 
+  description="Generic text file schema"
+  >
+  </schema>   
+</schemas>

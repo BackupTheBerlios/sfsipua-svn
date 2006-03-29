@@ -1,0 +1,26 @@
+HKCR
+{
+	ActionSample.EmailActions.1 = s 'EmailActions Class'
+	{
+		CLSID = s '{173EE332-8F3A-4A58-BBC9-F4F3E0DF3ADD}'
+	}
+	ActionSample.EmailActions = s 'EmailActions Class'
+	{
+		CLSID = s '{173EE332-8F3A-4A58-BBC9-F4F3E0DF3ADD}'
+		CurVer = s 'ActionSample.EmailActions.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {173EE332-8F3A-4A58-BBC9-F4F3E0DF3ADD} = s 'EmailActions Class'
+		{
+			ProgID = s 'ActionSample.EmailActions.1'
+			VersionIndependentProgID = s 'ActionSample.EmailActions'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{F2CE9546-1B71-4829-A2E5-232B2A6ECE8C}'
+		}
+	}
+}

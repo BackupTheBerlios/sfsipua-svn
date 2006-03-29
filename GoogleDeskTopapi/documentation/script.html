@@ -1,0 +1,2166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Sidebar Plug-In Creation Using Scripts </title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="http://desktop.google.com/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Sidebar Plug-In Creation Using Scripts </b></font></td>
+        </tr>
+
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+       <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Script API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="uiguidelines.html">Plug-in UI Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>
+    <td>
+
+      <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+      <ul>
+        <li> <font size="-1"><a href="#introduction">Introduction</a></font> </li>
+
+        <li> <font size="-1"><a href="#gettingstarted">Getting Started</a></font> </li>
+        <li> <font size="-1"><a href="#helloworld">Hello World! Plug-in</a></font></li>
+
+        <li> <font size="-1"><a href="#handlingevents">Handling Events</a></font> </li>
+        <li> <font size="-1"><a href="#internationalization">Internationalization</a></font></li>
+
+        <li> <font size="-1"><a href="#api">API Additions</a></font> </li>
+      </ul>
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <b><a name="introduction"></a>Introduction</b>
+
+    <p><font size="-1">The Google Desktop Display API now includes
+    objects and methods that let you write plug-ins in scripting
+    languages such as JavaScript or VBScript. While scripting is much
+    simpler than other ways of writing plug-ins, if your plug-in uses
+    advanced UI features, such as native Windows widgets, you must use
+    the native COM-based methods instead.</font></p>
+
+    <p><font size="-1">This document assumes familiarity with the
+    principles, objects, and interfaces described in the <a
+    href="displayapi.html">Google Desktop Display API
+    documentation</a>. Before writing a Sidebar plug-in, you should
+    also read the <a href="uiguidelines.html">Plug-in UI
+    Guidelines</a>.</font></p>
+ 
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <b><a name="gettingstarted"></a>Getting Started</b>
+
+    <p><font size="-1">To develop a script Sidebar plug-in, start by
+    downloading the GD SDK. For script-based plug-ins, unlike other
+    plug-ins, you will not have to write code to register your plug-in
+    with Google Desktop or to install/uninstall your plug-in; the <a
+    href="gdpinstaller.html">Plug-in Installation Tool</a> takes care
+    of that for you. Note that you must use the Installation Tool to
+    package and install a script-based plug-in.</font></p>
+
+    <p><font size="-1">Your scripts can use any standard script
+    language features, functions and data types. However, as of this
+    release, scripts cannot use native UI widgets in the Sidebar
+    UI.</font></p> 
+       
+    <p><font size="-1">Script plug-ins execute in a layer above the plug-in helper framework. A plug-in's script is responsible for setting the usual plug-in properties and content (tile title, About dialog text, icons, creating content items, etc.). Scripts can also implement more advanced features such as adding custom items to the plug-in's menu, showing an options dialog, allowing save and restore options across sessions, custom drawing for content items, etc.. 
+    </font>
+
+    <p></p>
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <b><a name="helloworld"></a></b></font><b>Hello World! Plug-in</b>
+
+    <p></p>    
+
+    <p><font size="-1">Let's look at a basic Hello World JavaScript
+    plug-in. This plug-in will show one item in a Sidebar tile with
+    text reading 'Hello World!'. When you click on the item, its
+    details view will have the text "Detailed
+    description". </font></p>
+
+    <pre><font face="Courier New" style="font-size:90%">
+    // Setup the icons, about dialog stuff and flags
+    pluginHelper.title = "Hello World!";
+    pluginHelper.about_text = "HelloWorld! plugin\nCopyright (c) \nMore description here";
+    pluginHelper.SetIcons(utils.loadImage("plugin_small.gif"), utils.loadImage("plugin_large.gif"));
+    pluginHelper.SetFlags(gddPluginFlagNone, gddContentFlagHaveDetails);
+
+    // Create a content item and say hello.
+    var item = new ContentItem();
+    item.heading = "Hello World!";          // this string is shown in the item
+    item.snippet = "Detailed description";   // this string shown in details view
+    pluginHelper.AddContentItem(item, gddItemDisplayInSidebar); // add the item to the display
+    </font></pre>
+    
+    <p><font size="-1">And that's all there is to this plug-in. As
+    mentioned, the Plug-in Installer will take care of writing all the
+    code needed to register the plug-in with GD. So all you have to
+    worry about is specifying your plug-in's properties and how it
+    responds to events.</font></p>
+ 
+    <p><font size="-1">The <font face="Courier
+    New">pluginHelper</font> object represents your overall
+    plug-in/Sidebar tile. The first block of code above sets some of
+    its properties, giving the tile a title, text to display in its
+    About dialog, and its small and large icons (<font face="Courier
+    New">setIcons()</font> sets both icons, with the small icon as its
+    first argument and the large icon as its second argument). Other
+    settings are left as their default values.</font></p>
+
+    <p><font size="-1">Of course, you have to provide image files for
+    the tile's icons. The <font face="Courier New">utils</font> object
+    provides various utility methods; here we use its <font face="Courier
+    New">loadImage()</font> method to load image file contents
+    into the script environment.</font></p>
+
+    <p><font size="-1">The second code block works with a content item
+    displayed in the tile. We start by creating a <font face="Courier
+    New">ContentItem</font> object; each content item in a tile is
+    represented by a separate object. Then we set some of its
+    properties, specifically the texts that will appear in the tile
+    display and the item's details view. Finally, we use the <font
+    face="Courier New">pluginHelper</font> method <font face="Courier
+    New">AddContentItem()</font> to display this content item in the
+    tile. Of course, there's also a <font face="Courier
+    New">RemoveContentItem()</font> counterpart method.</font></p>
+
+    <p><font size="-1">The flag variables <font face="Courier
+    New">gdd<i>XXXXXX</i></font> used in the above plug-in are
+    declared in the Google Desktop directory (Note: <i>not</i>
+    in the SDK, but in the GD application directory) in both <font
+    face="Courier New">plugin_common.js</font> and <font face="Courier
+    New">plugin_common.vbs</font>. These variables will always be 
+    available, since their scripts automatically run before a plug-in
+    is loaded/executed.</font></p>
+
+    <p><font size="-1">You should look at, run, and experiment with
+    the various sample scripts provided in the GD SDK in the directory
+    <font face="Courier New">api/samples/scripts/display/</font>
+    before developing your first script. First, look at and run the
+    <font face="Courier New">Hello World</font> sample, then <font
+    face="Courier New">Options & Menu</font>, and then <font
+    face="Courier New">Custom Draw</font>. Then move on to the more
+    advanced and comprehensive sample plug-ins such as <font
+    face="Courier New">Calendar</font>, <font face="Courier New">Media
+    Player</font> and <font face="Courier
+    New">Word-a-Day</font>.</font></p>
+
+    <font size="-1">
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <b><a name="handlingevents"></a></b></font><b>Handling Events</b><font size="-1">
+
+    <p><font size="-1">Many objects used by a plug-in expose an event
+    model which you can use to customize the plug-in's execution. To
+    handle an event, you must set a handler function for that specific
+    event. Events which you can override using script handlers can be
+    found in the Event Handlers section of each of the Script API
+    objects listed <a href="#api">below</a>.</font></p>
+
+    <p><font size="-1">Event handlers are write only; all you can do
+    with them is assign a function to them. If you don't set a
+    particular handler, its default action happens in response to its
+    associated event. In their descriptions below, a prototype
+    signature is given for each event handler; the function you assign
+    to a particular event handler should match its prototype's signature.
+    </font></p>
+
+    <p><font size="-1">Let's look at the relevant parts of the <font
+    face="Courier New">Options & Menu</font> sample code to see an example
+    of event handler usage.</font></p>
+ 
+    <pre><font face="Courier New" style="font-size:120%">
+    // Plug-in properties being set, similar to the Hello World example.
+    // ...
+    // Associate the plug-in object's onAddCustomMenuItems event with
+    // a function defined in the script.
+    pluginHelper.onAddCustomMenuItems = AddCustomMenuItems;  // handler to add menu items    
+
+    // ...
+
+    function AddCustomMenuItems(menu) {
+      // Add the various item layouts as menu items and check the currently selected one
+      var itemLayout = options.GetValue("item_layout");
+      for (var i = 0; i < menuItems.length; ++i) {
+        if (i == itemLayout) {
+          menu.AddItem(menuItems[i], gddMenuItemFlagChecked, MenuItemClicked);
+        } else {
+          menu.AddItem(menuItems[i], 0, MenuItemClicked);
+        }
+      }    
+    }
+
+    // ...
+   </font></pre>
+
+   <p><font size="-1">In this case, we assign the <font face="Courier
+   New">AddCustomMenuItems</font> function to the <font face="Courier
+   New">pluginHelper</font> object's <font face="Courier
+   New">onAddCustomMenuItems</font> event. Note that the assigned
+   value consists only of the function name, not its full parameter
+   signature. This event happens when the Sidebar wants to initialize
+   the plug-in's menu before displaying it.</font></p>
+
+   <p><font size="-1">The prototype listed for <font face="Courier
+   New">AddCustomMenuItems</font> is <font face="Courier
+   New">AddCustomMenuItems(menu)</font>, so our assigned function must
+   also take a single argument, a <font face="Courier New">menu</font>
+   object. As it happens, we wrote our function to have the same
+   function and parameter name, although this is not required.</font></p>
+ 
+    <p>    
+      <font size="-1">For more advanced information, see the API IDL file for the specific interfaces implemented by each of the following objects.
+      </font>      
+    <ol><font size="-1">
+
+      <li><font face="Courier New"
+        size="-1">IGoogleDesktopDisplayContentItemHelper2</font></li>
+      <li><font face="Courier New"
+        size="-1">IGoogleDesktopDisplayPluginHelper2</font></li>
+      <li><font face="Courier New"
+        size="-1">IGoogleDesktopDisplayWindow</font></li>
+      <li><font face="Courier New"
+        size="-1">IGoogleDesktopDisplayWindowControl</font></li>
+      <li><font face="Courier New"
+        size="-1">IGoogleDesktopDisplayMenu</font></li></font>
+    </ol>
+
+    <p></p>
+    <p><font size="-1">You can find additional examples of script event handling in the sample plug-in code.</font></p>
+    <font size="-1">
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+</font>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <b><a name="internationalization"></a></b></font><b>Internationalization</b></font><font size="-1">&nbsp;
+    </font>
+
+    <p><font size="-1">Even if you don't or aren't able to provide
+    text in multiple languages for your plug-in, you should write your
+    plug-in to support doing so. Eventually, someone else may want or
+    be able to provide other language versions of your plug-in's text.
+    </font></p>
+
+    <p><font size="-1"> To do so, all language-specific strings that
+    will be visible in your plug-in's UI must be placed in a file
+    named <font face="Courier New">strings.js</font> or <font
+    face="Courier New">strings.vbs</font> under subdirectories named
+    after the appropriate language ID. These files
+    contain variable assignments for the strings in a particular
+    lanaguge. Instead of using the strings in your plug-in code, use
+    the variables instead. For example, <font face="Courier New">Hello
+    World</font>'s English <font face="Courier New">strings.js</font>
+    file contains, among other assignments, the line:<br>
+    <font face="Courier New">var strTitle = "HelloWorld!"</font></font></p>
+
+    <p><font size="-1">If you wrote your Javascript plug-in to have
+    both English and French versions, your files would be placed in
+    the following directory tree:
+
+    </font><pre><font face="Courier New" size="-1">
+  &lt;GD dir&gt;/Plugins/YourPlugin
+                     |
+                     |---- plugin.js
+                     |
+                     |---- plugin.gif
+                     |
+                     |---- 1033 (langID for US English)
+                     |      |
+                     |      `-- strings.js
+                     |
+                     `---- 1036 (langID for French)
+                            |
+                            `-- strings.js
+
+</font></pre>
+
+    <p></p>
+    <p><font size="-1">The Sidebar first checks for a directory with
+    the same language ID as the current system. If there is one, it
+    loads that directory's <font face="Courier New">strings.js</font>
+    file. If it cannot find that file, it defaults to loading the
+    <font face="Courier New">1033</font> (US English) directory's
+    <font face="Courier New">strings.js</font> file if present. For a
+    VBScript plug-in, it does the same thing but with <font
+    face="Courier New">strings.vbs</font>.</font></p>
+    <font size="-1">
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="apispecs"></a></font><b>API Overview</b><font size="-1">
+
+    <p><font size="-1">    
+    The Sidebar API exposes these global variables for use by scripts. These are all described in detail, including properties, methods, and event handlers, <a href="#api">later on</a>:
+    </font>
+    <ul><font size="-1"> 
+      <li><font face="Courier New" size="-1">pluginHelper</font><font size="-1">: An object representing your plug-in.</font></li>
+      <li><font face="Courier New" size="-1">options</font><font size="-1">: Your plug-in's options store, which contains your plug-in's options and settings data.</font></li>
+
+      <li><font face="Courier New" size="-1">utils</font><font size="-1">: Provides access to various utility methods, such as managing timers, showing message boxes, getting user input, loading images, etc.. </font></li>
+      <li><font face="Courier New" size="-1">googleTalk</font><font size="-1">: Allows your plug-in to get the list of online friends and send/receive data.</font></li>
+
+   </font> </ul>
+    <p></p>
+    <p><font size="-1">    
+    Also, the Sidebar exposes the following object types:
+    </font>
+    <ul><font size="-1"> 
+      <li><font face="Courier New" size="-1">ContentItem</font><font size="-1">:
+          the <font face="Courier New">ContentItemHelper</font> object, creates a
+         <font face="Courier New">GoogleDesktop.ContentItemHelper</font>
+
+         object.</li>
+      <li><font face="Courier New" size="-1">DetailsView</font><font size="-1">:
+        the <font face="Courier New">DetailsViewHelper</font> object creates
+	a <font face="Courier New">GoogleDesktop.DetailsViewHelper</font> object
+	and implements
+	<font face="Courier New">IGoogleDesktopSidebarDetailsViewHelper</font>.</li>
+      <li><font face="Courier New" size="-1">XMLHttpRequest</font><font size="-1">:
+        wrapper around an <font face="Courier New">XMLHttpRequest</font> object,
+	creates a <font face="Courier New">Microsoft.XMLHttp</font> object.</li>
+
+      <li><font face="Courier New" size="-1">DOMDocument</font><font size="-1">:
+        wrapper around a <font face="Courier New">DOMDocument</font> object,
+        creates a <font face="Courier New">Msxml.DOMDocument</font> object.</li>
+      <li><font face="Courier New" size="-1">WebBrowser</font><font size="-1">:
+        wrapper around <font face="Courier New">Shell.Explorer</font> object.</li>
+
+  </font></ul>
+    <p></p>
+    <p><font size="-1">    
+    When creating the above objects:
+    </font>
+    <ol><font size="-1"> 
+      <li><font size="-1">In JavaScript you can create these objects using <font
+       face="Courier New">new <i>&lt;ObjectName&gt;</i></font>. None of these constructors take an argument.</font></li>
+
+      <li><font size="-1">In VBScript, create these objects via <font face="Courier New">CreateObject()</font> along with the object's ProgID as given above.</font></li>
+
+   </font> </ol>
+
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <b><a name="api"></a></b></font><b>Script API Reference</b>
+    <font size="-1">    
+    <p><font size="-1">This section shows the various script-related
+        objects in the GD API, including their properties, methods,
+        and event handlers.</font></p>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>Global</b>
+           (not associated with any object)</font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</font></b><br></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onLoad</font></td>
+          <td><font face="Courier New">onLoad()</font></td>
+          <td><font size="-1">If this function defined, it will be 
+            called after the plug-in has been completely loaded 
+            and before it is displayed. The plug-in can perform initialization
+            tasks in this callback.</font></td>
+          <td><font size="-1">Nothing</font></td>
+        </tr>
+        <tr>
+          <td><font face="Courier New" size="-1">onUnload</font></td>
+          <td><font face="Courier New">onUnload()</font></td>
+          <td><font size="-1">If this function is defined, it will be 
+            called when the plug-in is about to be unloaded. 
+            The plug-in can perform cleanup tasks (e.g. close timers, free objects 
+            etc.) in this callback.</font></td>
+          <td><font size="-1">Nothing</font></td>
+        </tr>   
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font face="Courier New">PluginHelper</font><font size="-1"> object</font></b></td>
+        </tr>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Properties</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Type</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Read/Write</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">title</font></td>
+          <td><font size="-1">Title shown for the plug-in.</font></td>
+	  <td><font face="Courier New" size="-1">string</font></td>
+          <td><font size="-1">Write only</font></td>
+	</tr>
+        <tr>
+
+	  <td><font face="Courier New" size="-1">about_text</font></td>
+          <td><font size="-1">Text shown in the plug-in's About dialog.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+  	  <td><font size="-1">Write only</font></td>
+	</tr>
+        <tr>
+	  <td><font face="Courier New" size="-1">content_items</font></td>
+
+          <td><font size="-1">Array of displayed content items</font></td>
+          <td><font face="Courier New" size="-1">array</font>
+    	      <font size="-1"> of <font face="Courier New">content_item</font><font
+	      size="-1">s</font></td>
+  	  <td><font size="-1">Read/write (in JavaScript, reading the value returns
+	      a <font face="Courier New">VBArray</font>)</font></td>
+
+	</tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">max_content_items</font></td>
+          <td><font size="-1">Maximum number of displayed items. Default is 25 items, but the plug-in can modify this value if needed.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+  	  <td><font size="-1">Read/write</font></td>
+
+	</tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">window_width</font></td>
+          <td><font size="-1">Plug-in window width in pixels.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+  	  <td><font size="-1">Read only</font></td>
+
+	</tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">window_height</font></td>
+          <td><font size="-1">Plug-in window height in pixels.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+  	  <td><font size="-1">Read only</font></td>
+
+	</tr>
+        <tr>
+	  <td><font face="Courier New" size="-1">pin_images</font></td>
+          <td><font size="-1">Array of images to use for the 'pin' icon, which when clicked pins the clicked item at the top of the list.</font></td>
+          <td><font face="Courier New" size="-1">array</font><font size="-1"> of <font face="Courier New">image</font><font size="-1">s</font></td>
+
+  	  <td><font size="-1">Read/write (in JavaScript, reading the value returns
+	      a <font face="Courier New">VBArray</font>)</font></td>
+	</tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">SetFlags(plugin_flags,
+	    content_flags)</font></td>
+
+          <td><font size="-1">Set plug-in and content flags affecting plug-in
+	    behavior.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">SetIcons(small_icon,
+	    large_icon)</font></td>
+          <td><font size="-1">Set icons used in the plug-in's title and About
+	    dialog.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+
+	</tr>
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">AddContentItem(content_item,
+	    display_options)</font></td>
+          <td><font size="-1">Add the specified single content item.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+        <tr>
+
+	  <td colspan=2><font face="Courier New" size="-1">RemoveContentItem(content_item)</font></td>
+          <td><font size="-1">Remove the specified single content item.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">RemoveAllContentItems()</font></td>
+          <td><font size="-1">Remove all content items.</font></td>
+
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</b><br></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">onShowOptionsDlg</font></td>
+          <td><font face="Courier New">InitDialog(window)</font></td>
+          <td><font size="-1">Called to initialize the plug-in's options dialog
+	    before displaying it.</font></td>
+  	  <td><font size="-1">Return <font face="Courier New">false</font> to
+	    cancel the dialog, <font face="Courier New">true</font> or nothing
+	    to display it.</font></td>
+
+	</tr>
+        <tr>
+	  <td><font face="Courier New" size="-1">onAddCustomMenuItems</font></td>
+          <td><font face="Courier New">AddCustomMenuItems(menu)</font></td>
+          <td><font size="-1">Called to initialize the plug-in's menu before
+	    displaying it.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+
+        <tr>
+	  <td><font face="Courier New" size="-1">onCommand</font></td>
+	  <td><font face="Courier New">OnCommand(command)</font></td>
+          <td><font size="-1">Called to process plug-in commands defined by the GD
+	    API ('command' is one of GDD_CMD_xxxx).</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">onDisplayStateChange</font></td>
+	  <td><font face="Courier New">OnDisplayStateChange(new_display_state)
+	      </font></td>
+          <td><font size="-1">Called to process display state changes.<br>
+          <font face="Courier New">new_display_state</font> is one of the 
+          gddTileDisplayStateXXXX defines.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">onDisplayTargetChange</font></td>
+	  <td><font face="Courier New">OnDisplayTargetChange(new_display_target)
+	      </font></td>
+          <td><font size="-1">Called to process display target changes.<br>
+          <font face="Courier New">new_display_target</font> is one of the 
+          gddTargetXXXX defines.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+      </tbody></table>
+<br><br>
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font face="Courier New">ContentItem</font><font size="-1"> object</font></b></td>
+        </tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Properties</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Type</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Read/Write</i></font></td>
+        </tr>
+
+        <tr>
+	  <td><font face="Courier New" size="-1">image</font></td>
+          <td><font size="-1">Image to show in the item.</font></td>
+          <td><font face="Courier New" size="-1">Image</font></td>
+
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">notifier_image</font></td>
+          <td><font size="-1">Image to show in the notifier.</font></td>
+          <td><font face="Courier New" size="-1">Image</font></td>
+	  <td><font size="-1">Read/write</td>
+
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">time_created</font></td>
+          <td><font size="-1">Time (in JavaScript, the variant time value). </font></td>
+          <td><font face="Courier New" size="-1">time</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+
+	  <td><font face="Courier New" size="-1">heading</font></td>
+          <td><font size="-1">Item's displayed title.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">source</font></td>
+
+          <td><font size="-1">Item's displayed website/news source.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">snippet</font></td>
+          <td><font size="-1">Item's displayed snippet.</font></td>
+
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">open_command</font></td>
+          <td><font size="-1">URL/file path opened when the user opens/double clicks the item.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">layout</font></td>
+          <td><font size="-1">Layout of the item indicating the format in which the item should be displayed.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+	  <td><font size="-1">Read/write</td>
+
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">flags</font></td>
+          <td><font size="-1">Combination of the content item flags.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+	  <td><font size="-1">Write only</td>
+	</tr>  
+
+        <tr>
+
+	  <td><font face="Courier New" size="-1">tooltip</font></td>
+          <td><font size="-1">Tooltip text, such as full path, full headlines, etc.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Write only</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">friend_name</font></td>
+          <td><font size="-1">If this item was received from another user, contains
+            the name of the user who sent the item.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+        <tr>
+	  <td><font face="Courier New" size="-1">time_received</font></td>
+          <td><font size="-1">If this item was received from another user, contains
+            the date & time (in UTC) when it was received.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td><font size="-1">Read/write</td>
+	</tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">SetRect(x, y, width, height)
+	    </font></td>
+          <td><font size="-1">Set the item's display position. Before setting any
+	    item's position, enable the plug-in's
+	    <font face="Courier New">MANUAL_LAYOUT</font> flag. If this is not done,
+	    the items will appear in the default positions given by the
+	    plug-in.</font></td>
+  	  <td><font size="-1">Nothing</font></td>
+	</tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</font></b><br></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onDrawItem</font></td>
+          <td><font face="Courier New" size="-1">DrawItem(item, display_target, graphics, x, y, width, height)</font></td>
+
+          <td><font size="-1">Called to draw the item.</font></td>
+          <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+   
+        <tr>
+          <td><font face="Courier New" size="-1">onGetHeight</font></td>
+          <td><font face="Courier New" size="-1">GetHeight(item, display_target,
+	    graphics, width)</font></td>
+	  <td><font size="-1">Called to get the height in pixels of the item for
+	    the given width.</font></td>
+
+          <td><font size="-1">Returns <font face="Courier New">integer</font> giving
+            the item's height in pixels.</font></td>
+        </tr>   
+
+        <tr>
+          <td><font face="Courier New" size="-1">onOpenItem</font></td>
+          <td><font face="Courier New" size="-1">OpenItem(item)</font></td>
+          <td><font size="-1">Called when the user opens/double clicks the
+	    item.</font></td>
+
+          <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+   
+        <tr>
+          <td><font face="Courier New" size="-1">onToggleItemPinnedState</font></td>
+          <td><font face="Courier New" size="-1">ToggleItemPinnedState(item)</font>
+	  </td>
+          <td><font size="-1">Called when the user clicks the 'pin' button of an
+	    item</font></td>
+
+	  <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+   
+        <tr>
+          <td><font face="Courier New" size="-1">onGetIsTooltipRequired</font></td>
+          <td><font face="Courier New" size="-1">GetIsTooltipRequired(item, display_target, graphics, x, y, width, height)</font></td>
+          <td><font size="-1">Called to check if a tooltip is required for the
+	    item displayed at the given position</font></td>
+          <td><font size="-1">Returns <font face="Courier New">boolean</font>,
+             <font face="Courier New">true</font> to show the tooltip,
+	     <font face="Courier New">false</font> to not show it.</font></td>
+
+        </tr>
+
+   
+        <tr>
+	  <td><font face="Courier New" size="-1">onDetailsView</font></td>
+         <td><font face="Courier New" size="-1">OnDetailsView(item)</font></td>
+          <td><font size="-1">Called before showing the details view for the given 
+	    item</font></td>
+         <td><font size="-1">Return nothing to cancel the details view, or return an
+           object with the following properties:</font>
+
+           <ul>
+             <li><font face="Courier New" size="-1">obj.title</font><font size="-1">
+	       - the title to be shown for the details view</font></li>
+             <li><font face="Courier New" size="-1">obj.details_control</font><font
+	       size="-1"> - an activeX control which should be shown in the details
+	       view</font></li>
+	     <li><font face="Courier New" size="-1">obj.flags</font><font size="-1">
+	       - flags controlling the details view layout/usage</font></li></ul>
+
+           <font size="-1">For more info on each of the above params, see documentation
+  	   for <font face="Courier New" size="-1">OnDetailsView</font> in interface
+	   <font face="Courier New" size="-2">IGoogleDesktopDisplayContentItemHandler</font>
+	</td>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onProcessDetailsViewFeedback</font>
+	  </td>
+
+          <td><font face="Courier New" size="-1">ProcessDetailsViewFeedback(item,
+	    details_view_flags)</font></td>
+          <td><font size="-1">Called to process user action in the details
+	    view.</font></td>
+          <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onRemoveItem</font></td>
+
+          <td><font face="Courier New" size="-1">RemoveItem(item)</font></td>
+          <td><font size="-1">Called when user removed an item from the
+	    display</font></td>
+	  <td><font size="-1">Returns <font face="Courier New" size="-1">true</font>
+	    to cancel the remove and keep the item,
+	    <font face="Courier New" size="-1">false</font> to
+	   continue and remove the item.</font></td>
+        </tr>
+
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>options</b></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+
+        </tr>
+
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">GetValue(key_text)</font>
+	    </td>
+          <td><font size="-1">Get the value for the given key.</font></td>
+  	  <td><font size="-1">Returns <font face="Courier New">string</font>
+
+             which is key argument's value, returns an empty string if not
+	     found.</font></td>
+	</tr>
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">PutValue(key_text,
+	    value)</font></td>
+          <td><font size="-1">Set the value for the given key.</font></td>
+  	  <td><font size="-1">Returns nothing.</font></td>
+	</tr>
+
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">Clear()</font></td>
+          <td><font size="-1">Remove all key/value pairs in this options
+	    store.</font></td>
+  	  <td><font size="-1">Returns nothing.</font></td>
+	</tr>
+
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>utils</b></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+	  <td colspan=2><font face="Courier New" size="-1">GetValue(key_text)</font>
+	    </td>
+          <td><font size="-1">Get the value for the given key.</font></td>
+  	  <td><font size="-1">Returns <font face="Courier New">string</font>
+             which is key argument's value, returns an empty string if not
+	     found.</font></td>
+
+	</tr>
+
+       <tr>	
+         <td colspan=2><font face="Courier New" size="-1">loadImage(image_src)</font></td>
+         <td><font size="-1">Load and return the given image file. <br>
+         <font face="Courier New">image_src</font> can be path to a local file 
+         (remote URLs not supported) or it could be the <font face="Courier New">
+         responseStream</font> member of a XMLHttp object (this allows the plugin
+         to download images using XMLHttp object and load them).</font></td>
+         <td><font size="-1">Returns the loaded image object.</font></td>
+       </tr>
+   
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">setInterval(handler,
+	   elapse_ms)</font></td>
+
+         <td><font size="-1">Set a repeating timer that calls the handler every
+	   time it expires.</font></td>
+         <td><font size="-1">Returns new timer's ID.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">clearInterval(timer_id)
+           </font></td>
+         <td><font size="-1">Clear/end the given timer.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+
+       </tr>
+   
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">setTimeout(handler,
+	   elapse_ms)</font></td>
+         <td><font size="-1">Set a one-shot timer which calls the handler once
+	   after it expires.</font></td>
+         <td><font size="-1">Returns new timer's ID.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">clearTimeout(timer_id)
+	 </font></td>
+
+         <td><font size="-1">Clear/end the given timer.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+   
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">alert(text)</font></td>
+         <td><font size="-1">Display a message box with the given text.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">confirm(text)</font></td>
+         <td><font size="-1">Returns <font face="Courier New">boolean</font>,
+	   <font face="Courier New">true</font> if OK was pressed,
+	   <font face="Courier New">false</font> if not.</font></td>
+
+         <td><font size="-1">Display a message box asking the user to press OK or
+	   cancel.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">prompt(label,
+	   default_text)</font></td>
+         <td><font size="-1">Display a input box asking user for input.</font></td>
+         <td><font size="-1">Returns <font face="Courier New">string</font> the user
+	   entered.</font></td>
+
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">log(level, category,
+	   text)</font></td>
+         <td><font size="-1">Sends the given text to the Plugin Debug Console. 
+           The Plugin Debug Console is a tool included in the SDK and has to be
+           running to receive and display messages sent using this method.<br>
+           <font face="Courier New">category</font> is a string defined by the plugin
+           identifying which category this log message belongs to (eg. timer, 
+           network etc).<br>
+           <font face="Courier New">level</font> is one of the gddLogLevelXXXX values.
+           </font></td>
+         <td><font size="-1">Returns nothing</td>
+
+       </tr>
+
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>googleTalk</b></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+           <td colspan=100%><b><font size="-1">Properties</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Type</i></font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Read/Write</i></font></td>
+        </tr>
+        <tr>
+          <td><font face="Courier New" size="-1">friends</font></td>
+          <td><font size="-1">Returns the friends that are online.</font></td>
+	        <td><font size="-1">An <font face="Courier New">array</font> of
+	          <font face="Courier New" size="-1">friend</font> objects.</td>
+          <td><font size="-1">Read only</font></td>
+
+	</tr>
+
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr> 
+          <td colspan=2><font face="Courier New" size="-1">SendTalkData(friend_id,
+	    data)</font></td>
+          <td><font size="-1">Sends a string to a friend.  <font face="Courier New">friend_id</font>
+          is from the <font face="Courier New" size="-1">user_id</font> property of
+          <font face="Courier New" size="-1">friend</font> object.</td>
+          <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+       
+       <tr> 
+          <td colspan=2><font face="Courier New" size="-1">SendTalkText(friend_id,
+	    message)</font></td>
+          <td><font size="-1">Sends a text message to a friend as an IM.  <font face="Courier New">friend_id</font>
+          is from the <font face="Courier New" size="-1">user_id</font> property of
+          <font face="Courier New" size="-1">friend</font> object.</td>
+          <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</font></b><br></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onReceiveTalkData</font></td>
+          <td><font face="Courier New" size="-1">OnReceiveTalkData(friend, data)</font>
+
+          <td><font size="-1">Called when the same plugin on a friend's machine sends data.
+          <font face="Courier New">friend</font> is a
+          <font face="Courier New" size="-1">friend</font> object, and
+          <font face="Courier New">data</font> is a string.</font></td>
+          <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+   
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>Friend object</b></font>
+           <font size="-1">Note: this object is returned by </font><code>googleTalk</code><font size="-1">.
+           The plugin cannot create variables of this type.</font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+           <td colspan=100%><b><font size="-1">Properties</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Type</i></font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Read/Write</i></font></td>
+        </tr>
+        <tr>
+          <td><font face="Courier New" size="-1">name</font></td>
+          <td><font size="-1">The friend's user visible name.</font></td>
+	        <td><font face="Courier New" size="-1">string</font></td>
+          <td><font size="-1">Read only</font></td>
+	      </tr>
+	      <tr>
+          <td><font face="Courier New" size="-1">user_id</font></td>
+          <td><font size="-1">The friend's user id, this is passed as a parameter to methods 
+          such as </font><code>SendTalkText</code><font size="-1"> and </font><code>SendTalkData</code>.</font></td>
+	        <td><font face="Courier New" size="-1">string</font></td>
+          <td><font size="-1">Read only</font></td>
+	      </tr>
+	      <tr>
+          <td><font face="Courier New" size="-1">email_address</font></td>
+          <td><font size="-1">The friend's email address.</font></td>
+	        <td><font face="Courier New" size="-1">string</font></td>
+          <td><font size="-1">Read only</font></td>
+	      </tr>
+	      <tr>
+          <td><font face="Courier New" size="-1">has_sidebar</font></td>
+          <td><font size="-1">Whether the friend has the Sidebar installed.</font></td>
+	        <td><font face="Courier New" size="-1">boolean</font></td>
+          <td><font size="-1">Read only</font></td>
+	      </tr>
+	      <tr>
+          <td><font face="Courier New" size="-1">status</font></td>
+          <td><font size="-1">The status of the friend (i.e. online/idle/busy).</font></td>
+	        <td><font face="Courier New" size="-1">integer</font></td>
+          <td><font size="-1">Read only</font></td>
+	      </tr>
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>graphics</b></font>
+	     <font size="-1">Note: Color can be a html color string
+	     <font face="Courier New">"#FF00FF"</font>, one of gddColorXXX defines,
+	     or empty for the default color. Font can be one of gddFontXXX defines,
+	     or empty for default font.</td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+       <tr>	
+         <td colspan=2><font face="Courier New" size="-1">DrawLine(x1, y1, x2, y2,
+	   color);</font></td>
+         <td><font size="-1">Draws a line from x1,y1 to x2,y2 with given
+	   color.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+
+       </tr>
+    
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">DrawRect(x, y, width, height,
+	   line_color, fill_color)</font></td>
+         <td><font size="-1">Draws a rectangle in the given coords with given
+	   colors.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+    
+       <tr> 
+        <td colspan=2><font face="Courier New" size="-1">DrawImage(x, y, width,
+	  height, image, alpha_percent)</font></td>
+
+        <td><font size="-1">Draw the given image at the given rectangle. The image is
+	  blended with the specified alpha (0-100).</font></td>
+        <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">DrawText(x, y, width,
+	   height, text, color, flags, font)</font></td>
+         <td><font size="-1">Draw the given text at the rect with given color and
+	   font. <font face="Courier New">flags</font> is a combination of text
+	   flags gddTextFlagXXX.</font></td>
+
+         <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+       
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">GetTextWidth(text, flags,
+	   font)</font></td>
+         <td><font size="-1">Calculate the pixel width of the given text rendered
+	   using the given font. <font face="Courier New">flags</font> is a
+	   combination of text flags gddTextFlagXXX</font></td>
+         <td><font size="-1">Returns <font face="Courier New">integer</font> giving
+	   the pixel width required for the text.</font></td>
+
+       </tr>
+    
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">GetTextHeight(text,
+	   width, flags, font)</font></td>
+         <td><font size="-1">Calculate the pixel width of the given text rendered
+	   using the given font. <font face="Courier New">width</font> gives the
+	   size in pixels at which the text should be clipped/wrapped.
+	   <font face="Courier New">flags</font> is a combination of text flags
+	   gddTextFlagXXX</font></td>
+         <td><font size="-1">Returns <font face="Courier New">integer</font> giving
+	   the pixel height required for the text.</font></td>
+
+       </tr>
+
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>menu</b></font></td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>	
+          <td colspan=2><font face="Courier New" size="-1">AddItem(item_text, style,
+	    handler)</font></td>
+          <td><font size="-1">Add a single menu item.
+	    <font face="Courier New">style</font> is a combination of
+	    gddMenuItemFlagXXXX. The <font face="Courier New">handler</font>'s
+	    function prototype is
+	    <font face="Courier New">OnMenuItem(item_text)</font>.</font></td>
+
+          <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">SetItemStyle(item_text,
+	   style)</font></td>
+         <td><font size="-1">Set the style of the given menu item. Style is a
+	   combination of gddMenuItemFlagXXXX.</font></td>
+         <td><font size="-1">Returns nothing.</font></td>
+       </tr>
+
+       
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">AddPopup(popup_text)</font>
+	 </td>
+         <td><font size="-1">Add a submenu/popup showing the given text.</font></td>
+         <td><font size="-1">Returns menu object for the new popup menu.</font></td>
+       </tr>
+
+    </tbody></table>
+<br><br>
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>window</b></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Methods</font></b></td>
+
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td colspan=2><font face="Arial, Helvetica, sans-serif"><i>Name and
+	    Arguments</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr> 
+          <td colspan=2><font face="Courier New" size="-1">AddControl(ctrl_class,
+	    ctrl_type, ctrl_id, text, x, y, width, height)</font></td>
+          <td><font size="-1">Create a control with the given data and add it to
+	    the window. <font face="Courier New">ctrl_class</font> is one of
+	    gddWndCtrlClassXXX. <font face="Courier New">ctrl_type</font> is one
+	    of gddWndCtrlTypeXXX. Parameters <font face="Courier New">ctrl_id</font>,
+	    <font face="Courier New">text</font>, <font face="Courier New">x</font>,
+	    <font face="Courier New">y</font>, <font face="Courier New">width</font>
+
+	    and  <font face="Courier New">height</font> are just passed to the
+	    control's put methods, so their types should match the put methods'
+	    parameters.</font></td>
+          <td><font size="-1">Returns new control's
+	    <font face="Courier New">WindowControl</font> object.</font></td>
+       </tr>
+
+       <tr> 
+         <td colspan=2><font face="Courier New" size="-1">GetControl(ctrl_id)</font>
+
+	 </td>
+         <td><font size="-1">Retrieve the control with the given ID.</font></td>
+         <td><font size="-1">Returns the <font face="Courier New">WindowControl</font>
+	   object for the given control.</font></td>
+       </tr>
+       
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</font></b><br></font></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onClose</font></td>
+          <td><font face="Courier New" size="-1">OnClose(button_id)</font> where 
+              <font face="Courier New" size="-1">button_id</font> is one of the
+	      gddIdXXXX defines.</td>
+
+          <td><font size="-1">Called when the window closes.</font></td>
+          <td><font size="-1">Returns <font face="Courier New">boolean</font>;
+               <font face="Courier New">false</font> to keep the
+               window open, <font face="Courier New">true</font> or
+              nothing to close it.</font></td>
+        </tr>
+   
+    </tbody></table>
+<br><br>
+   <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font face="Courier New"><b>WindowControl</font>
+	     object</b></td>
+        </tr>
+
+         <tr bgcolor="#e8f4f7">
+
+           <td colspan=100%><b><font size="-1">Properties</font></b></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Type</i></font></td>
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Read/Write</i></font></td>
+        </tr>
+        <tr>
+          <td><font face="Courier New" size="-1">title</font></td>
+          <td><font size="-1">Title shown for the plug-in.</font></td>
+	  <td><font face="Courier New" size="-1">string</font></td>
+          <td><font size="-1">Write only</font></td>
+
+	</tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">id</font></td>
+          <td><font size="-1">Control's identifier.</font></td>
+          <td><font face="Courier New" size="-1">string</font></td>
+	  <td>Read/write</td>
+
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">enabled</font></td>
+          <td><font size="-1">Flag indicating if this control is enabled/disabled
+	    </font></td>
+          <td><font face="Courier New" size="-1">boolean</font></td>
+	  <td>Read/write</td>
+
+        </tr>
+     
+        <tr>
+          <td><font face="Courier New" size="-1">text</font></td>
+          <td><font size="-1">Control's full displayed content.</font></td>
+          <td><font size="-1">For a list control, this is an
+	    <font face="Courier New">array</font> of
+	    <font face="Courier New">string</font>s in the list. For other controls,
+	    it is a single string</td>
+
+	  <td>Read/write</td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">value</font></td>
+          <td><font size="-1">Control's current value.</font></td>
+          <td><font size="-1">For a list control, it is the currently selected
+	    <font face="Courier New">string</font>. For a check box button control,
+	    it is a <font face="Courier New">boolean</font> indicating the check
+	    state. For other controls, it is the displayed text
+	    <font face="Courier New">string</font></td>
+
+	  <td>Read/write</td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">x</font></td>
+          <td><font size="-1">Control's x position in pixels.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+
+	  <td>Read/write</td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">y</font></td>
+          <td><font size="-1">Control's y position in pixels.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+
+	  <td>Read/write</td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">width</font></td>
+          <td><font size="-1">Control's width in pixels</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+
+	  <td>Read/write</td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">height</font></td>
+          <td><font size="-1">Control's height in pixels.</font></td>
+          <td><font face="Courier New" size="-1">integer</font></td>
+
+	  <td>Read/write</td>
+        </tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><b><font size="-1">Event Handlers</font></b><br></td>
+        </tr>
+        <tr bgcolor="#e8f4f7">
+
+          <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Prototype</i></font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+          </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><i>Returns</i></font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onChanged</font></td>
+          <td><font face="Courier New" size="-1">OnChanged(window, control)</font>
+	      </td>
+          <td><font size="-1">Called whenever control content (other than buttons) is
+              changed by the user.</font></td>
+          <td><font size="-1">Returns nothing.</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Courier New" size="-1">onClicked</font></td>
+          <td><font face="Courier New" size="-1">OnClicked(window, control)</font>
+              </td>
+          <td><font size="-1">Called when a user clicks a button, either normal
+	    or checkbox.</font></td>
+          <td><font size="-1">Returns nothing.</font></td>
+
+        </tr>
+
+     </tbody></table>
+<br><br>
+
+   <table border="1" cellpadding="3" cellspacing="0" width="100%">
+       <tbody>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><b>Constants and Flags</b></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+
+           <td colspan=2><b><font size="-1">Details View Flags</font></b></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+         </tr>
+         <tr>
+           <td><font face="Courier New" size="-1">gddDetailsViewFlagNone</font></td>
+           <td>No flags are passed.</td>
+         </tr>
+         <tr>
+           <td><font face="Courier New" size="-1">gddDetailsViewFlagToolbarOpen</font></td>
+           <td>Make the details view title clickable like a button.</td>
+         </tr>
+         <tr>
+           <td><font face="Courier New" size="-1">gddDetailsViewFlagNegativeFeedback</font></td>
+           <td>Add a negative feedback button in the details view (e.g. 'Don't show me items like this').</td>
+         </tr>
+         <tr>
+           <td><font face="Courier New" size="-1">gddDetailsViewFlagRemoveButton</font></td>
+           <td>Add a 'Remove' button in the details view.</td>
+         </tr>
+         <tr>
+           <td><font face="Courier New" size="-1">gddDetailsViewFlagShareWithButton</font></td>
+           <td>Add a button in the details view which displays the friends list 
+            when clicked, and the user can share the content item with them.</td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Plug-in Flags</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddPluginFlagNone</font></td>
+           <td>No flags are passed.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddPluginFlagToolbarBack</font></td>
+           <td>Add a 'back' button in the plug-in toolbar.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddPluginFlagToolbarForward</font></td>
+           <td>Add a 'forward' button in the plug-in toolbar.</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Info Masks</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddInfoMaskNone</font></td>
+           <td>No flags are passed.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddInfoMaskMinSize</font></td>
+           <td>Return the minimum size required for the plug-in to
+           display its content</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddInfoMaskMaxSize</font></td>
+           <td>Return the minimum size required for the plug-in to
+           display its content</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddInfoMaskIdealSize</font></td>
+           <td>Return the ideal size required for the plug-in to
+	   display its content</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Plugin Commands</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddCmdAboutDialog</font></td>
+           <td>Show About dialog.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddCmdToolbarBack</font></td>
+           <td>User clicked the 'back' button.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddCmdToolbarForward</font></td>
+           <td>User clicked the 'forward' button</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Content Item Layouts</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemLayoutNowrapItems</font></td>
+           <td>Single line with just the heading and icon.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemLayoutNews</font></td>
+           <td>A layout displaying the heading, source, and time.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemLayoutEmail</font></td>
+           <td>A layout displaying the heading, source, time, and snippet.</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Content Flags</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentFlagNone</font></td>
+           <td>No flags are passed.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentFlagHaveDetails</font></td>
+           <td>Show details view when user clicks on content items.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentFlagPinnable</font></td>
+           <td>Allow user to pin content items so they will always
+	   be displayed.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentFlagManualLayout</font></td>
+           <td>Plug-in will manage the layout of items by giving
+	   each item's display position</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Content Item Flags</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagNone</font></td>
+           <td>No flags passed.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagStatic</font></td>
+           <td>Item does not take user input.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagHighlighted</font></td>
+           <td>Item is highlighted/shown as bold.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagPinned</font></td>
+           <td>Item is pinned to the top of the list.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagTimeAbsolute</font></td>
+           <td>Item's time is shown as absolute time and not
+	   relative to current time.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagNegativeFeedback</font></td>
+           <td>Item can take negative feedback from user.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagLeftIcon</font></td>
+           <td>Item's icon should be displayed on the left side.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddContentItemFlagNoRemove</font></td>
+           <td>Do not show a 'remove' option for this item in 
+	   the context menu.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddContentItemFlagShareable
+           </font></td>
+           <td>Item may be shared with friends. This will enable
+             the specific menu item in the context menu and the button in the 
+             details view.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddContentItemFlagShared
+           </font></td>
+           <td>Indicates that this item was received from another user.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddContentItemFlagInteracted
+           </font></td>
+           <td>Indicates that the user has interacted (viewed details/opened etc.)
+             with this item.</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Tile Display State</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTileDisplayStateHidden</font></td>
+           <td>Tile is not visible.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTileDisplayStateRestored</font></td>
+           <td>Tile is restored from being minimized or popped out states.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTileDisplayStateMinimized</font></td>
+           <td>Tile is minimized and only the title bar is visible.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTileDisplayStatePoppedOut</font></td>
+           <td>Tile is 'popped-out' of the sidebar in a separate window.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTileDisplayStateResized</font></td>
+           <td>Tile is resized.</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Target Device</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTargetSidebar</font></td>
+           <td>Item is being displayed/drawn in the Sidebar.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTargetNotifier</font></td>
+           <td>Item is being displayed/drawn in the notification window.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddTargetFloatingView</font></td>
+           <td>Plugin/item is being displayed in it's own window floating
+           on the desktop.</td>
+	 </tr>  
+      <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>ContentItem Display Options</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddItemDisplayInSidebar</font></td>
+           <td>Display the item in the Sidebar.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddItemDisplayInSidebarIfVisible</font></td>
+           <td>Display the item in the Sidebar if it is visible.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddItemDisplayAsNotification</font></td>
+           <td>Display the item in the notification window.</td>
+	 </tr>
+
+	 <tr>
+           <td><font face="Courier New" size="-1">gddItemDisplayAsNotificationIfSidebarHidden</font></td>
+           <td>Display the item in the notification window if the Sidebar is hidden.</td>
+	 </tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=2><font size="-1"><b>Window Classes</b></font></td>
+         </tr>
+
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlClassLabel</font></td>
+           <td>Standard windows static/label control.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlClassEdit</font></td>
+           <td>Standard windows single-line edit control.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlClassList</font></td>
+           <td>Standard windows listbox/drop-list combobox control.</td>
+	 </tr>  
+	
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlClassButton</font></td>
+           <td>Standard windows button control (also includes check
+	   boxes).</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Control Types</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeNone</font></td>
+           <td>Nothing passed.</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Edit Control Types</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeEditPassword</font></td>
+           <td>Edit box to allow user enter passwords, masks the actual characters
+           entered.</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>List Control Types</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i></font></td>
+         </tr>
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeListOpen</font></td>
+           <td>Normal list control showing all options in a scrollable
+	   window.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeListDrop</font></td>
+           <td>Drop down list control (also called a combobox control
+	   without in-place editing feature).</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Button Control Types</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeButtonPush</font></td>
+           <td>Standard pushbutton.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddWndCtrlTypeButtonCheck</font></td>
+           <td>Checkbox control.</td>
+	 </tr>  
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Font IDs</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddFontNormal</font></td>
+           <td>Font used for normal text.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddFontSnippet</font></td>
+           <td>Font used for snippet text (could be slightly smaller
+	   than normal font).</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddFontExtraInfo</font></td>
+           <td>Font used for extra info about items (e.g. source 
+	   and time).</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Text Color IDs</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddColorNormalText</font></td>
+           <td>Color used for normal text.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddColorNormalBackground</font></td>
+           <td>Color used for the Sidebar background.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddColorSnippet</font></td>
+           <td>Color used for snippet text.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddColorExtraInfo</font></td>
+           <td>Color used for extra info about items (e.g. source and time).</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Text Flags</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagCenter</font></td>
+           <td>Center text horizontally.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagRight</font></td>
+           <td>Right align text.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagVCenter</font></td>
+           <td>Center text vertically.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagBottom</font></td>
+           <td>Bottom align text.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagWordBreak</font></td>
+           <td>Break text at word boundaries when wrapping multiple lines.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddTextFlagSingleLine</font></td>
+           <td>Display text in a single line without line wraps.</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Menu Item Flags</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddMenuItemFlagGrayed</font></td>
+           <td>Disabled menu item.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddMenuItemFlagChecked</font></td>
+           <td>Checked menu item.</td>
+	 </tr>  
+
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Button IDs Which Appear In The Options Dialog</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New" size="-1">gddIdOK</font></td>
+           <td>OK button</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New"
+           size="-1">gddIdCancel</font></td>
+           <td>Cancel button.</td>
+	 </tr>  
+	 
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Levels of messages written to the Plugin Log</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New" size="-1">gddLogLevelDebug</font></td>
+           <td>Used for normal diagnostic messages.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddLogLevelInfo</font></td>
+           <td>Used for informatory messages that might not be normal behavior.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddLogLevelWarning</font></td>
+           <td>Used for situations where input/data is unusual and needs attention.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddLogLevelError</font></td>
+           <td>Used for critical errors.</td>
+	 </tr>  
+	 
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>Status of a contact in the Friends List</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New" size="-1">gddFriendStatusOnline</font></td>
+           <td>Friend is online.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddFriendStatusIdle</font></td>
+           <td>Friend is idle, has not used the PC recently.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddFriendStatusBusy</font></td>
+           <td>Friend is busy.</td>
+	 </tr>  
+	 
+         <tr bgcolor="#e8f4f7">
+           <td colspan=100%><font size="-1"><b>"Send To" targets</b></font></td>
+         </tr>
+         <tr bgcolor="#e8f4f7">
+           <td><font face="Arial, Helvetica, sans-serif"><i>Name</i></font></td>
+           <td><font face="Arial, Helvetica, sans-serif"><i>Description</i>
+           </font></td>
+         </tr>
+
+	 <tr>
+           <td><font face="Courier New" size="-1">gddSendToSidebar</font></td>
+           <td>Send the data to the given user's sidebar.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddSendToIM</font></td>
+           <td>Send the data to the given user using IM.</td>
+	 </tr>  
+	 <tr>
+           <td><font face="Courier New" size="-1">gddSendToEmail</font></td>
+           <td>Send the data to the given user using email.</td>
+	 </tr>  
+      </tbody>
+   </table>
+
+     <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+      </td>
+    </tr>
+    <tr><td colspan="2">
+
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="http://desktop.google.com/privacypolicy.html">Privacy Policy</a> - <a href="http://desktop.google.com/eula">Terms and Conditions</a> - <a href="http://desktop.google.com/copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+
+      </tbody></table>
+    </td></tr>
+
+    </tbody></table>
+</body></html>

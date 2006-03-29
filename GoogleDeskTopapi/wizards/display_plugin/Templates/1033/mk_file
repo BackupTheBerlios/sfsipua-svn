@@ -1,0 +1,65 @@
+SUBDIRS = [
+  "res",
+]
+
+TARGET_NAME      = ""
+TARGET_TYPE      = ""
+SOURCE_CPPS      = []
+SOURCE_ASMS      = []
+SOURCE_LIBS      = []
+SOURCE_RCS       = []
+SOURCE_IDLS      = []
+ADDED_INC_DIRS   = []
+ADDED_LIB_DIRS   = []
+ADDED_C_DEFINES  = []
+ADDED_CL_FLAGS   = []
+ADDED_ASM_FLAGS  = []
+ADDED_LINK_FLAGS = []
+ADDED_RC_FLAGS   = []
+ADDED_MIDL_FLAGS = []
+PRECOMPILE_STOPFILE = ""
+PRECOMPILE_BUILDER  = ""
+MANUAL_DEPENDENCIES = {}
+BINPLACE_FILES   = []
+
+# ===== Custom build steps to zip up the sample files
+
+Import("env", "util")
+
+DIST_FILES      = [
+  "DetailsView.cpp",
+  "DetailsView.h",
+  "DetailsView.rgs",
+  "mk_file",
+  "Plugin.cpp",
+  "Plugin.h",
+  "Plugin.rgs",
+  "PluginEntry.cpp",
+  "project_name.def",
+  "project_name.idl",
+  "project_name.rc",
+  "PropertyPage.rgs",
+  "PropertyPage2.rgs",
+  "PropertyPage3.rgs",
+  "PropertyPages.cpp",
+  "PropertyPages.h",
+  "resource.h",
+  "stdafx.cpp",
+  "stdafx.h",
+  "Templates.inf",
+]
+
+# zip the sample files up
+Zip("../../../../GD_SDK.zip", DIST_FILES)
+
+# ===== Never edit below this line. Ever. Or I'll kick your ass. ====
+
+Import("util")
+
+util.DoBuild( TARGET_NAME, TARGET_TYPE,
+              SOURCE_CPPS, SOURCE_ASMS, SOURCE_LIBS, SOURCE_RCS, SOURCE_IDLS,
+              ADDED_INC_DIRS, ADDED_LIB_DIRS,
+              ADDED_C_DEFINES, ADDED_CL_FLAGS, ADDED_ASM_FLAGS, ADDED_LINK_FLAGS, ADDED_RC_FLAGS, ADDED_MIDL_FLAGS,
+              PRECOMPILE_STOPFILE, PRECOMPILE_BUILDER,
+              MANUAL_DEPENDENCIES, BINPLACE_FILES )
+util.RecurseDirs( SUBDIRS, util.PATH_FROM_BASE )

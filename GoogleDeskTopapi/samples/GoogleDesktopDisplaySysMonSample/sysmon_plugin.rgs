@@ -1,0 +1,16 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {DDC969BE-6BD5-4efe-9456-380F19E80041} = s 'System Monitor Sample'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{0015B480-3A08-43cf-8972-58E8A4532278}'
+			'Description' = s 'Watches the performance of your PC.' 
+		}
+	}
+}

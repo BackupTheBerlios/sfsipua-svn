@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Calendar'
+  Icon=''
+  Description='A simple calendar plugin for Google Desktop Sidebar'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='CE55B9C0-D0E6-42f5-8CCA-9A6B90359FAC'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google Inc.'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Options and Menu'
+  Icon=''
+  Description='Shows how to use the options store and plugin menu'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='93690EFB-FF02-41bb-9B6C-AC02D9C205F9'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

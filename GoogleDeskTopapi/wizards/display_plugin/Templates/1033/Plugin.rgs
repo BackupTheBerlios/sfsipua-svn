@@ -1,0 +1,28 @@
+HKCR
+{
+	[!output PROJECT_NAME].[!output PROJECT_NAME]Plugin.1 = s '[!output PROJECT_NAME]Plugin'
+	{
+		CLSID = s '{[!output GUID_PLUGIN_CLASS]}'
+	}
+	[!output PROJECT_NAME].[!output PROJECT_NAME]Plugin = s '[!output PROJECT_NAME]Plugin'
+	{
+		CLSID = s '{[!output GUID_PLUGIN_CLASS]}'
+		CurVer = s '[!output PROJECT_NAME].[!output PROJECT_NAME]Plugin.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {[!output GUID_PLUGIN_CLASS]} = s '[!output PROJECT_NAME]Plugin'
+		{
+			ProgID = s '[!output PROJECT_NAME].[!output PROJECT_NAME]Plugin.1'
+			VersionIndependentProgID = s '[!output PROJECT_NAME].[!output PROJECT_NAME]Plugin'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{[!output GUID_TYPE_LIBRARY]}'
+			'Description' = s '[!output PLUGIN_DESCRIPTION]'
+		}
+	}
+}

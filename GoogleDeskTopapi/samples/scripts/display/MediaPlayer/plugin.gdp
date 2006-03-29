@@ -1,0 +1,27 @@
+<Plugin 
+  Script='true'
+  Name='Media Player'
+  Icon=''
+  Description='A media player plugin for Google Desktop Sidebar'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='9577F312-8EEA-4430-A45F-73507461BE2D'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google Inc.'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+  <File Src='play.gif' />
+  <File Src='pause.gif' />
+  <File Src='stop.gif' />
+  <File Src='prev.gif' />
+  <File Src='next.gif' />
+  <File Src='open.gif' />
+
+</Plugin>

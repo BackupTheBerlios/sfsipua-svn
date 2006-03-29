@@ -1,0 +1,869 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop ActiveX Sidebar Plug-In Tutorial</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="http://desktop.google.com/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Sidebar ActiveX Plug-In Tutorial</b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using ActiveX<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+    <ul>
+      <li>
+       <font size="-1"><a href="#introduction">Introduction</a></font>
+      </li><li>
+        <font size="-1"><a href="#createproject">Creating the Project in Visual Studio</a></font>
+      </li><li>
+        <font size="-1"><a href="#importlibraries">Importing Google Desktop Libraries</a></font></li><li>
+        <font size="-1"><a href="#createobject">Creating the Display Object</a></font>
+      </li><li>
+        <font size="-1"><a href="#registering">Registering the Plug-In With Google Desktop</a></font>
+      </li><li>
+        <font size="-1"><a href="#testing"><font size="-1">Building and Testing The Plug-In</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#titleicon"><font size="-1">Setting The
+	  Sidebar Tile Title and Icon</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#fontcolor"><font size="-1">Setting the Font and Colors</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#mouseevents"><font size="-1">Accepting Mouse Events</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#savingloading"><font size="-1">Saving and Loading Data</font></a></font></li>
+    </ul>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody><tr>
+              <td valign="top">
+
+    <h4><a name="introduction"></a>Introduction </h4>
+
+    <p><font size="-1">This is a tutorial on how to create a DLL Google
+    Desktop Sidebar plug-in as an ActiveX control. This is different from
+	using the helper framework in that you have more control over the tile,
+	but with added complexity in creating the plug-in. Note that is
+    <i>not</i> an API reference, but rather step-by-step instructions for
+    creating an ActiveX based plug-in. Before reading this, you should be
+    familiar with the Google Desktop SDK/API concepts and interfaces
+    described <a href="displayapi.html">here</a>.
+    </font></p>
+
+    <p><font size="-1">In particular, this tutorial shows how to create a
+    basic plug-in that creates a Sidebar tile and, when a user clicks within
+    the tile, draws a circle centered on the click point. Our example's name
+    is </font><font size="-1" face="Courier New">MyCircles</font><font size="-1">, and we indicate example
+    code that you will need to change for your own plug-ins in 
+    <font color=#ff0000>red</font>. A Sidebar including the MyCircles tile
+    is shown to the right.</font></p>
+
+</td>
+<td valign="bottom"><div align="right"><img src="images/sidebar_activex.gif" height="479" width="179"></div></td>
+</tr>
+          </tbody></table>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="createproject"></a><b>Creating the Project in Visual Studio</b>    <p><font size="-1">To start with, you need to create your project in
+    Visual Studio, name it, and set a couple of its properties. This results
+    in a basic project template that you'll register with Google Desktop and
+    fill in with functionality code in the following sections.</font></p>
+ 
+    <p><font size="-1"><ol>
+    <li>Start Visual Studio .NET 2003.</li>
+    <li>Go to the <font face="Courier New">File</font> menu and select <font face="Courier New">New,
+        Project...</font></li></li>
+    <li>In Project Types, go to <font face="Courier New">Visual C++ Projects</font> and then <font face="Courier New">ATL</font></li>
+	<li>Find <font face="Courier New">ATL Project</font> on the templates list. Now, enter
+        a name for your plug-in in the textbox. For our example, we use
+	the name <font face="Courier New">MyCircles</font>. Click <font face="Courier New">OK</font>.</li>
+    <li>The ATL Project Wizard will ask you for settings. On the dialog's
+        left side, click on the <font face="Courier New">Application Settings</font> tab.</li>
+    <li>Uncheck the <font face="Courier New">Attributed</font> checkbox. Then click the
+        <font face="Courier New">Finish</font> button.</li>
+    <li>Visual Studio now creates your project. The Solution Explorer will
+        display all of the new project files. The wizard creates an
+	unneeded second project, called
+	<font face="Courier New"><i>&lt;YourProjectName&gt;</i>PS</font>, in the case of
+        our example project, <font face="Courier New">MyCirclesPS</font> is created. You can delete
+	the second project by clicking on it in the Solution Explorer and
+	hitting the DEL key.</li>
+    <li>Right click on the main project (<font face="Courier New">MyCircles</font>) in the
+        Solution Explorer and select <font face="Courier New">Properties</font>.</li>
+    <li>At the top, beside <font face="Courier New">Configuration</font>, select 
+        <font face="Courier New">All Configurations</font>.</li>
+    <li>On the dialog's left side, select <font face="Courier New">General</font>. Beside
+        <font face="Courier New">Character Set</font>, select <font face="Courier New">Unicode</font>. You should
+	use Unicode in your applications in order to be compatible with
+	non-English languages.</li>
+    <li>Also in the <font face="Courier New">Properties</font> dialog, go in the <font face="Courier New">Build
+        Events</font> folder and select <font face="Courier New">Post-Build Event</font>.</li>
+    <li>Clear the value specified for the <font face="Courier New">Command Line</font> parameter. This text
+        automatically registers your plug-in when a successful build is done.
+	Unfortunately, when updating your plug-in you also need to unregister
+        it which this text does not do. Later on, we'll see how to set up
+	your plug-in to do both registration and unregistration.</li>
+    </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="importlibraries"></a><b>Importing Google Desktop Libraries</b>
+
+    <p><font size="-1">You must import Google Desktop's constants and helper
+    functions into your application for it to interact with GD. When you
+    unzipped the SDK, its <font face="Courier New">GD_SDK\api\samples\common</font> directory
+    contained <font face="Courier New">GoogleDesktopComponentCommon.vcproj</font> which
+    contains the constants and helper functions.</font></p>
+      
+    <p><font size="-1"><ol>
+
+    <li>
+    Import <font face="Courier New">GoogleDesktopComponentCommon</font> into your application
+    by right clicking on your solution (for our example, <font face="Courier New">MyCircles</font>) and then selecting <font face="Courier New">Add,
+    Existing Project....</font></li>
+
+    <li>Find the <font face="Courier New">GoogleDesktopComponentCommon.vcproj</font> file in
+    the SDK's <font face="Courier New">/api/samples/common</font> area and import it by
+    clicking <font face="Courier New">Open</font>.
+    </li>
+
+    <li>Since your project depends on the
+    <font face="Courier New">GoogleDesktopComponentCommon</font> project, you need to specify
+    the dependency. To do so, right click on your project
+    (<font face="Courier New">MyCircles</font> in our example) and select <font face="Courier New">Project
+    Dependencies</font>.</li>
+
+    <li>Put a checkmark in the box that says
+    <font face="Courier New">GoogleDesktopComponentCommon</font> and then click <font face="Courier New">OK</font>.
+    </li>
+
+    </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="createobject"></a><b>Creating the Sidebar Display Object</b>
+ 
+    <p><font size="-1">Now that we've got the project set up and the
+    necessary Desktop libraries imported, it's time to create the object 
+    that will be displayed in the Sidebar.</font></p>
+ 
+    <p><font size="-1"><ol>
+      <li>In the Solution Explorer, click on the <font face="Courier New">Class View</font>
+          tab.</li>
+      <li>Right click on your project (<font face="Courier New">MyCircles</font> for the
+          example) and select <font face="Courier New">Add, Add Class....</font></li>
+      <li>Select <font face="Courier New">ATL Control</font> and click <font face="Courier New">Open</font>.</li>
+      <li>Under <font face="Courier New">Short name</font>, give the control a name. Our
+          example control could be called <font face="Courier New">MyCirclesObj</font>; note
+	  that since <font face="Courier New">MyCircles</font> is already taken by the project
+	  namespace, you can't give your control the exact same name
+	  as your project. </li>
+      <li>From the <font face="Courier New">Options</font> tab select <font face="Courier New">Minimal
+          Control</font>. Click the <font face="Courier New">Finish</font> button. This creates
+          your display object definition and inserts two new files into your
+      project for the new object (for our example, the files are
+      <font face="Courier New">MyCirclesObj.h</font> and <font face="Courier New">MyCirclesObj.cpp).</font></li>
+    </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="registering"></a><b>Registering the Plug-In with Google Desktop</b>
+
+    <p><font size="-1">In order for Google Desktop to know about and
+    be able to interact with a plug-in, the plug-in must register itself
+    with GD. The best time to do this is to have it register with GD
+    when Windows registers this DLL and unregister with GD when
+    Windows unregisters this DLL.</font></p>
+    
+    <p><font size="-1"><ol><font size="-1"> <li>Open the main CPP file,
+       <font face="Courier New"><i>&lt;ProjectName&gt;</i>.cpp</font> (for our example,
+       <font face="Courier New">MyCircles.cpp</font>. Note the difference between
+       <font face="Courier New">MyCircles.cpp</font> and <font face="Courier New">.h</font> and
+       <font face="Courier New">MyCirclesObj.cpp</font> and
+       <font face="Courier New">.h</font>. <font face="Courier New">MyCircles.*</font> is for the library
+       itself and takes care of registering the components with Google
+       Desktop. <font face="Courier New">MyCirclesObj.*</font> is the object which actually
+       displays data and interacts with the user).</li> 
+       
+
+       <li>Put an include command for the Google Desktop helper functions at
+       the top of this file. Make sure it points to the <font face="Courier New">.h</font>
+       file's correct location, which is based on where you previously 
+       imported the <font face="Courier New">GoogleDesktopComponentCommon.vcproj</font>. The
+       command will look like the following, changed to be the actual
+       installed location of the file:<br>
+       <font face="Courier New"><font color=#0000ff>#include</font> "../common/GoogleDesktopComponentRegistration.h"</font></li>
+
+       <li>Modify <font face="Courier New">DllRegisterServer(<font color=#0000ff>void</font>)</font> and
+       <font face="Courier New">DllUnregisterServer(<font color=#0000ff>void</font>)</font> to notify Google Desktop when
+       Windows registers or unregisters this DLL. The following code shows the
+       modifications to our <font face="Courier New">MyCircles</font> sample code. <font
+       color=#ff0000>Red</font> text indicates code that should be changed
+       to values correct for your project instead of for
+       <font face="Courier New">MyCircles</font>.
+       </p>
+<font size="-1">
+<pre><font face="Courier New" style="font-size:120%">
+<font color=#008800>// DllRegisterServer - Adds entries to the system registry</font>
+STDAPI DllRegisterServer(<font color=#0000ff>void</font>) {
+<font color=#008800>  // Register object, typelib and all interfaces in typelib</font>
+  HRESULT hr = _AtlModule.DllRegisterServer();
+
+  <font color=#0000ff>if</font> (SUCCEEDED(hr)) {
+<font color=#008800>    // Set the plug-in's default settings</font>
+    <font color=#0000ff>bool</font> plugin_shows_notifications = <font color=#ff0000>false</font>;
+    CComBSTR plugin_title(_T(<font color=#ff0000>"My Circles"</font>));
+    CComBSTR plugin_description(_T(<font color=#ff0000>"Draws a circle where the user clicks the mouse"</font>));
+
+    // Register the plug-in with Google desktop
+    hr = RegisterDisplayComponentHelper(<font color=#0000ff>__uuidof</font>(<font color=#ff0000>MyCirclesObj</font>), plugin_title,
+      plugin_description, _T(""), plugin_shows_notifications);
+  }
+
+  <font color=#0000ff>return</font> hr;
+}
+
+<font color=#008800>// DllUnregisterServer - Removes entries from the system registry</font>
+STDAPI DllUnregisterServer(<font color=#0000ff>void</font>) {
+<font color=#008800>  // Unregister plug-in from Google Desktop</font>
+  UnregisterComponentHelper(<font color=#0000ff>__uuidof</font>(<font color=#ff0000>MyCirclesObj</font>));
+
+<font color=#008800>  // Unregister plug-in from Windows</font>
+  HRESULT hr = _AtlModule.DllUnregisterServer();
+  <font color=#0000ff>return</font> hr;
+}
+</font></pre>
+</font>
+
+<p><font size="-1"><font face="Courier New">RegisterDisplayComponentHelper()</font> registers
+the plug-in with Google Desktop. Its first parameter is your object's GUID,
+which identifies your plug-in to Google Desktop. Remember to replace
+<font face="Courier New">MyCirclesObj</font> with the your project's object name.</font></p>
+
+<p><font size="-1">The second
+and third parameters are the title and description that Google Desktop
+will have for your plug-in when prompting to register and also when listed
+in the preferences.</font></p>
+
+<p><font size="-1"> The fourth parameter is a path to the plug-in's
+icon. This isn't actually used for a Sidebar plug-in, so we pass an empty
+string. The final
+parameter should be set to true if your plug-in sends notifications to be
+displayed in the GD notifier area. In the sample code, we use the
+variable <font face="Courier New">plugin_shows_notifications</font> as the value of this final
+parameter. Set its value accordingly in its definition. For
+<font face="Courier New">MyCircles</font>, <font face="Courier New">plugin_shows_notifications</font> is set to
+<font face="Courier New">false</font>.</font></p></li></font></ol>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="testing"></a></font><b>Building and Testing the Plug-In</b>
+
+    <font size="-1">
+    <p><font size="-1">Now that the plug-in is registered and has
+      access to the Google Desktop libraries, it's time to build it
+      and do basic tests before customizing it.</font></p>
+    <p>    
+    <font size="-1"><ol>
+
+      <li>Create the DLL by going to the <font face="Courier New">Build</font> menu and
+      selecting <font face="Courier New">Build Solution</font>.</li>
+
+      <li>Open the Windows command prompt and run the following command:<br>
+      <font face="Courier New">regsvr32 "&lt;<i>PathToBuiltDLL</i>&gt;"</font><br>
+      <font face="Courier New">PathToBuiltDLL</font> is the path to the DLL created in the
+      previous step. It should look something like:<br>
+      <font face="Courier New">regsvr32 "C:\Documents and
+      Settings\Larry\Desktop\MyCircles\Debug\MyCircles.dll"</font><br>
+      This registers the plug-in with Windows and Google Desktop.</li>
+
+      <li>Google Desktop will show you a dialog to confirm the
+      registration. Click <font face="Courier New">OK</font> to do so. You
+      now have an active plug-in.</li>
+
+      <li>You should test your plug-in to be sure that it is runable
+      and appearing in the Sidebar.</li>
+
+      <li>When you're done testing the plug-in, rerun the
+      <font face="Courier New">regsvr32</font> command, but with a <font face="Courier New">/u</font> flag to
+      unregister the plug-in instead of registering it.  For example:<br>
+      <font face="Courier New">regsvr32 /u "C:\Documents and
+      Settings\Larry\Desktop\MyCircles\Debug\MyCircles.dll"</font></li>
+      </ol>
+    </font>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="titleicon"></a></font><b>Setting the Sidebar Tile Title and Icon</b><font size="-1">
+
+    <p><font size="-1">Now that we have defined and built the plug-in
+      object, we can start customizing it. First, we'll add code to let
+      it display a tile-specific title and icon when it appears in the
+      Sidebar.</font></p>
+    <p>    
+    <ol>
+      <font size="-1">
+        <li>Open the plug-in object's CPP file (<font face="Courier New">MyCirclesObj.cpp</font>
+        in our example).</li>
+	    <li>Once again, at the top of the file, you need to include a Google Desktop header file.
+	    Insert the following below the current <font face="Courier New">#include</font> lines and
+	    make sure the path is valid:<br>
+         <font face="Courier New"><font color=#0000ff>#include</font> "../common/GoogleDesktopDisplayAPI.h"</font></li>
+        <li>Insert the following code at the end of the file (This code is
+         written to work with our <font face="Courier New">MyCircles</font> sample code. <font
+       color=#ff0000>Red</font> text indicates code that should be changed
+         to values correct for your project instead of for
+         <font face="Courier New">MyCircles</font>):
+  <pre><font face="Courier New"  style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyCirclesObj</font>::SetClientSite(IOleClientSite* site) {
+  HRESULT hr = IOleObjectImpl&lt;<font color=#ff0000>CMyCirclesObj</font>&gt;::SetClientSite(site);
+
+  <font color=#0000ff>if</font> (site != NULL) {
+    CComQIPtr&lt;IGoogleDesktopDisplaySite&gt; sidebar_site(m_spClientSite);
+    
+    <font color=#0000ff>if</font> (sidebar_site) {
+      <font color=#008800>// Set the tile's title on the GD interface</font>
+      CComBSTR tile_title(_T(<font color=#ff0000>"My Circles"</font>));
+      sidebar_site-&gt;put_title(tile_title);
+      
+      <font color=#008800>// Load the icon bitmap resource</font>
+      CComPtr&lt;IPicture&gt; tile_icon;
+      HBITMAP bitmap = LoadBitmap(_AtlBaseModule.GetResourceInstance(), MAKEINTRESOURCE(<font color=#ff0000>IDB_MYCIRCLESOBJ</font>));
+      <font color=#0000ff>if</font> (bitmap == NULL)
+        <font color=#0000ff>return</font> E_FAIL;
+
+      <font color=#008800>// Do the conversion from a HBITMAP to IPicture</font>
+      PICTDESC picture_desc;
+      picture_desc.cbSizeofstruct = <font color=#0000ff>sizeof</font>(picture_desc);
+      picture_desc.picType = PICTYPE_BITMAP;
+      picture_desc.bmp.hbitmap = bitmap;
+      picture_desc.bmp.hpal = NULL;
+      HRESULT hr = OleCreatePictureIndirect(&picture_desc, IID_IPicture, TRUE, (<font color=#0000ff>void</font>**)&tile_icon);
+      <font color=#0000ff>if</font> (FAILED(hr))
+        <font color=#0000ff>return</font> E_FAIL;
+
+      <font color=#008800>// Set the tile's icon on the GD interface</font>
+      sidebar_site-&gt;put_icon(tile_icon);
+    }
+  }
+
+  <font color=#0000ff>return</font> hr;
+}
+</font></pre>
+  
+<font face="Courier New">IOleControl</font>'s <font face="Courier New">SetClientSite</font> method sets the
+  Sidebar tile's display title and icon. The value of the <font face="Courier New">tile_title</font>
+  variable should be what you want displayed in the tile's title.<br><br>
+  
+The final argument to <font face="Courier New">LoadBitmap</font> should be to an existing
+  Bitmap resource that will be the icon displayed in the Sidebar tile. As this
+  returns an <font face="Courier New">HBITMAP</font> value, the next code section converts the it
+  to an OLE Picture Object (<font face="Courier New">IPicture</font>).<br>
+        </li>
+  
+       <li>You must also declare the <font face="Courier New">SetClientSite</font> method
+         in the plug-in object's Header file. Open that file
+         (<font face="Courier New">MyCirclesObj.h</font> in our example) and
+         insert the following code at the end of the class, but before ending
+         scope:
+  
+<pre><font face="Courier New"  style="font-size:120%">
+<font color=#0000ff>private</font>:
+  STDMETHODIMP <font color=#ff0000>CMyCirclesObj</font>::SetClientSite(IOleClientSite* site);
+<font color=#666666>};</font>
+</font></pre></li></font>
+    </ol>
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="fontcolor"></a></font><b>Setting the Sidebar Tile Font and Colors</b><font size="-1">
+
+    <p><font size="-1">We continue customizing our plug-in tile by setting
+      its display font and colors. It's more
+      esthetic to use the same font and colors as the other tiles in the
+      Sidebar, so the code below does that. Also, similar to setting the title
+      and icon values, we need to edit both your object's CPP and Header
+      files.</font></p>
+    <p>    
+    <ol>
+      <font size="-1">
+  
+    <li>Open the plug-in object's Header file (For our example, <font face="Courier New">MyCirclesObj.h</font>).<ol><font size="-1"><br>
+  
+        <li>Remove the constructor method and replace it with a definition such as:
+  
+<pre><font color=#666666 style="font-size:120%">
+public CComControl&lt;CMyCirclesObj&gt;
+{
+public:</font>
+<font color=#ff0000  style="font-size:120%">CMyCirclesObj</font>();
+~<font color=#ff0000 style="font-size:120%">CMyCirclesObj</font>();
+
+<font color=#666666 style="font-size:120%">DECLARE_OLEMISC_STATUS(OLEMISC_RECOMPOSEONRESIZE |</font>
+</pre></li>
+  
+<li>Remove the <font face="Courier New">OnDraw</font> method and
+  replace it with the following definition. 
+  The Header file incorrectly comes with actual code in it, so you'll
+  delete that code and move the actual method definition to the CPP file.
+  <pre><font face="Courier New"  style="font-size:120%">
+<font color=#666666>public</font>:
+	HRESULT OnDraw(ATL_DRAWINFO& di);
+		
+<font color=#666666>	DECLARE_PROTECT_FINAL_CONSTRUCT()</font>
+</font></pre></li>
+  <li>Add the following variables to the end of the class before ending scope:
+  <pre><font face="Courier New">
+<font color=#0000ff>private</font>:
+  HFONT default_font_;
+  COLORREF foreground_color_;
+  COLORREF background_color_;
+<font color=#666666>};</font>
+</font></pre></li></font></ol></li>
+  <li>Open the plug-in object's CPP file (for our example, <font face="Courier New">MyCirclesObj.cpp</font>).
+  <ol><font size="-1"><br>
+  <li>Go to the <font face="Courier New">SetClientSite</font> method and insert the following
+  code after the <font face="Courier New">put_icon</font> line, replacing <font color=#ff0000gyt>red
+  </font> code with appropriate values for your project. The code first
+  gets the Sidebar's current
+  font and loads it into an <font face="Courier New">HFONT</font>. It then retrieves the 
+  Sidebar's default background and foreground tile colors. The colors and
+  font are stored in globally accessible variables so that your tile
+  can be similar in appearance to the rest of the Sidebar tiles.
+  
+<pre><font face="Courier New" style="font-size:120%">
+      <font color=#666666>// Set the tile's icon on the GD interface
+      sidebar_site-&gt;put_icon(tile_icon);</font>
+
+      <font color=#008800>// Get the default font</font>
+      CComPtr&lt;IFont&gt; sidebar_font;
+      CComDispatchDriver sidebar_disp(m_spClientSite);
+      CComVariant sidebar_font_var;
+      HFONT sidebar_hfont;
+      LOGFONT font_data = {0};
+
+      sidebar_disp.GetProperty(DISPID_AMBIENT_FONT, &sidebar_font_var);
+      sidebar_font_var.punkVal-&gt;QueryInterface(&sidebar_font);
+      sidebar_font-&gt;get_hFont(&sidebar_hfont);
+      ::GetObject(sidebar_hfont, <font color=#0000ff>sizeof</font>(font_data), &font_data);
+
+      <font color=#008800>// Create the font</font>
+      <font color=#ff0000>default_font_</font> = CreateFontIndirect(&font_data);
+
+      <font color=#008800>// Get the default background color</font>
+      CComVariant read_color;
+      sidebar_disp.GetProperty(DISPID_AMBIENT_BACKCOLOR, &read_color);
+      OleTranslateColor(read_color.lVal, NULL, &<font color=#ff0000>background_color_</font>);
+
+      <font color=#008800>// Get the default foreground color</font>
+      sidebar_disp.GetProperty(DISPID_AMBIENT_FORECOLOR, &read_color);
+      OleTranslateColor(read_color.lVal, NULL, &<font color=#ff0000>foreground_color_</font>);
+    <font color=#666666>}</font>
+</font></pre></li>
+  
+<li>Insert the following code at the end of the file. 
+  The function is similar to the one automatically generated by the ATL
+  Wizard, except it now uses the Sidebar provided colors and font.
+  
+<pre><font face="Courier New" style="font-size:120%">
+HRESULT <font color=#ff0000>CMyCirclesObj</font>::OnDraw(ATL_DRAWINFO& di) {
+  <font color=#008800>// Set Clip region to the rectangle specified by di.prcBounds</font>
+  RECT& rc = *(RECT*)di.prcBounds;
+  HRGN hRgnOld = NULL;
+  <font color=#0000ff>if</font> (GetClipRgn(di.hdcDraw, hRgnOld) != 1)
+    hRgnOld = NULL;
+  <font color=#0000ff>bool</font> bSelectOldRgn = <font color=#0000ff>false</font>;
+
+  HRGN hRgnNew = CreateRectRgn(rc.left, rc.top, rc.right, rc.bottom);
+  <font color=#0000ff>if</font> (hRgnNew != NULL) {
+    bSelectOldRgn = (SelectClipRgn(di.hdcDraw, hRgnNew) != ERROR);
+  }
+
+  <font color=#008800>// Draw the window</font>
+  HBRUSH background_brush = CreateSolidBrush(<font color=#ff0000>background_color_</font>);
+  FillRect(di.hdcDraw, &rc, background_brush);
+  
+  <font color=#008800>// Draw the text</font>
+  UINT old_text_align = SetTextAlign(di.hdcDraw, TA_CENTER|TA_BASELINE);
+  <font color=#0000ff>int</font> old_background_mode = SetBkMode(di.hdcDraw, TRANSPARENT);
+  COLORREF old_text_color = SetTextColor(di.hdcDraw, <font color=#ff0000>foreground_color_</font>);
+  HFONT old_font = <font color=#0000ff>static_cast</font>&lt;HFONT&gt;(SelectObject(di.hdcDraw, <font color=#ff0000> default_font_</font>));
+
+  LPCTSTR center_text = _T(<font color=#ff0000>"My Circles!"</font>);
+  TextOut(di.hdcDraw, (rc.left + rc.right) / 2, (rc.top + rc.bottom) / 2, 
+    center_text, lstrlen(center_text));
+
+  <font color=#008800>// Restore the previous DC settings</font>
+  SetTextColor(di.hdcDraw, old_text_color);
+  SetBkMode(di.hdcDraw, old_background_mode);
+  SetTextAlign(di.hdcDraw, old_text_align);
+  SelectObject(di.hdcDraw, old_font);
+  
+  <font color=#008800>// Remove the created objects</font>
+  DeleteObject(background_brush);
+
+  <font color=#0000ff>if</font> (bSelectOldRgn)
+    SelectClipRgn(di.hdcDraw, hRgnOld);
+
+  <font color=#0000ff>return</font> S_OK;
+}
+
+<font color=#ff0000>CMyCirclesObj</font>::<font color=#ff0000>CMyCirclesObj</font>() {
+  <font color=#ff0000>default_font_</font> = NULL;
+}
+
+<font color=#ff0000>CMyCirclesObj</font>::<font color=#ff0000>~CMyCirclesObj</font>() {
+  <font color=#008800>// Remove the fonts and colors created in SetClientSite</font>
+  <font color=#0000ff>if</font> (<font color=#ff0000>default_font_</font> != NULL)
+    DeleteObject(<font color=#ff0000>default_font_</font>);
+}
+</font>
+</pre>
+  
+</li></font></ol></li></font>
+    </ol>
+    </font>    </p>
+
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="mouseevents"></a><b>Accepting Mouse Events</b>
+
+    <p><font size="-1">
+         For <font face="Courier New">MyCircles</font>, we need to define how to handle
+         two mouse events, <font face="Courier New">OnMouseButtonDown</font> and
+	 <font face="Courier New">OnEraseBackground</font>. Again, we'll be editing both
+         the plug-in object's Header and CPP files.</font></p>
+    <p><font size="-1">
+         <font face="Courier New">OnMouseButtonDown</font> will be called when users click
+         the left mouse button. It will draw a circle at the clicked
+         location.</font></p>
+    <p><font size="-1">
+         <font face="Courier New">OnEraseBackground</font> is a dummy erase
+         handler, which when called effectively cancels any
+	 background redraw requests. This will prevent most
+         of the flashing effect that occurs when updating the tile.</font></p>
+
+    <p><ol><font size="-1">
+
+       <li>Open the plug-in object's Header file (for our example,
+       <font face="Courier New">MyCirclesObj.h</font>)
+       <ol><font size="-1"><br>
+         <li>We are adding Windows Message handlers, which in ATL must be
+	 added in the message map. Find the <font face="Courier New">BEGIN_MSG_MAP</font> block
+	 and add the following code in it:
+
+<pre><font face="Courier New" style="font-size:120%">
+<font color=#666666>BEGIN_MSG_MAP(CMyCirclesObj)</font>
+  MESSAGE_HANDLER(WM_LBUTTONDOWN, OnMouseButtonDown)
+  MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBackground)
+<font color=#666666>  CHAIN_MSG_MAP(CComControl&lt;CMyCirclesObj&gt;)
+  DEFAULT_REFLECTION_HANDLER()
+END_MSG_MAP()</font>
+</font></pre></li>
+
+         <li>Now we need to declare <font face="Courier New">OnMouseButtonDown</font> and
+         <font face="Courier New">OnEraseBackground</font>. These declarations should be put
+         at the end of the class block with the other method declarations:
+<pre><font face="Courier New" style="font-size:120%"><font color=#666666>
+private:
+  STDMETHODIMP SetClientSite(IOleClientSite* site);</font>
+  LRESULT OnMouseButtonDown(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled);
+  LRESULT OnEraseBackground(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled);
+</font></pre></li>
+
+         <li>Finally, we need to add the variables that store the circle's
+         position. These also go at the end of the class block with
+         the other variable declarations (<font
+	     color=#ff0000>Red</font> text indicates code that should be
+	     changed to values correct for your project instead of for
+	     <font face="Courier New">MyCircles</font>):
+<pre><font face="Courier New" style="font-size:120%"><font color=#666666>
+private:
+  HFONT default_font_;
+  COLORREF foreground_color_;
+  COLORREF background_color_;</font>
+  int <font color=#ff0000>circle_x_</font>;
+  int <font color=#ff0000>circle_y_</font>;
+</font></pre></li></font></ol></li>
+
+       <li>Open the plug-in object's CPP file (for our example,
+       <font face="Courier New">MyCirclesObj.cpp</font>).
+       <ol><font size="-1"><br>
+         <li>Modify the constructor as follows. We are setting the circle
+	 position in the constructor to -1, which will keep the circle
+         from being shown when the tile is first displayed.<br><br>
+
+	 More importantly, we are setting this tile to create it's own
+	 window via the <font face="Courier New">m_bWindowOnly = true</font> statement. This
+	 allows for proper mouse positioning and redrawing requests later
+	 on (<font
+	     color=#ff0000>Red</font> text indicates code that should be
+	     changed to values correct for your project instead of for
+	     <font face="Courier New">MyCircles</font>).
+
+<pre><font face="Courier New" style="font-size:120%">
+CMyCirclesObj::CMyCirclesObj() {
+  default_font_ = NULL;
+  <font color=#ff0000>circle_x_</font> = -1;
+  <font color=#ff0000>circle_y_</font> = -1;
+  m_bWindowOnly = <font color=#0000ff>true</font>;     
+}
+</font></pre></li>
+
+         <li>Add the following to the end of the CPP file.
+	 Whenever the mouse is clicked, its location will be stored in the
+	 variables and the tile redrawn to show the new circle location.
+	 <font face="Courier New">OnEraseBackground</font> is a simple handler that prevents
+	 Windows from clearing the tile and making it flash during updates.
+<pre><font face="Courier New" style="font-size:120%">
+LRESULT <font color=#ff0000>CMyCirclesObj</font>::OnMouseButtonDown(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled) {
+  <font color=#008800>// Set the location of the circle</font>
+  <font color=#ff0000>circle_x_</font> = GET_X_LPARAM(lp); 
+  <font color=#ff0000>circle_y_</font> = GET_Y_LPARAM(lp); 
+
+  <font color=#008800>// Force a redraw of the tile</font>
+  RedrawWindow(NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
+  
+  <font color=#0000ff>return</font> 0;
+}
+
+LRESULT <font color=#ff0000>CMyCirclesObj</font>::OnEraseBackground(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled) {
+  <font color=#0000ff>return</font> 0;
+}
+</font></pre></li>
+
+       <li>Add the following in the <font face="Courier New">OnDraw</font> method, after
+       the code that clears the draw area. It creates the brush and pen and
+       draws the circle at the clicked location:
+<pre><font face="Courier New" style="font-size:120%">
+  <font color=#666666>// Draw the window
+  HBRUSH background_brush = CreateSolidBrush(background_color_);
+  FillRect(di.hdcDraw, &rc, background_brush);</font>
+
+  <font color=#008800>// Draw the circle at the last clicked </font>
+  HBRUSH circle_brush = CreateSolidBrush(RGB(255, 0, 0));
+  HBRUSH old_brush = <font color=#0000ff>static_cast</font>&lt;HBRUSH&gt;(SelectObject(di.hdcDraw, circle_brush));
+  HPEN circle_pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
+  HPEN old_pen = <font color=#0000ff>static_cast</font>&lt;HPEN&gt;(SelectObject(di.hdcDraw, circle_pen));
+
+  <font color=#0000ff>if</font> ((circle_x_ != -1) && (circle_y_ != -1)) {
+    Ellipse(di.hdcDraw, <font color=#ff0000>circle_x_</font> - 10, <font
+    color=#ff0000>circle_y_</font> - 10, <font
+    color=#ff0000>circle_x_</font> + 10, <font color=#ff0000>circle_y_</font> + 10);
+  }
+
+  <font color=#666666>// Draw the text</font>
+</font></pre>
+</li>
+
+      <li>After drawing, we need to delete the brush and pen we created and
+        restore the previous ones. Modify the restore and delete code
+        as follows:
+<pre><font face="Courier New" style="font-size:120%">
+  <font color=#666666>// Restore the previous DC settings
+  SetTextColor(di.hdcDraw, old_text_color);
+  SetBkMode(di.hdcDraw, old_background_mode);
+  SetTextAlign(di.hdcDraw, old_text_align);
+  SelectObject(di.hdcDraw, old_font);</font>
+  SelectObject(di.hdcDraw, old_brush);
+  SelectObject(di.hdcDraw, old_pen);
+  
+  <font color=#666666>// Remove the created objects
+  DeleteObject(background_brush);</font>
+  DeleteObject(circle_brush);
+  DeleteObject(circle_pen);
+</font></pre></li></font></ol></li></font></ol>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="savingloading"></a><b>Saving and Loading Data</b>
+
+    <p><font size="-1">Finally, we show how to save and load data for the plug-in. For
+      example, you may want to save the state of your plug-in when the
+      Sidebar is closed. Again, we need to edit both the plug-in object's
+      Header and CPP files.
+    </font>
+    <p>
+    <font size="-1">
+    <ol><font size="-1">
+      <li><font size="-1">Open the plug-in object's Header file (For
+      our example, <font face="Courier New">MyCirclesObj.h</font>). Add the following code in
+      the method definitions (<font color=#ff0000>Red</font> text indicates
+      code that should be changed to values correct for your project instead
+      of for <font face="Courier New">MyCircles</font>).<br>
+      <br>
+
+      <font face="Courier New">InitNew</font>, <font face="Courier New">Load</font>, and <font face="Courier New">Save</font> are all
+      methods of <font face="Courier New">IPersistStream</font>. <font face="Courier New">InitNew</font> is called
+      the first time your plug-in is loaded to initialize it with its default settings. <font face="Courier New">Load</font> is called
+      when your plug-in is created and the Sidebar has the settings data to initialize your plug-in. <font face="Courier New">Save</font> is called to save
+      the tile's content when the Sidebar is closing. You can save whatever
+      data you would like in the given stream. For our example, we save the
+      circle's x and y positions.
+
+      </font>
+        <pre><font  style="font-size:120%" face="Courier New"><font color=#666666>
+private:
+  STDMETHODIMP SetClientSite(IOleClientSite* site)</font>;
+  STDMETHOD(InitNew)();
+  STDMETHOD(Load)(IStream *stream);
+  STDMETHOD(Save)(IStream *stream, BOOL clear_dirty);
+<font color=#666666>  LRESULT OnMouseButtonDown(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled);
+  LRESULT OnEraseBackground(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled);</font>
+</font></pre>
+
+        <li><font size="-1">Open the plug-in object's CPP file (for our example,
+	        <font face="Courier New">MyCirclesObj.cpp</font>). Insert the following at the end of
+	the file:
+            <pre><font face="Courier New" style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyCirclesObj</font>::InitNew() {
+  <font color=#0000ff>return</font> IPersistStreamInitImpl<<font color=#ff0000>CMyCirclesObj</font>>::InitNew();
+}
+
+STDMETHODIMP <font color=#ff0000>CMyCirclesObj</font>::Save(IStream *stream, BOOL clear_dirty) {
+  HRESULT hr = S_OK;
+  <font color=#0000ff>if</font> (!stream)
+    <font color=#0000ff>return</font> E_POINTER;
+
+  <font color=#008800>// Write the x position of the circle</font>
+  hr = stream->Write(&<font color=#ff0000>circle_x_</font>, <font color=#0000ff>sizeof</font>(<font color=#ff0000>circle_x_</font>), NULL);
+  <font color=#0000ff>if</font> (FAILED(hr))
+    <font color=#0000ff>return</font> hr;
+
+  <font color=#008800>// Write the y position of the circle</font>
+  hr = stream->Write(&<font color=#ff0000>circle_y_</font>, sizeof(circle_y_), NULL);
+  <font color=#0000ff>if</font> (FAILED(hr))
+    <font color=#0000ff>return</font> hr;
+
+  <font color=#0000ff>if</font> (clear_dirty)
+    SetDirty(FALSE);
+
+  <font color=#0000ff>return</font> hr;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyCirclesObj</font>::Load(IStream *stream) {
+  HRESULT hr = S_OK;
+  <font color=#0000ff>if</font> (!stream)
+    <font color=#0000ff>return</font> E_POINTER;
+
+  <font color=#008800>// Read the x position of the circle</font>
+  hr = stream->Read(&<font color=#ff0000>circle_x_</font>, <font color=#0000ff>sizeof</font>(<font color=#ff0000>circle_x_</font>), NULL);
+  <font color=#0000ff>if</font> (FAILED(hr))
+    <font color=#0000ff>return</font> hr;
+
+  <font color=#008800>// Read the y position of the circle</font>
+  hr = stream->Read(&<font color=#ff0000>
+circle_y_</font>, <font color=#0000ff>sizeof</font>(<font color=#ff0000>circle_y_), NULL);
+  <font color=#0000ff>if</font> (FAILED(hr))
+    <font color=#0000ff>return</font> hr;
+
+  <font color=#0000ff>return</font> S_OK;
+}
+            </font></font></pre>
+        </font></li></font></ol></p>        
+                                
+   <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+      </td>
+    </tr>
+    <tr><td colspan="2">
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="http://desktop.google.com/privacypolicy.html">Privacy Policy</a> - <a href="http://desktop.google.com/eula">Terms and Conditions</a> - <a href="http://desktop.google.com/copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+    </td></tr>
+
+    </tbody></table>
+</body></html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Event Notification Developer Guide</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Event Notification Developer Guide </b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Event API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+
+    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+    <p><font size="-1"><A href="#overview"><b>Overview</b></A></font></p>
+    <UL>
+      <li>
+        <font size="-1"><A href="#gettingstarted">Getting Started</A></font>
+      <li>
+        <font size="-1"><A href="#devprocess">Development Process Overview</A></font></li></UL>
+    <p><font size="-1"><A href="#event_framework_api"><b>Event Notification Developer API</b></A></font></p>
+    <ul>
+      <li>
+        <font size="-1"><A href="#registering">Registering Event Notification Plug-ins</A></font>
+      <li>
+        <font size="-1"><A href="#action_interfaces"><FONT size="-1">Using the Event 
+              Notification Framework</FONT></A></font>
+      </li>
+    </ul>
+
+    <p><code><b><a href="GoogleDesktopAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopAPI.idl</A></b></code></p>
+
+      <br>
+    <a id="overview" name="overview"></a><b>Overview</b>
+    <hr align="left" color="#3399cc" noShade SIZE="1">
+    <h4><a name="gettingstarted"></a>Getting Started
+    </h4>
+    <p><font size="-1">The Google Desktop Event Notification Framework allows plug-ins 
+        to receive notifications when new items are being indexed. </font>
+    </p>
+    <P><font size="-1">To use event notifications you 
+        will need, in addition to the information in this document: </font>
+    </P>
+    <ul>
+      <li>
+        <font size="-1">Sufficient access to write a plug-in for your application and an 
+          installer for it. </font>
+      <li>
+        <font size="-1">Programming knowledge of the Microsoft Windows Component Object 
+          Model (COM). </font>
+      </li>
+    </ul>
+    <h4><a id="devprocess" name="devprocess"></a>Development Process Overview
+    </h4>
+    <p><font size="-1">To develop an Event Notification plug-in, start by downloading the 
+        SDK, in particular the </font><code><a href="GoogleDesktopAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopAPI.idl</A></code><font size="-1">
+        file. We recommend developing your application with Microsoft Visual Studio.</font></p>
+    <p><font size="-1">You will then need to write code to: </font>
+    </p>
+    <UL>
+      <li>
+        <font size="-1">Register your application with Google Desktop (required). </font>
+      <LI>
+        <font size="-1">Subscribe to receive event notifications and implement the required callbacks. </font>
+      <li>
+        <font size="-1">Unregister your application with Google Desktop when your 
+          application uninstalls. </font>
+      </li>
+    </UL>
+    <p><font size="-1">We recommend that you look over the sample code provided with 
+        the SDK. Please note that the sample code examples have their GUIDs hardcoded, 
+        so if you choose to reuse code from there you must change the interfaceIDs, 
+        classIDs, and libIDs to ones valid for your application.</font></p>
+    <div align="right"><font size="-2"><A href="#top">Back to top</A></font></div>
+    <!-- Event Notification Developer API -->
+    <a id="event_framework_api" name="event_framework_api"></a><b>Event Notification 
+      Developer API</b>
+    <hr align="left" color="#3399cc" noShade SIZE="1">
+    <h4><a id="registering" name="registering"></a>Registering Event Notification 
+      Components
+    </h4>
+    <p><font size="-1">Google Desktop will not accept unregistered components. The Event 
+        Notification component registration is a one-time process done using the </font>
+      <code>IGoogleDesktopRegistrar</code><font size="-1"> interface, and should be 
+        done during component installation. As part of the registration process, the 
+        component must provide its GUID as well as information about itself.</font></p>
+    <p><font size="-1">As part of its uninstallation process, a component should 
+        unregister itself with Google Desktop.</font></p>
+    <font size="-1"><b>Component Registration Interface Summary </b></font>
+    <p><font size="-1">The following summarizes the interface and its methods. All 
+        method return values are of type</font> <code>HRESULT</code><font size="-1">. </font>
+    </p>
+    <code>interface IGoogleDesktopRegistrar: IDispatch</code>
+    <UL>
+      <li>
+        <font size="-1"><b>Note: </b>Components are required to to call this interface to 
+          register themselves with Google Desktop before they can interact with any APIs 
+          or other provided services. </font>
+        <br>
+      <LI>
+
+	<font size="-1"><b>Note: </b>The registration process consists of a call to </font>
+				<code>StartComponentRegistration</code> <font size="-1">followed by individual 
+					registrations for various services
+ obtained through</font> <code>GetRegistrationInterface</code>
+  <font size="-1">and finished by a call to </font><code>FinishComponentRegistration.</code> <font size="-1">For event components, the
+registration progid is "GoogleDesktop.EventRegistration" 
+and the interface is</font> <code>IGoogleDesktopRegisterEventPlugin</code>.
+
+
+        <br>
+      <li>
+        <code>StartComponentRegistration</code><font size="-1">: Must be invoked by any 
+          component to initiate the registration process. </font>
+        <UL>
+          <LI>
+            <font size="-1"><i>Arguments</i>: </font>
+            <UL>
+              <li>
+                <code>BSTR component_guid_or_progid</code><font size="-1">: The component's GUID 
+                  or ProgID.</font>
+              <LI>
+                <code>VARIANT</code> <font size="-1">component_description: A </font><code>SAFEARRAY</code>
+                <font size="-1">of pairs, where the first element is a descriptive parameter name 
+                  and the second element is that parameter's value. The method expects only the 
+                  following three required parameters, which should be given in this order. </font>
+                <ul>
+                  <li>
+                    <font size="-1">"</font><code>Title</code><font size="-1">": Component title that 
+                      will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">"</font><code>Description</code><font size="-1">": Component 
+                      description that will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">"</font><code>Icon</code><font size="-1">": A string pointing to 
+                      an ICON resource, of the form "</font><code>c:\program files\boo\comp.dll,23</code><font size="-1">". 
+                      This icon may be used to indicate the component and its results on various GD 
+                      pages.</font>
+                  </li>
+                </ul>
+              </LI>
+            </UL>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <code>E_COMPONENT_ALREADY_REGISTERED</code> <font size="-1">if this component has 
+                  already been registered with GD.</font>
+              <li>
+                <font size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </font>
+              </li>
+            </ul>
+          </li>
+        </UL>
+        <br>
+      <LI>
+        <CODE>GetRegistrationInterface</CODE><FONT size="-1">: Provides the requested 
+          type of registration interface. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR registration_type</CODE><FONT size="-1">: a stringified CLSID or a 
+                  progid to the type of registration required.</FONT>
+              <LI>
+                <CODE>[out, retval] IUnknown **registration_interface</CODE><FONT size="-1">: </FONT>
+                <FONT size="-1">provides the requested registration mechanism. </FONT>
+              </LI>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+        <BR>
+      <LI>
+        <CODE>FinishComponentRegistration</CODE><FONT size="-1">: Must be invoked to 
+          finish the registration process. </FONT>
+        <UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+        <br>
+      <LI>
+        <CODE>UnregisterComponent</CODE>
+        <ul>
+          <li>
+            <i><font size="-1">Arguments</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>BSTR component_guid_or_progid</code>: <font size="-1">the same GUID used 
+                  when registering the component. </font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code><font size="-1"> if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </LI>
+    </UL>
+    <b><font size="-1">Component Registration Code Template </font></b>
+    <p><font size="-1">The following template demonstrates how a component can register 
+        for event notifications. Note that this registration should only be done once, 
+        not every time the plug-in starts. </font>
+    </p>
+    <p><font size="-1">To register a component:</font><br>
+
+      <font face="Courier New, Courier, mono">
+        <pre>  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) {
+    ATLASSERT(spRegistrar != NULL);
+    
+    // Component description is 6 strings
+    CComSafeArray&lt;VARIANT&gt; arr_descr(6);
+
+    arr_descr.SetAt(0, CComVariant(L"Title"));
+    arr_descr.SetAt(1, CComVariant(L"A sample event notification plug-in"));
+    arr_descr.SetAt(2, CComVariant(L"Description"));
+    arr_descr.SetAt(3, CComVariant(L"Implements sample event notifications"));
+    arr_descr.SetAt(4, CComVariant(L"Icon"));
+    arr_descr.SetAt(5, CComVariant(L",1"));
+
+    // our CLSID in string format
+    CComBSTR our_clsid(clsid);
+    
+    // Wrap description array in variant
+    CComVariant descr(arr_descr.m_psa);
+
+    // and register
+    hr = spRegistrar-&gt;StartComponentRegistration(our_clsid, descr);
+    if (FAILED(hr))
+      return hr;
+
+    // success, now register as an event notification component.
+    CComPtr&lt;IGoogleDesktopRegisterEventPlugin&gt; spRegistration;
+
+    CComBSTR event_registrar_progid("GoogleDesktop.EventRegistration");
+    hr = spRegistrar-&gt;GetRegistrationInterface(event_registrar_progid,
+      reinterpret_cast&lt;IUnknown**&gt;(&amp;spRegistration));
+    ATLASSERT(FAILED(hr) || spRegistration);
+
+    if (SUCCEEDED(hr)) {
+      // registration cookie that will be used later on 
+      // to subscribe to event notifications
+      long cookie = 0;
+      hr = spRegistration-&gt;RegisterPlugin(CComBSTR(PLUGIN_GUID), &amp;cookie);
+
+      if (SUCCEEDED(hr)) {
+        hr = spRegistrar-&gt;FinishComponentRegistration();
+      }
+      
+      // store the registration cookie
+      if (SUCCEEDED(hr)) {
+        hr = StoreRegistrationCookie(cookie);
+      }      
+    }
+</pre>
+      </font>
+    <P></P>
+    <p><font size="-1">To unregister a component:</font><br>
+      <font face="Courier New, Courier, mono">
+        <pre>  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) { 
+    // our CLSID in string format
+    CComBSTR bstrClsid(clsid);
+  
+    hr = spRegistrar-&gt;UnregisterComponent(bstrClsid);
+  }
+</pre>
+      </font>
+
+      <div align="right"><font size="-2"><A href="#top">Back to top</A></font></div>
+      <h4><a id="action_interfaces" name="action_interfaces"></a>Using the Event 
+        Notification Framework</h4>
+    <P><font size="-1">After a successful registration with Google Desktop, a component 
+        can use the Event Notification APIs to subscribe to receive notifications about 
+        items being indexed as well as filter which events to receive based on specific 
+        criteria.</font></P>
+    <h5>Subscribing for Event Notifications</h5>
+    <P><FONT size="-1">The Event Notification API consists of a set of COM interfaces 
+        which control how a subscription behaves. The entry point to the Event 
+        Notification Framework is the <b>IGoogleDesktopEventPublisher</b> interface.</FONT>
+    </P>
+    <CODE>interface IGoogleDesktopEventPublisher: IDispatch</CODE>
+
+    <UL>
+      <LI>
+        <CODE>Subscribe</CODE><FONT size="-1">: Subscribe to start receiving notification 
+          events. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>long registration_cookie</CODE><FONT size="-1">: The cookie received from 
+                  the registration procedure (see <a href="#registering">IGoogleDesktopRegisterEventPlugin</a>).</FONT>
+              <LI>
+                <CODE>IUnknown* subscriber</CODE><FONT size="-1">: The object that will receive 
+                  notification calls when events are received. Out-of-proc subscribers implement 
+                  IDispatch on this object and receive calls on either a method named 
+                  "OnNewEvent" or the default method that has the dispid DISPID_VALUE. OnNewEvent 
+                  accepts a single argument of type</FONT>
+                  <CODE>IGoogleDesktopNotifyEvent</CODE>. 
+                  <FONT size="-1">In-proc 
+                  subscribers can implement a private interface, IGDSEventSubscriber:IUnknown.</FONT>
+              <LI>
+                <CODE>[out, retval] IGoogleDesktopEventSubscription** subscription</CODE><FONT size="-1">: 
+                  The subscription object.</FONT></LI>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      <LI>
+        <CODE>Unsubscribe</CODE><FONT size="-1">: Invoke to stop receiving notification 
+          events and free any associated resources.</FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>IGoogleDesktopEventSubscription* subscription</CODE><FONT size="-1">: The 
+                  the subscription object.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+    </UL>
+    <P><font size="-1">The following interfaces control a subscription. Before events 
+        are delivered to subscribers, they must pass through any filters that are 
+        active on the subscription.</font>
+    </P>
+    <CODE>interface IGoogleDesktopFilterCollection: IDispatch</CODE>
+
+    <UL>
+      <LI>
+        <CODE>filter_operator</CODE><FONT size="-1">: Get/Put property used to decide how 
+          multiple filter results are combined. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>GoogleDesktopSubscriptionFilterOperator op</CODE><FONT size="-1">: One of 
+                  the and/or operators (GD_FILTER_OPERATOR_AND, GD_FILTER_OPERATOR_OR).</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      <LI>
+        <CODE>negate_result</CODE><FONT size="-1">: Get/Put property negates the result 
+          of filtering. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>[out, retval] VARIANT_BOOL * not</CODE><FONT size="-1">: .</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: If true, negates the 
+              result of filtering</FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      <LI>
+        <CODE>AddFilter</CODE><FONT size="-1">: Add a new filter for the event stream.</FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR progid</CODE><FONT size="-1">: The prog id of the filter to add.</FONT>
+              <LI>
+                <CODE>[in, optional] VARIANT name</CODE><FONT size="-1">: Optional filter name.</FONT>
+              <LI>
+                <CODE>[out, retval] IDispatch** filter</CODE><FONT size="-1">: The filter object.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>RemoveFilter</CODE><FONT size="-1">: Remove a filter from the event stream.</FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>IDispatch* filter</CODE><FONT size="-1">: The filter object.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>FindFilter</CODE><FONT size="-1">: Find an event filter given a name.</FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR filter_name</CODE><FONT size="-1">: The filter name.</FONT>
+              <LI>
+                <CODE>[out, retval] IDispatch** filter</CODE><FONT size="-1">: The filter object.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>RemoveAllFilters</CODE><FONT size="-1">: Remove all filters from the 
+          subscription.</FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+    </UL>
+    <CODE>interface IGoogleDesktopEventSubscription: 
+      IGoogleDesktopFilterCollection</CODE>
+    <BR>
+    <UL>
+      <LI>
+        <CODE>active</CODE><FONT size="-1">: Get/Put property used to enable/disable a 
+          subscription. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>VARIANT_BOOL event_stream_enabled</CODE><FONT size="-1">: Enable/disable 
+                  switch.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+    </UL>
+    <h5>Filtering Event Notifications</h5>
+    <p><font size="-1">The following interfaces allow the plug-in to filter the event 
+        notifications based on specified schemas and the content of schema properties.</font></p>
+    <CODE>interface IGoogleDesktopSchemaFilter: IDispatch</CODE>
+    <BR>
+    <UL>
+      <LI>
+        <CODE>AllowNone</CODE><FONT size="-1">: Clears all allowed values and disables 
+          all event notifications. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>Allow</CODE><FONT size="-1">: Add the specified schema to the array of 
+          allowed schema names. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR schema_name</CODE><FONT size="-1">: Name of the allowed schema.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>Disallow</CODE><FONT size="-1">: Remove the specified schema from the array 
+          of allowed schema names. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR schema_name</CODE><FONT size="-1">: Name of the removed schema.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>GetAllowed</CODE><FONT size="-1">: Retrieves the array of allowed schema 
+          names. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>[out, retval] SAFEARRAY(VARIANT)* schema_names</CODE><FONT size="-1">: 
+                  Array containing the allowed schema names.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+    </UL>
+
+    <CODE>interface IGoogleDesktopSchemaPropertyFilter: IDispatch</CODE>
+    <BR>
+    <UL>
+      <LI>
+        <CODE>AddRequiredText</CODE><FONT size="-1">: Adds the specified string to the 
+          array of strings required in the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>BSTR required</CODE><FONT size="-1">: The string required in the property.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>AddExcludedText</CODE><FONT size="-1">: Adds the specified string to the 
+          array of strings excluded from the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>BSTR required</CODE><FONT size="-1">: The string excluded from the 
+                  property.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>RemoveRequiredText</CODE><FONT size="-1">: Removes the specified string 
+          from the array of strings required in the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>BSTR required</CODE><FONT size="-1">: The string to be removed.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>RemoveExcludedText</CODE><FONT size="-1">: Removes the specified string 
+          from the array of strings excluded from the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>BSTR required</CODE><FONT size="-1">: The string to be removed.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>GetRequiredText</CODE><FONT size="-1">: Retrieves the array of strings 
+          required in the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>[out, retval] SAFEARRAY(VARIANT)* required</CODE><FONT size="-1">: Array of 
+                  strings.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>GetExcludedText</CODE><FONT size="-1">: Retrieves the array of strings 
+          excluded from the property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name to filter on.</FONT>
+              <LI>
+                <CODE>[out, retval] SAFEARRAY(VARIANT)* excluded</CODE><FONT size="-1">: Array of 
+                  strings.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>match_whole_word</CODE><FONT size="-1">: Put property that specifies if 
+          matching is restricted to whole words. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>[in] VARIANT_BOOL whole</CODE><FONT size="-1">: If true, match whole words.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+    </UL>
+    <h5>Receiving an Event Notification</h5>
+    <p><font size="-1">After successfully subscribing to the Event Notification 
+        Framework and setting filtering options, a plug-in will be called for each 
+        matching event through the subscriber object passed to the <b>IGoogleDesktopEventPublisher.Subscribe</b> method. 
+        Event information will be provided through the <b>IGoogleDesktopNotifyEvent</b> interface.</font>
+        
+    <CODE>interface IGoogleDesktopNotifyEvent: IDispatch</CODE>
+    <BR>
+    <UL>
+      <LI>
+        <CODE>GetProperty</CODE><FONT size="-1">: Returns the value of a named property. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>BSTR property_name</CODE><FONT size="-1">: The property name.</FONT>
+              <LI>
+                <CODE>[out, retval] VARIANT* property_value</CODE><FONT size="-1">: The value of the property.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>
+      <LI>
+        <CODE>SchemaName</CODE><FONT size="-1">: Get property which holds the name of the schema 
+        that the event is derived from. </FONT>
+        <UL>
+          <LI>
+            <FONT size="-1"><I>Arguments</I>: </FONT>
+            <UL>
+              <LI>
+                <CODE>[out, retval] BSTR* schema_name</CODE><FONT size="-1">: The schema name.</FONT>
+            </UL>
+          <LI>
+            <I><FONT size="-1">Returns</FONT></I><FONT size="-1">: </FONT>
+            <UL>
+              <LI>
+                <CODE>S_OK</CODE> <FONT size="-1">if successful. </FONT>
+              <LI>
+                <FONT size="-1">Appropriate error on failure. </FONT>
+              </LI>
+            </UL>
+          </LI>
+        </UL>
+      </LI>      
+    </UL>        
+    
+    <b><font size="-1">Event Notification Code Template </font></b>
+    <p><font size="-1">The following template demonstrates how a plug-in subscribes 
+    to receive event notifications and how to configure the subscription. </font>
+    </p>
+    <pre>		
+  //
+  // Create an instance of the Google Desktop Event Publisher
+  // and set up a subscription
+  //
+  CComPtr&lt;IGoogleDesktopEventPublisher&gt; publisher;
+  hr = publisher.CoCreateInstance(L"GoogleDesktop.EventPublisher.1");
+
+  // A callback object that will receive notifications
+  EventCallback callback;
+
+  // The subscription that controls how events are delivered to us
+  CComPtr&lt;IGoogleDesktopEventSubscription&gt; subscription;
+
+  if (SUCCEEDED(hr)) {
+    // Get the callback object
+    CComPtr&lt;IUnknown&gt; callback_identity;
+    hr = callback._LocDEQueryInterface(IID_IUnknown,
+                                       reinterpret_cast&lt;void**&gt;(&amp;callback_identity));
+
+    // Subscribe
+    hr = publisher->Subscribe(cookie, callback_identity, &amp;subscription);
+    if (SUCCEEDED(hr)) {
+      CComQIPtr&lt;IGoogleDesktopSchemaFilter&gt; schema_filter;    
+      
+      // Add a schema filter
+      CComPtr&lt;IDispatch&gt; disp;
+      hr = sub->AddFilter(CComBSTR(L"GoogleDesktop.SchemaFilter"), CComVariant(), &amp;disp);
+      if (FAILED(hr))
+        return hr;
+
+      // Filter on the Email schema
+      schema_filter = disp;
+      hr = schema_filter->Allow(CComBSTR(L"Google.Desktop.Email"));
+
+      if (SUCCEEDED(hr)) {
+        // Turn on the event stream and start receiving notifications
+        subscription->put_active(VARIANT_TRUE);
+      }
+    }
+  }
+		</pre>
+    <p><font size="-1">The code template below shows a sample callback implementation
+    through which the plug-in receives notifications. The event information is passed in through an object
+    implementing <b>IGoogleDesktopNotifyEvent</b>.</font>
+
+<pre>
+class EventCallback : 
+  public IDispEventSimpleImpl&lt;1, EventCallback, &amp;IID_IDispatch&gt; {
+public:
+BEGIN_SINK_MAP(EventCallback)
+  SINK_ENTRY_INFO(1, IID_IDispatch, DISPID_VALUE, OnNewEvent, &amp;s_OnNewEventInfo)
+END_SINK_MAP()
+
+  /**
+  * This function gets called by the event framework as this is the default
+  * method on our class (DISPID_VALUE).
+  */
+  STDMETHOD_(void, OnNewEvent)(IDispatch* event) {
+    if (event == NULL) {
+      _tprintf(_T("Historical indexing has just been done.\n"));
+    } else {
+      CComQIPtr&lt;IGoogleDesktopNotifyEvent&gt; e(event);
+      ATLASSERT(e != NULL);
+      CComBSTR schema;
+      e->get_SchemaName(&amp;schema);
+
+      CComVariant uri;
+      e->GetProperty(CComBSTR(L"uri"), &amp;uri);
+
+      _tprintf(_T("%ls: %ls\n"), schema, uri.vt == VT_BSTR ? uri.bstrVal : L"?");
+    }
+  }
+
+  static _ATL_FUNC_INFO s_OnNewEventInfo;
+};
+
+_ATL_FUNC_INFO EventCallback::s_OnNewEventInfo = {CC_STDCALL, VT_EMPTY, 1, {VT_DISPATCH}};		
+
+</pre>
+    <div align="right"><font size="-2"><A href="#top">Back to top</A></font></div>
+
+
+  </td></tr>
+  <tr valign="top">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+</tbody></table>
+</body></html>

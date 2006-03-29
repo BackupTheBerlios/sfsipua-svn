@@ -1,0 +1,1467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>GD Developer Search Query API Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">   
+    <style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+code {font-size:13px;}
+</style></head>
+  <body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+    <table border="0" cellpadding="5" cellspacing="0" width="99%">
+      <tbody>
+        <tr>
+          <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+          <td width="86%">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+                </tr>
+              </tbody></table>
+            <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google 
+                        Desktop Search Query API Developer Guide </b></font>
+                  </td>
+                </tr>
+              </tbody></table>
+          </td>
+        </tr>
+        <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Query API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>
+	</td>
+          <td>
+		
+		
+		
+		    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+            <p><font size="-1"><a href="#gettingstarted">Getting
+	    Started</a><br>
+
+            <p><font size="-1"><a href="#registering">Registering With
+            The Query API</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#registeringnative">Native Plug-in
+            Registration</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#registeringscript">Script Plug-in
+            Registration</a><br>
+	    </font></p> 
+
+            <p><font size="-1"><a href="#queryobjects">Query
+	    Objects</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#querynative">Query Methods for Native Plug-Ins</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#queryscript">Query Methods for Script Plug-Ins</a><br>
+	    </font></p> 
+
+            <p><font size="-1"><a href="#queryex">QueryEx Query
+	    Objects</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#queryexnative">QueryEx for Native Plug-Ins</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#queryexscript">QueryEx for Script Plug-Ins</a><br>
+	    </font></p> 
+
+            <p><font size="-1"><a href="#individualresult">Individual
+	    Search Result Objects</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#individualresultnative">Individual Search Result
+	    Objects for Native Plug-Ins</a><br> 
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#individualresultscript">Individual Search Result
+	    Objects for Script Plug-Ins</a><br> 
+	    </font></p> 
+
+            <p><font size="-1"><a href="#itemversions">Item
+	    Versions</a><br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#itemversionsnative">Item Versions
+	    for Native Plug-Ins</a><br> 
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="#itemversionsscript">Item Versions 
+	    for Script Plug-Ins</a><br> 
+	    </font></p> 
+
+            <p><font size="-1"><a href="#httpxml">HTTP/XML-Based Query
+            API (obsolete)</a></font></br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#gettingstarted2">Getting
+            Started</a><br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#requesting">Requesting a
+            Desktop Search</a><br> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#results">Desktop Search
+            Results</a><br></font></p> 
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+            <a name="gettingstarted"></a><b>Getting Started </b>
+            <p>
+              <font size="-1">Google Desktop indexes, caches, and searches content on your 
+                computer. Through the Desktop Software Development Kit's
+                Query APIs, your applications can 
+                send search queries directly to Google Desktop and process its search results.</font></p>
+
+            <p><font size="-1">The Query API described in the first
+	    part of this document was introduced with Google Desktop
+	    3. We cover both how to use it with native plug-ins and
+	    with script-based plug-ins, and assume that you are
+	    familiar with the general principles of how to write
+	    Desktop plug-ins.</font></p>
+
+            <p><font size="-1">The latter part of this document describes the
+            previously used methods for issuing Desktop search queries using
+            HTTP and XML. While still usable at the moment, we do not plan to
+            further develop this type of Query API and may eventually
+            deprecate it. This material was included in case you are working
+            with a previously written plug-in which used this
+            approach. You should not use this approach in any new
+            plug-ins.</font></p> 
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+           <hr align="left" color="#3399cc" noshade="noshade" size="1">
+   <a name="registering"></a><h4>Registering With The Query API</h4>
+
+   <P><font size="-1">You can only use the Query API if you have
+   registered with it and thus obtained a Query API registration
+   cookie. Note that this is in addition to the general registration
+   of your plug-in with Google Desktop.</font></p>
+
+   <p><font size="-1">There are two types of Query API registration cookies,
+   <i>read-only</i> and <i>read-write</i>. Usually, you'll only
+   need a read-only cookie. The read-write cookie is only needed when
+   you remove an item from the Google Desktop index.</font></p>
+
+   <p><font size="-1">We recommend that your plug-in encrypt the registration
+   cookie when it saves it, and, of course, be able to decrypt it when
+   you pass it to the various Query API methods and objects.</font></p>
+ 
+   <p><font size="-1">You'll need a global identifier (GUID) for your
+   plug-in to pass to the registration method. You can use a tool such
+   as </font><code>guidgen.exe</code><font size="-1"> to generate
+   one.</font></p> 
+
+   <a name="registeringnative"></a><h5>Native Plug-in Registration</h5>
+   
+   <p><font size="-1">If you are writing a native plug-in, the
+    following summarizes the registration interface and its
+    method. All method return values are of type 
+    </font><code>HRESULT</code><font size="-1">.</font></p>
+
+    <code>interface IGoogleDesktopRegisterQueryPlugin<WBR>: IDispatch</code>
+    <ul>
+      <li><font size="-1">
+        <b>Note: </b>Components are required to call this interface to 
+          register themselves with the Google Desktop Query API before
+          they can make use of that API.</font>
+        <br>
+      <li>
+        <code>RegisterPlugin</code><font size="-1">: Must be invoked by any 
+          component to register with the Query API. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR plugin_class</code><font size="-1">: The
+		  component's GUID or ProgID.</font></li>
+              <li>
+                <code>VARIANT_BOOL read_only</code><font size="-1">:
+                  If </font><code>true</code><font size="-1">, you can
+                  do search queries but cannot delete items from the
+                  index. A </font><code>false</code><font size="-1">
+                  value gives you both read and write access, allowing
+                  you to delete index items.</font></li>
+              <li><code>[out, retval] long* cookie</code><font
+                    size="-1">: Returns the registration cookie. Save
+		    this value, as you will have to use it whenever
+                    you make a query or remove an item from the
+		    Desktop index via the Query API.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i>: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure, such as
+		  an unregistered component classID or appID,
+		  component prohibited by policy, etc.</font></li>
+            </ul>
+          </li>
+        </ul></li></ul></font><p>
+
+   <a name="registeringscript"></a><h5>Script Plug-in Registration</h5>
+
+      <p><font size="-1">If you are writing a script-based plug-in, 
+        see </font><code>register_script_sample.js</code><font size="-1">
+	for a complete example of registering with the Query API using
+	JavaScript. The gist is the following code:</font>
+   <pre><code>
+  try {
+    // Instantiate the Google Desktop registrar component by creating
+    // an ActiveX registration object.
+
+    var registrar = new ActiveXObject("GoogleDesktop.Registrar");
+
+    // Give it our plug-in GUID and description
+    registrar.StartComponentRegistration(g_scriptSampleId, componentDescription);
+
+    // Ask for the specific registration object that gives us Query API access.
+    var regObj = registrar.GetRegistrationInterface("GoogleDesktop.QueryRegistration");
+
+    // Now ask that registration object to give us a cookie representing
+    // our Query API access.  Note the read_only flag argument here;
+    // if false, then we're asking for read-write access instead of
+    // just read-only access.
+    cookie = regObj.RegisterPlugin(g_scriptSampleId, read_only);
+
+    // Now submit and hope the user will accept this component.
+    // If not, then an error will be thrown
+    registrar.FinishComponentRegistration();
+  } catch (e) {
+    // We hit an error
+    message("Couldn't register the script samples.\n" + new String(e.number) +
+            "\n" + e.description);
+    return 0;
+  }
+  </code></pre>
+
+  <p><font size="-1">Note that you need to save the cookie value, as
+      you will have to use it whenever you make a query or remove an
+      item from the Desktop index via the Query API.</font></p>
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+  <h4><a name="queryobjects" id="queryobjects"></a>Query Objects</h4>
+
+  <p><font size="-1">The Query API has one root object,
+   </font><code>IGoogleDesktopQueryAPI</code><font size="-1"> for
+   native plug-ins, </font><code>GoogleDesktop.QueryAPI</code><font
+   size="-1"> for script plug-ins, that supports two methods:</font> 
+   <ul>
+     <li><code>Query</code><font size="-1">: Immediately executes the
+       specified desktop search query and returns a result object that
+       contains all the search results for the query.</font></li>
+     <li><code>QueryEx</code><font size="-1">: Returns a query object
+       which does not (yet) actually execute the query. Instead, you can
+       tweak some custom parameters first, then execute the revised query.
+       When executed, it returns the same type of result object as
+       </font><code>Query</code><font size="-1">.</font></li> 
+   </ul>
+   </font></p>      
+ 
+   <p><font size="-1">The </font><code>Query</code><font size="-1">
+   and </font><code>QueryEx</code></font size="-1"> root object methods both
+   take the following arguments:</font>
+   <ul>
+     <li><code>cookie</code><font size="-1">: The security
+       cookie created when you registered your plug-in with the Query
+       API.</font></li>
+     <li><code>query</code><font size="-1">: The search query string,
+       which can include the <a
+       href="http://desktop.google.com/features.html#advancedsearch">same
+       set of query operators</a> that you could use 
+       in a query typed into a Google Desktop search box.</font></li
+       
+     ><li><code>category</code><font size="-1">: Optional string argument
+       that lets you restrict results to those of a particular type. Valid
+       values are </font><code>email</code><font size="-1">,
+       </font><code>web</code><font size="-1">, </font><code>im</code><font
+       size="-1">, </font><code>file</code><font size="-1">,
+       </font><code>contact</code><font size="-1">, 
+       </font><code>calendar</code><font size="-1">,
+       </font><code>task</code><font size="-1">,
+       </font><code>note</code><font size="-1">,
+       or </font><code>journal</code><font size="-1">.</font></li>
+     <li><code>ranking</code><font size="-1">: Optional numeric
+       argument specifying whether the search results will be ranked by
+       date (</font><code>RECENCY_RANKING</code><font size="-1"> = 1), the
+       default, or by relevance (</font><code>RELEVANCE_RANKING</code><font
+       size="-1"> = 0).</font></li>
+   </ul></p>
+
+   <a name="querynative"></a><h5>Query Methods for Native Plug-Ins</h5>
+
+    <p>
+    <code>interface IGoogleDesktopQueryAPI<WBR>: IDispatch</code>
+    <ul>
+      <li>
+        <code>Query</code><font size="-1">: Immediately takes the
+          specified search query and executes it with default option values.
+          </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>long cookie</code><font size="-1">: The
+		  component's Query API security cookie.</font></li>
+              <li>
+                <code>BSTR query</code><font size="-1">:
+                  The search query string, which can contain any of
+                  <a
+                   href="http://desktop.google.com/features.html#advancedsearch">the
+                   allowed Desktop search operators</a>.</font></li> 
+              <li>
+                <code>VARIANT category</code><font size="-1">: [Optional]
+		  </font></li>
+              <li>
+                <code>VARIANT ranking</code><font size="-1">: [Optional]
+                  </font></li>
+              <li><code>[out, retval] IGoogleDesktopQueryResultSet**
+	        results</code><font size="-1">: The search results from
+                having automatically executed a desktop search for the
+                search query.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li><br>
+      <li>
+        <code>QueryEx</code><font size="-1">: Returns a query object
+            that does not automatically execute a search. Instead, you
+            can alter the query's properties and exert finer control
+            over the search, and then execute the query.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>long cookie</code><font size="-1">: The
+		  component's Query API security cookie.</font></li>
+              <li>
+                <code>BSTR query</code><font size="-1">:
+                  The search query string, which can contain any of
+                  <a href="http://desktop.google.com/features.html#advancedsearch">the allowed Desktop search operators</a>.</li>
+              <li>
+                <code>VARIANT category</code><font size="-1">: [Optional]
+		  </font></li>
+              <li>
+                <code>VARIANT ranking</code><font size="-1">: [Optional]
+                  </font></li>
+              <li><code>[out, retval] IGoogleDesktopQuery** q)</code>
+	        <font size="-1">: An unexecuted query object, which
+                you can alter the default properites and parameters of
+                before running a search on its search query.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+
+</ul></font>
+
+   <a name="queryscript"></a><h5>Query Methods for Script Plug-Ins</h5>
+
+<p><font size="-1">In JavaScript, you just create the base object and
+then create and run the Query in one step.</font>
+<pre><code>
+  // Instantiate the main query api object
+  var qapi = new ActiveXObject("GoogleDesktop.QueryAPI");
+
+  // Perform the query and get a recordset object back containing the
+  // search results.
+  var set = qapi.Query(cookie, search_string);
+</code></pre></font></p>
+
+<p><font size="-1">See the </font><code>simple_query.js </code><font
+size="-1"> example for a detailed example.</font></p>
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+   <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+   <a name="queryex"></a><h4>QueryEx Query Objects</h4>
+
+<p><font size="-1">If you run the </font><code>QueryEx()</code></font>
+method, it returns a Query object for which you can change any or all of
+these four options before executing the query:</font>
+   <ul>
+     <li><code>async</code><font size="-1">: By setting this to
+     </font><code>false</code><font size="-1">, all result items are
+     fetched before the </font><code>Execute()</code><font size="-1">
+      method completes. The default value is
+     </font><code>true</code><font size="-1">.</font></li> 
+     <li><code>filter_duplicates</code><font size="-1">: By
+     setting to </font><code>false</code><font size="-1">, you'll get
+     all the items that match, including any duplicates of already
+     matched items. Default
+     is </font><code>true</code><font size="-1">.</font></li>
+     <li><code>match_all_terms</code><font size="-1">: When set
+     to </font><code>false</code><font size="-1">, if there are
+     multiple query terms, any item matching just one of the query
+     terms is returned. Otherwise, a result must match all of the query
+     terms. Default is </font><code>true</code><font size="-1">.</font></li>
+     <li><code>blacklisting</code><font size="-1">: By setting
+     to </font><code>false</code><font size="-1">, items in the search
+     results do not go through the default blacklisting filters.
+     Default is </font><code>true</code><font size="-1">.
+     If you turn this off, you'll most likely see spam email, secure
+     content, bad urls such as about:, res:, etc. in addition to
+     your good results.</font></li>
+   </ul></p>
+
+<p><font size="-1">In order to change an option value, use the
+</font><code>SetOption()</code><font size="-1"> method, one of four
+methods associated with Query objects. These are:</font>
+
+<ul><li><code>SetOption</code><font size="-1">: Takes arguments, in
+      this order, of what option to set and what value to set it
+      to.</font></li> 
+    <li><code>GetOption</code><font size="-1">: Takes an option name,
+      returns its value.</font></li>
+    <li><code>query</code><font size="-1">: Takes no arguments,
+      returns a string containing the search query.</font></li>
+    <li><code>Execute</code><font size="-1">: Once you've finished
+      setting the Query object's options, run this method to actually
+      run the search. Returns a query result set.</li>
+</ul>
+
+   <a name="queryexnative"></a><h5>QueryEx for Native Plug-Ins</h5>
+
+<p><code>QueryEx</code><font size="-1">'s returned object,
+</font><code>IGoogleDektopQuery</code></font>, has the following
+interface:
+
+    <p><font size="-1">
+    <code>interface IGoogleDesktopQuery<WBR>: IDispatch</code>
+    <ul>
+      <li>
+        <code>SetOption</code><font size="-1">: Set an option value.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR name</code><font size="-1">: Which option to
+		  set.</font></li>
+              <li>
+                <code>VARIANT value</code><font size="-1">:
+                  What value to set the option to.</li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>GetOption</code><font size="-1">: Get an option value.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR name</code><font size="-1">: Which option to
+		  get the value of.</font></li>
+              <li>
+                <code>[out, retval] VARIANT* value</code><font size="-1">:
+                  The option's value.</li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>query</code><font size="-1">: Get the search query string.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] BSTR* ret</code><font size="-1">:
+                  The search query string.</li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>Execute</code><font size="-1">: Execute the search as
+        specified by the QueryEx object's query string and option values.
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] IGoogleDesktopQueryResultSet**
+		  results</code><font size="-1">: Results from the search.</li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li></ul></li></ul></font></p>
+
+   <a name="queryexscript"></a><h5>QueryEx for Script Plug-Ins</h5>
+
+   <p><font size="-1">The following code using
+   </font><code>QueryEx</code><font size="-1"> comes from the
+   </font><code>item_count.js</code><font size="-1"> example. It shows
+   the usual series of events when using
+   </font><code>QueryEx</code><font size="-1">; call
+   </font><code>QueryEx</code><font size="-1"> on the
+   base Query API object to get a Query object, set Query object
+   options with </font><code>SetOption()</code><font size="-1">, then
+   call </font><code>Execute()</code><font size="-1"> on the Query object and
+   get back a recordset of the search results.
+
+
+</font>
+   <pre><code>
+  var q = new ActiveXObject("GoogleDesktop.QueryAPI");
+
+  // Call the QueryEx method so that we can turn off the asynchronous
+  // loading of record items.
+  var qx = q.QueryEx(g_securityCookie, query);
+
+  // Turn off the default asynchronous behavior.
+  qx.SetOption("async", false);
+
+  // Execute the query synchronously and get back a recordset object
+  var set = qx.Execute();
+    </code></pre>
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+   <a name="resultobjects"></a><h4>Result Objects</h4>
+
+<p><font size="-1">When you execute a </font><code>Query</code><font
+size="-1"> or </font><code>QueryEx</code><font size="-1">, it
+returns an result set object.  This object contains individual result item
+objects, each of which represents a single search result.</font></p>
+
+<p><font size="-1">Unless you used </font><code>QueryEx</code><font size="-1">
+and changed the default value of the Query object's
+</font><code>async</code><font size="-1"> option to
+</font><code>false</code><font size="-1"> from its default value
+</font><code>true</code><font size="-1"> before executing the
+query, you can access search results before the search has completely
+finished. To find out if a search has completed, check the resultset's
+</font><code>readystate</code><font size="-1"> property, which can
+have three values:</font>
+<ul><li><code>GD_QRS_UNITIALIZED = 0</code><font size="-1">: Search
+has not yet started.</font></li>
+    <li><code>GD_QRS_LOADING = 1</code><font size="-1">: Search
+is still in progress.</font></li>
+    <li><code>GD_QRS_COMPLETE = 2</code><font size="-1">: Search
+is complete, with all results received and in the resultset.</font></li>
+</ul>
+
+<p><font size="-1">There are four methods associated with result set
+objects:</font>
+<ul><li><code>readystate</code><font size="-1">: Takes no arguments,
+      returns the current </font><code>readystate</code><font size="-1">
+      value.</font></li>
+    <li><code>count</code><font size="-1">: Takes no arguments, 
+      returns the total number of individual search result items in
+      the recordset. Note that this number will change as long as
+      results are still arriving. Until
+      </font><code>readystate</code><font size="-1"> is
+      </font><code>GD_QRS_COMPLETE</code><font size="-1">, this value
+      is an estimate.</font></li>
+    <li><code>Next</code><font size="-1">: Takes no arguments, returns
+      the next individual search result in the set. If results are
+      still arriving and </font><code>Next()</code><font size="-1"> is
+      at the end of the current results, it will wait until the next
+      result arrives. If you reach the end of the results after all
+      results are in the recordset, </font><code>Next()</code><font
+      size="-1"> returns </font><code>null</code><font size="-1">.
+      </font></li>
+    <li><code>available_count</code><font size="-1">: Takes no arguments,
+      returns how many individual results can be fetched via calls to
+      </font><code>next()</code><font size="-1"> without it blocking
+      while waiting for more results.</font></li>
+</ul>
+
+<a name="resultobjectsnative"></a><h5>Result Objects for Native Plug-Ins</h5>
+
+    <p><font size="-1">
+    <code>interface IGoogleDesktopQueryResultSet: IDispatch</code>
+    <ul>
+      <li>
+        <code>Next</code><font size="-1">: Returns the next individual
+          search result in the set. If results are still arriving, it
+          waits for the next result to arrive before returning it. If
+          called after reaching the final result, it returns 
+	  </font><code>S_FALSE</code><font size="-1"> and
+	  </font><code>null</code><font size="-1">.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>[out, retval] IGoogleDesktopQueryResultItem**
+	        next</code><font size="-1">: An individual search result.
+                </font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li><code>S_FALSE</code><font size="-1"> and
+	        </font><code>null</code><font size="-1"> if called after the
+                last result has already been returned.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>readystate</code><font size="-1">: Returns the current
+	  </font><code>readystate</code><font size="-1"> value, which
+          can be
+      <ul><li></font><code>GD_QRS_UNINITIALIZED = 0</code><font size="-1"></li>
+          <li></font><code>GD_QRS_LOADING = 1</code><font size="-1">
+	    (Still receiving results)</li>
+          <li></font><code>GD_QRS_COMPLETE = 2</code><font
+	  size="-1"> (All results received)</li></ul>
+        </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] QRSReadyState* state</code>
+		<font size="-1">: </font><code>readystate</code>
+		<font size="-1">'s value.</li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>count</code><font size="-1">: Returns the total number
+          of individual search result items. Note that this number
+          will change so long as individual results are still
+          arriving. Until the </font><code>readystate</code><font size="-1">
+          value becomes </font><code>GD_QRS_COMPLETE</code><font
+          size="-1">, this value is an estimate. After that, it is the
+          exact and total number of individual search results.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] long* ret</code>
+		<font size="-1">: </font><code>Number of results</code></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>available_count</code><font size="-1">: Returns the
+          value of how many individual results can currently be
+          fetched via calls to </font><code>next()</code><font size="-1">
+          without blocking.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] long* available_count</code>
+		<font size="-1">: Current remaining number of available
+                  search results.</font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li></ul>
+
+<a name="resultobjectsscript"></a><h5>Result Objects for Script Plug-Ins</h5>
+
+<p><font size="-1">To iterate through a result set's individual
+results in JavaScript, you'd write something like: 
+</font><pre><code>
+  var item;
+  while ((item = results.Next()) != null) {
+    // process item here
+  }
+</code></pre></p>
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<a name="individualresult"></a><h4>Individual Search Result Objects</h4>
+
+<p><font size="-1">Result item objects each contain a single search
+result. The key method is </font><code>GetProperty</code><font
+size="-1">, which takes a property name and returns its value for the
+result. The complete list of valid property names is quite long; the
+ones you'll probably use most often are
+</font><code>content</code><font size="-1">,
+</font><code>uri</code><font size="-1">,
+</font><code>summary</code><font size="-1">, and for email
+</font><code>from</code><font size="-1">, </font><code>to</code><font
+size="-1">, and </font><code>subject</code><font size="-1">.
+
+<p><font size="-1">In order to avoid errors due to trying to get a value for a
+property that doesn't exist for a result due to its type (i.e. a file
+won't have a </font><code>from</code><font size="-1"> property), you
+should first use the </font><code>schema</code><font size="-1"> method
+to determine the result's type. The following schemas are defined in
+the Desktop SDK IDL:</font>
+<ul><code>
+  <li>"web"</li>
+  <li>"text"</li>
+  <li>"media"</li>
+  <li>"office"</li>
+  <li>"file"</li>
+  <li>"calendar"</li>
+  <li>"contact"</li>
+  <li>"email"</li>
+  <li>"im"</li>
+  <li>"note"</li>
+  <li>"journal"</li>
+  <li>"task"</li>
+  <li>"shortcut"</li>
+</code></ul></p>
+
+<p><font size="-1">If you try to get a value for a property the result
+doesn't have, an error is returned. For scripts, that means an
+exception is thrown, so remember to use exception handling in your 
+script plug-ins.</font></p>
+
+<p><font size="-1">There are four methods associated with result item
+objects:</font>
+<ul><li><code>GetProperty</code><font size="-1">: Takes a property
+      name argument, returns that property's value.</font></li>
+    <li><code>schema</code><font size="-1">: Takes no arguments, 
+      returns the name of the item's schema.</font></li>
+    <li><code>versions</code><font size="-1">: Takes no arguments, returns
+      either a list of emails in this item's thread (if the item is an
+      email) or a list of all file versions (if the item is a file) in
+      the Desktop index. These are returned as a document versions object.
+      </font></li>
+    <li><code>RemoveFromIndex</code><font size="-1">: Takes one
+      argument, which if </font><code>true</code><font size="-1">
+      (the default value)
+      removes this item and all its versions from the Desktop index.
+      If </font><code>false</code><font size="-1">, only this
+      individual item is removed. 
+      Remember, you must have a read-write Query API
+      registration cookie for this method to work. If you don't have
+      one, you'll get an "Access Denied" error.</font></li></ul></p>
+ </ul>
+
+<p><font size="-1">The complete property set is:
+<table><tbody>
+<tr><td>width</td> <td>primary_fax</td> <td>status</td> <td>business_phone</td> <td>duration</td></tr>
+
+<tr><td>bcc</td> <td>business_fax</td> <td>mail_header</td> <td>channels</td> <td>home_address</td></tr>
+
+<tr><td>mail_flags</td> <td>importance</td> <td>author</td>
+<td>department</td> <td>display_name</td></tr>
+
+<tr><td>company</td> <td>keywords</td> <td>height</td> <td>other_phone</td>
+<td>job_title</td></tr>
+
+<tr><td>text_content</td> <td>home_phone</td> <td>office_location</td>
+<td>data_rate</td> <td>total_work</td></tr>
+
+<tr><td>received</td> <td>personal_home_page</td> <td>start_date</td> <td>flags</td> <td>event_id</td></tr>
+
+<tr><td>business_home_page</td> <td>genre</td> <td>participants</td>
+<td>country</td> <td>birthday</td></tr>
+
+<tr><td>info_tip</td> <td>date_completed</td> <td>other_data</td>
+<td>track_number</td> <td>companies</td></tr>
+
+<tr><td>interaction_period</td> <td>cookie_raw</td> <td>thumbnail</td>
+<td>categories</td> <td>conversation_id</td></tr>
+
+<tr><td>profession</td> <td>percent_complete</td> <td>bit_rate</td>
+<td>thumbnail_format</td> <td>pager</td></tr>
+
+<tr><td>year_published</td> <td>end_date</td> <td>artist</td>
+<td>assistant</td> <td>due_date</td></tr>
+
+<tr><td>start_time</td> <td>date</td> <td>native_size</td> <td>doc_id</td>
+<td>to</td></tr>
+
+<tr><td>home_fax</td> <td>format</td> <td>owner</td> <td>replyto</td>
+<td>mobile_phone</td></tr>
+
+<tr><td>original_date</td> <td>comment</td> <td>timestamp</td>
+<td>machine_name</td> <td>lyrics</td></tr>
+
+<tr><td>email1</td> <td>web_page</td> <td>email3</td> <td>folder_name</td>
+<td>primary_phone</td></tr>
+
+<tr><td>bookmarked</td> <td>length</td> <td>type</td> <td>title</td>
+<td>mail_id</td></tr>
+
+<tr><td>wedding_anniversary</td> <td>message_time</td> <td>company_name</td>
+<td>buddy_name</td> <td>location</td></tr>
+
+<tr><td>content</td> <td>component_id</td> <td>last_modified_time</td>
+<td>shortcut_target</td> <td>internet_shortcut_name</td></tr>
+
+<tr><td>cc</td> <td>company_phone</td> <td>subject</td>
+<td>business_address</td> <td>album_title</td></tr>
+
+<tr><td>attendees</td> <td>spouse</td> <td>language</td> <td>nickname</td>
+<td>other_address</td></tr>
+
+<tr><td>uri</td> <td>from</td> <td>cookie</td> <td>component_guid</td>
+<td>hobbies</td></tr>
+
+<tr><td>recurrence_pattern</td> <td>organizer</td> <td>email2</td>
+ <td>im_address</td> <td>manager_name</td></tr>
+ 
+<tr><td>children_names</td> <td>actual_work</td> <td>user_name</td></tr>
+</tbody></table>
+
+<a name="individualresultnative"></a><h5>Individual Search Result Items for Native Plug-ins</h5>
+
+    <p><font size="-1">The following is the interface for
+    </font><code>IGoogleDesktopQueryResultItem</code><font size="-1">,
+    the native plug-in individual result item.</font></p>
+
+    <p><font size="-1">
+    <code>interface IGoogleDesktopQueryResultItem: IDispatch</code>
+    <ul>
+      <li>
+        <code>GetProperty</code><font size="-1">: Looks up and returns
+	  property values.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>BSTR prop_name</code><font size="-1">:
+	          Property name to look up the value of.</font></li>
+              <li><code>[out, retval] VARIANT* value</code><font
+	        size="-1">: Value of the property argument for this result.
+                </font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>RemoveFromIndex</code><font size="-1">: Removes either
+        only this item or all versions of this item from the Desktop
+	index (for email items, the latter means removing all messages
+	in its thread). Note that you must have a read-write Query API
+        registration cookie for this method to work; if not you'll get
+        an "Access Denied" error.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>VARIANT_BOOL remove_all_related_versions</code>
+	      	<font size="-1">: If
+		</font><code>VARIANT_TRUE</code><font size="-1">, all 
+		versions are removed. If 
+		</font><code>VARIANT_FALSE</code><font size="-1">,
+                only this single item is removed.</font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+      <li>
+        <code>schema</code><font size="-1">: Returns the name of the
+        item's schema.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>[out, retval] BSTR* schema_name</code><font
+	        size="-1">: Name of this item's schema
+                </font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+
+      <li>
+        <code>versions</code><font size="-1">: Returns either a list
+	of emails in this item's thread (if the item is an email) or
+	a list of all file versions (if the item is a file) in the
+	Desktop index.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>[out, retval] IGoogleDesktopDocumentVersions**
+	      ret</code><font size="-1">: List of item's versions or
+	      other messages in its thread.</font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+   </ul></li></ul>
+
+<a name="individualresultscript"></a><h5>Individual Search Result Items for Script Plug-ins</h5>
+
+<p><font size="-1">The following code from the
+  </font><code>lucky.js</code><font size="-1"> example shows how to
+  get various properties from each individual result item in a result
+  set. The </font><code>message()</code><font size="-1"> method is a
+  basic output method defined early in the script.</font>
+<pre><code>
+  //Get the next individual search result item from the recordset  
+  var item = set.Next()
+  if (item != null) {
+    // First output the URI of the item we found
+    message(item("uri"));
+    // Now output the text representation of the content
+    message(item("text_content"));
+    // Alternatively, we could output the content in its native form
+    // message(item("content"));
+  } else {
+    message("no item found!");
+  }
+</code></pre></p>
+
+<p><font size="-1">The </font><code>remove_from_index.js</code><font
+size="-1"> example shows first how to build a query whose results
+are restricted by being a specific filename in a specific folder, as 
+well as a script that removes from the Desktop index all result items
+from a search query.</font></p> 
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<a name="itemversions"></a><h4>Item Versions</h4>
+
+<p><font size="-1">The result item's </font><code>version</code><font
+size="-1"> property requires a bit of explanation. Its value is a
+document versions object, which is a collection of individual query
+result items. These are the same individual result items described
+in the previous section; in other words, an individual search result
+object can contain other individual result objects in its
+</font><code>version</code><font size="-1"> property.</font></p>
+
+<p><font size="-1">For an email message, its version contents are the other
+email messages in the same thread. For a file, its version contents
+are any other versions of that file, either from an earlier or a later
+time, indexed by Desktop.</font></p>
+
+<p>The method of accessing individual versions is different from how
+individual results are gotten from a search result recordset. The 
+</font><code>count</code><font size="-1"> property's value is
+the number of versions in the document versions object.
+The </font><code>Item()</code><font size="-1"> method takes a 0-based
+index value and returns the result item object at that location. 
+Note that the versions are not ordered other than by their index
+value; version 0 is not necessarily the earliest or latest version,
+version 1 may be earlier or later than version 0, etc.</font></p>
+
+<a name="itemversionsnative"></a><h5>Item Versions in Native Plug-ins</h5>
+
+    <p><font size="-1">
+    <code>interface IGoogleDesktopDocumentVersions: IDispatch</code>
+    <ul>
+      <li>
+        <code>count</code><font size="-1">: Number of separate
+          versions in this object.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>[out, retval] long* ret</code><font
+	        size="-1">: Number of indexed versions of this item.
+                </font></li>
+            </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+            </ul>
+          </li>
+        </ul></li>
+
+        <li>
+        <code>Item</code><font size="-1">: Takes an index value and
+        returns the result item stored at that location in the
+        document versions list.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li><code>long index</code>
+	      	<font size="-1">: Index value of the version to be
+                 returned.</font></li>
+              <li><code>[out, retval] IGoogleDesktopQueryResultItem**
+	        ret</code><font size="-1">: The item at the position
+		provided by the </font><code>index</code><font
+                size="-1"> argument.</li>
+              </ul></li>
+          <li>
+            <font size="-1"><i>Returns</font></i><font size="-1">: 
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful.</font></li>
+              <li>
+                <font size="-1">Appropriate error on failure.</font></li>
+	      </ul>
+        </li></ul></li></ul>
+
+<a name="itemversionsscript"></a><h5>Item Versions in Script Plug-ins</h5>
+
+<p><font="-1">The versions collection has one function,
+</font><code>Item(index)</code><font size="-1"> and one property,
+</font><code>count</code><font size="-1">, which function as described
+above.</font></p>
+
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<a name="httpxml"></a><h4>HTTP/XML-Based Query API</h4>
+
+<h4><a name="gettingstarted2" id="gettingstarted2"></a>Getting Started</h4>
+
+            <p><font size="-1">From here to the end of the document,
+            we cover how to use the former HTTP/XML-based Query
+            API. As stated in the beginning, this is for reference use
+            only for existing plug-ins that used this approach. Any
+            new plug-ins should use the new Query API described
+            previously.</font></p>
+
+            <p><font size="-1"> To issue GD HTTP/XML search queries
+                you will need to know, in addition  
+                to the information in this document: </font>
+            </p>
+            <ul>
+              <li>
+                <font size="-1">How to issue an HTTP request.</font></li>
+              <li>
+                <font size="-1">How to process an XML-format HTTP response.</font></li>
+            </ul>
+
+
+ <h4><a name="requesting" id="requesting"></a>Requesting a Desktop Search</h4>
+
+            <p><font size="-1">Your application requests a desktop search by sending an HTTP 
+                request that includes a </font><code>&amp;format=xml</code><font size="-1"> parameter 
+                to Google Desktop. For example, to search for "Google" you'd send something 
+                like:<br>
+                <br>
+              </font><code>http://127.0.0.1:4664/search&amp;s=1ftR7c_hVZKYvuYS-RWnFHk91Z0?q=Google&amp;format=xml</code><font size="-1"></font></p>
+            <p>
+              <font size="-1">To break this down:</font>
+            </p>
+            <ul>
+              <li>
+                <code>http://127.0.0.1:4664/</code><font size="-1"> is the localhost address and 
+                  GD port. </font><code>search&amp;s=1ftR7c_hVZKYvuYS-RWnFHk91Z0</code><font size="-1">
+                  is the search command and a security token. </font><code>?q=Google</code> <font size="-1">
+                  is the query term(s) parameter. </font>
+                <br>
+                <ul>
+                  <li>
+                    <font size="-1">If you want to search for more than one term, separate the terms 
+                      with <code>+</code>s. For example, to search for both "Google" and "GD", use:<br>
+                    </font><code>?q=Google+GD</code><br>
+                  <li>
+                    <font size="-1">If you want to search for a specific phrase, separate the terms 
+                      with <code>+</code>s and surround the phrase with </font><code>%22</code><font size="-1">s. 
+                      For example, to search for the phrase "Google Desktop", use: </font><code>?q=%22Google+Desktop%22</code><font size="-1">
+                      To search for the two phrases "Google Desktop" and "Copyright 2005", use </font>
+                    <code>?q=%22Google+Desktop%22+%22Copyright+2005%22</code>
+                  </li>
+                </ul>
+                <br>
+              <li>
+                <code>&amp;format=xml</code><font size="-1"> specifies that the HTTP response 
+                  returns the search results in XML format, as described in the next section. </font>
+              </li>
+            </ul>
+            <p><font size="-1">Note that these requests
+                <span style="font-style: italic;">only</span>
+                do a desktop search, not both a web and desktop search.The search query URL, 
+                including your security token, is stored in the registry at:<br>
+                <br>
+              </font><code>HKEY_CURRENT_USER\Software\Google\Google Desktop\API\search_url</code></p>
+            <p>
+              <font size="-1">To use the example above, the stored query URL would be something 
+                like:</font>
+            </p>
+            <pre>http://127.0.0.1:4664/search&amp;s=1ftR7c_hVZKYvuYS-RWnFHk91Z0?q=</pre>
+            <font size="-1">To create a query, all you have to do is append your query terms 
+              and the final</font><code>&amp;format=xml</code><font size="-1"> parameter to 
+              the stored query URL. </font>
+            <p><font size="-1">By default, an HTTP search response will only return the first 
+                ten results. You can specify a larger number by appending the</font> <code>&amp;num=</code><font size="-1">
+                parameter, followed by the maximum number of results you'd like returned, to 
+                your query. There is no problem if the maximum number argument value is greater 
+                than the total number of search results; only the total number of results is 
+                returned, with no null "results".</font></p>
+            <p><font size="-1">You can also specify at what point in the results the returned 
+                ones start. For example, if you're using the default value of 10 returned 
+                results and want to get back results 11-20 instead of the default results 1-10, 
+                append the</font> <code>&amp;start=</code> <font size="-1">parameter, followed 
+                by the position you want the results to start from. In this example, you'd 
+                specify</font> <code>&amp;start=1</code><code>0</code><font size="-1"> to 
+                indicate you want your returned results to start with the one after overall 
+                result 10. The</font> <code>&amp;start=</code><font size="-1"> and </font><code>
+                &amp;num=</code> <font size="-1">parameters can both be used in a single query.</font></p>
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+			<h4><a name="results" id="results"></a><b>Desktop Search Results</b></h4>
+
+            <p><font size="-1">When it receives a search request with the</font> <code>&amp;format=xml</code>
+              <font size="-1">parameter, GD returns results in an XML format. For example:</font></p>
+            <code>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes" ?&gt;<br>
+              &lt;results count="24945"&gt;<br>
+              &lt;result&gt;<br>
+              &lt;category&gt;file&lt;/category&gt;
+              <br>
+              &lt;id&gt;46384&lt;/id&gt;
+              <br>
+              &lt;title&gt;SDK Developer Documentation&lt;/title&gt;
+              <br>
+              &lt;url&gt;C:\Documents and Settings\me\My 
+              Documents\developerguide.html~&lt;/url&gt;
+              <br>
+              &lt;time&gt;127543068856350000&lt;/time&gt;
+              <br>
+              &lt;snippet&gt;SDK Developer Documentation &lt;b&gt;Google&lt;/b&gt; Desktop 
+              SDK Developer Guide For Users Download Plug-ins Desktop Search Forum For 
+              Developers&lt;/snippet&gt;
+              <br>
+              &lt;icon&gt;/file.gif&lt;/icon&gt;
+              <br>
+              &lt;cache_url&gt;http://127.0.0.1:4664/... &lt;/cache_url&gt;
+              <br>
+              &lt;/result&gt;<br>
+              <br>
+              ...<br>
+              <br>
+              &lt;/results&gt;<br>
+            </code>
+            <p><font size="-1">The one meta- results tag is</font> <code>&lt;results&gt;</code><font size="-1">, 
+                which contains the total number of items that matched the query as the value of 
+                a </font><code>count</code><font size="-1"> parameter; e.g. </font><code>&lt;results 
+                count=42&gt;</code><font size="-1">. This will be the largest number of 
+                possible </font><code>&lt;result&gt;</code>...<code>&lt;/result&gt;</code><font size="-1">
+                entries in the </font><code>&lt;results&gt;</code> <font size="-1">element. 
+                However, if the number of returned results (which defaults to at most 10 if you 
+                don't specify an </font><code>&amp;num=</code> <font size="-1">parameter with a 
+                larger value) is different from the </font><code>count</code><font size="-1"> value, 
+                the number of returned </font><code>&lt;result&gt;</code>...<code>&lt;/result&gt;</code>
+              <font size="-1">entries will be the smaller of the two conflicting values. </font>
+            </p>
+            <p><font size="-1">For example, let's say the </font><code>&lt;count&gt;</code><font size="-1">
+                value is 42. But you didn't give an </font><code>&amp;num=</code> <font size="-1">
+                argument in the query. So, despite there being 42 items that matched the query, 
+                the XML response will only contain 10 </font><code>&lt;result&gt;</code>...<code>&lt;/result&gt;</code><font size="-1">
+                entries. If the</font> <code>&lt;count&gt;</code><font size="-1"> value was 6, 
+                which is smaller than the default 10 value, the XML response will only contain 
+                6 </font><code>&lt;result&gt;</code>...<code>&lt;/result&gt;</code><font size="-1">
+                entries.</font></p>
+            <p><font size="-1"> If you want to be sure to obtain all search results, your 
+                component will have to parse out the </font><code>&lt;count&gt;</code><font size="-1">
+                value and then issue additional HTTP GD search requests to retrieve that many 
+                results via use of either the </font><code>&amp;start=</code> <font size="-1">or
+              </font><code>&amp;num=</code><font size="-1"> parameters.</font></p>
+            <p>
+              <font size="-1">Each</font> <code>&lt;result&gt;</code> <font size="-1">may 
+                include the following fields, which may appear in any order. Which fields 
+                appear will depend on the result type; for example, the</font> <code>&lt;from&gt;</code>
+              <font size="-1">entry should only show up in email or chat results. Each tag will 
+                contain a value; any tags not containing a value are not shown. </font>
+            </p>
+            <ul>
+              <li>
+                <code>&lt;category&gt;</code><font size="-1"> contains the result's type, one of: </font>
+                <ul>
+                  <li>
+                    <code>email</code>
+                  </li>
+                  <li>
+                    <code>chat </code>
+                  </li>
+                  <li>
+                    <code>web</code>
+                  </li>
+                  <li>
+                    <code>file</code>
+                  </li>
+                  <li>
+                    <code>contact</code>
+                  </li>
+                  <li>
+                    <code>calendar</code>
+                  </li>
+                  <li>
+                    <code>task</code>
+                  </li>
+                  <li>
+                    <code>journal</code>
+                  </li>
+                  <li>
+                    <code>note</code>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>&lt;id&gt;</code><font size="-1">&nbsp; is the result's GD internal 
+                  identifier. </font>
+              </li>
+              <li>
+                <code>&lt;title&gt;</code><font size="-1">&nbsp; is the result's title, which 
+                  varies depending on its type, for example: </font>
+                <ul>
+                  <li>
+                    <font size="-1">Web page: the page's title. </font>
+                  </li>
+                  <li>
+                    <font size="-1">Email: the message's Subject:. </font>
+                  </li>
+                  <li>
+                    <font size="-1">File: its filename.</font>
+                  </li>
+                  <li>
+                    <font size="-1">Chat: a line from the chat. </font>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>&lt;url&gt;</code> <font size="-1">is the result's URL. For files and web 
+                  pages, this is the usual path to the result. For chats and email messages, 
+                  Google Desktop generates a URL for the location where it has stored its cached 
+                  copy. </font>
+              </li>
+              <li>
+                <font size="-1"></font><code>&lt;time&gt;</code><font size="-1"> is the time 
+                  value from the event that put this content into GD. Usually this will be the 
+                  time the content was indexed by GD, but, for example, it could also be a file's 
+                  last modified time. The format is per the Windows FILETIME structure; the 
+                  number of 100-nanosecond intervals since January 1, 1601 represented as a 
+                  64-bit number.</font>
+              </li>
+              <li>
+                <code>&lt;snippet&gt;</code><font size="-1"> is a snippet from the result's 
+                  content that contains at least one of the search terms. </font>
+              </li>
+              <li>
+                <code>&lt;icon&gt;</code><font size="-1"> is a Google Desktop-relative URL to an 
+                  icon representing this result or its type. This will either be one of the 
+                  standard Google Desktop Search result type icons (envelope for email, Word icon 
+                  for a Word file, etc.) or a favicon obtained from a website. </font>
+              </li>
+              <li>
+                <code>&lt;thumbnail&gt;</code> <font size="-1">is a relative URL to the icon for 
+                  this result at the GD webserver</font>
+              </li>
+              <li>
+                <code>&lt;from&gt;</code><font size="-1"> is the name of either the person an 
+                  email message was from, or the other party in an Instant Message chat.</font>
+              </li>
+              <li>
+                <code>&lt;cache_url&gt;</code><font size="-1"> is the Google Desktop-relative URL 
+                  of this result's internal cache page. </font>
+              </li>
+            </ul>
+            <p><font size="-1">If you want to experiment with queries to see what their XML 
+                format results look like, just do a desktop search from the browser. Then 
+                append </font><code>?format=xml</code><font size="-1"> to the result's URL, hit 
+                Enter, and the same results will display in XML format in the browser. Two 
+                caveats: first, only the number of results that originally appeared on one 
+                results page will show up in the browser in XML. So, for example, if only 10 
+                HTML format results show up in the browser on one results page, only 10 XML 
+                format results will appear in the browser, even if the value of</font> <code>&lt;total-results&gt;</code><font size="-1">
+                is, say, 42. Second, your browser must include an XML viewer, which IE and 
+                Firefox do by default.</font></p>
+            <p><font size="-1">Finally, note that the XML results do
+                <span style="font-style: italic;">not</span>
+                include the search terms. If your application wants to also make use of the 
+                search terms, as well as the results, it will have to keep track of what they 
+                were.</font></p>
+            <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+            <p></p>
+		
+		
+		  
+		  
+       
+          </td>
+        </tr>
+        <tr valign="top">
+          <td colspan="2">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+                </tr>
+              </tbody></table>
+            <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 
+                        Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> 
+                        - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright 
+                          Notices</a> </font>
+                    </div>
+                  </td>
+                </tr>
+              </tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+  </body>
+</html>

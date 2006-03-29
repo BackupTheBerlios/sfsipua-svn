@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Hello World'
+  Icon=''
+  Description='Says Hello World'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='5F1AAC6B-83B9-48e2-804B-E77AD19C9EC8'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

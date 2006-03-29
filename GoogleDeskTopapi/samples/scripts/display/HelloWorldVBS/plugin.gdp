@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Hello World VBS'
+  Icon=''
+  Description='Says Hello World, written in VBScript'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='935AABE7-6F4C-4de6-B68C-F5CE0063488F'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.vbs' Main='true' />
+  <File Src='1033\strings.vbs' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

@@ -1,0 +1,7 @@
+; GoogleDesktopCurrencyConversionSample.def : Declares module exports
+LIBRARY "GoogleDesktopCurrencyConversionSample.DLL"
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

@@ -1,0 +1,1047 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Display API Documentation</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Display API Documentation</b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Display API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>
+	</td>
+    <td>
+    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+    <p><font size="-1"><a href="#overview"><b>Overview</b></a></font></p>
+    <ul>
+      <li>
+        <font size="-1"><a href="#gettingstarted">Getting Started</a></font>
+      <li>
+        <font size="-1"><a href="#devprocess">Development Process Overview</a></font></li>
+    </ul>
+    <p><font size="-1"><a href="#api"><b>Display API</b></a></font></p>
+    <ul>
+      <li>
+        <font size="-1"><a href="#registering">Registering Display Plug-ins</a></font>
+      <li>
+        <font size="-1"><a href="#interfaces"><font size="-1">Displaying and Interacting with 
+              Display Plug-ins</font></a></font>
+      <li>
+        <font size="-1"><a href="#details"><font size="-1">Details View </font></a></font>
+      <li>
+        <font size="-1"><a href="#notifications"><font size="-1">Notifier</font></a></font></li>
+    </ul>
+
+    <font size="-1">
+      <br>
+    </font><a name="overview"></a><b>Overview</b>
+    <hr align="left" color="#3399cc" noshade size="1">
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top">
+
+    <h4><a name="gettingstarted"></a>Getting Started
+    </h4>
+
+    <p><font size="-1">Google Desktop can host applications and plug-ins 
+       that provide useful visual information to the user. 
+       GD can display content from these applications and
+       plug-ins in the Google Desktop Sidebar and the Notifier/alert window.
+        </font></p>
+        
+    <p><font size="-1">To create a display module that works with Google Desktop, 
+        you need</font>
+    </p>
+    <ul>
+      <li>
+        <font size="-1">Programming tools to create a plug-in and an 
+          installer. </font>
+      <li>
+        <font size="-1">Programming knowledge of the Microsoft Windows Component Object 
+          Model (COM). </font>
+      </li>
+    </ul>
+</td>
+<td valign="bottom" ><div align="right"><img src="images/sidebar_expand1.gif" width="156" height="395"></div></td>
+</tr>
+<tr>
+              <td colspan="2"><div align="right">
+              <div align="right"><img src="images/sidebar_expand2.gif" width="529" height="253"></div></td>
+
+                  </tr>
+                </table>
+
+    <h4><a name="devprocess"></a>Development Process Overview
+    </h4>
+    <p><font size="-1">To develop a display plug-in, start by downloading the SDK, in 
+        particular the </font><code><a href="GoogleDesktopDisplayAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopDisplayAPI.idl</a></code><font size="-1">
+        file. We recommend using Microsoft Visual Studio for developing
+        the plug-in.</font></p>
+    <p><font size="-1">You will then need to write code (in any COM compatible 
+        language) to: </font>
+    <ul>
+      <li>
+        <font size="-1">Register your plug-in with Google Desktop (required). </font>
+      <li>
+        <font size="-1">Implement the interfaces required by Google Desktop Display API. </font>
+      <li>
+        <font size="-1">Unregister your plug-in with Google Desktop when 
+          uninstalling. </font>
+      </li>
+    </ul>
+    <p><font size="-1">We recommend that you look over the sample code provided with 
+        the SDK. Please note that the sample code examples have their GUIDs hardcoded, 
+        so if you choose to reuse code from there you must change the interfaceIDs, 
+        classIDs, and libIDs.</font></p>
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+
+
+    <a name="api"></a><b>Display API</b>
+    <hr align="left" color="#3399cc" noshade size="1">
+    <h4 id="registering">Registering Display Components</h4>
+    <p><font size="-1">Google Desktop does not accept unregistered components. 
+        Display
+        component registration is a one-time process done using the </font><code>IGoogleDesktopRegistrar</code><font size="-1">
+        interface, and should be done during component installation. As part of the 
+        registration process, the component must provide its GUID as well as 
+        information about itself that will be added to the GD preferences UI.</font></p>
+    <p><font size="-1">As part of its own uninstallation process, a component should 
+        unregister itself with Google Desktop.</font></p>
+    <font size="-1"><b>Component Registration Interface Summary </b></font>
+    <p><font size="-1">The following summarizes the interface and its methods. All 
+        method return values are of type</font> <code>HRESULT</code><font size="-1">. </font>
+    </p>
+    <code>interface IGoogleDesktopComponentRegister: IDispatch</code>
+    <ul>
+       <li>
+        <font size="-1"><b>Note:</b> Components are required to to call this 
+          interface to register themselves with Google Desktop before they can interact 
+          with any APIs or other provided services. </font>
+        <br>
+      <li>
+        <font size="-1"><b>Note:</b> The registration process consists of a call to </font>
+        <code>StartComponentRegistration</code> <font size="-1">followed by individual 
+          registrations for various services 
+ obtained through</font> <code>GetRegistrationInterface</code>
+  <font size="-1">
+          and finished by a call to </font><code>FinishComponentRegistration.</code>
+<font size="-1">For display components, the
+registration progid is "GoogleDesktop.DisplayPluginRegistration" 
+and the interface is</font> <code>IGoogleDesktopRegisterDisplayPlugin</code>.
+        <br>
+      <li>
+        <code>StartComponentRegistration</code><font size="-1">: Must be invoked by any 
+          component to initiate the registration process. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR component_guid_or_progid</code><font size="-1">: The component's GUID 
+                  or ProgID.</font>
+              <li>
+                <code>VARIANT</code> <font size="-1">component_description: A </font><code>SAFEARRAY</code>
+                <font size="-1">of pairs, where the first element is a descriptive parameter name 
+                  and the second element is that parameter's value. The method expects only the 
+                  following three required parameters, which should be given in this order. </font>
+                <ul>
+                  <li>
+                    <font size="-1">&quot;</font><code>Title</code><font size="-1">&quot;: Component title that 
+                      will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">&quot;</font><code>Description</code><font size="-1">&quot;: Component 
+                      description that will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">&quot;</font><code>Icon</code><font size="-1">&quot;: A string pointing to 
+                      an ICON resource, of the form &quot;</font><code>c:\program files\boo\comp.dll,23</code><font size="-1">&quot;. 
+                      This icon may be used to indicate the component and its results on various GD 
+                      pages.</font>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <code>E_COMPONENT_ALREADY_REGISTERED</code> <font size="-1">if this component has 
+                  already been registered with GD.</font>
+              <li>
+                <font size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <br>
+      <li>
+        <code>GetRegistrationInterface</code><font size="-1">: Provides the requested 
+          type of registration interface. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR registration_type</code><font size="-1">: a stringified CLSID or a 
+                  progid to the type of registration required. The following progids are defined: 
+                  &quot;GoogleDesktop.ExtensionRegistration&quot;, 
+                  &quot;GoogleDesktop.DisplayPluginRegistration&quot;, 
+                  &quot;GoogleDesktop.ActionRegistration&quot;.</font>
+              <li>
+                <code>[out, retval] IUnknown **registration_interface</code><font size="-1">: </font>
+                <font size="-1">provides the requested registration mechanism. </font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <br>
+      <li>
+        <code>FinishComponentRegistration</code><font size="-1">: Must be invoked 
+          to finish the registration process. </font>
+        <ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <br>
+      <li>
+        <code>UnregisterComponent</code>
+        <ul>
+          <li>
+            <i><font size="-1">Arguments</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>BSTR component_guid_or_progid</code>: <font size="-1">the same GUID used 
+                  when registering the component. </font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code><font size="-1"> if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <b><font size="-1">Component Registration Code Template </font></b>
+    <p><font size="-1">The following template registers a component.
+        Note that this 
+        registration should only be done once, not every time the plug-in starts. </font>
+    </p>
+    <p><font size="-1">To register a component in C++ (for C#, please 
+       <a href="#register_csharp">see below</a>):</font><br>
+
+      <font face="Courier New, Courier, mono"> 
+        <pre>
+  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) {
+    ATLASSERT(spRegistrar != NULL);
+    
+    // Component description is 6 strings
+    CComSafeArray&lt;VARIANT&gt; arr_descr(6);
+
+    arr_descr.SetAt(0, CComVariant(L&quot;Title&quot;));
+    arr_descr.SetAt(1, CComVariant(title));
+    arr_descr.SetAt(2, CComVariant(L&quot;Description&quot;));
+    arr_descr.SetAt(3, CComVariant(description));
+    arr_descr.SetAt(4, CComVariant(L&quot;Icon&quot;));
+    arr_descr.SetAt(5, CComVariant(icon));
+
+    // our CLSID in string format
+    CComBSTR our_clsid(clsid);
+    
+    // Wrap description array in variant
+    CComVariant descr(arr_descr.m_psa);
+
+    // and register
+    hr = spRegistrar-&gt;StartComponentRegistration(our_clsid, descr);
+    if (FAILED(hr))
+      return hr;
+
+    // success, now register as a display component.
+    // This two step registration allows the same plugin to implement multiple
+    // components
+    CComPtr&lt;IGoogleDesktopRegisterDisplayPlugin&gt; spRegistration;
+
+    CComBSTR sidebar_registrar_progid(&quot;GoogleDesktop.DisplayPluginRegistration&quot;);
+    hr = spRegistrar-&gt;GetRegistrationInterface(sidebar_registrar_progid,
+    reinterpret_cast&lt;IUnknown**&gt;(&amp;spRegistration));
+  ATLASSERT(FAILED(hr) || spRegistration);
+
+  if (SUCCEEDED(hr)) {
+    // set to true if you use the notifier
+    bool show_notifications = false;
+      
+    hr = spRegistration-&gt;RegisterPlugin(our_clsid, (shows_notifications) ?
+      VARIANT_TRUE : VARIANT_FALSE);
+
+    if (SUCCEEDED(hr)) {
+      hr = spRegistrar-&gt;FinishComponentRegistration();
+    }
+  }
+</pre>
+      </font>
+
+    <p><font size="-1"><a name="register_csharp">To</a> 
+       register a component in C#:</font><br>
+
+      <font face="Courier New, Courier, mono"> 
+        <pre>
+  try {
+    // Create the registrar object
+    GoogleDesktopRegistrarClass registrar = new GoogleDesktopRegistrarClass();
+
+    // Start component registration by specifying our attributes
+    object[] descriptions = {
+      "Title", pluginName,       // a string
+      "Description", pluginName,
+      "Icon", ""
+    };
+    registrar.StartComponentRegistration(controlGuid, descriptions);
+
+    // A single component can register for multiple plugins with Google 
+    // Desktop. Here we register a single display plugin.
+    IGoogleDesktopRegisterDisplayPlugin displayRegistration = 
+      (IGoogleDesktopRegisterDisplayPlugin)
+      registrar.GetRegistrationInterface("GoogleDesktop.DisplayPluginRegistration");
+
+    displayRegistration.RegisterPlugin(controlGuid, false);
+
+    // Done with component registration.
+    registrar.FinishComponentRegistration();
+  } catch (Exception e) {
+    MessageBox.Show("Exception thrown during registration. Description=" + 
+                    e.Message);
+  }
+        </pre>
+      </font>
+
+    <p><font size="-1">To unregister a component in C++:</font><br>
+
+      <font face="Courier New, Courier, mono">
+        <pre>  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) { 
+    // our CLSID in string format
+    CComBSTR bstrClsid(clsid);
+  
+    hr = spRegistrar-&gt;UnregisterComponent(bstrClsid);
+  }
+</pre>
+      </font>
+
+    <p><font size="-1">To unregister a component in C#:</font>
+
+      <font face="Courier New, Courier, mono"> 
+        <pre>
+  try {
+    // Create the registrar object
+    GoogleDesktopRegistrarClass registrar = new GoogleDesktopRegistrarClass();
+
+    // Unregister ourselves
+    registrar.UnregisterComponent(controlGuid);
+  } catch (Exception e) {
+    MessageBox.Show("Exception thrown during registration. Description=" + e.Message);
+  }
+        </pre>
+      </font>
+
+    
+    
+    <h4><a name="interfaces"></a>Displaying and Interacting with Display Plug-ins</h4>
+    <p><font size="-1">After a successful registration with Google Desktop, a component 
+        can use the Display APIs to display itself and interact with the 
+        GD
+        framework.</font></p>
+    <p><font size="-1"> 
+        Each Sidebar plug-in is given a 
+        rectangular window of space (negotiated between the Sidebar and the plug-in) and 
+        optionally a title bar. (Notifier display plug-ins appear off to 
+        the side without a title bar.) 
+        The title bar holds an icon and a title string. The 
+        entire region devoted to a plug-in is called the plug-in's
+        <span style="font-style:italic">
+          <span style="font-weight:bold">tile</span>
+        </span>. The users will be able to resize a plug-in's tile according to their 
+        preference.</font></p>
+
+    <p><font size="-1">The Display API is a set of COM interfaces, some of which are 
+        exposed by Google Desktop and the rest implemented by the plug-ins.  
+        Plug-ins must be implemented as ActiveX controls.  They
+        may optionally expose 
+        some of the interfaces defined in the Display API.  
+        (It is possible to create plug-ins that don't use the Display API. 
+        However as expected these plug-ins can not use the features offered 
+        by Google Desktop.)<br>
+        <br>The Display API defines the following interfaces:
+    </font></p>
+    <ol>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplaySite</span>: This 
+      is the interface exposed by GD most useful to its display plug-ins.
+      </font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayPlugin</span>: All 
+      display plug-ins aware of GD must implement this interface.
+      </font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayPluginHelper</span>: A 
+      helper interface. This interface implements a complete display plug-in and can 
+      display and manage data given by the plug-in. Plug-in developers are recommended 
+      to use this component (through COM aggregation)
+      to maintain a standard look and feel to the Sidebar.</font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayContentItem</span>:
+        Plug-ins create objects implementing this interface and pass them  
+        the display Plug-in Helper functions to display and manage their 
+        content.</font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayContentItemHandler</span>: 
+      Plug-ins which aggregate and use the above helper object implement this to 
+      receive callbacks about user interaction with the displayed 
+      content.</font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayDetailsViewHelper</span>:
+      A Display component that can be instantiated and used by plug-ins to 
+      show more details about a particular content item.</font>
+      <li><font size="-1">
+        <span style="font-weight:bold">IGoogleDesktopDisplayDetailsViewHandler</span>:
+        Plug-ins using the above helper object implement this interface to receive 
+        callbacks about user interaction with the displayed content 
+        details.</font>
+      </li>
+    </ol>
+    <p><font size="-1">In addition to the above interfaces, Google Desktop also uses the following 
+      standard COM interfaces.</font>
+      <ol>
+        <li><font size="-1">
+          <span style="font-weight:bold">IContextMenu: </span>Google Desktop displays a 
+        context menu when the user right-clicks or selects the appropriate icon in a 
+        Sidebar panel. This context menu will include standard menu items created by 
+        Google Desktop and can also include items added by the plug-in. 
+        Display plug-ins that need to 
+        add items to the context menu must implement the IContextMenu interface and 
+        Google Desktop will use this interface to add and invoke plug-in 
+        specific context menu items.</font>
+        <li><font size="-1">
+          <span style="font-weight:bold">IPersistStreamInit</span>:
+        Display plug-ins with persistent data (such as settings) must implement this 
+        interface and Google Desktop will use this interface to load and 
+        store the plug-in's persistent data.</font>
+        <li><font size="-1">
+          <span style="font-weight:bold">ISpecifyPropertyPages/IPropertyPage</span>:
+          Plug-ins having configurable options will implement these two interfaces to 
+          manage their options in property pages.</font>
+        </li>
+      </ol>
+    <p><font size="-1">A display plug-in developer can implement a UI himself
+      or use the helper UI framework to 
+      display information and get the user input in a uniform way.</font>
+    </p>
+
+    <p><font size="-1">In the first case the developer is required to 
+       implement only the <b>IGoogleDesktopDisplayPlugin</b>
+      interface.</font>
+    </p>
+    <code>interface IGoogleDesktopDisplayPlugin</code>
+    <br>
+    <ul>
+      <li>
+        <code>OnCommand</code><font size="-1">: Called by GD with any of the 
+          GDD_CMD_* identifiers to execute the specific command. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>GoogleDesktopDisplayPluginCommand command</code><font size="-1">: One of 
+                  the GoogleDesktopDisplayPluginCommand (e.g. GDD_CMD_STATE_MINIMIZED).</font></li></ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>        
+      <li>
+        <code>OnDisplayStateChange</code><font size="-1">: Called by GD with any of the 
+          GDD_TILE_DISPLAY_STATE_* identifiers to inform about display 
+          state changes. One especially interesting state is
+          GDD_TILE_DISPLAY_STATE_POPPED_OUT; this signals that the user
+          clicked the pop-out button (labeled &lt;&lt;).  
+          Your plug-in might handle this by 
+          displaying more content. By default all content shown in the 
+          plug-in's tile in the sidebar will be shown in the pop-out view.
+          </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>GoogleDesktopDisplayTileDisplayState state</code><font size="-1">: One of 
+                  the GoogleDesktopDisplayTileDisplayState (e.g. GDD_TILE_DISPLAY_STATE_MINIMIZED).</font></li></ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>        
+      <li>
+        <code>GetInfo</code><font size="-1">: Called by GD to get plug-in 
+          info and inform it about its position. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[in, out] GoogleDesktopDisplayTileInfo *tile_info</code><font size="-1">: 
+                  Data structure containing in/out information. The plug-in need to set the 
+                  required information in this struct.</font></li></ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p><font size="-1">Several methods are available on the <b>IGoogleDesktopDisplaySite</b>
+      interface that can be used by a plug-in to control its title, context menu, 
+      display details windows etc.
+    </font></p>
+    <p><font size="-1">
+       Developers who wish to take advantage of the helper UI framework 
+      can use the <b>IGoogleDesktopDisplayPluginHelper</b> interface 
+      (together with (<b>IGoogleDesktopDisplayContentItem</b> and 
+       <b>IGoogleDesktopDisplayPluginHandler</b>) 
+      which implements a complete display plug-in. The developer can add content items 
+      and receive callbacks about the user interaction with the content. Below are 
+      some of the interesting methods on these interfaces.</font>
+    </p>
+     
+    
+    <code>interface IGoogleDesktopDisplayPluginHelper: IDispatch</code>
+    <br>
+    <ul>
+      <li>
+        <code>put_title</code><font size="-1">: Set the plug-in's title string. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR title</code><font size="-1">: String to use for the title.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>SetFlags</code><font size="-1">: Set the plug-in's flags that will be passed 
+          onto GD when requested and content flags specifying properties of 
+          all content items. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>GoogleDesktopDisplayPluginFlags plugin_flag</code><font size="-1">: 
+                  Combination of plug-in flags.</font></li>
+              <li>
+                <code>GoogleDesktopDisplayContentFlags content_flags</code><font size="-1">: 
+                  Combination of content flags.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>SetIcons</code><font size="-1">: Set the icons used for this plug-in. 
+          The small icon is used in the title and the large icon is used for 
+          notifications/about dialog.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>IPicture *small_icon</code><font size="-1">: 
+                  Picture to use for small icon (10x10 pixels).</font></li>
+              <li>
+                <code>IPicture *large_icon</code><font size="-1">: 
+                  Picture to use for large icon (32x32 pixels).</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>put_about_text</code><font size="-1">: Set the text to display 
+          in the plug-in's about dialog. If you do not call this function, the plug-in will receive 
+          the GDD_CMD_ABOUT_DLG command when the about dialog is invoked.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR about_text</code><font size="-1">: 
+                  Text to show in the about dialog.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>AddContentItem</code><font size="-1">: Add the given item to the displayed 
+          content. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>IGoogleDesktopDisplayContentItem *item</code><font size="-1">: Item to add.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>RemoveContentItem</code><font size="-1">: Removes the item to the displayed 
+          content. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>IGoogleDesktopDisplayContentItem *item</code><font size="-1">: Item to 
+                  remove.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>RemoveAllContentItems</code><font size="-1">: Removes all the displayed 
+          content. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: none</font>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>get_content_items</code><font size="-1">: Get the current list of items.
+          This list includes both currently displayed items and those that were added 
+          recently and not yet displayed.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>[out, retval] SAFEARRAY(VARIANT)* items</code><font size="-1">: 
+                  OUT parameter where the array of items is stored and returned.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <br>       
+      <li>
+        <code>get_max_content_items</code><font size="-1">: Get method for the max number 
+          of items that this plug-in can display.</font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>UINT *max_items</code><font size="-1">: OUT parameter 
+                  where the max number of items is returned.</font></li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+                <br>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li></ul>        
+    
+    
+    <font size="-1"><p>
+          The <b>IGoogleDesktopDisplayContentItem</b> interface encapsulates one content 
+          item. Typical content items include an icon, some text and flags indicating how 
+          the item should be rendered. For example a plug-in showing a list of contacts 
+          can have 5 content items (one for each contact) and each of these items show 
+          the presence status and the name of the contact. When the user clicks on a 
+          content item the plug-in will receive a notification in it's ContentHandler 
+          interface. A plug-in can create COM objects implementing the <b>IGoogleDesktopDisplayContentItem</b>
+          interface or it can use the helper implementation provided by the 
+          ContentItemHelper object.
+        </p>
+        <p>
+          The <b>IGoogleDesktopDisplayContentItemHandler</b> interface handles events 
+          related to a content item. The <b>IGoogleDesktopDisplayContentItemHelper</b> object 
+          provided by the API implements this interface and provides default 
+          implementations for DrawItem and ToggleItemPinnedState methods. If a plug-in 
+          wishes to handle the other methods or to override the default implementations 
+          it can implement this interface in it's ContentItem object and it will be 
+          called before the default processing is done. If the plug-in's implementation 
+          returns E_NOTIMPL then default processing is done for the method.
+        </p></font>
+
+
+        <h4><a name="details"></a>Details View
+        </h4>
+    <p><font size="-1">The Details View is a UI feature that allows a display 
+       plug-in to display additional
+    information in a separate window/panel outside the Sidebar. Plug-ins taking advantage of this
+    feature can also receive notifications and events from the details view. The Detail View is 
+    exposed through the interface <b>IGoogleDesktopDisplayDetailsViewHelper.</b> </font></p>
+
+        
+        <code>interface IGoogleDesktopDisplayDetailsViewHelper: IDispatch</code>
+        <br>
+        <ul>
+          <li>
+            <code>SetContent</code><font size="-1">: Set the content to be displayed in the details view content pane. </font>
+            <ul>
+              <li>
+                <font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li>
+                    <code>BSTR source</code><font size="-1">: Origin of the content, NULL if not relevant.</font></li>
+                  <li>
+                    <code>DATE time_created</code><font size="-1">: Time at which the content was created (in UTC).</font></li>
+                  <li>
+                    <code>BSTR text</code><font size="-1">: Actual text of the content, without any formatting.</font></li>
+                  <li>
+                    <code>VARIANT_BOOL time_absolute</code><font size="-1">: True if the time displayed is in absolute format or relative to current.</font></li>
+                  <li>
+                    <code>GoogleDesktopDisplayContentItemLayout content_layout</code><font size="-1">: Layout of the details, usually the same layout as plug-in content.</font></li>                
+                </ul>           
+              <li>
+                <i><font size="-1">Returns</font></i><font size="-1">: </font>
+                <ul>
+                  <li>
+                    <code>S_OK</code> <font size="-1">if successful. </font>
+                  <li>
+                    <font size="-1">Appropriate error on failure. </font>
+                    <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+         <br>           
+          <li>
+            <code>SetContentFromItem</code><font size="-1">: Set the content to be displayed directly from an item. </font>
+            <ul>
+              <li>
+                <font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li>
+                    <code>IGoogleDesktopDisplayContentItem* item</code><font size="-1">: The item to be displayed.</font></li>
+                </ul>
+              <li>
+                <i><font size="-1">Returns</font></i><font size="-1">: </font>
+                <ul>
+                  <li>
+                    <code>S_OK</code> <font size="-1">if successful. </font>
+                  <li>
+                    <font size="-1">Appropriate error on failure. </font>
+                    <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>          
+          </li></ul>
+        
+        
+    <p><font size="-1">Plug-ins should implement the <b>IGoogleDesktopDisplayDetailsViewHandler</b> interface 
+    if they use the DetailsViewHelper object and want to receive notifications and events from the details view. </font></p>
+       
+        
+        <code>interface IGoogleDesktopDisplayDetailsViewHandler: IUnknown</code>
+        <br>
+        <ul>        
+          <li>
+            <code>ProcessDetailsViewFeedback</code><font size="-1">: Called when the details view shown by this plug-in is closed. </font>
+            <ul>
+              <li>
+                <font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li>
+                    <code>GoogleDesktopDisplayDetailsViewFlags flags</code><font size="-1">: Combination of GoogleDesktopDisplayDetailsViewFlags indicating why it
+                     was closed and additional info such as if the user had given negative feedback in the details view.</font></li>
+                </ul>
+              <li>
+                <i><font size="-1">Returns</font></i><font size="-1">: </font>
+                <ul>
+                  <li>
+                    <code>S_OK</code> <font size="-1">if successful. </font>
+                  <li>
+                    <font size="-1">Appropriate error on failure. </font>
+                    <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>          
+          </li></ul>
+                
+
+        <h4><a name="notifications"></a>Notifier
+        </h4>
+    <p><font size="-1">The Google Desktop Sidebar offers a visual notification mechanism. Content items can be displayed 
+    in a special UI panel that slides from the Sidebar.
+    These are known as "notifiers" or "alerts."</font></p>          
+           
+        
+        <code>interface IGoogleDesktopDisplayNotifier: IDispatch</code>
+        <br>
+        <ul>
+          <li>
+            <code>AddNotification</code><font size="-1">: Queues a new content item to the notifier. </font>
+            <ul>
+              <li>
+                <font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li>
+                    <code>IGoogleDesktopDisplayContentItem* item</code><font size="-1">: Item to be displayed in the UI.</font></li>
+                </ul>
+              <li>
+                <i><font size="-1">Returns</font></i><font size="-1">: </font>
+                <ul>
+                  <li>
+                    <code>S_OK</code> <font size="-1">if successful. </font>
+                  <li>
+                    <font size="-1">Appropriate error on failure. </font>
+                    <br>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li></ul>
+        
+                                
+   <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+      </td>
+    </tr>
+    <tr><td colspan=2>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+    </td></tr>
+
+    </tbody></table>
+</body></html>

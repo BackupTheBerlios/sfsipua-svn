@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleDesktopDisplaySample1", "GoogleDesktopDisplaySample1.vcproj", "{DB4C5399-C120-445D-B2BB-A21EB9873AC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A0D55C3-7C2A-4B61-8F28-6B757052788F} = {5A0D55C3-7C2A-4B61-8F28-6B757052788F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleDesktopComponentCommon", "..\common\GoogleDesktopComponentCommon.vcproj", "{5A0D55C3-7C2A-4B61-8F28-6B757052788F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DB4C5399-C120-445D-B2BB-A21EB9873AC5}.Debug.ActiveCfg = Debug|Win32
+		{DB4C5399-C120-445D-B2BB-A21EB9873AC5}.Debug.Build.0 = Debug|Win32
+		{DB4C5399-C120-445D-B2BB-A21EB9873AC5}.Release.ActiveCfg = Release|Win32
+		{DB4C5399-C120-445D-B2BB-A21EB9873AC5}.Release.Build.0 = Release|Win32
+		{5A0D55C3-7C2A-4B61-8F28-6B757052788F}.Debug.ActiveCfg = Debug|Win32
+		{5A0D55C3-7C2A-4B61-8F28-6B757052788F}.Debug.Build.0 = Debug|Win32
+		{5A0D55C3-7C2A-4B61-8F28-6B757052788F}.Release.ActiveCfg = Release|Win32
+		{5A0D55C3-7C2A-4B61-8F28-6B757052788F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

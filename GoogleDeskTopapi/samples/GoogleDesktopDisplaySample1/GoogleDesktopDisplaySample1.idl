@@ -1,0 +1,48 @@
+// GoogleDesktopDisplaySample1.idl : IDL source for GoogleDesktopDisplaySample1
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (GoogleDesktopDisplaySample1.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+  object,
+  uuid(8CA23991-F31D-4755-B411-EE346D55FEC1),
+  dual,
+  nonextensible,
+  helpstring("ISamplePlugin Interface"),
+  pointer_default(unique)
+]
+interface ISamplePlugin : IDispatch{
+  [propget, id(1), helpstring("property ItemStart")] HRESULT ItemStart([out, retval] ULONG* pVal);
+  [propput, id(1), helpstring("property ItemStart")] HRESULT ItemStart([in] ULONG newVal);
+  [propget, id(2), helpstring("property ContentLayout")] HRESULT ContentLayout([out, retval] LONG* pVal);
+  [propput, id(2), helpstring("property ContentLayout")] HRESULT ContentLayout([in] LONG newVal);
+};
+[
+  uuid(1F90FD2E-00AC-4C5B-894D-0ECE5FBFD7E9),
+  version(1.0),
+  helpstring("GoogleDesktopDisplaySample1 1.0 Type Library")
+]
+library SampleLib
+{
+  importlib("stdole2.tlb");
+  [
+    uuid(B5BEBDA8-BD58-43FE-962D-D532AF29CCE3),
+    helpstring("SamplePlugin Class")
+  ]
+  coclass SamplePlugin
+  {
+    [default] interface ISamplePlugin;
+  };
+  [
+    uuid(54F835DB-5E1D-494C-AD09-1EEEE84D3D29),
+    helpstring("SamplePluginPropertyPage Class")
+  ]
+  coclass SamplePluginPropertyPage
+  {
+    [default] interface IUnknown;
+  };
+};

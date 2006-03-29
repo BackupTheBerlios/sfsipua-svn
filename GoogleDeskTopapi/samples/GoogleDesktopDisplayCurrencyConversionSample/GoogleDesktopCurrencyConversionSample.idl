@@ -1,0 +1,49 @@
+// Copyright 2005 Google Inc
+// All rights reserved
+// 
+// GoogleDesktopCurrencyConversionSample.idl : IDL source for GoogleDesktopCurrencyConversionSample
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (GoogleDesktopCurrencyConversionSample.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+  object,
+  uuid(D18FA551-43DC-4da8-9204-D5F1181E06CE),
+  dual,
+  nonextensible,
+  helpstring("ICurrencyConversionSamplePlugin Interface"),
+  pointer_default(unique)
+]
+interface ICurrencyConversionSamplePlugin : IDispatch{
+  [propget, id(1), helpstring("csv property currencies")] HRESULT Currencies([out, retval] BSTR* pBstr);
+  [propput, id(1), helpstring("csv property currencies")] HRESULT Currencies([in] BSTR newVal);
+};
+[
+  uuid(7429D474-02C4-4125-AFAD-6B41D037BC6F),
+  version(1.0),
+  helpstring("Currency Conversion Sample 1.0 Type Library")
+]
+library CurrencyConversionSampleLib
+{
+  importlib("stdole2.tlb");
+  [
+    uuid(EEF4FB2D-3D3F-4aba-8155-50995B85F07E),
+    helpstring("Currency Conversion Sample Class")
+  ]
+  coclass CurrencyConversionSamplePlugin
+  {
+    [default] interface ICurrencyConversionSamplePlugin;
+  };
+  [
+    uuid(0C58E4C9-D9F9-49e1-8C52-5054190BC3A6),
+    helpstring("Currency Conversion Sample PropertyPage Class")
+  ]
+  coclass CurrencyConversionSamplePropertyPage
+  {
+    [default] interface IUnknown;
+  };
+};

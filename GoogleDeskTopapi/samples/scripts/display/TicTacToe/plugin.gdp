@@ -1,0 +1,28 @@
+<Plugin 
+  Script='true'
+  Name='Tic Tac Toe'
+  Icon=''
+  Description='Tic Tac Toe Game'
+  RequiredGoogleDesktopVersion='4.0.0.0'
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='2b438926-b07c-4b1a-b701-246af527bed2'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+  <File Src='o_32.gif' />
+  <File Src='x_32.gif' />
+  <File Src='b_32.gif' />
+  <File Src='splash.gif' />
+  <File Src='online.gif' />
+  <File Src='away.gif' />
+  <File Src='busy.gif' />
+
+</Plugin>

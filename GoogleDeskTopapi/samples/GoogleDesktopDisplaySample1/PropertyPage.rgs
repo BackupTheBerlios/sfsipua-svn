@@ -1,0 +1,26 @@
+HKCR
+{
+	GDSBSample1.SamplePluginPropertyPage.1 = s 'SamplePluginPropertyPage'
+	{
+		CLSID = s '{54F835DB-5E1D-494C-AD09-1EEEE84D3D29}'
+	}
+	GDSBSample1.SamplePluginPropertyPage = s 'SamplePluginPropertyPage'
+	{
+		CLSID = s '{54F835DB-5E1D-494C-AD09-1EEEE84D3D29}'
+		CurVer = s 'GDSBSample1.SamplePluginPropertyPage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {54F835DB-5E1D-494C-AD09-1EEEE84D3D29} = s 'SamplePluginPropertyPage'
+		{
+			ProgID = s 'GDSBSample1.SamplePluginPropertyPage.1'
+			VersionIndependentProgID = s 'GDSBSample1.SamplePluginPropertyPage'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{1F90FD2E-00AC-4C5B-894D-0ECE5FBFD7E9}'
+		}
+	}
+}

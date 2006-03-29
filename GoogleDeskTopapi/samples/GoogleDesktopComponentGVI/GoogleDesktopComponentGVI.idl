@@ -1,0 +1,37 @@
+// GoogleDesktopComponentGVI.idl : IDL source for GoogleDesktopComponentGVI
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (GoogleDesktopComponentGVI.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(B514C931-15BE-43C3-870E-78FBF7D62E0B),
+	dual,
+	nonextensible,
+	helpstring("Igvi_plugin Interface"),
+	pointer_default(unique)
+]
+interface Igvi_plugin : IDispatch{
+  [id(1), helpstring("method HandleFile")] HRESULT HandleFile([in] BSTR full_path_to_file, IDispatch* factory_dispatch);
+};
+[
+	uuid(9C33C9B8-011B-47EF-961E-28B2D8DE8DF1),
+	version(1.0),
+	helpstring("GoogleDesktopComponentGVI 1.0 Type Library")
+]
+library GoogleDesktopComponentGVILib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(8D44056C-0385-44A1-A82C-E10EAE40D7DD),
+		helpstring("gvi_plugin Class")
+	]
+	coclass gvi_plugin
+	{
+		[default] interface Igvi_plugin;
+	};
+};

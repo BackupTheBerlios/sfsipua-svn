@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Sidebar Plug-In Wizard Tutorial</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Sidebar Plug-In Wizard Tutorial</b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using Wizard<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+    <ul>
+      <li>
+       <font size="-1"><a href="#introduction">Introduction</a></font>
+      </li><li>
+        <font size="-1"><a href="#createproject">Creating the Project in Visual Studio</a></font>
+      </li><li>
+        <font size="-1"><a href="#customizewizardcode">Customizing Generated
+          Wizard Code For This Tutorial</a></font></li><li>
+        <font size="-1"><a href="#additems">Adding Items To The Plug-in Tile</a></font>
+      </li><li>
+        <font size="-1"><a href="#doubleclicks">Responding to Double Clicks
+           on Tile Items</a></font>
+	  </li><li>
+        <font size="-1"><a href="#singleclicks"><font size="-1">Responding
+	  to Single Clicks on Tile Items</font></a></font></li>
+    </ul>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody><tr>
+              <td valign="top">
+
+    <h4><a name="introduction"></a>Introduction </h4>
+
+    <p><font size="-1">This is a tutorial on how to create a DLL Google
+    Desktop Sidebar plug-in using the helper framework and the wizard for Visual Studio 2003. 
+	This framework and wizard are both provided as part of the Google Desktop Developer SDK. The wizard
+    significantly eases and speeds up plug-in development by generating a
+    minimal template for your plug-in which you can easily modify for your
+    specific needs.</font></p> 
+
+    <p><font size="-1">Note that this is
+    <i>not</i> an API reference, but rather step-by-step instructions for
+    creating a helper framework based plug-in using the wizard. Before
+    reading this, you should be familiar with the Google Desktop SDK/API
+    concepts and interfaces described <a
+    href="displayapi.html">here</a>.  </font></p>
+
+    <p><font size="-1">In particular, this tutorial shows how to
+    create a basic plug-in that creates a Sidebar tile that monitors
+    your disk drives and alerts you whenever you insert or remove any
+    removable storage media. The
+    overall name of our example is <font face="Courier New">MyDiskMonitor</font>, and we
+    indicate example code that you will need to change for your own
+    plug-ins by coloring it <font color=#ff0000>red</font>. A Sidebar
+    including the MyDiskMonitor tile is shown to the right. </font></p>
+
+</td>
+<td valign="bottom"><div align="right"><img src="images/sidebar_helper.gif" width="179" height="511" hspace="8"></div></td>
+</tr>
+          </tbody></table>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="createproject"></a><b>Creating the Project in Visual Studio</b>    <p><font size="-1">To start with, you need to create your project
+    in Visual Studio, name it, and set a couple of its
+    properties. This results in a basic project template that you'll
+    modify in the following tutorial sections.</font></p>
+ 
+    <p><ol><font size="-1">
+      <li><font size="-1">Start <i>Visual Studio .NET 2003</i>.</font></li>
+      <li><font size="-1">Go to the <i>File</i> menu and select <i>New,
+          Project...</i></font></li>
+      <li><font size="-1">From the <i>Project Types</i> list, select <i>Visual C++
+          Projects</i> and then <i>Google</i>.</font></li>
+      <li><font size="-1">Select <i>Google Desktop Display Plugin
+      Wizard</i>.</font></li>
+      <li><font size="-1">Enter a name for your plug-in in the textbox. For our example, we use
+	  the name </font><font size="-1" face="Courier New, Courier, mono">MyDiskMonitor</font><font size="-1">. Click <i>OK</i>.</font></li>
+      <li><font size="-1">The Google Desktop Display Plug-in Wizard will ask you for settings.
+          Start by typing in a description for your plug-in. For our example,
+          enter "Monitors removable drives and alerts you when a storage device
+          is inserted or removed.".</font></li>
+      <li><font size="-1">Beside <i>Initial number of items</i>, enter 0. Setting this to a value other than 0 will
+		  create dummy sample items (simply titled "Item") which aren't of use for this tutorial.</font></li>
+      <li><font size="-1">Set <i>Number of property pages</i> to 0, since these aren't used
+          in our example. A property page is an options panel in which the user
+		  can set settings for your plug-in. Property pages will not be covered in
+		  this tutorial.</font></li>
+      <li><font size="-1">Click the <i>Finish</i> button. The Google Desktop Display Plugin
+          Wizard automatically creates your project and implements the proper
+          libraries.</font></li>
+		  </font>
+    </ol>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="customizewizardcode"></a><b>Customizing Generated Wizard Code For This
+    Tutorial
+    </b>    <p><font size="-1">The wizard's sample code automatically creates a new
+      tile item every few seconds. Since our example only adds items when
+      they occur on the system at non-fixed times (and at what's likely to
+      be considerably less often than every few seconds), we need to remove
+      this code. 
+      </font></p>
+
+    <p>
+    <ol>
+  <font size="-1">
+      <li><font size="-1">Open </font><font face="Courier New">plugin.h</font><font size="-1">, the
+          plug-in object's header file. </font>
+          <ol><font size="-1">
+	    <li><font size="-1">Go to message-only window class            </font><font face="Courier New">CMyDiskMonitorPluginMsgOnlyWindow</font><font size="-1"> and its </font><font face="Courier New">MESSAGE_HANDLER</font><font size="-1"> block and remove its </font><font face="Courier New">WM_TIMER</font><font size="-1"> line.</font></li>  
+  
+         <li><font size="-1">Remove the </font><font face="Courier New">OnTimer</font><font size="-1"> method prototype. The section
+            should now look like: </font>
+             <pre><font face="Courier New" style="font-size:120%">
+<font color=#008800>// message map</font>
+  BEGIN_MSG_MAP(<font color=#ff0000>CMyDiskMonitorPluginMsgOnlyWindow</font>)
+  END_MSG_MAP()
+
+<font color=#0000ff>private</font>:
+  <font color=#ff0000>CMyDiskMonitorPlugin</font> *m_plugin;
+};
+          </font></pre></li>
+  
+        <li><font size="-1">In the main plug-in class <font face="Courier New">CMyDiskMonitorPlugin</font>, remove
+            the <font face="Courier New">ChangeItems</font> prototype.</font></li>
+        </font></ol>
+          <font size="-1"><br> 
+          </font>
+        <li><font size="-1">Open <font face="Courier New">plugin.cpp</font>, the plug-in object's cpp file.</font></li>
+        <ol>
+          <li><font size="-1">From the message-only class
+              <font face="Courier New">CMyDiskMonitorPluginMsgOnlyWindow</font>'s
+              <font face="Courier New">Init()</font> method, remove the line:<br>
+	          <font face="Courier New">SetTimer(kItemUpdateTimerId, kItemUpdateTimeMs, NULL);
+	          </font>
+	          </pre>
+          </font></li>
+  
+        <li><font size="-1">Also in the <font face="Courier New">CMyDiskMonitorPluginMsgOnlyWindow</font>
+	    class, remove the wizard-created <font face="Courier
+	  New">OnTimer</font> method.</font></li>
+          <li><font size="-1">In the main plug-in class <font face="Courier New">CMyDiskMonitorPlugin</font>, remove
+	    the <font face="Courier New">ChangeItems()</font> method.</font></li> 
+          <li><font size="-1">Also in the main plug-in class, in the
+	          <font face="Courier New">StartDisplayingItems</font> method remove the line
+          <font face="Courier New">ChangeItems(true);</font></font></li>
+        </ol> 
+  </font>
+    </ol>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="additems"></a><b>Adding Items To The Plug-in Tile
+ 
+    </b>
+    <p><font size="-1">Now that we've got the project set up and the
+    necessary Desktop libraries imported, it's time to create the object 
+    that will be displayed in the Sidebar.</font></p>
+ 
+    <p>
+    <ol><font size="-1">
+        <li><font size="-1">Open </font><font face="Courier New">plugin.h</font><font size="-1">, the plug-in object's header
+          file. Next, we need to define some variables so that we can
+          receive media notifications.</font>
+          <ol>
+      
+        <li><font size="-1">Insert the following under the #include lines at the top of the file:
+          </font>
+            <pre><font face="Courier New"  style="font-size:120%">
+#define WM_SHELLNOTIFY WM_USER+5
+
+typedef struct {
+    DWORD dwItem1;
+    DWORD dwItem2;
+} SHNOTIFYSTRUCT;
+</font></pre></li>
+  
+        <li><font size="-1">In the message-only window message handler, insert two lines of
+          code, one in the middle and one at the end, so that it now looks
+          like:
+          </font>
+            <pre><font face="Courier New"  style="font-size:120%">
+  <font color=#BABABA>BEGIN_MSG_MAP(CMyDiskMonitorPluginMsgOnlyWindow)</font>
+    MESSAGE_HANDLER(WM_SHELLNOTIFY, OnShellNotify);
+  <font color=#BABABA>END_MSG_MAP()</font>
+
+  LRESULT OnShellNotify(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled);
+</font></pre></li>
+  
+        <li><font size="-1">At the bottom of the message-only window class definition scope,
+	    insert the following:
+          </font>
+            <pre><font face="Courier New"  style="font-size:120%">
+public:
+  void UnInit();
+
+private:
+  CString GetPathFromPIDL(DWORD pidl);
+
+<font color=#BABABA>private:
+  CMyDiskMonitorPlugin *m_plugin;</font>
+  int m_notification;
+<font color=#BABABA>};</font>
+</font></pre></li>
+  
+        <li><font size="-1">Since we want to add items of any name and source depending on
+	  the media notification, change the <font face="Courier New">
+	  AddNewContentItem();</font>
+	  definition in the main plug-in class to:<br>
+          <font face="Courier New">void AddNewContentItem(CString
+	  item_title, CString item_source);</font></font></li></ol></li>
+	  
+        <font size="-1"><br>
+          </font>
+          <li><font size="-1">Open the plug-in object's CPP file, <font face="Courier
+	New">plugin.cpp</font>.</font>
+            <ol>
+	    <li><font size="-1">Remove the <font face="Courier New">CMyDiskMonitorPluginMsgOnlyWindow::Init()</font> method.</font></li>
+	    <li><font size="-1">The following code handles windows notifications when the user
+	  inserts or removes removable media. The type of item added depends
+          on the action; inserted media adds a "media inserted" item, while
+          removed media adds a "media removed" item. Add it to the end of the file. </font>
+	      <pre><font face="Courier New"  style="font-size:120%">
+bool <font color=#ff0000>CMyDiskMonitorPluginMsgOnlyWindow</font>::Init(<font color=#ff0000>CMyDiskMonitorPlugin</font> *plugin) {
+<font color=#008800>  // create a message-only window</font>
+  if (Create(HWND_MESSAGE) == NULL)
+    return false;
+
+  m_plugin = plugin;
+
+<font color=#008800>  // Specify to listen for file change events from all hard drives</font>
+  LPITEMIDLIST id_list;
+  if (SHGetSpecialFolderLocation(m_hWnd, CSIDL_DESKTOP, &id_list) != NOERROR)
+    return false;
+
+  SHChangeNotifyEntry notify_settings;
+  notify_settings.fRecursive = TRUE;
+  notify_settings.pidl = id_list;
+
+<font color=#008800>  // Start listening for file events</font>
+  m_notification = SHChangeNotifyRegister(m_hWnd, 
+    SHCNE_DISKEVENTS, 
+    SHCNE_MEDIAINSERTED | SHCNE_MEDIAREMOVED | SHCNE_DRIVEADD | SHCNE_DRIVEREMOVED,
+    WM_SHELLNOTIFY, 
+    1, &notify_settings);
+  if (m_notification == 0)
+    return false;
+  return true;
+}
+
+void <font color=#ff0000>CMyDiskMonitorPluginMsgOnlyWindow</font>::UnInit() {
+  if (m_notification)
+    SHChangeNotifyDeregister(m_notification);
+}
+
+LRESULT <font color=#ff0000>CMyDiskMonitorPluginMsgOnlyWindow</font>::OnShellNotify(UINT msg, WPARAM wp, LPARAM lp, BOOL& handled) {
+  SHNOTIFYSTRUCT *notification = (SHNOTIFYSTRUCT *)wp;
+  CString strPath, strMsg;
+
+  if ((lp == SHCNE_MEDIAINSERTED) || (lp == SHCNE_DRIVEADD)) {
+    m_plugin->AddNewContentItem(L"Media inserted", GetPathFromPIDL(notification->dwItem1));
+  } else if ((lp == SHCNE_MEDIAREMOVED) || (lp == SHCNE_DRIVEREMOVED)) {
+    m_plugin->AddNewContentItem(L"Media removed", GetPathFromPIDL(notification->dwItem1));
+  }
+
+  return S_OK;
+}
+
+CString <font color=#ff0000>CMyDiskMonitorPluginMsgOnlyWindow</font>::GetPathFromPIDL(DWORD pidl) {
+  CString out(_T(""));
+  wchar_t path[MAX_PATH];
+
+  if (SHGetPathFromIDList((struct _ITEMIDLIST *)pidl, path))
+    out = path;
+
+  return out;
+}
+</font></pre>
+  
+      <li><font size="-1">Modify the FinalRelease method to:<br>
+        </font>
+          <pre><font face="Courier New"  style="font-size:120%">
+void <font color=#ff0000>CMyDiskMonitorPlugin</font>::FinalRelease() {
+  if (m_msgOnlyWindow.IsWindow()) {
+    m_msgOnlyWindow.UnInit();
+    m_msgOnlyWindow.DestroyWindow();
+  }
+  m_pluginHelper.Release();
+}
+</font></pre></li>
+        <li><font size="-1">Modify the <font face="Courier New">AddNewContentItem</font> method to:<br>
+            <font face="Courier New">void
+            <font color=#ff0000>CMyDiskMonitorPlugin</font>::AddNewContentItem(CString item_title, CString
+        item_source) {</font></font></li>
+        <li><font size="-1">In the <font face="Courier New">AddNewContentItem</font> method, change the
+        definitions of snippet, source, and heading to: 
+        </font>
+          <pre><font face="Courier New"  style="font-size:120%">
+<font color=#008800>// the strings to display</font>
+CComBSTR snippet(item_title);
+CComBSTR source(item_source);
+CComBSTR heading(item_title);
+</font></pre></li>
+        </p>
+        </ol></li>
+  </font>  </ol>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <a name="doubleclicks"></a><b>Responding to Double Clicks on Tile Items</b>    <p><font size="-1">We need to handle how the items in our tile respond
+    when users double-click on them. Per the UI guidelines, double-clicking opens
+    the item in a new application window and also selects it in the Sidebar.
+    </font></p>
+
+    <p><ol><font size="-1">
+      <li><font size="-1">Open the plug-in object's CPP file (</font><font face="Courier New">plugin.cpp</font><font size="-1">).</font></li>
+      <li><font face="Courier New">OpenItem()</font><font size="-1"> in the item class handles opening the
+          item. Customize it to handle your particular items. For our example,
+          replace the generated </font><font face="Courier New">OpenItem()</font><font size="-1"> method with the following version: </font>
+        <pre><font face="Courier New"  style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorPluginContentItem</font>::OpenItem() {
+  CComQIPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; helper(m_contentItemHelper);
+
+  CComBSTR drive;
+  ATLVERIFY(SUCCEEDED(helper->get_source(&drive)));
+
+  ShellExecute(NULL, _T("open"), drive, NULL, drive, SW_SHOWNORMAL);
+
+  return S_OK;
+}
+</font></pre>
+      </li>
+  </font>  </ol>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="singleclicks"></a><b>Responding to Single Clicks on Tile Items
+    </b>    <p><font size="-1">We need to handle how the items in our tile respond
+    when users single-click on them. Per the UI guidelines, single-clicking opens
+    the item's details view.
+    </font></p>
+    <p>
+    <ol><font size="-1">
+        <li><font size="-1">Open the plug-in object's CPP file (</font><font face="Courier New, Courier, mono">plugin.cpp</font><font size="-1">).</font></li>
+        <li><font face="Courier New">OpenItem()</font><font size="-1"> in the item class handles opening the
+          item. Customize it to handle your particular items. For our example, a
+          details view is put together depending on the volume information (if
+          it was inserted). The</font> <font face="Courier New">SetContent()</font><font size="-1"> method adds text to
+          the details view. When completed, the </font><font face="Courier New">Detach()</font><font size="-1"> method makes
+          the data displayable on the details view window.<br>
+          <br>
+          Replace the generated </font><font face="Courier New">OpenItem()</font><font size="-1"> method with the
+          following version: </font>
+          <pre><font face="Courier New"  style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorPluginContentItem</font>::OnDetailsView(BSTR* title,
+    GoogleDesktopDisplayDetailsViewFlags* flags, IUnknown** details_control,
+    VARIANT_BOOL* cancel) {
+<font color=#008800>  // Get the item to be displayed</font>
+  CComQIPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; helper(m_contentItemHelper);
+  ATLASSERT(helper != NULL);
+  if (!helper)
+    return E_INVALIDARG;
+
+<font color=#008800>  // Here we can create any ActiveX control for displaying the details, and </font>
+<font color=#008800>  // return it via the details_control parameter. We use our </font>
+<font color=#008800>  // CMyDiskMonitorPluginDetailsView control to draw the details view content.</font>
+  CComPtr&lt;<font color=#ff0000>IMyDiskMonitorPluginDetailsView</font>&gt; details;
+  HRESULT hr = details.CoCreateInstance(<font color=#ff0000>CLSID_MyDiskMonitorPluginDetailsView</font>);
+  if (SUCCEEDED(hr)) {
+
+<font color=#008800>    // Get source drive that was inserted/removed</font>
+    CComBSTR drivePathBSTR(""); 
+    helper->get_source(&drivePathBSTR);
+    CString drivePath(drivePathBSTR); 
+
+<font color=#008800>    // Get the drive label</font>
+    CString driveLabel;
+    GetVolumeInformation(drivePath, driveLabel.GetBuffer(255), 255, 
+       NULL, NULL, NULL, NULL, NULL);
+    driveLabel.ReleaseBuffer();
+
+<font color=#008800>    // Get the drive size total and free space</font>
+    ULARGE_INTEGER totalSpace, freeSpace;
+    CString totalSpaceOUT, freeSpaceOUT;
+    GetDiskFreeSpaceEx(drivePath, NULL, &totalSpace, &freeSpace);
+    totalSpaceOUT.Format(_T("%llu"), totalSpace);
+    freeSpaceOUT.Format(_T("%llu"), freeSpace);
+
+<font color=#008800>    // Set the text in the details view</font>
+    CString output;
+    output += _T("Drive: ") + drivePath + _T("\n");
+    output += _T("Label: ") + driveLabel + _T("\n");
+    output += _T("Total size (Bytes): ") + totalSpaceOUT + _T("\n");
+    output += _T("Free space (Bytes): ") + freeSpaceOUT + _T("\n");
+
+<font color=#008800>    // Display the output in the details window</font>
+    CComBSTR outputBSTR(output);
+    details->SetContent(outputBSTR);
+    helper->get_source(title);
+    
+<font color=#008800>    // Return the data to display</font>
+    *details_control = details.Detach();
+    *flags = static_cast&lt;GoogleDesktopDisplayDetailsViewFlags&gt;(
+      GDD_DETAILS_VIEW_FLAG_TOOLBAR_OPEN);
+  }
+
+  return hr;
+}
+</font></pre>
+        </li></font>
+    </ol>
+    </p>
+
+                                
+   <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+      </td>
+	</tr>
+    <tr><td colspan="2">
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><a href="http://desktop.google.com/privacypolicy.html">Privacy Policy</a> - <a href="http://desktop.google.com/eula">Terms and Conditions</a> - <a href="http://desktop.google.com/copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+    </td></tr>
+
+    </tbody></table>
+</body></html>

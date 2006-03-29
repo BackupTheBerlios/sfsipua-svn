@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Im Feeling Lucky'
+  Icon=''
+  Description='This plugin demonstrates how you can use the Google Desktop Event API to monitor user webpages and perform actions based on page content.'
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='E89163F4-FAAD-48f3-BB83-CEF96C36FE88'
+  Type='Display,Event'
+  Version='1.0.0'
+  Publisher='Google Inc.'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

@@ -1,0 +1,9 @@
+; GoogleDesktopComponentSample1.def : Declares the module parameters.
+
+LIBRARY      "GoogleDesktopComponentSample1.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

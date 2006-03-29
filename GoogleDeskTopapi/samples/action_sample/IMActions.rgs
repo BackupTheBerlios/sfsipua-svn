@@ -1,0 +1,26 @@
+HKCR
+{
+	ActionSample.IMActions.1 = s 'IMActions Class'
+	{
+		CLSID = s '{32577D81-B9E8-4e76-A2AE-2F32A4142DD9}'
+	}
+	ActionSample.IMActions = s 'IMActions Class'
+	{
+		CLSID = s '{32577D81-B9E8-4e76-A2AE-2F32A4142DD9}'
+		CurVer = s 'ActionSample.IMActions.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {32577D81-B9E8-4e76-A2AE-2F32A4142DD9} = s 'IMActions Class'
+		{
+			ProgID = s 'ActionSample.IMActions.1'
+			VersionIndependentProgID = s 'ActionSample.IMActions'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{F2CE9546-1B71-4829-A2E5-232B2A6ECE8C}'
+		}
+	}
+}

@@ -1,0 +1,57 @@
+// Copyright 2005 Google Inc.
+// All Rights Reserved.
+//
+// ActionSample.idl : IDL source for ActionSample
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ActionSample.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+  object, 
+  uuid(52A07669-B79C-497d-8ACA-472698959B9E),
+]
+// Dummy interface, just so that the processing of this file generates
+// all requisite offspring - e.g. _p.c etc.
+interface IDummy: IUnknown
+{
+};
+
+[
+  uuid(F2CE9546-1B71-4829-A2E5-232B2A6ECE8C),
+  version(1.0),
+  helpstring("ActionSample 1.0 Type Library")
+]
+library ActionSampleLib
+{
+  importlib("stdole2.tlb");
+  [
+    uuid(32577D81-B9E8-4e76-A2AE-2F32A4142DD9),
+    helpstring("IMActions Class")
+  ]
+  coclass IMActions
+  {
+    [default] interface IUnknown;
+  };
+
+  [
+    uuid(173EE332-8F3A-4A58-BBC9-F4F3E0DF3ADD),
+    helpstring("EmailActions Class")
+  ]
+  coclass EmailActions
+  {
+    [default] interface IUnknown;
+  };
+
+  [
+    uuid(23C99C3B-1423-4c6f-A049-035D72CBB066),
+    helpstring("SearchActions Class")
+  ]
+  coclass SearchActions
+  {
+    [default] interface IUnknown;
+  };
+};

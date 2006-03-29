@@ -1,0 +1,108 @@
+// [!output PROJECT_NAME].idl : IDL source for [!output PROJECT_NAME]
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library ([!output PROJECT_NAME].tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+// This interface is used by the property pages to get/set the plugin's properties
+[
+  object,
+  uuid([!output GUID_PLUGIN_INTERFACE]),
+  dual,
+  nonextensible,
+  helpstring("I[!output PROJECT_NAME]Plugin Interface"),
+  pointer_default(unique)
+]
+interface I[!output PROJECT_NAME]Plugin : IDispatch {
+[!if USE_PROPERTY_PAGE1]
+  [propget, id(1)]
+  HRESULT Value1([out, retval] LONG* pVal);
+  [propput, id(1)]
+  HRESULT Value1([in] LONG newVal);
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+
+  [propget, id(2)]
+  HRESULT Value2([out, retval] LONG* pVal);
+  [propput, id(2)]
+  HRESULT Value2([in] LONG newVal);
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+
+  [propget, id(3)]
+  HRESULT Value3([out, retval] LONG* pVal);
+  [propput, id(3)]
+  HRESULT Value3([in] LONG newVal);
+[!endif]
+};
+
+[!if CUSTOM_DETAILS_VIEW]
+// This interface is used by the plugin to communicate with the details view
+[
+  object,
+  uuid([!output GUID_DETAILS_VIEW_INTERFACE]),
+  dual,
+  helpstring("I[!output PROJECT_NAME]PluginDetailsView Interface"),
+  pointer_default(unique)
+]
+interface I[!output PROJECT_NAME]PluginDetailsView : IDispatch {
+  [id(1)]
+  HRESULT SetContent([in] BSTR text);
+};
+[!endif]
+
+// The type library
+[
+  uuid([!output GUID_TYPE_LIBRARY]),
+  version(1.0),
+  helpstring("[!output PROJECT_NAME] 1.0 Type Library")
+]
+library [!output PROJECT_NAME]Lib {
+  importlib("stdole2.tlb");
+  [
+    uuid([!output GUID_PLUGIN_CLASS]),
+    helpstring("[!output PROJECT_NAME] Class")
+  ]
+  coclass [!output PROJECT_NAME]Plugin {
+    [default] interface I[!output PROJECT_NAME]Plugin;
+  };
+[!if CUSTOM_DETAILS_VIEW]
+  [
+    uuid([!output GUID_DETAILS_VIEW_CLASS]),
+    helpstring("[!output PROJECT_NAME]PluginDetailsView Class")
+  ]
+  coclass [!output PROJECT_NAME]PluginDetailsView {
+    [default] interface I[!output PROJECT_NAME]PluginDetailsView;
+  };
+[!endif]
+[!if USE_PROPERTY_PAGE1]
+  [
+    uuid([!output GUID_PROPERTY_PAGE1]),
+    helpstring("[!output PROJECT_NAME]PluginPropertyPage Class")
+  ]
+  coclass [!output PROJECT_NAME]PluginPropertyPage {
+    [default] interface IUnknown;
+  };
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+  [
+    uuid([!output GUID_PROPERTY_PAGE2]),
+    helpstring("[!output PROJECT_NAME]PluginPropertyPage2 Class")
+  ]
+  coclass [!output PROJECT_NAME]PluginPropertyPage2 {
+    [default] interface IUnknown;
+  };
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+  [
+    uuid([!output GUID_PROPERTY_PAGE3]),
+    helpstring("[!output PROJECT_NAME]PluginPropertyPage3 Class")
+  ]
+  coclass [!output PROJECT_NAME]PluginPropertyPage3 {
+    [default] interface IUnknown;
+  };
+[!endif]
+};

@@ -1,0 +1,11 @@
+HKCR
+{
+  NoRemove AppID
+  {
+    '%APPID%' = s 'GoogleDesktopComponentSample1'
+    'GoogleDesktopComponentSample1.DLL'
+    {
+      val AppID = s '%APPID%'
+    }
+  }
+}

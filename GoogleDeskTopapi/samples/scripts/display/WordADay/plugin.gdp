@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='Word-a-Day'
+  Icon=''
+  Description='Learn and explore new words each day'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='5A93930F-5274-4c6c-A59F-1CC60A8B778B'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google Inc.'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

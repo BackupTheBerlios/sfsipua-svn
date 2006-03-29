@@ -1,0 +1,26 @@
+HKCR
+{
+	GoogleDesktopCurrencyConversionSample.PropertyPage.1 = s 'GoogleDesktopCurrencyConversionSamplePropertyPage'
+	{
+		CLSID = s '{0C58E4C9-D9F9-49e1-8C52-5054190BC3A6}'
+	}
+	GoogleDesktopCurrencyConversionSample.PropertyPage = s 'GoogleDesktopCurrencyConversionSamplePropertyPage'
+	{
+		CLSID = s '{0C58E4C9-D9F9-49e1-8C52-5054190BC3A6}'
+		CurVer = s 'GoogleDesktopCurrencyConversionSample.PropertyPage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {0C58E4C9-D9F9-49e1-8C52-5054190BC3A6} = s 'GoogleDesktopCurrencyConversionSamplePropertyPage'
+		{
+			ProgID = s 'GoogleDesktopCurrencyConversionSample.PropertyPage.1'
+			VersionIndependentProgID = s 'GoogleDesktopCurrencyConversionSample.PropertyPage'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{7429D474-02C4-4125-AFAD-6B41D037BC6F}'
+		}
+	}
+}

@@ -1,0 +1,21 @@
+<Plugin 
+  Script='true'
+  Name='HtmlDetailsView'
+  Icon=''
+  Description='Shows HTML in the details view'
+  RequiredGoogleDesktopVersion='3.2006.112.0'
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='E39F2F0C-4AD5-4F5A-9F1B-9AD302E97ED1'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+
+</Plugin>

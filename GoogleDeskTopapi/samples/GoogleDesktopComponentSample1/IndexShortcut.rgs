@@ -1,0 +1,27 @@
+HKCR
+{
+  GoogleDesktopComponentSample1.IndexShortcut.1 = s 'IndexShortcut Class'
+  {
+    CLSID = s '{95DA1281-AEB5-45A4-A71A-B2E57EA41E0F}'
+  }
+  GoogleDesktopComponentSample1.IndexShortcut = s 'IndexShortcut Class'
+  {
+    CLSID = s '{95DA1281-AEB5-45A4-A71A-B2E57EA41E0F}'
+    CurVer = s 'GoogleDesktopComponentSample1.IndexShortcut.1'
+  }
+  NoRemove CLSID
+  {
+    ForceRemove {95DA1281-AEB5-45A4-A71A-B2E57EA41E0F} = s 'IndexShortcut Class'
+    {
+      ProgID = s 'GoogleDesktopComponentSample1.IndexShortcut.1'
+      VersionIndependentProgID = s 'GoogleDesktopComponentSample1.IndexShortcut'
+      ForceRemove 'Programmable'
+      InprocServer32 = s '%MODULE%'
+      {
+        val ThreadingModel = s 'Both'
+      }
+      val AppID = s '%APPID%'
+      'TypeLib' = s '{3921D68F-6B14-4189-BA5D-2117A9DE67B6}'
+    }
+  }
+}

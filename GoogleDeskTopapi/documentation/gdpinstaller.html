@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Plug-In Installer</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="http://desktop.google.com/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop&nbsp;Plug-In Installer&nbsp;Developer Guide</b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Plug-in Installer<br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a>
+	</font></p>	
+	</td>
+    <td>
+      <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+      <ul>
+        <li><font size="-1"><a href="#gettingstarted">Getting Started</a></font></li>
+        <li><font size="-1">            <a href="#configuration">The Plug-In Configuration File</a></font></li>
+        <li><font size="-1">            <a href="#running">Running the Plug-In Installer</a></font></li>
+      </ul>
+      <div align="right"></div>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <b><a name="gettingstarted"></a>Getting Started</b>
+       
+    <p><font size="-1">As described elsewhere in this Developer Guide, you can create Google Desktop (GD) Sidebar plug-ins using the <a href="displayapi.html">Display API</a>. This document describes how to use the GD Plug-in Installer to simplify the plug-in development process. The Plug-in Installer generates an Microsoft Installer (MSI) package for GD Display plug-ins. This tool is also used to create install packages for plug-ins developed using <a href="script.html">scripting languages</a>.</font>    
+    <p><font size="-1">For non-script-based plug-ins, you do not have to use the Plug-in Installer. However, if you do, it will handle writing the code needed to register your plug-in with Google Desktop as well as the code needed for installation/removal (i.e. copy/remove files, register Windows components, etc.). </font></p>
+    <p><font size="-1">You will have already downloaded the Google Desktop Developer SDK in order to write your plug-in. To use the Plug-in Installer, you must also download the WiX (Windows Installer XML) toolkit from <a href="http://wix.sourceforge.net/">http://wix.sourceforge.net</a>. The Plug-in Installer uses WiX to generate an MSI installer package, which will contain all the code necessary to register your plug-in with Google Desktop.</font></p>
+    <font size="-1"><font size="-1"></font>
+    <p></p>
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+    </font>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+ <a name="configuration"></a><b>The Plug-In Configuration File</b>
+    <p>    
+      <font size="-1">You define your plug-in's installer by writing an XML configuration file with a <font face="Courier
+               New">.gdp</font> extension. This file consists of a <font face="Courier New">&lt;Plugin&gt;</font> element, its properties, and a non-zero number of <font
+               face="Courier New">&lt;File&gt;</font> sub-elements. For example:
+      </font>      
+    <pre><font face="Courier New" style="font-size:90%">
+&lt;Plugin 
+  Name="My Plug-in"
+  Script="true"
+  UsesNotifier="true"
+  Description="Enter Description Here"
+  RequiredGoogleDesktopVersion="3.2005.1111.923"
+    
+  Icon="C:\myicon.ico"
+  CLSID="YOURCLSID-A479-4197-9898-9083A6b00A86"
+  AboutUrl="http://mycompany.com"
+  Contact="name@mycompany.com"
+  UpdateUrl="http://mycompany.com/update"
+
+  Type='Display'
+  Version="1.0.0.0"
+  Publisher="My Company"
+&gt;
+
+  &lt;File Src="plugin.js" Main="true" /&gt;
+  &lt;File Src="images\img.jpg" /&gt;
+  &lt;File Src="1033\string.js" /&gt;
+
+&lt;/Plugin&gt;              
+</font></pre>
+               <p><font size="-1"> The top-level <font face="Courier New">&lt;Plugin&gt;</font> element's properties specify your plug-in's properties. The following table lists and explains all the available properties. </font></p>
+               <table id="Table1" border="1" cellpadding="3" cellspacing="0"
+	              width="90%">
+                 <tbody>
+                   <tr bgcolor="#e8f4f7">
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		          size="-1">Property</font></b></td>
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		          size="-1">Description</font></b></td>
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		          size="-1">Required</font></b></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Name</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		       size="-1">Your plug-in's name, used anywhere your plug-in is listed, such as in Sidebar Add/Remove panels, Windows Add/Remove Programs, or the GD Preferences page.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Description</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">Short description of what your plug-in does.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		      size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">RequiredGoogleDesktopVersion</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		      size="-1">In order to be installed the plug-in will require at least this version of Google Desktop. 
+		      This attribute is necessary for cases when certain features used by the plug-in are not available in older Google Desktop 
+		      installations; in such situations the Plug-in Installer warns the user and aborts the plug-in installation. 
+		      The Google Desktop version is available in the registry unde HKLM\Software\Google\Google Desktop\installed_version.
+		       </font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		      size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">CLSID</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		      size="-1">Your plug-in's unique CLSID in string format. This can be generated using external tools such as <font face="Courier New">uuidgen.exe</font>. </font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		      size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Type</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">List of comma separated values specifying your plug-in's registration type(s).
+		    Allowed values are 'Display' (for Sidebar plug-in registration), 'Event' (for Event API registration),
+		    and 'Query' (for Query API registration).</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Version</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Your plug-in's version.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Publisher</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">A string specifying the plug-in's creator</font> </td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Icon</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">The <font face="Courier New">.ico</font> icon used by your plug-in in the Windows Add/Remove Panel. If not specified, the Google Desktop icon will be used.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">No</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Script</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">If this is a script plug-in, set this property to <font face="Courier New">true</font>. The default value is <font face="Courier New">false</font>. </font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">No</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">UsesNotifier</font> </td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Set to <font face="Courier New">true</font> if the Sidebar plug-in uses notifications. The default value is <font
+		    face="Courier New">false.</font></font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		  size="-1">No</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">AllowModifyIndex</font> </td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Set to <font face="Courier New">true</font> to allow modification of the index (e.g. removing items from the index). 
+		    Used in conjunction with the Query API. The default value is <font
+		    face="Courier New">false.</font></font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		  size="-1">No</font></td>
+                   </tr>                   
+                   <tr>
+                     <td><font face="Courier New" size="-1">AboutUrl</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		  size="-1">URL for a page describing your plug-in in detail. </font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		  size="-1">No</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">UpdateUrl</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">URL for a page where users can download future updates to this plug-in. </font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Contact</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Email address for a plug-in support contact.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+                   </tr>
+                 </tbody>
+               </table>
+               <p><font size="-1"> Use the <font face="Courier New">&lt;File&gt;</font> elements to list your plug-in's required files. At least one file must be specified. The following table lists and explains all the available <font
+	      face="Courier New">&lt;File&gt;</font> properties.</font></p>
+               <table id="Table2" border="1" cellpadding="3" cellspacing="0" width="90%">
+                 <tbody>
+                   <tr bgcolor="#e8f4f7">
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Property</font></b></td>
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Description</font></b></td>
+                     <td><b><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Required</font></b></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Src</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Specifies the file's source path relative to the <font face="Courier New">.gdp</font> configuration file.</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Yes</font></td>
+                   </tr>
+                   <tr>
+                     <td><font face="Courier New" size="-1">Main</font></td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		    size="-1">Specifies your plug-in's main file/module that will be registered as its entry point. This file should implement the required interfaces to interact with Google Desktop. One and only one of the <font face="Courier New">&lt;Plugin&gt;</font> element's <font face="Courier New">&lt;File&gt;</font> elements must have this attribute. If no elements have this attribute, you'll see an error message when you process the XML file.</font> </td>
+                     <td><font face="Arial, Helvetica, sans-serif"
+		  size="-1">No</font></td>
+                   </tr>
+                 </tbody>
+               </table>
+               <br>
+               <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+               <hr align="left" color="#3399cc" noshade="noshade" size="1">
+              
+        <a name="running"></a><b>Running the Plug-In Installer</b>
+               <p><font size="-1">The Plug-in Installer is a simple command line executable, found in the <font face="Courier New">tools</font> subdirectory of the Google Desktop SDK. The following usage example shows its available command line options:</font></p>
+               <pre><font face="Courier New" style="font-size:90%">C:\Google\SDK&gt;GoogleDesktopPluginInstaller.exe -?
+Google Desktop Plug-In Installer
+Copyright (C) Google 2005. All rights reserved.
+
+usage:  GoogleDesktopPluginInstaller.exe [options] gdpConfigFile
+
+-wxs      generate a .wxs file
+-msi      generate a .msi file (default)
+-?        this help information
+
+This tool requires the WiX compiler (http://wix.sourceforge.net)
+For more information see http://desktop.google.com/plugins            
+</font></pre>
+               <p><font size="-1">               
+               You can create your plug-in's <font
+	      face="Courier New">.msi</font> executable file in either of two ways:
+               </font><ul>
+                 <li><font size="-1">The simplest is to have the WiX toolset executables in your PATH and run <font face="Courier New">GoogleDesktopPluginInstaller.exe</font> on your <font face="Courier New">.gdp</font> XML configuration file with the default <font face="Courier
+                  New">-msi</font> option. This generates a <font face="Courier New">.msi</font> file with the same name as your configuration file.</font></li>
+                 <font size="-1"><br>
+                 <li>Or, you can run <font face="Courier New">GoogleDesktopPluginInstaller.exe</font> on your <font face="Courier New">.gdp</font> XML configuration file with the <font face="Courier
+                  New">-wxs</font> option. This generates a <font face="Courier New">.wxs</font> Windows Installer XML Source file.<br>
+                      <br>
+    You then use this file as input to the WiX compiler, <font
+                  face="Courier New">candle.exe</font>;<br>
+    <font
+                  face="Courier New">C:\Google\SDK&gt;candle.exe foo.wxs</font><br>
+                      <br>
+    This generates the file <font face="Courier New">foo.wixobj</font>, which you run the WiX linker, <font face="Courier New">light.exe</font> on to generate the <font face="Courier New">.msi</font> executable;<br>
+                      <font face="Courier
+                  New">C:\Google\SDK&gt;light.exe foo.wixobj</font><br>
+                      <br>
+    Why do all this instead of the simple method? Because this way you have the opportunity to update the <font face="Courier New">.wxs</font> file with additional information for more complex plug-ins before creating your executable. For example, you can add registry entries and custom install actions specific to your application.</li>
+                 </font>
+               </ul>
+      <p><font size="-1">Once you have your <font face="Courier New">.msi</font> executable, just run it to install your plug-in and register the plug-in with Google Desktop. Your plug-in now appears in the Add/Remove Programs Panel, from which it can be uninstalled.</font></p></td>
+    </tr>
+    <tr><td colspan="2">
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="http://desktop.google.com/privacypolicy.html">Privacy Policy</a> - <a href="http://desktop.google.com/eula">Terms and Conditions</a> - <a href="http://desktop.google.com/copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+    </td></tr>
+
+    </tbody></table>
+</body></html>

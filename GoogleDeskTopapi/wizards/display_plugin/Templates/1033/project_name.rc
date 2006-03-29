@@ -1,0 +1,233 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""[!output PROJECT_NAME].tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "InternalName", "[!output PROJECT_NAME].dll"
+            VALUE "OriginalFilename", "[!output PROJECT_NAME].dll"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_PLUGIN_RGS          REGISTRY                "Plugin.rgs"
+[!if CUSTOM_DETAILS_VIEW]
+IDR_DETAILS_VIEW_RGS    REGISTRY                "DetailsView.rgs"
+[!endif]
+[!if USE_PROPERTY_PAGE1]
+IDR_PROPERTYPAGE_RGS    REGISTRY                "PropertyPage.rgs"
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+IDR_PROPERTYPAGE2_RGS   REGISTRY                "PropertyPage2.rgs"
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+IDR_PROPERTYPAGE3_RGS   REGISTRY                "PropertyPage3.rgs"
+[!endif]
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_PLUGIN              ICON                    "res\\plugin.ico"
+IDI_ITEM                ICON                    "res\\item.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+[!if USE_PROPERTY_PAGE1]
+IDD_PROPERTYPAGE DIALOGEX 0, 0, 109, 39
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Value 1",IDC_STATIC,7,9,28,8
+    EDITTEXT        IDC_VALUE1,41,7,61,12,ES_AUTOHSCROLL
+END
+
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+IDD_PROPERTYPAGE2 DIALOGEX 0, 0, 109, 39
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Value 2",IDC_STATIC,7,9,29,8
+    EDITTEXT        IDC_VALUE2,41,7,61,12,ES_AUTOHSCROLL
+END
+
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+IDD_PROPERTYPAGE3 DIALOGEX 0, 0, 109, 39
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Value 3",IDC_STATIC,7,9,29,8
+    EDITTEXT        IDC_VALUE3,41,7,61,12,ES_AUTOHSCROLL
+END
+[!endif]
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+[!if USE_PROPERTY_PAGE1]
+    IDD_PROPERTYPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 102
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 32
+    END
+
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+    IDD_PROPERTYPAGE2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 102
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 32
+    END
+
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+    IDD_PROPERTYPAGE3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 102
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 32
+    END
+[!endif]
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PLUGIN_NAME         "[!output PROJECT_NAME] Plugin"
+    IDS_COPYRIGHT           "[!output PROJECT_NAME] Plugin\n\nCopyright (C) 2005"
+[!if USE_PROPERTY_PAGE1]
+    IDS_PROPERTYPAGE_TITLE  "Page 1"
+[!endif]
+[!if USE_PROPERTY_PAGE2]
+    IDS_PROPERTYPAGE2_TITLE "Page 2"
+[!endif]
+[!if USE_PROPERTY_PAGE3]
+    IDS_PROPERTYPAGE3_TITLE "Page 3"
+[!endif]
+[!if CUSTOM_MENU_ITEMS]
+    IDS_MENU_ITEM1          "Menu Item 1"
+    IDS_MENU_ITEM2          "Menu Item 2"
+[!endif]
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "[!output PROJECT_NAME].tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

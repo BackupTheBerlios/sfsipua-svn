@@ -1,0 +1,562 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Sidebar Communication API</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+code { font-size:13px; }
+td#content { font-size:13px; }
+h3 {font-size:16px;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="http://desktop.google.com/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Sidebar Communication API</b></font></td>
+        </tr>
+
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+       <td width="16%" nowrap="nowrap">
+	   <font size="-1">
+	<p><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+<font size="-1">
+    <p><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Communication API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>
+	</td>
+    <td id="content">
+
+
+      <h3><a name="top"></a>Contents</h3>
+
+      <ul>
+        <li> <a href="#introduction">Introduction</a></font> </li>
+        <li> <a href="#script">Script Plug-ins</a></font> </li>
+        <li> <a href="#native">Native Plug-ins</a></font>
+	  <ul><li><a href="#sending">Finding Friends and Sending Data</a></li>
+	      <li><a href="#friends">Friend Objects</a></li>
+	      <li><a href="#receiving">Receiving Data</li>
+          </ul></li>
+        </ul>
+        </li>
+      </ul>
+
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <h3><a name="introduction"></a>Introduction</h3>
+
+    <p>Sidebar plug-ins can now communicate with Sidebar
+    plug-ins running on other machines, under the following conditions:
+    <ul><li>The plug-ins must be the same; a Tic-Tac-Toe plug-in can
+          communicate with another Tic-Tac-Toe plug-in, but it can't 
+          communicate with a Scratch Pad plug-in or vice versa.</li>
+        <li>All users of the communicating plug-ins must be logged into
+	  Google Talk.</li>
+    </ul></p>
+
+    <p>Google Talk serves as the communication medium for
+    Sidebar plug-ins. If a user is logged into Google Talk, a plug-in can
+    get a list of which of the user's Google Talk friends
+    are currently online. Once it has the list of online friends, a plug-in
+    can send and receive data from the same plug-in running on an
+    online friend's machine. If a friend doesn't have Sidebar installed,
+    a plug-in can instead send a text message to that friend.</p>
+
+    <p>The Communication API is available for both native
+    and script-based plug-ins. This document only covers how to use
+    the Communication API to add communication capabilities as part of
+    a Sidebar plug-in. It assumes that you are familiar with the
+    concepts and requirements for writing a Sidebar plug-in as
+    described in either the <a href="displayapi.html">Display API</a>
+    or <a href="script.html">Script API</a> documents,
+    depending on which you use to write your Sidebar plug-ins.</p> 
+    
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <a name="script"></a><h3>Script Plug-ins</h3>
+
+    <p>When adding communication capability to a
+    script-based plug-in, you will use the global variable <font
+    face="Courier New" size="-1">googleTalk</font> both to send data
+    and to set the handler function called when the plug-in receives
+    data.</p>
+
+    <p>Your first step when sending data is to reference
+    <code>googleTalk</code>'s
+    <code>friends</code> property, which 
+    gets an array of <code>friend</code>
+    objects consisting of your online Google Talk friends.</p>
+
+    <p>A friend object has five properties:
+    <ul><li><code>name</code>: Visible name in Google Talk.</li>
+        <li><code>user_id</code>: Google Talk
+	    user id, passed as the data/message 
+            recipient parameter to the data/message sending
+	    methods.</li>
+	<li><code>email_address</code>: Friend's email address.</li>
+	<li><code>has_sidebar</code>: Boolean
+	    indicator if the friend has Sidebar 
+	    installed. This should be checked before trying to send
+	    data to a possibly non-existant Sidebar.</li>
+	<li><code>status</code>: Friend's
+	    Google Talk status, either online, idle, 
+	    or busy, represented here as 0, 1, or 2 respectively.</li>
+    </ul></p>
+
+    <p>Once the script has the array of your Google
+    Talk friends, it sends data to
+    them using one of two methods:
+    <ul><li><code>SendTalkData(friend_id, data)</code>: Sends the data string 
+        (maximum length 2K characters) to the friend identified by
+	<code>friend_id</code>'s
+	Sidebar. Specifically, to the same panel in the 
+	friend's Sidebar as the method call is made from.</li>
+        <li><code>SendTalkText(friend_id, message)</code>: Sends an up to 
+         2K character text message to the Google Talk user
+	 with <code>friend_id</code>. This
+	 method is usually used when the friend 
+	 doesn't have Sidebar installed.</li>
+    </ul></p>
+
+    <p>In order to receive data, you need to associate
+    a function to handle it with <code>googleTalk</code>'s
+    <code>onReceiveTalkData</code> function handler.
+    Your function's signature should be
+    <code><i>name</i>(<i>friend_object</i>,
+    <i>data_string</i>)</code>. This function will be
+    called whenever your plug-in receives data, so you must write it
+    so that it can deal with any and all messages another plug-in
+    might send.</p>
+
+    <p>See the <a href="script.html">Script Plug-ins</a> documentation
+    for more information as well as the Tic-Tac-Toe example code included
+    in the <a href="downloadsdksubmit">SDK</a>.</p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="native"></a><h3>Native Plug-ins</h3>
+    
+    <p>The Desktop API has several plug-in
+    communication-specific interfaces. In addition, some functions
+    associated with more general Desktop API interfaces are used in
+    plug-in communication. </p> 
+		
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="sending"></a><h3>Finding Friends and Sending Data</h3>
+
+    <p>Your communication API starting point is the
+    <code>IGoogleDesktopPluginTalkService</code>
+    interface. Its methods get the list of the user's online Google Talk
+    friends and send data to other plug-ins.  The first step in getting a pointer 
+    to <code>IGoogleDesktopPluginTalkService</code> is to get the client site.  </p>
+    
+    If your plug-in derives from <code>IGoogleDesktopDisplayPluginHelper</code>,
+    then you can call <code>GetClientSite</code>.  For example:    
+    <pre><code>
+    CComQIPtr&lt;IOleObject&gt; ole_obj(plugin_helper_);
+    CComPtr&lt;IOleClientSite&gt; client_site;
+    ole_obj->GetClientSite(&client_site);
+    </code></pre>
+    
+    If your plug-in doesn't use the plug-in helper (i.e. it's just an ActiveX control), a
+    member variable <code>m_spClientSite</code> gives you access to the site.  For example:
+    <pre><code>
+    CComPtr&lt;IOleClientSite&gt; client_site(m_spClientSite);
+    </code></pre>
+    
+    Once you have access to the client site, you can use call <code>QueryService</code> to
+    get <code>IGoogleDesktopPluginTalkService</code>.  For example:
+    <pre><code>
+    CComQIPtr&lt;IServiceProvider&gt; service_provider(client_site);
+    CComPtr&lt;IGoogleDesktopPluginTalkService&gt; talk_service;
+    service_provider->QueryService(IID_IGoogleDesktopPluginTalkService, IID_IGoogleDesktopPluginTalkService, &talk_service);
+    </code></pre>
+    
+    </p>
+		
+    <p>
+     <code>interface IGoogleDesktopPluginTalkService: IDispatch</code><br/>
+     <ul>
+	 <li><code>get_friends</code>: Get the user's online
+         Google Talk friends.
+	 <ul>
+	   <li><i>Arguments</i>:
+           <ul>
+             <li><code>[out] VARIANT* friends</code>:
+	     a <code>SAFEARRAY</code> of
+	     <code>VARIANT</code>s, each holding an
+	     <code>IGoogleDesktopTalkFriend</code>
+	     object
+	   </li></ul></li>
+           <li><i>Returns</i>: 
+	   <ul>
+	     <li><code>S_OK</code> if successful.</li>
+	     <li>Appropriate error on failure.</li>
+         </ul></li></ul></li>
+
+	<li><code>SendTalkData</code>: Sends up to a
+	2K character string to the same plug-in on a friend's machine.
+	<ul>
+	  <li><i>Arguments</i>: 
+	  <ul>
+            <li><code>BSTR user_id</code>: the friend's
+	      user id to which Desktop sends the data.</li>
+	    <li><code>BSTR data</code>: the data
+	      string sent to the user.</li>
+	  </ul></li>
+          <li><i>Returns</i>:
+	  <ul>
+	    <li><code>S_OK</code> if successful.</li>
+	    <li>Appropriate error on failure.</li>
+         </ul></li></ul></li>
+
+	 <li><code>SendTalkText</code>: Sends an up to
+         2K character text message to a user.
+	 <ul>
+	   <li><i>Arguments</i>: 
+	   <ul>	
+	     <li><code>BSTR user_id</code>: the friend's
+	      user id to which Desktop sends the message.</li>
+             <li><code>BSTR message</code>: the IM text
+	      sent to the user.</li>
+	   </ul></li>
+	   <li><i>Returns</i>:
+           <ul>
+	     <li><code>S_OK</code> if successful.</li>
+	     <li>Appropriate error on failure.</li>
+          </ul></li></ul></li></ul></p>
+
+    <p>Before sending data, a plug-in should check if the
+    recipient has Sidebar installed. Remember, the <code>friends</code>
+    method returns online Google Talk friends, who may or
+    may not be Sidebar users.
+    <code>SendTalkData</code> sends data to Sidebar
+    plug-ins, so it shouldn't be used if a friend doesn't have the Sidebar
+    installed. <code>SendTalkText</code> sends an
+    IM via Google Talk, and so will work for anyone on the Google Talk friends
+    list. The <code>IGoogleDesktopTalkFriend</code> objects returned by the
+    <code>get_friends</code> method contain a
+    <code>has_sidebar</code> field that lets
+    you check if a particular friend has Sidebar installed.</p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="friends"></a><h3>Friend Objects</h3>
+
+    <p>When your plug-in gets the list of friends, each
+    friend is represented by a
+    <code>IGoogleDesktopTalkFriend</code> object, 
+    which can have the following Google Talk status values.
+    </p>
+		
+    <p><code>
+    enum GoogleDesktopTalkFriendStatus {<br/>
+    &nbsp;&nbsp;GDD_FRIEND_STATUS_ONLINE = 0,<br/>
+    &nbsp;&nbsp;GDD_FRIEND_STATUS_IDLE,<br/>
+    &nbsp;&nbsp;GDD_FRIEND_STATUS_BUSY,<br/>
+    };
+
+    <br/><br/>
+
+    interface IGoogleDesktopTalkFriend: IDispatch</code><br/>
+    <ul>
+      <li><code>get_name</code>: Gets the friend's user visible
+      name.
+      <ul>
+	<li><i>Arguments</i>: 
+	<ul>
+	  <li><code>[out] BSTR *name</code></li>
+	</ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful. </li>
+	  <li>Appropriate error on failure.</li>
+      </ul></li></ul></li>
+
+      <li><code>get_user_id</code>: Gets the friend's userid,
+      which you will pass to <code>SendTalkText</code>
+      and <code>SendTalkData</code>.
+      <ul>
+	<li><i>Arguments</i>: 
+	<ul>
+	  <li><code>[out] BSTR *user_id</code></li>
+	</ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful. </li>
+	  <li>Appropriate error on failure.</li>
+      </ul></li></ul></li>
+
+      <li><code>get_has_sidebar</code>: Does the friend have
+         Sidebar installed?.
+      <ul>
+	<li><i>Arguments</i>: 
+	<ul>
+	  <li><code>[out] VARIANT_BOOL *installed</code></li>
+	</ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful. </li>
+	  <li>Appropriate error on failure.</li>
+      </ul></li></ul></li>
+
+      <li><code>get_status</code>: The friend's Google Talk
+        status (online, idle, busy; see
+	<code>GoogleDesktopTalkFriendStatus</code>
+	values above).
+      <ul>
+	<li><i>Arguments</i>: 
+	<ul>
+	  <li><code>[out] GoogleDesktopTalkFriendStatus *status</code></li>
+	</ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful. </li>
+	  <li>Appropriate error on failure.</li>
+      </ul></li></ul></li>
+    </ul>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="receiving"></a><h3>Receiving Data</h3>
+
+    <p>Now that you know how to find out who's available and
+    how to send data to them, the next step is to add code to your plug-in
+    that notifies it when data arrives. There are two ways to do this:
+    <ul>
+      <li>If your plug-in uses <code>IGoogleDesktopDisplayPluginHelper</code>, then you must also implement the 
+      <code>IGoogleDesktopDisplayPluginHelper2</code>
+      interface.
+        <ul><li>This allows you to override the sent/received data when a
+        content item is sent to a friend.  This is needed in case you want
+        to serialize extra data associated with each content item, which
+        the plug-in helper doesn't have access to.</li></ul></li>
+      <li>Otherwise, you need to implement the<code>IGoogleDesktopPluginTalkHandler</code>
+      interface.</li>
+    </ul></p>
+
+
+    <p><code>interface IGoogleDesktopPluginTalkHandler: IUnknown</code>
+    <ul>
+      <li><code>OnReceiveTalkMessage</code>: Callback when
+      a message arrives for your plug-in 
+      <ul>
+	<li><i>Arguments</i>:
+	<ul>
+          <li><code>IDispatch *talk_friend</code>: the message
+          sender, represented as an
+	  <code>IGoogleDesktopTalkFriend</code>.
+	  </li>
+	  <li><code>BSTR data</code>: the data. [tyg: Is this the message content, meta-data, or both?]</li>
+	</ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful.</li>
+          <li>Appropriate error on failure.</li>
+        </ul></li></ul></li></ul>
+     </p>
+		
+     <p><code>interface IGoogleDesktopDisplayPluginHandler2: IUnknown</code>
+     <ul>	
+       <li><code>GetItemData</code>: When you share a content
+       item (i.e. a user right clicks the "Send to" menu item or drags and
+       drops the item), this function serializes the item.  The data goes to
+       your friend's machine's
+       <code>OnReceiveTalkMessage</code> handler.
+       If you're using the content item helper, you can return
+       <code>E_NOTIMPL</code> and let the plug-in
+       helper handle the item.
+       <ul>
+	 <li><i>Arguments</i>: 
+  	 <ul>
+	   <li><code>IUnknown *item</code>: the <code>
+           IGoogleDesktopDisplayContentItem</code> to
+	   serialize.</li>
+	   <li><code>[out] BSTR *data</code>: store here
+	   whatever data you need to show the item in another
+	   Sidebar.</li>
+	 </ul></li>
+	<li><i>Returns</i>: 
+	<ul>
+	  <li><code>S_OK</code> if successful.</li>
+          <li>Appropriate error on failure.</li>
+        </ul></li></ul></li>
+
+	<li><code>GetItemText</code>: When you share a content
+	item with a user who doesn't have the Sidebar, you can instead send a
+	text version of the item.  If you're using the content item helper,
+	then you can return <code>E_NOTIMPL</code>
+	and let the plug-in helper handle the item.
+	<ul>
+	  <li><i>Arguments</i>: 
+	  <ul>
+	    <li><code>IUnknown *item</code>: the <code>
+            IGoogleDesktopDisplayContentItem</code> to
+	    serialize. </li>
+	    <li><code>[out] BSTR *message</code>: the text of
+	    the instant message.</li>
+	  </ul>
+	  <li><i>Returns</i>: 
+	  <ul>
+	    <li><code>S_OK</code> if successful.</li>
+	    <li>Appropriate error on failure.</li>
+        </ul></li></ul></li>
+
+  	<li><code>OnReceiveTalkMessage</code>: Callback for
+	when a message arrives for your plug-in. If you use the content item
+	helper, then you can return <code>E_NOTIMPL</code>
+	 and let the plug-in helper handle the
+	item.</li>
+	<ul>
+	  <li><i>Arguments</i>: 
+	  <ul>
+	    <li><code>IDispatch *talk_friend</code>:
+	    the message sender represented as an
+	    <code>IGoogleDesktopTalkFriend</code>.
+	    </li>
+	    <li><code>BSTR data</code>: the data.</li>
+	  </ul></li>
+	  <li><i>Returns</i>: 
+	  <ul>
+	    <li><code>S_OK</code> if successful. </li>
+	    <li>Appropriate error on failure.</li>
+      </ul></li></ul></li></ul></p>
+
+      <p>Finally, if your plug-in uses the
+      <code>IGoogleDesktopDisplayDetailsViewHelper</code>
+      ,	you should also implement
+      <code>IGoogleDesktopDisplayDetailsViewHandler2
+      </code>. This notifies your plug-in when a user sends
+      an item using the button in the details view.</p>
+		
+      <p><code>
+      enum GoogleDesktopSendToType {<br/>
+      &nbsp;&nbsp;GDD_SEND_TO_SIDEBAR = 0,<br/>
+      &nbsp;&nbsp;GDD_SEND_TO_IM,<br/>
+      &nbsp;&nbsp;GDD_SEND_TO_EMAIL,<br/>
+      };</code></p>
+
+      <p><code>interface IGoogleDesktopDisplayDetailsViewHelper2:
+      IUnknown</code>
+      <ul>
+	<li><code>SendItemToFriend</code>: Called when the
+	user uses the send-to button in the Details view to send this item
+        to a Google Talk friend.
+	<ul>
+	  <li><i>Arguments</i>: 
+	  <ul>
+            <li><code>IGoogleDesktopTalkFriend *talk_friend</code>
+	    : the recipient of the item, represented as
+            an <code>IGoogleDesktopTalkFriend</code>.
+            </li>
+	    <li><code>GoogleDesktopSendToType type</code>:
+	    how the item is sent (see above for the enumeration of the
+            three options).</li>
+          </ul></li>
+	  <li><i>Returns</i>:
+	  <ul>
+	    <li><code>S_OK</code> if successful.
+	    <li>Appropriate error on failure.</li>
+          </ul></li></ul></li></ul></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+</td>
+  </tr>
+  <tr valign=top>
+    <td colSpan=2>
+      <table cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <tr>
+          <td bgColor=#3399cc><img height=1 alt="" width=1></td>
+        </tr>
+      </table>
+      <table cellSpacing=0 cellPadding=0 width="100%" bgColor=#e8f4f7 border=0>
+        <tr>
+          <td noWrap align=right><div align=center><font class=p color=#000000 size=-1>&copy;2006 Google - </font><font size=-1><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </table>
+	</td>
+  </tr>
+</table>
+</body>
+</html>
+

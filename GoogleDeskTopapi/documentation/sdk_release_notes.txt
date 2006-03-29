@@ -1,0 +1,52 @@
+
+Google Desktop 3 Beta
+
+Major new features:
+----------------------------------------
+
+* Ability to query your Google Talk friends list and send/receive content with them. See the Communication API documentation.
+* New Query API / Event API which can be easily used from sidebar script plug-ins.
+* Plug-ins can now be floating on the desktop, or they can be docked in the sidebar.
+* Plug-in developers can now send log messages for debugging purposes and view the messages using the gdpconsole.exe tool which is shipped with the SDK.
+* Plug-ins can now load and display images that they download from the internet (useful for creating plugins such as webcams, traffic reports, weather etc..)
+
+For a complete list of everything that changed in the IDL, we recommend you to view a diff between the IDL in the publicly available SDK and the IDL in this new SDK.
+
+List of changes in the Script API.
+----------------------------------------
+
+New flags:
+* 'gddDetailsViewFlagShareWithButton' to specify if the details view will show a "Send to" button allowing user to share this item with friends.
+* 'gddContentFlagNoAutoMinSize' to specify that the item's min size should not be automatically adjusted based on the first item's height. Useful for plugins like Photos/Maps.
+* 'gddContentItemFlagNoSharing' to specify that this item should not be allowed to share with friends
+* 'gddContentItemFlagShared' to indicate that this item came from another user
+* 'gddContentItemFlagInteracted' to indicate that the user had interacted with this item (automatically set by the sidebar if the user had opened/viewed details for the item)
+
+* New display target 'gddTargetFloatingView' to indicate that the plugin is currently floating on the desktop in it's own window and not docked to the sidebar.
+
+* New edit control type for the plugin options dialog 'gddWndCtrlTypeEditPassword' to create a password edit control which will not display the password when typed in.
+
+* New member function "utils.log()" which can be used to send logging messages to the plugin log console tool (included in SDK), and various logging level defines 'gddLogLevelXXXX' and 'gddSendToXXXX' related to this function.
+
+* New global object "googleTalk" using which you can get the user's friends list, send and receive data with other friends etc. And associated defines and types such as 'gddFriendStatusXXXX'.
+
+* New global object "eventPublisher" allowing easy access to the event API (check out sample ImFeelingLucky). This has the exact same methods as the interface IGoogleDesktopEventPublisher in GoogleDesktopAPI.idl, except that the methods does not need a registration cookie (this is managed internally by the sidebar).
+
+* New global object "queryAPI" allowing easy access to the query API (check out samples). This has the exact same methods as the interface IGoogleDesktopQueryAPI in GoogleDesktopAPI.idl, except that the methods does not need a registration cookie (this is managed internally by the sidebar).
+
+* New callback 'pluginHelper.onDisplayTargetChange' which if set will call the plug-in's function when the plug-in is floated out of the sidebar or docked into the isdebar.
+
+* Plug-ins can now display in-memory HTML content easily in the details view, by creating a 'DetailsView' script object, setting the html text and setting the 'html_content' property to 'true'. (NOTE: This feature is not available with the current build but will be available in the next developer preview build. Check out sample 'HtmlDetailsView' in the next build).
+
+* 'utils.loadImage' function can now load images directly from the XMLHttp object, allowing plug-ins to download images off the internet and display them. Once you get the XMLHttp success code for the image URL, call "utils.loadImage(http.responseStream)" to load the image.
+
+* New 'utils.log()' function which will send the given message to the plug-in console. The plug-in console is a new tool present in the SDk tools directory, named as "gdpconsole.exe". This will be very useful when debugging your plugins.
+
+
+New code samples.
+--------------------
+
+* Google Video indexing plug-in
+* Query API sample
+* ImFeelingLucky Event API sample
+* TicTacToe Communication API sample

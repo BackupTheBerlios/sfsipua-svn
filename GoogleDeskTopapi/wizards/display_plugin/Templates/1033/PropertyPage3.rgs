@@ -1,0 +1,26 @@
+HKCR
+{
+	[!output PROJECT_NAME].[!output PROJECT_NAME]PluginPropertyPage3.1 = s '[!output PROJECT_NAME]PluginPropertyPage3'
+	{
+		CLSID = s '{[!output GUID_PROPERTY_PAGE3]}'
+	}
+	[!output PROJECT_NAME].[!output PROJECT_NAME]PluginPropertyPage3 = s '[!output PROJECT_NAME]PluginPropertyPage3'
+	{
+		CLSID = s '{[!output GUID_PROPERTY_PAGE3]}'
+		CurVer = s '[!output PROJECT_NAME].[!output PROJECT_NAME]PluginPropertyPage3.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {[!output GUID_PROPERTY_PAGE3]} = s '[!output PROJECT_NAME]PluginPropertyPage3'
+		{
+			ProgID = s '[!output PROJECT_NAME].[!output PROJECT_NAME]PluginPropertyPage3.1'
+			VersionIndependentProgID = s '[!output PROJECT_NAME].[!output PROJECT_NAME]PluginPropertyPage3'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{[!output GUID_TYPE_LIBRARY]}'
+		}
+	}
+}

@@ -1,0 +1,1362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Helper Framework Plug-In Tutorial</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+	font-size:12px;
+}
+h4 {font-size:16px;}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="http://desktop.google.com/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Helper Framework Plug-In Tutorial</b></font></td>
+        </tr>
+
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using Helper Framework<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+    <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+
+    <ul><li>
+       <font size="-1"><a href="#introduction">Introduction</a></font>
+      </li><li>
+        <font size="-1"><a href="#createproject">Creating the Project in Visual Studio</a></font>
+      </li><li>
+        <font size="-1"><a href="#importlibraries">Importing Google Desktop Libraries</a></font></li><li>
+        <font size="-1"><a href="#createobject">Creating the Display Object</a></font>
+
+      </li><li>
+        <font size="-1"><a href="#registering">Registering the Plug-In With Google Desktop</a></font>
+      </li><li>
+        <font size="-1"><a href="#testing"><font size="-1">Building and Testing The Plug-In</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#titleicon"><font size="-1">Setting The
+	  Sidebar Tile Title and Icon</font></a></font>
+      </li><li>
+
+        <font size="-1"><a href="#fontcolor"><font size="-1">Setting the Sidebar Tile Appearance and Adding and About Box</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#insertingitems"><font size="-1">Using the
+Helper to Insert Items</font></a></font>
+      </li><li>
+        <font size="-1"><a href="#dynamicitems"><font size="-1">Using the
+Helper to Dynamically Insert Items</font></a></font>
+      </li>
+	  <li>
+
+	    <font size="-1"><a href="#doubleclicks"><font size="-1">Responding to Double Clicks on Tile Items</font></a></font>
+	  </li>
+	  <li>
+	    <font size="-1"><a href="#singleclicks"><font size="-1">Responding to Single Clicks on Tile Items with Details View</font></a></font>
+	  </li>
+    </ul>
+
+    <p><code><b><a href="http://desktop.google.com/GoogleDesktopDisplayAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopDisplayAPI.idl</a></b></font></p>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+<table border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+              <td valign="top">
+
+    <h4><a name="introduction"></a>Introduction</h4>
+
+    <p><font size="-1">This is a tutorial on how to create a DLL Google
+    Desktop Sidebar plug-in using the helper framework. This framework
+    simplifies plug-in development by providing functions for doing common
+    Sidebar plug-in tasks. It also ensures a consistent user interface
+    across Sidebar plug-ins. For simple tasks, such as displaying text,
+    developing with the helper framework is much easier than creating an
+    ActiveX control. Note that this is <i>not</i> an API reference, but
+    rather step-by-step instructions for creating an helper library based
+    plug-in. Before reading this, you should be familiar with the Google
+    Desktop SDK/Display API concepts and interfaces described <a
+    href="http://desktop.google.com/displayapi.html">here</a>.</font></p>
+
+    <p><font size="-1">In particular, this tutorial shows how to write a
+    basic plug-in that creates a Sidebar tile that notifies the user when
+    removable media is inserted or removed from their computer.  The overall
+    name of our example is MyDiskMonitor, and we indicate example code that
+    you will need to change for your own plug-ins by coloring it <font
+    color=#ff0000>red</font>. A Sidebar including the MyDiskMonitor tile is
+    shown to the right.  </font></p>
+
+</td>
+<td valign="bottom"><div align="right"><img src="images/sidebar_helper.gif" height="511" width="179" style="margin-left:10px;"></div></td>
+</tr>
+          </tbody></table>
+		  
+	<span style="font-family:arial;font-size:12px;">
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <h4><a name="createproject"></a>Creating the Project in Visual Studio</h4>
+
+    <p>To start with, you need to create your project
+    in Visual Studio, name it, and set a couple of its
+    properties. This results in a basic project template that you'll
+    register with Google Desktop and fill in with code in the following
+    tutorial sections.</p>
+ 
+    <p><ol>
+    <li>Start <i>Visual Studio .NET 2003</i>.</li>
+    <li>Go to the <font face="Courier New" style="font-size:120%;">File</font> menu and select <font face="Courier New" style="font-size:120%;">New,
+        Project...</font></li>
+
+    <li>Find <font face="Courier New" style="font-size:120%;">ATL Project</font> on the
+        project list (in <font face="Courier New" style="font-size:120%;">Visual C++ Projects</font> and then <font face="Courier New" style="font-size:120%;">ATL</font>). Now, enter
+        a name for your plug-in in the textbox. For our example, we use
+	the name <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>. Click <font face="Courier New" style="font-size:120%;">OK</font>.</li>
+    <li>The ATL Project Wizard will ask you for settings. On the dialog's
+        left side, click on the <font face="Courier New" style="font-size:120%;">Application Settings</font> tab.</li>
+
+    <li>Uncheck the <font face="Courier New" style="font-size:120%;">Attributed</font> checkbox. Then click the
+        <font face="Courier New" style="font-size:120%;">Finish</font> button.</li>
+    <li>Visual Studio now creates your project. The Solution Explorer will
+        display all of the new project files. The wizard will have created an
+	unneeded second project, called
+	<font face="Courier New" style="font-size:120%;"><i>&lt;YourProjectName&gt;</i>PS</font>, in the case of
+        our example project <font face="Courier New" style="font-size:120%;">MyDiskMonitorPS</font>. You can delete
+	the second project by clicking on it in the Solution Explorer and
+	hitting the DEL key.</li>
+
+    <li>Right click on the main project (<font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>) in the
+        Solution Explorer and select <font face="Courier New" style="font-size:120%;">Properties</font>.</li>
+    <li>At the top, beside <font face="Courier New" style="font-size:120%;">Configuration</font>, select <font face="Courier New" style="font-size:120%;">All
+        Configurations</font>.</li>
+    <li>On the dialog's left side, select <font face="Courier New" style="font-size:120%;">General</font>. Beside
+        <font face="Courier New" style="font-size:120%;">Character Set</font>, select <font face="Courier New" style="font-size:120%;">Unicode</font>. You should
+	use Unicode in your applications in order to be compatible with
+	non-English languages.</li>
+
+    <li>Also in the <font face="Courier New" style="font-size:120%;">Properties</font> dialog, go in the <font face="Courier New" style="font-size:120%;">Build
+        Events</font> folder and select <font face="Courier New" style="font-size:120%;">Post-Build Event</font>.</li>
+    <li>Clear the value specified for the <font face="Courier New" style="font-size:120%;">Command Line</font>
+        parameter. This
+        text automatically registers your plug-in when a successful
+        build is done. Unfortunately, when updating your plug-in you
+        also need to unregister it and this value does not handle
+	unregistration. Later on, we'll see how to set up your plug-in
+	to do both registration and unregistration.</li>
+
+    <li>Click the <font face="Courier New" style="font-size:120%;">OK</font> button to close
+        this dialog.
+    </ol></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <h4 id="importlibraries">Importing Google Desktop Libraries</h4>
+
+    <p><font size="-1">You must import Google Desktop's constants and
+       helper functions into your application for it to interact with
+       GD. When you unzipped the SDK, its
+       <font face="Courier New" style="font-size:120%;">GD_SDK\api\samples\common</font>
+       directory included <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon.vcproj</font>,
+       which contains the constants and helper functions.</font></p>
+
+    <p><font size="-1"><ol>
+
+    <li>
+    Import <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon</font> into your application
+    by right clicking on your solution (for our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>) and then selecting <font face="Courier New" style="font-size:120%;">Add,
+    Existing Project....</font></li>
+
+    <li>Find the <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon.vcproj</font> file in
+    the SDK's <font face="Courier New" style="font-size:120%;">/api/samples/common</font> area and import it by
+    clicking <font face="Courier New" style="font-size:120%;">Open</font>.
+    </li>
+
+    <li>Since your project depends on the
+    <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon</font> project, you need to specify
+    the dependency. To do so, right click on your project
+    (<font face="Courier New" style="font-size:120%;">MyDiskMonitor</font> in our example) and select <font face="Courier New" style="font-size:120%;">Project
+    Dependencies</font>.</li>
+
+    <li>Put a checkmark in the box that says
+    <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon</font> and then click <font face="Courier New" style="font-size:120%;">OK</font>.
+    </li>
+
+    </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <h4 id="createobject">Creating the Sidebar Display Object</h4>
+ 
+    <p><font size="-1">Now that we've got the project set up and the
+    necessary Desktop libraries imported, it's time to create the object 
+    that will be displayed in the Sidebar.</font></p>
+ 
+    <p><font size="-1"><ol>
+      <li>In the Solution Explorer, click on the <font face="Courier New" style="font-size:120%;">Class View</font>
+          tab.</li>
+
+      <li>Right click on your project (<font face="Courier New" style="font-size:120%;">MyDiskMonitor</font> for the
+          example) and select <font face="Courier New" style="font-size:120%;">Add, Add Class....</font></li>
+      <li>Select <font face="Courier New" style="font-size:120%;">ATL Simple Object</font> and click <font face="Courier New" style="font-size:120%;">Open</font>.</li>
+      <li>Under <font face="Courier New" style="font-size:120%;">Short name</font>, give the control a name. Our
+      example control could be called <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj</font>;
+      note that since MyDiskMonitor is already taken by the project
+      namespace, you can't give your control the exact same name as
+      your project.
+      <li>From the <font face="Courier New" style="font-size:120%;">Options</font> tab select <font face="Courier New" style="font-size:120%;">IObjectWithSite</font>. Click
+      the <font face="Courier New" style="font-size:120%;">Finish</font> button. This creates
+          your display object definition and inserts two new files into your
+      application for the new object (for our example, the files are
+      <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font> and <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.cpp</font>).</li>
+
+	  <li>Open the plug-in object's Header file (For our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font>).<ol>
+
+      <li>To use the Google Desktop helper functions, you must add an <font face="Courier New" style="font-size:120%;">include</font> at the top of the file. Make sure this points to the correct location of the <font face="Courier New" style="font-size:120%;">.h</font> file:
+      <pre><font face="Courier New" style="font-size:120%;">
+#include "../common/GoogleDesktopDisplayAPI.h"
+      </font></pre></li>
+
+      <li>Next, we have to define the Helper variable (which allows us to access the helper functions) in this file
+	   before closing the class' scope.
+	   <pre><font face="Courier New" style="font-size:120%;">
+<font color=#BABABA>public:</font> 
+
+  CComPtr&lt;IUnknown&gt; helper_;  
+
+<font color=#BABABA>};</font> 
+</font></pre></li>
+
+      <li>In order to simplify plug-in development by giving the
+      <font face="Courier New" style="font-size:120%;">helper_</font> object access to
+      helper functions, add the following code in the file's COM Map:
+
+<pre><font face="Courier New" style="font-size:120%;">
+<font color=#BABABA>BEGIN_COM_MAP(CMyDiskMonitorObj)
+  COM_INTERFACE_ENTRY(IMyDiskMonitorObj)
+  COM_INTERFACE_ENTRY(IDispatch)</font>
+  COM_INTERFACE_ENTRY_AUTOAGGREGATE_BLIND(helper_.p,
+    CLSID_GoogleDesktopDisplayPluginHelper)
+<font color=#BABABA>END_COM_MAP()</font> 
+
+  DECLARE_GET_CONTROLLING_UNKNOWN()
+  <font color=#BABABA>DECLARE_PROTECT_FINAL_CONSTRUCT()</font> 
+</font></pre></li></ol>
+    </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <h4 id="registering">Registering the Plug-In with Google Desktop</h4>
+
+    <p><font size="-1">In order for Google Desktop to know about and
+    be able to interact with a plug-in, the plug-in must register itself
+    with GD. The best time to do this is to have it register with GD
+    when Windows registers this DLL and unregister with GD when
+    Windows unregisters this DLL.</font></p>
+    
+    <p><font size="-1"><ol>
+
+       <li>Open the main CPP file,
+       <font face="Courier New" style="font-size:120%;"><i>&lt;ProjectName&gt;</i>.cpp</font> (for our example,
+       <font face="Courier New" style="font-size:120%;">MyDiskMonitor.cpp</font>. Note the difference between
+       MyDiskMonitor.cpp and .h and MyDiskMonitorObj.cpp and .h. MyDiskMonitor.*
+       is for the library itself and takes care of registering the
+       components with Google Desktop. MyDiskMonitorObj.* is the object
+       which actually displays data and interacts with the
+       user).).</li>
+
+       
+       <li>Put an include command for the Google Desktop helper
+       functions at the top of this file. Make sure it points to the
+       <font face="Courier New" style="font-size:120%;">.h</font> file's correct location, which is based on where you
+       previously imported the
+       <font face="Courier New" style="font-size:120%;">GoogleDesktopComponentCommon.vcproj</font>. The command
+       will look like the following, changed to be the actual installed 
+       location of the file:<br>
+       <font face="Courier New" style="font-size:120%;"><font color=#0000ff>#include</font> "../common/GoogleDesktopComponentRegistration.h"</font>
+
+       <li>Modify <font face="Courier New" style="font-size:120%;">DllRegisterServer(<font color=#0000ff>void</font>)</font> and
+       <font face="Courier New" style="font-size:120%;">DllUnregisterServer(<font color=#0000ff>void</font>)</font> to notify Google Desktop when
+       Windows registers or unregisters this DLL. The following code shows the
+       modifications to our <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font> sample code. <font
+       color=#ff0000>Red</font> text indicates code that should be changed
+       to values correct for your project instead of for
+       <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>.
+   
+
+<p><font size="-1"><font face="Courier New" style="font-size:120%;">RegisterDisplayComponentHelper()</font> registers
+the plug-in with Google Desktop. Its first parameter is your object's GUID,
+which identifies your plug-in to Google Desktop. Remember to replace
+<font face="Courier New" style="font-size:120%;">MyDiskMonitorObj</font> with the your project's object name.</font></p>
+
+<p><font size="-1">The second and third parameters are the title and
+description the Google Desktop UI displays for your plug-in.</font></p>
+
+<p><font size="-1">The fourth parameter is a path to the plug-in's
+icon. This isn't actually used for a Sidebar plug-in, so we pass an
+empty string. The final parameter should be set to true if your
+plug-in sends notifications to be displayed in the GD notifier
+area. In the sample code, we use the variable</font>
+<font face="Courier New" style="font-size:120%;">plugin_shows_notifications</font> as the value of this final
+parameter. Set its value accordingly in its definition. For
+<font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>,
+
+<font face="Courier New" style="font-size:120%;">plugin_shows_notifications</font> is set to false.
+       </li></ol></font></p>
+
+<pre><font face="Courier New">
+<font color=#008800>// DllRegisterServer - Adds entries to the system registry</font>
+STDAPI DllRegisterServer(<font color=#0000ff>void</font>) {
+<font color=#008800>  // Register object, typelib and all interfaces in typelib</font>
+  HRESULT hr = _AtlModule.DllRegisterServer();
+
+  <font color=#0000ff>if</font> (SUCCEEDED(hr)) {
+
+<font color=#008800>    // Set the plug-in's default settings</font>
+    <font color=#0000ff>bool</font> plugin_shows_notifications = <font color=#ff0000>false</font>;
+    CComBSTR plugin_title(_T(<font color=#ff0000>"My Disk Monitor"</font>));
+    CComBSTR plugin_description(_T(<font color=#ff0000>"Monitors removable drives and alerts you when a storage device is
+	inserted or removed"</font>));
+
+    // Register the plug-in with Google desktop
+    hr = RegisterDisplayComponentHelper(<font color=#0000ff>__uuidof</font>(<font color=#ff0000>MyDiskMonitorObj</font>), plugin_title,
+      plugin_description, _T(""), plugin_shows_notifications);
+  }
+
+  <font color=#0000ff>return</font> hr;
+}
+
+
+<font color=#008800>// DllUnregisterServer - Removes entries from the system registry</font>
+STDAPI DllUnregisterServer(<font color=#0000ff>void</font>) {
+<font color=#008800>  // Unregister plug-in from Google Desktop</font>
+  UnregisterComponentHelper(<font color=#0000ff>__uuidof</font>(<font color=#ff0000>MyDiskMonitorObj</font>));
+
+<font color=#008800>  // Unregister plug-in from Windows</font>
+
+  HRESULT hr = _AtlModule.DllUnregisterServer();
+  <font color=#0000ff>return</font> hr;
+}
+</font></pre>
+</font>
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+<hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <h4 id="testing">Building and Testing the Plug-In</h4>
+
+    <p><font size="-1">Now that the plug-in is registered and has
+    access to the Google Desktop libraries, it's time to build it
+    and do basic tests before customizing it.</font></p>
+
+    <p><font size="-1"><ol>
+
+      <li>Create the DLL by going to the <font face="Courier New" style="font-size:120%;">Build</font> menu and
+      selecting <font face="Courier New" style="font-size:120%;">Build Solution</font>.</li>
+
+      <li>Open the Windows command prompt and run the following command:<br>
+
+      <font face="Courier New" style="font-size:120%;">regsvr32 "&lt;<i>PathToBuiltDLL</i>&gt;"</font><br>
+      <font face="Courier New" style="font-size:120%;">PathToBuiltDLL</font> is the path to the DLL created in the
+      previous step. It should look something like:<br>
+      <font face="Courier New" style="font-size:120%;">regsvr32 "C:\Documents and
+      Settings\Larry\Desktop\MyDiskMonitor\Debug\MyDiskMonitor.dll"</font><br>
+      This registers the plug-in with Windows COM, which immediately
+      calls Google Desktop to register the plug-in there as well.</li> 
+
+      <li>Google Desktop will prompt you to register the plug-in. Click
+      <font face="Courier New" style="font-size:120%;">OK</font> to do so. You now have an active plug-in.</li>
+
+      <li>You should test your plug-in to be sure that it is runable
+      and appearing in the Sidebar.</li>
+
+      <li>When you're done testing the plug-in, rerun the <font face="Courier New" style="font-size:120%;">regsvr32</font> command, but with a <font face="Courier New" style="font-size:120%;">/u</font>
+      flag to unregister the plug-in instead of registering it. 
+      For example:<br>
+      <font face="Courier New" style="font-size:120%;">regsvr32 /u "C:\Documents and Settings\Larry\Desktop\MyDiskMonitor\Debug\MyDiskMonitor.dll"</font></li>
+
+      </ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <h4 id="titleicon">Setting the Sidebar Tile Title and Icon</h4>
+
+    <p><font size="-1">Now that we have defined and built the plug-in
+    object, we can start customizing it. First, we'll add code to let
+    it display a tile-specific title and icon when it appears in the
+    Sidebar.</font></p>
+
+    <p><font size="-1"><ol>
+       <li>Open your plug-in object's Header file 
+         (<font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font> in our
+         example).<ol>
+         <li>Define the
+	   <font face="Courier New" style="font-size:120%;">SetClientSite</font> method
+	   by inserting the following code at the end of the class, but before
+	   ending scope. <font face="Courier New" style="font-size:120%;">SetSite</font>
+	   is a method from the implemented
+	   <font face="Courier New" style="font-size:120%;">ObjectWithSite</font>. It is 
+           commonly used by ActiveX objects to set their title and icon.
+
+
+<pre><font face="Courier New" style="font-size:120%;">
+<font color=#0000ff>public</font>:
+  STDMETHOD(SetSite) (IUnknown* site);
+</font></pre></li></ol></li>
+
+      <li>Open the plug-in object's CPP file (<font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.cpp</font>
+      in our example).
+        <ol>
+      <li>Insert a BITMAP resource into the project's resource file containing the 16x16 icon you'd like to use
+        for the tile's titlebar. You can either import and existing one or create a new one with the tools
+		provided in the Visual Studio interface. For our example, we'll name
+        the BITMAP resource
+	<font face="Courier New" style="font-size:120%;">IDB_MYDISKMONITOROBJ</font>.</li>
+
+      <li>Insert the following code at the end of the file (This code is
+       written to work with our <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font> sample code. <font
+       color=#ff0000>Red</font> text indicates code that should be changed
+       to values correct for your project instead of for
+       <font face="Courier New" style="font-size:120%;">MyDiskMonitor</font>).<br><br>
+
+       We are using <font face="Courier New" style="font-size:120%;">IObjectWithSite</font>
+
+       method <font face="Courier New" style="font-size:120%;">SetSite()</font> to set
+       the tile's title and icon (OLE Control) when displayed in the Sidebar.
+       Make sure to change the <font face="Courier New" style="font-size:120%;">tile_title</font>
+       variable value to what you want as the tile's title. Also change the
+       <font face="Courier New" style="font-size:120%;">IDB_MYDISKMONITOROBJ</font> argument
+       in the <font face="Courier New" style="font-size:120%;">LoadBitmap</font> call to
+       an existing Bitmap resource you want to be the title bar displayed
+       icon. The code following the
+       <font face="Courier New" style="font-size:120%;">LoadBitmap</font> call converts
+       the returned Bitmap handle
+       (<font face="Courier New" style="font-size:120%;">HBITMAP</font>) to an OLE
+       Picture Object (<font face="Courier New" style="font-size:120%;">IPicture</font>).
+
+
+
+<pre><font face="Courier New" style="font-size:120%;">
+HRESULT <font color=#ff0000>CMyDiskMonitorObj</font>::SetSite(IUnknown* site) {
+  CComQIPtr&lt;IGoogleDesktopDisplaySite&gt; sidebar_site(site);
+
+  <font color=#0000ff>if</font> (sidebar_site) {
+    <font color=#008800>// Set the tile's title on the GD interface</font>
+    CComBSTR tile_title(_T("<font color=#ff0000>My Disk Monitor</font>"));
+    sidebar_site-&gt;put_title(tile_title);
+    
+    <font color=#008800>// Load the icon bitmap resource</font>
+
+    CComPtr&lt;IPicture&gt; tile_icon;
+    HBITMAP bitmap = LoadBitmap(_AtlBaseModule.GetResourceInstance(),
+      MAKEINTRESOURCE(<font color=#ff0000>IDB_MYDISKMONITOROBJ</font>));
+    <font color=#0000ff>if</font> (bitmap == NULL)
+      <font color=#0000ff>return</font> E_FAIL;
+
+    <font color=#008800>// Do the conversion from a HBITMAP to IPicture</font>
+    PICTDESC picture_desc;
+    picture_desc.cbSizeofstruct = <font color=#0000ff>sizeof</font>(picture_desc);
+    picture_desc.picType = PICTYPE_BITMAP;
+    picture_desc.bmp.hbitmap = bitmap;
+    picture_desc.bmp.hpal = NULL;
+    HRESULT hr = OleCreatePictureIndirect(&picture_desc, IID_IPicture, TRUE, 
+      (<font color=#0000ff>void</font>**)&tile_icon);
+    <font color=#0000ff>if</font> (FAILED(hr))
+      <font color=#0000ff>return</font> E_FAIL;
+
+    <font color=#008800>// Set the tile's icon on the GD interface</font>
+
+    sidebar_site-&gt;put_icon(tile_icon);
+
+  }
+
+  <font color=#0000ff>return</font> S_OK;
+}
+</font></pre></li></ol></li></ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <h4 id="fontcolor">Setting the Sidebar Tile Appearance and Adding an About Box</h4>
+
+    <p><font size="-1">We continue customizing our plug-in by setting its
+    display font and colors. Esthetically, these properties should use the
+    same values as the other tiles in the Sidebar. So the code below first
+    gets those values and then sets the relevant properties of our plug-in
+    to them.</font><p> 
+
+    <p><font size="-1">We also add an About box to the tile. Similar to
+    setting the title and icon values, we need to edit both your project's
+    CPP and Header files.</font></p>
+
+    <p><font size="-1"><ol>
+
+    <li>Open the plug-in object's Header file (For our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font>).<ol>
+      <li>It's a good idea to move the constructor and destructor
+      methods, <font face="Courier New" style="font-size:120%;">FinalConstruct()</font> and
+      <font face="Courier New" style="font-size:120%;">FinalRelease()</font>, to the main CPP file from the
+      the Header file. Remove the lines in the header
+      file relating to these methods and replace them with the
+      following code, which can be placed anywhere within the
+      class' scope (replace the text in <font color=#ff0000>red</font>
+
+      with names appropriate to your project's name):
+<pre><font face="Courier New" style="font-size:120%;">
+public:
+
+  <font color=#ff0000>CMyDiskMonitorObj</font>();
+  ~<font color=#ff0000>CMyDiskMonitorObj</font>();
+  HRESULT FinalConstruct();
+  void FinalRelease();
+</font></pre></li>
+
+</ol></li>
+
+<li>Open the plug-in object's CPP file (for our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.cpp</font>).
+<ol>
+<li>We need to implement the
+
+<font face="Courier New" style="font-size:120%;">FinalConstruct()</font>
+and <font face="Courier New" style="font-size:120%;">FinalRelease()</font> constructor and
+destructor methods. Add the following code at the end of the CPP file. Notice
+that the <font face="Courier New" style="font-size:120%;">helper_</font> object
+is manually released in <font face="Courier New" style="font-size:120%;">FinalRelease()</font>. Therefore, to keep code out of the header
+file, we move these methods to the CPP file.
+
+<pre><font face="Courier New" style="font-size:120%;">
+HRESULT <font color=#ff0000>CMyDiskMonitorObj</font>::FinalConstruct() {
+  return S_OK;
+}
+
+void <font color=#ff0000>CMyDiskMonitorObj</font>::FinalRelease() {
+  helper_.Release();
+}
+
+
+<font color=#ff0000>CMyDiskMonitorObj</font>::<font color=#ff0000>CMyDiskMonitorObj</font>() {
+}
+
+<font color=#ff0000>CMyDiskMonitorObj</font>::~<font color=#ff0000>CMyDiskMonitorObj</font>() {
+}
+</font></pre></li>
+
+<li>Now, we'll set your tile's display options and implement its About
+dialog.  The Helper is useful for this since it assists you in being
+consistent with other plug-ins' appearance. Insert the following code at the
+end of the <font face="Courier New" style="font-size:120%;">SetSite()</font> method, just
+before the <font face="Courier New" style="font-size:120%;">return S_OK</font>
+line. Inserting it there causes the code to run during your plug-in's
+creation.<br><br>
+
+In this code, we first enable access to the helper, then set the tile's
+display options. In our example, we do not use any modifers, which can be
+used to do things like add back and forward arrows to the titlebar. See the API
+documentation or IDL file for the available options for these two parameters.
+<br><br>
+Next, we set the About dialog's text, with the
+<font face="Courier New" style="font-size:120%;">\n</font> causing a new line in the dialog.
+Per the convention for all plug-ins, the first two dialog lines are displayed
+at the top beside the icon, with the remaining lines displayed below.
+<br><br>
+Finally, we call <font face="Courier New" style="font-size:120%;">SetIcons()</font>
+to set the icons for both the About dialog and alerts window. We use the same
+icon as the one beside the tile title, but you can use any icon you wish.
+You might want to use a 32x32 icon for
+<font face="Courier New" style="font-size:120%;">tile_icon</font> and let the libraries
+rescale it to the needed size.
+
+<pre><font face="Courier New" style="font-size:120%;">
+
+<font color=#BABABA>    // Set the tile's icon on the GD interface
+    sidebar_site-&gt;put_icon(tile_icon);</font>
+
+<font color=#008800>    // Create the helper object</font>
+    CComQIPtr&lt;IGoogleDesktopDisplayPluginHelper&gt; helper(<font color=#ff0000>helper_</font>);
+    <font color=#0000ff>if</font> (helper_ == NULL)
+      <font color=#0000ff>return</font> E_FAIL;
+
+
+<font color=#008800>    // Set the display options for the tile</font>
+    UINT content_flags = GDD_CONTENT_FLAG_HAVE_DETAILS;
+    UINT plugin_flags = GDD_PLUGIN_FLAG_NONE;
+
+    helper-&gt;SetFlags(<font color=#0000ff>static_cast</font>&lt;GoogleDesktopDisplayPluginFlags&gt;(plugin_flags),
+      <font color=#0000ff>static_cast</font>&lt;GoogleDesktopDisplayContentFlags&gt;(content_flags));
+
+<font color=#008800>    // Set the maximum amount of items possible to display to be 10. Anything 
+    // more will be automatically removed</font>
+    helper-&gt;put_max_content_items(10);
+
+
+<font color=#008800>    // Set the about dialog text</font>
+    helper-&gt;put_about_text(_T("<font color=#ff0000>My Disk Monitor\nCopyright (C) 2005\nMonitors </font>")
+      _T("<font color=#ff0000>disk changes on your computer\n\nAs removable media is inserted or removed in </font>")
+      _T("<font color=#ff0000>computer, a notification will be displayed as an item in the plug-in's tile.</font>"));
+
+<font color=#008800>    // Set the plug-in's icons (also used in About dialog)</font>
+    helper-&gt;SetIcons(<font color=#ff0000>tile_icon</font>, <font color=#ff0000>tile_icon</font>);
+
+<font color=#BABABA>  }
+
+  return S_OK;</font>
+</font></pre></li></ol></li></ol></font></p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <h4 id="insertingitems">Using the Helper to Insert Items</h4>
+
+    <p><font size="-1">
+
+      In this section, we show how to add items to our Sidebar tile
+      via the Helper object.</font></p>
+
+    <p><font size="-1"><ol>
+      <li>Open the plug-in object's Header file (for our example,
+        <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font>).
+      <ol>
+      <li>Insert the following code at the end of the file.
+          <font color=#ff0000>Red</font> text
+          indicates code that should be changed to apply to your
+          project rather than our example.<br><br>
+
+          The code is simpler than it might at first appear to be.
+          It creates a class to provide callbacks that you can
+          use to further customize the items that are added to the 
+          tile's contents. For example, when the user clicks on a
+          tile item, you could have it throw one of the listed events
+          (<font face="Courier New" style="font-size:120%;">DrawItem</font>, <font face="Courier New" style="font-size:120%;">OpenItem</font>, etc.).
+          While you could
+          create new tile items without having to manage a new class,
+          you wouldn't be able to easily handle their callback
+	  messages.
+              
+
+<pre><font face="Courier New" style="font-size:120%;">
+<font color=#0000ff>class</font> <font color=#ff0000>CMyDiskMonitorContentItem</font> :
+  <font color=#0000ff>public</font> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+  <font color=#0000ff>public</font> IDispatchImpl&lt;IGoogleDesktopDisplayContentItemHandler,
+  &IID_IGoogleDesktopDisplayContentItemHandler, <font color=#ff0000>&LIBID_MyDiskMonitorLib</font>,
+  /*wMajor =*/ 1, /*wMinor =*/ 0&gt; {
+
+<font color=#0000ff>public</font>:
+  BEGIN_COM_MAP(<font color=#ff0000>CMyDiskMonitorContentItem</font>)
+    COM_INTERFACE_ENTRY(IGoogleDesktopDisplayContentItemHandler)
+    // the next statement causes the content item to be aggregated from the 
+    // ContentItemHelper object that is exposed by the API. The variable 
+    // 'm_contentItemHelper' will hold the helper object.
+    COM_INTERFACE_ENTRY_AUTOAGGREGATE_BLIND(helperitem_.p,
+    CLSID_GoogleDesktopDisplayContentItemHelper)
+  END_COM_MAP()
+
+<font color=#0000ff>public</font>:
+  DECLARE_GET_CONTROLLING_UNKNOWN()
+
+  <font color=#ff0000>CMyDiskMonitorContentItem</font>() {
+  }
+  <font color=#0000ff>void</font> FinalRelease() {
+  }
+
+  // IGoogleDesktopDisplayContentItemHandler
+  STDMETHOD(DrawItem)(GoogleDesktopDisplayTarget target, HDC dc,  <font color=#0000ff>const</font> RECT *bounds);
+  STDMETHOD(GetHeight)(GoogleDesktopDisplayTarget target, HDC dc, <font color=#0000ff>long</font> width, <font color=#0000ff>long</font> *height);
+  STDMETHOD(OpenItem)();
+  STDMETHOD(ToggleItemPinnedState)();
+  STDMETHOD(GetIsTooltipRequired)(GoogleDesktopDisplayTarget target, 
+    HDC dc, <font color=#0000ff>const</font> RECT *bounds, VARIANT_BOOL *is_required);
+  STDMETHOD(OnDetailsView)(BSTR* title,
+    GoogleDesktopDisplayDetailsViewFlags* flags,
+    IUnknown** details_control,
+    VARIANT_BOOL* cancel);
+  STDMETHOD(ProcessDetailsViewFeedback)(GoogleDesktopDisplayDetailsViewFlags flags);
+  STDMETHOD(OnRemoveItem)(VARIANT_BOOL* cancel);
+
+
+<font color=#0000ff>public</font>:
+  CComPtr&lt;IUnknown&gt; helperitem_; // aggregated helper object exposed by the API
+};
+<font color=#0000ff>typedef</font> CComObject&lt;<font color=#ff0000>CMyDiskMonitorContentItem</font>&gt; <font color=#ff0000>CMyDiskMonitorContentItemImpl</font>;
+</font></pre>
+</li></ol></li>
+
+	
+	
+
+
+      <li>Open the plug-in object's CPP file (for our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.cpp</font>)
+      <ol>
+
+        <li>Insert the following code at the bottom of the file. It
+	is a placeholder to provide for when you want to add actions
+        that occur when a user clicks on an item or want to do more
+	advanced item editing. As always, <font color=#ff0000>red</font> text indicates wording
+        that should be changed to match your project rather than our
+        example.
+
+<pre><font face="Courier New" style="font-size:120%;">
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::OpenItem() {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::GetIsTooltipRequired(
+  GoogleDesktopDisplayTarget target, HDC dc, <font color=#0000ff>const</font> RECT *bounds,
+    VARIANT_BOOL *is_required) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::DrawItem(
+    GoogleDesktopDisplayTarget target, HDC dc, <font color=#0000ff>const</font> RECT *bounds) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::GetHeight(
+    GoogleDesktopDisplayTarget target, HDC dc, <font color=#0000ff>long</font> width, <font color=#0000ff>long</font> *height) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::ToggleItemPinnedState() {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::OnDetailsView(BSTR* title,
+    GoogleDesktopDisplayDetailsViewFlags* flags, IUnknown** details_control,
+    VARIANT_BOOL* cancel) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::ProcessDetailsViewFeedback(
+    GoogleDesktopDisplayDetailsViewFlags dv_flags) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::OnRemoveItem(VARIANT_BOOL* cancel) {
+  <font color=#0000ff>return</font> E_NOTIMPL;
+}
+
+</font></pre></li>
+
+         <li>Insert the following code at the end of the
+         <font face="Courier New" style="font-size:120%;">SetSite()</font>
+	 method and before the success checking
+         scope. Red text should be changed to match your project, 
+         rather than our example.<br><br>
+
+	 This is where we actually insert an item. Creating the item
+         requires many parameters, but once it's created and added
+         to the tile Google Desktop will take care of properly
+         displaying it.<br><br>
+
+         Specifically:<ol>
+
+            <li>The current system time is used as the entry time
+	    value. This can be modified to be any value you might
+	    prefer.</li>
+            <li> The item header will display the item's number to
+	    show that items are inserted into the list such that
+	    the newest item is at the top.</li>
+            <li>All of the <font face="Courier New" style="font-size:120%;">put_</font> calls set different
+	      properties of the item. Note that we do not set all the
+	      possible properties; see the <a href="http://desktop.google.com/GoogleDesktopAPI.idl">IDL file</a> and <a href="displayapi.html">Display API</a>
+              documentation for the complete set
+              of properties that you can manipulate.</li>
+            <li>Finally, the item is added to the tile and
+	      displayed by Google Desktop.</li></ol>
+
+    <pre><font face="Courier New" style="font-size:120%;">
+<font color=#BABABA>    // Set the plug-in's icons (also used in About dialog)
+    helper-&gt;SetIcons(tile_icon, tile_icon);</font>
+
+    <font color=#008800>// Insert 10 items. Notice that they will get inserted with #10 being shown at the top</font>
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> cur_item_num = 1; cur_item_num &lt;= 10; ++cur_item_num) {
+      <font color=#008800>// Create an object for the new item</font>
+
+      CMyDiskMonitorContentItemImpl *item_object = NULL;
+      CMyDiskMonitorContentItemImpl::CreateInstance(&item_object);
+      CComPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; item_helper;
+      item_object-&gt;GetUnknown()-&gt;QueryInterface(IID_IGoogleDesktopDisplayContentItemHelper,
+        <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>void</font>**&gt;(&item_helper));
+
+      <font color=#008800>// Get the system time for a time value</font>
+      SYSTEMTIME system_time;
+
+      GetSystemTime(&system_time);
+      DATE time;
+      SystemTimeToVariantTime(&system_time, &time);
+
+      <font color=#008800>// Format the string to display for the heading</font>
+
+      CString heading_str;
+      heading_str.Format(_T("Heading #%d"), cur_item_num);
+      CComBSTR heading(heading_str);
+
+      <font color=#008800>// Set the properties for the new item</font>
+      item_helper-&gt;put_heading(heading);
+      item_helper-&gt;put_tooltip(_T("Tooltip"));
+      item_helper-&gt;put_source(_T("Source"));
+      item_helper-&gt;put_time_created(time);
+      item_helper-&gt;put_flags(<font color=#0000ff>static_cast</font>&lt;GoogleDesktopDisplayContentItemFlags&gt;(
+        GDD_CONTENT_ITEM_FLAG_TIME_ABSOLUTE));
+      item_helper-&gt;put_image(NULL);
+      item_helper-&gt;put_layout(<font color=#0000ff>static_cast</font>&lt;GoogleDesktopDisplayContentItemLayout&gt;(
+        GDD_CONTENT_ITEM_LAYOUT_NEWS));
+
+      <font color=#008800>// Create the item that will be added</font>
+
+      CComQIPtr&lt;IGoogleDesktopDisplayContentItem&gt; item(item_helper);
+      GoogleDesktopContentItemDisplayOptions item_flags =
+        <font color=#0000ff>static_cast</font>&lt;GoogleDesktopContentItemDisplayOptions&gt;(GDD_ITEM_DISPLAY_IN_SIDEBAR);
+     
+      <font color=#008800>// Add the item with the helper</font>
+      <font color=#ff0000>helper</font>-&gt;AddContentItem(item, item_flags);
+    }
+<font color=#BABABA>  }
+
+  return S_OK;
+}</font>
+
+</font></pre></li></ol></li>
+
+          <li>Open the <font face="Courier New" style="font-size:120%;">stdafx.h</font>
+	  file,
+	  which was automatically generated by the ATL Wizard as part of your project.
+          <ol><li>
+	    Since <font face="Courier New" style="font-size:120%;">CString</font> was used
+	    in the CPP file, we need to do an
+	    <font face="Courier New" style="font-size:120%;">#include</font> for the
+ 	    <font face="Courier New" style="font-size:120%;">CString</font> methods. 
+            Insert the following code below the existing
+	    <font face="Courier New" style="font-size:120%;">#include</font> statements:
+
+<pre><font face="Courier New" style="font-size:120%;">
+<font color=#BABABA>#include "resource.h"
+#include &lt;atlbase.h&gt;
+#include &lt;atlcom.h&gt;</font>
+<font color=#0000ff>#include</font> &lt;atlstr.h&gt;
+
+<font color=#BABABA>using namespace ATL;</font>
+</font></pre></li></ol></li></ol></font></p>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <h4 id="dynamicitems">Using the Helper to Dynamically Insert Items</h4>
+    <ol>
+  
+      <li><font size="-1">Open your project's
+            <font face="Courier New" style="font-size:120%;">stdafx.h</font> file.
+          </font>
+          <ol>
+	    <li><font size="-1">Since Google Desktop requires Windows 2000 or later, you should
+        set the WINVER compiler variable to be 0x0500. As a first step,
+        remove or comment out the following WINVER and _WIN32_ referencing
+        code:
+        </font>
+	      <pre><font face="Courier New" style="font-size:120%;">
+</font><font face="Courier New"><font color=#008800>// Modify the following defines if you have to target a platform prior to the ones specified below.</font>
+
+<font color=#008800>// Refer to MSDN for the latest info on corresponding values for different platforms.</font>
+<font color=#0000ff>#ifndef</font> WINVER    <font color=#008800>// Allow use of features specific to Windows 95 and Windows NT 4 or later.</font>
+<font color=#0000ff>#define</font> WINVER 0x0400  <font color=#008800>// Change this to the appropriate value to target
+		       //Windows 98 and Windows 2000 or later.</font>
+<font color=#0000ff>#endif</font>
+
+<font color=#0000ff>#ifndef</font> _WIN32_WINNT  <font color=#008800>// Allow use of features specific to Windows NT 4 or later.</font>
+
+<font color=#0000ff>#define</font> _WIN32_WINNT 0x0400  <font color=#008800>// Change this to the appropriate value to target Windows 2000 or later.</font>
+<font color=#0000ff>#endif</font>
+
+<font color=#0000ff>#ifndef</font> _WIN32_WINDOWS <font color=#008800>// Allow use of features specific to Windows 98 or later.</font>
+<font color=#0000ff>#define</font> _WIN32_WINDOWS 0x0410 <font color=#008800>// Change this to the appropriate value to target Windows Me or later.</font>
+
+<font color=#0000ff>#endif</font>
+
+<font color=#0000ff>#ifndef</font> _WIN32_IE   <font color=#008800>// Allow use of features specific to IE 4.0 or later.</font>
+<font color=#0000ff>#define</font> _WIN32_IE 0x0400  <font color=#008800>// Change this to the appropriate value to target IE 5.0 or later.</font>
+<font color=#0000ff>#endif</font></font><font size="-1" face="Courier New" style="font-size:120%;">
+          </font></pre>
+	    </li>
+  
+          <li><font size="-1">Insert the following line, which replaces the lines you just
+            removed/commented out:<br>
+            <font face="Courier New" style="font-size:120%;"><font color=#0000ff>#define</font> WINVER 0x0500    <font color=#008800>// Win2k and above</font></font></font>
+	    </li></ol></li>
+  
+      <font size="-1"><br>
+        </font>
+        <li><font size="-1">Open the plug-in object's Header file (for our example,
+            <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.h</font>). </font>
+          <ol>
+  
+	<li><font size="-1">Insert the following code at the top of the file, right below the
+          existing <font face="Courier New" style="font-size:120%;">#include</font>
+	  statements.<br>
+	  <br>
+          This code creates a new class for a message-only window. Often,
+          it is very useful for a plug-in to create a new message-only window
+          to receive Windows messages or as a base for timers. In our example,
+	  it will receive notifications about removable media being inserted
+	  or removed.<br>
+	  <br>
+  
+        On initialization of the Sidebar tile, this class's
+	      <font face="Courier New" style="font-size:120%;">StartNotifications()</font> method
+	  should be called. When destroying the plug-in, its
+          <font face="Courier New" style="font-size:120%;">StopNotifications()</font>
+  
+	method should be called to handle the clean up. In this example code,
+	  generally undocumented functions are used to monitor file
+          changes from Explorer, which is why we have to manually define
+	  many of the structures and constants.
+  
+    </font>
+	    <pre><font face="Courier New" style="font-size:120%;">
+<font color=#0000ff>#include</font> &lt;shlobj.h&gt;
+<font color=#0000ff>#include</font> &lt;atlwin.h&gt;
+
+<font color=#0000ff>#define</font> WM_SHELLNOTIFY WM_USER+5
+
+<font color=#0000ff>typedef struct</font> {
+    DWORD dwItem1;
+    DWORD dwItem2;
+} SHNOTIFYSTRUCT;
+
+
+<font color=#0000ff>class</font> <font color=#ff0000>CMyDiskMonitorObj</font>;
+
+<font color=#0000ff>class</font> <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font> : 
+  <font color=#0000ff>public</font> CWindowImpl&lt;<font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>&gt; {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>bool</font> StartNotifications(<font color=#ff0000>CMyDiskMonitorObj</font> *plugin);
+  <font color=#0000ff>bool</font> StopNotifications();
+
+  BEGIN_MSG_MAP(<font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>)
+    MESSAGE_HANDLER(WM_SHELLNOTIFY, OnShellNotify);
+  END_MSG_MAP()	
+
+  LRESULT OnShellNotify(UINT /*uMsg*/, WPARAM
+  	/*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+
+
+<font color=#0000ff>private</font>:
+  CString GetPathFromPIDL(DWORD pidl);
+
+<font color=#0000ff>private</font>:
+  <font color=#ff0000>CMyDiskMonitorObj</font> *plugin_;
+  ULONG notification_;
+};
+</font></pre></li>
+  
+           <li><font size="-1">Scroll to the end of the
+	             <font face="Courier New" style="font-size:120%;">CMyDiskMonitorObj</font> class definition
+	     and insert the following code. It creates an instance of the
+	     message-only window that receives notifications about the
+             removable media.
+  
+           </font>
+          <pre><font size="-1" face="Courier New" style="font-size:120%;">
+<font color=#BABABA>public:
+  CComPtr&lt;IUnknown&gt; helper_;</font>
+
+  <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font> message_window_;
+
+<font color=#BABABA>public:
+  STDMETHOD(SetSite) (IUnknown* site);
+};</font>
+</font></pre></li></ol></li>
+  
+<li><font size="-1">Open the plug-in object's CPP file (for our example, <font face="Courier New" style="font-size:120%;">MyDiskMonitorObj.cpp</font>)</font></li>
+  <ol>
+  <li><font size="-1">Go to the <font face="Courier New" style="font-size:120%;">SetSite()</font> method. From
+  there, go to where where the dummy items are added as shown previously in
+  this tutorial. This code is located below the <font face="Courier New" style="font-size:120%;">SetIcons()</font> call</font></li>
+  
+<li><font size="-1">Remove the loop which was created earlier and replace it with the following code:</font></li>
+  <pre><font size="-1" face="Courier New" style="font-size:120%;">
+    <font color=#BABABA>// Set the plug-in's icons (also used in About dialog)
+    helper-&gt;SetIcons(tile_icon, tile_icon);</font>
+    
+    <font color=#008800>// Start notifications on for Explorer file creations</font>
+    <font color=#0000ff>if</font> (message_window_.StartNotifications(this) == false)
+      <font color=#0000ff>return</font> E_FAIL;
+
+<font color=#BABABA>  }
+
+  return S_OK;
+}</font>
+</font></pre>
+  <font size="-1">
+  </li>
+  
+           </font>
+  <li><font size="-1">Insert the following at the bottom of the file. When the
+	     <font face="Courier New" style="font-size:120%;">StartNotifications()</font> method
+	     is called, the object will create a
+	     message-only window. If successfully created, it will then set
+	     itself up to receive notifications on all file
+	     creations. <font face="Courier New" style="font-size:120%;">StopNotifications()</font>
+	     also should be called once the plug-in gets
+	     unloaded in order to release the resources taken by the
+	     notifications.
+  
+</font>
+    <pre><font size="-1" face="Courier New" style="font-size:120%;">
+<font color=#0000ff>bool</font> <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>::StartNotifications(<font color=#ff0000>CMyDiskMonitorObj</font> *plugin) {
+  plugin_ = plugin;
+  
+  <font color=#008800>// create a message-only window</font>
+
+  <font color=#0000ff>if</font> (Create((HWND)-3) == NULL)
+    <font color=#0000ff>return</font> false;
+
+  <font color=#008800>// Specify to listen for file change events from all hard drives</font>
+  LPITEMIDLIST id_list;
+  <font color=#0000ff>if</font> (SHGetSpecialFolderLocation(m_hWnd, CSIDL_DESKTOP, &id_list) != NOERROR)
+    <font color=#0000ff>return false</font>;
+
+  SHChangeNotifyEntry notify_settings;
+  notify_settings.fRecursive = TRUE;
+  notify_settings.pidl = id_list;
+
+  <font color=#008800>// Start listening for file events</font>
+
+  notification_ = SHChangeNotifyRegister(m_hWnd, 
+    SHCNE_DISKEVENTS, 
+    SHCNE_MEDIAINSERTED | SHCNE_MEDIAREMOVED | SHCNE_DRIVEADD | SHCNE_DRIVEREMOVED,
+    WM_SHELLNOTIFY, 
+    1, &notify_settings);
+  <font color=#0000ff>if</font> (notification_ == 0)
+    <font color=#0000ff>return false</font>;
+  <font color=#0000ff>return true</font>;
+}
+
+<font color=#0000ff>bool</font> <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>::StopNotifications() {
+  SHChangeNotifyDeregister(notification_);
+
+  <font color=#0000ff>return true</font>;
+}
+</font></pre></li>
+  
+         <li><font size="-1">Insert the following code at the end of the file. This code
+	   block inserts an item whenever a notification event happens in the
+	   message-only window. Note that a large part of this code is what
+	   was in the loop in the previous part of this tutorial where simple
+	   dummy items were being inserted. Below, it has been slightly
+	   modified both to change the text output and to use the <font
+	 face="Courier New">plugin_</font> object to add the
+	   item. <font face="Courier New" style="font-size:120%;">GetPathFromPIDL</font> is
+	   required in order to do a conversion of the parameter data to a
+	   displayable form.
+  
+         </font>
+            <pre><font size="-1" face="Courier New" style="font-size:120%;">
+LRESULT <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>::OnShellNotify(UINT msg, 
+    WPARAM wp, LPARAM lp, BOOL& handled) {
+
+  <font color=#008800>// Get the before and after filenames</font>
+  SHNOTIFYSTRUCT *notification = (SHNOTIFYSTRUCT *)wp;
+  CString fullpath = GetPathFromPIDL(notification-&gt;dwItem1);
+  
+  <font color=#008800>// Verify that the path is not empty</font>
+
+  <font color=#0000ff>if</font> (fullpath.IsEmpty())
+    <font color=#0000ff>return</font> S_OK;
+
+  <font color=#008800>// Create an object for the new item</font>
+  CMyDiskMonitorContentItemImpl *item_object = NULL;
+  CMyDiskMonitorContentItemImpl::CreateInstance(&item_object);
+  CComPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; item_helper;
+  item_object-&gt;GetUnknown()-&gt;QueryInterface(IID_IGoogleDesktopDisplayContentItemHelper,
+    reinterpret_cast&lt;<font color=#0000ff>void</font>**&gt;(&item_helper));
+
+  <font color=#008800>// Get the system time for a time value</font>
+
+  SYSTEMTIME system_time;
+
+  GetSystemTime(&system_time);
+  DATE time;
+  SystemTimeToVariantTime(&system_time, &time);
+
+  // Display the correct information depending on the event data
+  <font color=#0000ff>if</font> ((lp == SHCNE_MEDIAINSERTED) || (lp == SHCNE_DRIVEADD)) {
+    item_helper->put_heading(_T("Media inserted"));
+  } <font color=#0000ff>else if</font> ((lp == SHCNE_MEDIAREMOVED) || (lp == SHCNE_DRIVEREMOVED)) {
+    item_helper->put_heading(_T("Media removed"));
+  }
+  CComBSTR source(fullpath);
+  item_helper-&gt;put_source(source);
+
+  // Set the properties for the new item
+  item_helper-&gt;put_tooltip(_T("Tooltip")); 
+  item_helper-&gt;put_time_created(time);
+  item_helper-&gt;put_flags(static_cast&lt;GoogleDesktopDisplayContentItemFlags&gt;(
+    GDD_CONTENT_ITEM_FLAG_TIME_ABSOLUTE));
+  item_helper-&gt;put_image(NULL);
+  item_helper-&gt;put_layout(static_cast&lt;GoogleDesktopDisplayContentItemLayout&gt;(
+    GDD_CONTENT_ITEM_LAYOUT_NEWS));
+
+  <font color=#008800>// Create the item that will be added</font>
+
+  CComQIPtr&lt;IGoogleDesktopDisplayContentItem&gt; item(item_helper);
+  GoogleDesktopContentItemDisplayOptions item_flags =
+    static_cast&lt;GoogleDesktopContentItemDisplayOptions&gt;(GDD_ITEM_DISPLAY_IN_SIDEBAR);
+
+  <font color=#008800>// Add the item with the helper</font>
+  CComQIPtr&lt;IGoogleDesktopDisplayPluginHelper&gt; helper(<font color=#ff0000>plugin_</font>-&gt;helper_);
+  helper-&gt;AddContentItem(item, item_flags);
+  
+  <font color=#0000ff>return</font> S_OK;
+}
+
+CString <font color=#ff0000>CMyDiskMonitorObjMsgOnlyWindow</font>::GetPathFromPIDL(DWORD pidl) {
+  CString out(_T(""));
+  wchar_t path[MAX_PATH];
+  
+  <font color=#0000ff>if</font> (SHGetPathFromIDList((struct _ITEMIDLIST *)pidl, path))
+    out = path;
+  
+  <font color=#0000ff>return</font> out;
+}
+
+</font></pre></li>
+  
+<li><font size="-1">Finally, so that resources are properly freed when the plug-in closes,
+  insert the following code in the <font face="Courier New" style="font-size:120%;">FinalRelease()</font> method:
+  </font>
+    <pre><font size="-1" face="Courier New" style="font-size:120%;">
+<font color=#BABABA>void CMyDiskMonitorObj::FinalRelease() {</font>
+  <font color=#0000ff>if</font> (<font color=#ff0000>message_window_</font>.IsWindow()) {
+    <font color=#ff0000>message_window_</font>.StopNotifications();
+    <font color=#ff0000>message_window_</font>.DestroyWindow();
+  }
+
+<font color=#BABABA>  helper_.Release();
+}</font>
+</font></pre></li></ol>
+  <font size="-1">
+  </li>
+  </font>
+    </ol>    </p>
+
+   <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+
+
+
+
+<hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <a name="doubleclicks"></a><h4>Responding to Double Clicks on Tile Items</h4>    <p><font size="-1">We need to handle how the items in our tile respond
+    when users double-click on them. Per the UI guidelines, double-clicking opens
+    the item in a new application window and also selects it in the Sidebar.
+    </font></p>
+
+    <p><ol><font size="-1">
+
+      <li><font size="-1">Open the plug-in object's CPP file (</font><font
+      face="Courier New">MyDiskMonitorObj.cpp</font><font
+      size="-1">).</font></li>
+
+      <li>The item class' <font face="Courier
+      New">OpenItem()</font><font size="-1"> handles opening the item, so
+      we need to customize it to do the right thing when opening our items. 
+      For our example, replace the generated </font><font face="Courier
+      New">OpenItem()</font><font size="-1"> method with the following
+      version: </font>
+
+        <pre><font face="Courier New"  style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::OpenItem() {
+  CComQIPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; helper(helperitem_);
+
+  CComBSTR drive;
+  ATLVERIFY(SUCCEEDED(helper->get_source(&drive)));
+
+  ShellExecute(NULL, _T("open"), drive, NULL, drive, SW_SHOWNORMAL);
+
+  return S_OK;
+}
+</font></pre>
+      </li>
+  </font>  </ol>
+    </p>
+
+    <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="singleclicks"></a><h4>Responding to Single Clicks on Tile Items with Details View</h4>
+    
+    <p><font size="-1">Per the Sidebar UI guidelines, single-clicking a
+    tile's content item opens that item's details view. The following 
+    code implements that behavior for our content items.</font></p>
+ 
+    <p>
+    <ol><font size="-1">
+        <li><font size="-1">Open the plug-in object's CPP file (</font><font face="Courier New, Courier, mono">MyDiskMonitorObj.cpp</font><font size="-1">).</font></li>
+
+         <li><font face="Courier New">OnDetailsView()</font><font size="-1"> in the item class handles opening the details view. Customize it to handle your particular items. For our example, the
+          details view is put together depending on the volume information (if
+          it was inserted). The</font> <font face="Courier New">SetContent()</font><font size="-1"> method adds text to
+          the details view. When completed, the </font><font face="Courier New">Detach()</font><font size="-1"> method makes
+          the data displayable on the details view window.<br>
+          <br>
+          Replace the generated </font><font face="Courier New">OnDetailsView()</font><font size="-1"> method with the
+          following version: </font>
+
+          <pre><font face="Courier New"  style="font-size:120%">
+STDMETHODIMP <font color=#ff0000>CMyDiskMonitorContentItem</font>::OnDetailsView(BSTR* title,
+    GoogleDesktopDisplayDetailsViewFlags* flags, IUnknown** details_control,
+    VARIANT_BOOL* cancel) {
+<font color=#008800>  // Get the item to be displayed</font>
+
+  CComQIPtr&lt;IGoogleDesktopDisplayContentItemHelper&gt; helper(helperitem_);
+  ATLASSERT(helper != NULL);
+  if (!helper)
+    return E_INVALIDARG;
+
+<font color=#008800>  // Here we can create any ActiveX control for displaying the details, and </font>
+<font color=#008800>  // return it via the details_control parameter. We use our </font>
+<font color=#008800>  // CMyDiskMonitorDetailsView control to draw the details view content.</font>
+  CComPtr&lt;IGoogleDesktopDisplayDetailsViewHelper&gt; details;
+  HRESULT hr = details.CoCreateInstance(CLSID_GoogleDesktopDisplayDetailsViewHelper);
+  if (SUCCEEDED(hr)) {
+
+<font color=#008800>    // Get source drive that was inserted/removed</font>
+    CComBSTR drivePathBSTR(""); 
+    helper-&gt;get_source(&drivePathBSTR);
+    CString drivePath(drivePathBSTR); 
+
+<font color=#008800>    // Get the drive label</font>
+    CString driveLabel;
+    GetVolumeInformation(drivePath, driveLabel.GetBuffer(255), 255, 
+       NULL, NULL, NULL, NULL, NULL);
+    driveLabel.ReleaseBuffer();
+
+<font color=#008800>    // Get the drive size total and free space</font>
+    ULARGE_INTEGER totalSpace, freeSpace;
+    CString totalSpaceOUT, freeSpaceOUT;
+    GetDiskFreeSpaceEx(drivePath, NULL, &totalSpace, &freeSpace);
+    totalSpaceOUT.Format(_T("%llu"), totalSpace);
+    freeSpaceOUT.Format(_T("%llu"), freeSpace);
+
+<font color=#008800>    // Set the text in the details view</font>
+    CString output;
+    output += _T("Drive: ") + drivePath + _T("\n");
+    output += _T("Label: ") + driveLabel + _T("\n");
+    output += _T("Total size (Bytes): ") + totalSpaceOUT + _T("\n");
+    output += _T("Free space (Bytes): ") + freeSpaceOUT + _T("\n");
+
+<font color=#008800>    // Display the output in the details window</font>
+    CComBSTR outputBSTR(output);
+    CComBSTR statusBSTR("");
+    helper-&gt;get_heading(&statusBSTR);
+    details-&gt;SetContent(statusBSTR, NULL, outputBSTR, VARIANT_TRUE, GDD_CONTENT_ITEM_LAYOUT_NEWS);
+    helper-&gt;get_source(title);
+    
+<font color=#008800>    // Return the data to display</font>
+
+    *details_control = details.Detach();
+    *flags = static_cast&lt;GoogleDesktopDisplayDetailsViewFlags&gt;(
+      GDD_DETAILS_VIEW_FLAG_TOOLBAR_OPEN);
+  }
+
+  return hr;
+}
+</font></pre>
+        </li></font>
+    </ol>
+    </p>
+
+                                
+   <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+	</span>
+
+      </td>
+    </tr>
+    <tr><td colspan="2">
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="http://desktop.google.com/privacypolicy.html">Privacy Policy</a> - <a href="http://desktop.google.com/eula">Terms and Conditions</a> - <a href="http://desktop.google.com/copyrights.html">Copyright Notices</a> </font></div></td>
+
+        </tr>
+      </tbody></table>
+    </td></tr>
+
+  </tbody></table>
+</body></html>

@@ -1,0 +1,609 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Actions API Developer Guide</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop Actions API Developer Guide </b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Action API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	
+	</td>
+    <td>
+	<font face="arial,sans-serif"><b><a name="0.2_top"></a>Contents</b></font>
+		<p><font size="-1"><a href="#0.2_overview"><b>Overview</b></a></font></p>
+		<ul>
+			<li>
+				<font size="-1"><a href="#0.2_gettingstarted">Getting Started</a></font>
+
+			<li>
+				<font size="-1"><a href="#0.2_devprocess">Development Process Overview</a></font></ul>
+		<p><font size="-1"><a href="#0.2_custom_action_api"><b>Custom Actions Developer API</b></a></font></p>
+		<ul>
+			<li>
+				<font size="-1"><a href="#0.2_registering">Registering Custom Actions Plug-Ins</a></font>
+			<li>
+
+				<font size="-1"><a href="#0.2_action_interfaces"><font size="-1">Implementing Custom Actions</font></a></font>
+			</li>
+		</ul>
+
+	<p><code><b><a href="GoogleDesktopActionAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopActionAPI.idl</a></b></code></p>
+
+		<font size="-1">
+			<br>
+		</font><a name="0.2_overview"></a><b>Overview</b>
+		<hr align="left" color="#3399cc" noshade size="1">
+		<h4><a name="0.2_gettingstarted"></a>Getting Started
+		</h4>
+		<p><font size="-1">Google Desktop Custom Actions allow plug-in developers to override 
+				the default actions when a user clicks on a specific UI item. </font>
+
+		</p>
+		<p><font size="-1">To implement Custom Actions and integrate your application with 
+				Google Desktop you will need, in addition to the information in this document: </font>
+		</p>
+		<ul>
+			<li>
+				<font size="-1">Sufficient access to write a plug-in for your application and an 
+					installer for it. </font>
+			<li>
+				<font size="-1">Programming knowledge of the Microsoft Windows Component Object 
+					Model (COM). </font>
+
+			</li>
+		</ul>
+		<h4><a name="0.2_devprocess"></a>Development Process Overview
+		</h4>
+		<p><font size="-1">To develop a GD Custom Action, start by downloading the SDK, in 
+				particular the </font><code><a href="GoogleDesktopActionAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopActionAPI.idl</a></code><font size="-1">
+				file. We recommend developing your application with Microsoft Visual Studio.</font></p>
+		<p><font size="-1">You will then need to write code to: </font>
+
+		</p>
+		<ul>
+			<li>
+				<font size="-1">Register your application with the GD (required). </font>
+			<li>
+				<font size="-1">Implement the required Custom Actions interfaces. </font>
+			<li>
+				<font size="-1">Unregister your application with GD when your application 
+					uninstalls. </font>
+
+			</li>
+		</ul>
+		<p><font size="-1">We recommend that you look over the sample code provided with the 
+				SDK. Please note that the sample code examples have their GUIDs hardcoded, so 
+				if you choose to reuse code from there you must change the interfaceIDs, 
+				classIDs, and libIDs to ones valid for your application.</font></p>
+		<div align="right"><font size="-2"><a href="#0.2_top">Back to top</a></font></div> 
+		<a name="0.2_custom_action_api"></a><b>Custom Action Developer 
+			API</b>
+		<hr align="left" color="#3399cc" noshade size="1">
+		<h4><a name="0.2_registering"></a>Registering Custom Action Components
+		</h4>
+
+		<p><font size="-1">GD will not accept unregistered components. Custom Action component 
+				registration is a one-time process done using the </font><code>IGoogleDesktopRegistrar</code><font size="-1">
+				interface, and should be done during component installation. As part of the 
+				registration process, the component must provide its GUID as well as 
+				information about itself.</font></p>
+		<p><font size="-1">As part of its own uninstallation process, a component should 
+				unregister itself with GD.</font></p>
+		<font size="-1"><b>Component Registration Interface Summary </b></font>
+		<p><font size="-1">The following summarizes the interface and its methods. All method 
+				return values are of type</font> <code>HRESULT</code><font size="-1">. </font>
+
+		</p>
+		<code>interface IGoogleDesktopRegistrar: IDispatch</code>
+		<ul>
+			<li>
+				<font size="-1"><b>Note: </b>Components are required to to call this interface to 
+					register themselves with Google Desktop before they can interact with any APIs 
+					or other provided services. </font>
+				<br>
+			<li>
+
+				<font size="-1"><b>Note: </b>The registration process consists of a call to </font>
+				<code>StartComponentRegistration</code> <font size="-1">followed by individual 
+					registrations for various services
+ obtained through</font> <code>GetRegistrationInterface</code>
+  <font size="-1">and finished by a call to </font><code>FinishComponentRegistration.</code> <font size="-1">For action components, the
+registration progid is "GoogleDesktop.ActionRegistration" 
+and the interface is</font> <code>IGoogleDesktopRegisterCustomAction</code>.
+				<br>
+			<li>
+				<code>StartComponentRegistration</code><font size="-1">: Must be invoked by any 
+					component to initiate the registration process. </font>
+
+				<ul>
+					<li>
+						<font size="-1"><i>Arguments</i>: </font>
+						<ul>
+							<li>
+								<code>BSTR component_guid_or_progid</code><font size="-1">: The component's GUID or 
+									ProgID.</font>
+							<li>
+
+								<code>VARIANT</code> <font size="-1">component_description: A </font><code>SAFEARRAY</code>
+								<font size="-1">of pairs, where the first element is a descriptive parameter name 
+									and the second element is that parameter's value. The method expects only the 
+									following three required parameters, which should be given in this order. </font>
+								<ul>
+									<li>
+										<font size="-1">&quot;</font><code>Title</code><font size="-1">&quot;: Component title that 
+											will be displayed on the GD preferences page. </font>
+
+									<li>
+										<font size="-1">&quot;</font><code>Description</code><font size="-1">&quot;: Component 
+											description that will be displayed on the GD preferences page. </font>
+									<li>
+										<font size="-1">&quot;</font><code>Icon</code><font size="-1">&quot;: A string pointing to an 
+											ICON resource, of the form &quot;</font><code>c:\program files\boo\comp.dll,23</code><font size="-1">&quot;. 
+											This icon may be used to indicate the component and its results on various GD 
+											pages.</font>
+									</li>
+								</ul>
+
+							</li>
+						</ul>
+					<li>
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>S_OK</code> <font size="-1">if successful. </font>
+
+							<li>
+								<code>E_COMPONENT_ALREADY_REGISTERED</code> <font size="-1">if this component has 
+									already been registered with GD.</font>
+							<li>
+								<font size="-1">Appropriate error on failure, such as an unregistered component 
+									classID or appID, component prohibited by policy, etc. </font>
+							</li>
+						</ul>
+				</ul>
+				<br>
+			<li>
+				<code>GetRegistrationInterface</code><font size="-1">: Provides the requested type 
+					of registration interface. </font>
+				<ul>
+					<li>
+						<font size="-1"><i>Arguments</i>: </font>
+
+						<ul>
+							<li>
+								<code>BSTR registration_type</code><font size="-1">: a stringified CLSID or a 
+									progid to the type of registration required.</font>
+							<li>
+								<code>[out, retval] IUnknown **registration_interface</code><font size="-1">: </font>
+								<font size="-1">provides the requested registration mechanism. </font>
+
+							</li>
+						</ul>
+					<li>
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>S_OK</code> <font size="-1">if successful. </font>
+
+							<li>
+								<font size="-1">Appropriate error on failure. </font>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<br>
+			<li>
+
+				<code>FinishComponentRegistration</code><font size="-1">: Must be invoked to finish 
+					the registration process. </font>
+				<ul>
+					<li>
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>S_OK</code> <font size="-1">if successful. </font>
+
+							<li>
+								<font size="-1">Appropriate error on failure, such as an unregistered component 
+									classID or appID, component prohibited by policy, etc. </font>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<br>
+			<li>
+
+				<code>UnregisterComponent</code>
+				<ul>
+					<li>
+						<i><font size="-1">Arguments</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>BSTR component_guid_or_progid</code>: <font size="-1">the same GUID used when 
+									registering the component. </font>
+
+							</li>
+						</ul>
+					<li>
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>S_OK</code><font size="-1"> if successful. </font>
+
+							<li>
+								<font size="-1">Appropriate error on failure. </font>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<b><font size="-1">Component Registration Code Template </font></b>
+		<p><font size="-1">The following template demonstrates how a component can register to 
+				handle the &quot;Reply&quot; action for emails. Note that this registration should only 
+				be done once, not every time the plug-in starts. </font>
+		</p>
+		<p><font size="-1">To register a component:</font><br>
+
+			<font face="Courier New, Courier, mono">
+<pre>  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) {
+    ATLASSERT(spRegistrar != NULL);
+    
+    // Component description is 6 strings
+    CComSafeArray&lt;VARIANT&gt; arr_descr(6);
+
+    arr_descr.SetAt(0, CComVariant(L&quot;Title&quot;));
+    arr_descr.SetAt(1, CComVariant(L&quot;A sample action plug-in&quot;));
+    arr_descr.SetAt(2, CComVariant(L&quot;Description&quot;));
+    arr_descr.SetAt(3, CComVariant(L&quot;Implements sample custom actions&quot;));
+    arr_descr.SetAt(4, CComVariant(L&quot;Icon&quot;));
+    arr_descr.SetAt(5, CComVariant(L&quot;,1&quot;));
+
+    // our CLSID in string format
+    CComBSTR our_clsid(clsid);
+    
+    // Wrap description array in variant
+    CComVariant descr(arr_descr.m_psa);
+
+    // and register
+    hr = spRegistrar-&gt;StartComponentRegistration(our_clsid, descr);
+    if (FAILED(hr))
+      return hr;
+
+    // success, now register as a action component.
+    // This two step registration allows the same plug-in to implement multiple
+    // components
+    CComPtr&lt;IGoogleDesktopRegisterCustomAction&gt; spRegistration;
+
+    CComBSTR action_registrar_progid(&quot;GoogleDesktop.ActionRegistration&quot;);
+    hr = spRegistrar-&gt;GetRegistrationInterface(action_registrar_progid,
+      reinterpret_cast&lt;IUnknown**&gt;(&amp;spRegistration));
+    ATLASSERT(FAILED(hr) || spRegistration);
+
+    if (SUCCEEDED(hr)) {
+      CComVariant var;
+      var.Clear();
+      hr = spRegistration-&gt;RegisterAction(CComBSTR(CLSID_EmailActions), 
+                    CComBSTR(ACTION_EMAIL_REPLY), CComVariant());
+
+      if (SUCCEEDED(hr)) {
+        hr = spRegistrar-&gt;FinishComponentRegistration();
+      }
+    }
+
+</pre>
+			</font>
+		<p></p>
+		<p><font size="-1">To unregister a component:</font><br>
+			<br>
+			<font face="Courier New, Courier, mono">
+<pre>  CComPtr&lt;IGoogleDesktopRegistrar&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) { 
+    // our CLSID in string format
+    CComBSTR bstrClsid(clsid);
+  
+    hr = spRegistrar-&gt;UnregisterComponent(bstrClsid);
+  }
+
+</pre>
+			</font>
+			
+			<h4><a name="0.2_action_interfaces"></a>Implementing and 
+				Handling Custom Actions</h4>
+		<p><font size="-1">After a successful registration with GD, a component can use the 
+				Custom Action APIs to implement and override the default actions for specific 
+				user actions.</font></p>
+		<p><font size="-1">The Action API consists of a COM interface, which must be 
+			exposed by plug-ins wishing to implement custom actions. Whenever a custom 
+			action is rendered GD will query registered plug-ins about their interest in 
+			the action i.e., whether to change he action title and whether to override or 
+			perform the default action. 
+                        Please note that the custom action plugins will be loaded in a COM
+                        multi-threaded apartment.
+		</font></p>
+		<code>interface IGoogleDesktopCustomAction: IUnknown</code>
+		<br>
+
+		<ul>
+			<li>
+				<code>QueryInterest</code><font size="-1">: Invoked when an action is being 
+					rendered to query for the plug-ins interest in the action. </font>
+				<ul>
+					<li>
+						<font size="-1"><i>Arguments</i>: </font>
+						<ul>
+
+							<li>
+								<code>ACTION_LOCATION location</code><font size="-1">: The GUID identifier for the 
+									location where the action is being rendered (ACTION_LOCATION_ALL is a wildcard 
+									and currently the only supported location).</font></li>
+							<li>
+								<code>ACTION_ID action</code><font size="-1">: The GUID for the action queried 
+									(e.g., ACTION_EMAIL_REPLY, ACTION_EMAIL_REPLY, ACTION_EMAIL_FORWARD).</font></li>
+							<li>
+								<code>BSTR query_string</code><font size="-1">: The query string, if applicable and 
+									if allowed by the user's preferences. Note: we will not implement a preference 
+									to disallow this parameter in this iteration.</font></li>
+
+							<li>
+								<code>IUnknown * item</code><font size="-1">: An interface to the item being 
+									rendered, most commonly a</font> <code>IGoogleDesktopNotifyEvent</code>.</li>
+							<li>
+								<code>[in, out] BSTR * action_title</code><font size="-1">: If the action is 
+									handled, this string will be displayed as the action title. On input this 
+									contains the default title for the current language.</font></li>
+							<li>
+								<code>[out] BSTR * action_cookie</code><font size="-1">: A string which will be 
+									handed back to the object if the action is performed. This could be an item 
+									specific property (e.g., &quot;uri&quot;, &quot;cookie&quot;) or any string combination</font></li>
+
+							<li>
+								<code>[out] ActionHandling * handling</code><font size="-1">: Specifies whether and 
+									how the action should be handled (e.g., ACTION_HANDLING_DEFAULT, 
+									ACTION_HANDLING_QUENCH, ACTION_HANDLING_OVERRIDE).</font></li>
+						</ul>
+					<li>
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+
+								<code>S_OK</code> <font size="-1">in all cases. </font>
+							<li>
+								<font size="-1">An error return may result in the removal of the plug-in's 
+									registration for this action, or until GD is restarted. </font>
+								<br>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+			<li>
+				<code>HandleAction</code><font size="-1">: Invoked when an action needs to be 
+					performed. </font>
+				<ul>
+					<li>
+						<font size="-1"><i>Arguments</i>: </font>
+						<ul>
+
+							<li>
+								<code>ACTION_LOCATION location</code><font size="-1">: The identifier for the 
+									location where the action was rendered.</font></li>
+							<li>
+								<code>ACTION_ID action</code><font size="-1">: The identifier for the action to 
+									perform.</font></li>
+							<li>
+								<code>BSTR query_string</code><font size="-1">: The query string, if applicable and 
+									if allowed by the user's preferences.</font></li>
+
+							<li>
+								<code>IUnknown * item</code><font size="-1">: An interface to the item who is 
+									rendered, most frequently this is</font> <code>IGoogleDesktopNotifyEvent</code>. <font size="-1">May be NULL 
+									in cases where it's not feasible to pass back the same instance as in 
+									QueryInterest.</font></li>
+							<li>
+								<code>BSTR action_cookie</code><font size="-1">: The string cookie the plug-in 
+									provided in the call from QueryInterest.</font></li>
+						</ul>
+					<li>
+
+						<i><font size="-1">Returns</font></i><font size="-1">: </font>
+						<ul>
+							<li>
+								<code>S_OK</code> <font size="-1">if successful. </font>
+							<li>
+								<font size="-1">Appropriate error on failure. </font>
+
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		 <b><font size="-1">Action Code Template </font></b>
+		<p><font size="-1">The following template demonstrates how a component can implement 
+				the methods on the</font> 
+                                <code>IGoogleDesktopCustomAction</code> 
+                                <font size="-1">interface. </font>
+
+		</p>
+		<p><font size="-1">When</font>
+                 <code>QueryInterest</code> 
+                 <font size="-1">is invoked for an email message the plug-in 
+                 will override Forward and quench Reply.</font>
+
+			<pre>
+  /// IGoogleDesktopCustomAction
+  STDMETHOD(QueryInterest)( 
+      /* [in] */ ACTION_LOCATION location,
+      /* [in] */ ACTION_ID action,
+      /* [in] */ BSTR query_string,
+      /* [in] */ IUnknown *item,
+      /* [out][in] */ BSTR *action_title,
+      /* [out] */ BSTR *action_cookie,
+      /* [out] */ ActionHandling *handling) {
+      ATLASSERT(NULL != query_string);
+      ATLASSERT(NULL != action_title &amp;&amp; NULL != *action_title);
+      ATLASSERT(NULL != action_cookie &amp;&amp; NULL == *action_cookie);
+      ATLASSERT(NULL != handling);
+      
+      /// Override Forward always, quench reply always
+      if (IsEqualGUID(action, ACTION_EMAIL_FORWARD)) {
+        CString title(L&quot;Overridden Forward&quot;);
+        CString cookie(L&quot;Email Forward&quot;);
+        
+        ATLASSERT(NULL != item);
+        
+        title.SetSysString(action_title);
+        *action_cookie = cookie.AllocSysString();
+
+        *handling = ACTION_HANDLING_OVERRIDE;
+
+      } else if (IsEqualGUID(action, ACTION_EMAIL_REPLY)) {
+        *handling = ACTION_HANDLING_QUENCH;
+      } else {
+        /// unknown 
+        ATLASSERT(false &amp;&amp; &quot;Unregistered action in QueryInterest&quot;);
+        *handling = ACTION_HANDLING_DEFAULT;
+      }
+
+      return S_OK;
+    }		
+		</pre>
+
+		<p><font size="-1">When</font> 
+                   <code>HandleAction</code> 
+                   <font size="-1">is invoked the plug-in will 
+				simply display a message box with the query and action strings.</font>
+
+			<pre>
+  /// IGoogleDesktopCustomAction
+  STDMETHOD(HandleAction)( 
+    /* [in] */ ACTION_LOCATION location,
+    /* [in] */ ACTION_ID action,
+    /* [in] */ BSTR query_string,
+    /* [in] */ IUnknown *item,
+    /* [in] */ BSTR action_cookie) {
+    /// Action processing displays a message box.
+    CString str;
+    
+    str.Format(_T(&quot;Query: %ws, action: %ws&quot;), query_string, action_cookie);
+    MessageBox(NULL, str, _T(&quot;Action!&quot;), MB_OK | MB_SERVICE_NOTIFICATION);
+
+    return S_OK;
+  }
+		</pre>
+
+</td>
+  </tr>
+  <tr valign="top">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+</tbody></table>
+
+</body></html>
+

@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayPluginWizard", "DisplayPluginWizard.vcproj", "{311B92FF-4960-4E6A-9E66-7002BFA81155}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{311B92FF-4960-4E6A-9E66-7002BFA81155}.Debug.ActiveCfg = Debug|Win32
+		{311B92FF-4960-4E6A-9E66-7002BFA81155}.Debug.Build.0 = Debug|Win32
+		{311B92FF-4960-4E6A-9E66-7002BFA81155}.Release.ActiveCfg = Release|Win32
+		{311B92FF-4960-4E6A-9E66-7002BFA81155}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

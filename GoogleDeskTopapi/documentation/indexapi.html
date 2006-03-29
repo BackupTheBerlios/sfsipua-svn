@@ -1,0 +1,1774 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>GD SDK Developer Index API Documentation</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font color="#000000" face="arial,sans-serif"><b>Google Desktop SDK Index API Developer Guide </b></font></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;Index API<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="sidebar_plugin_guidelines.html">Plug-in Design Guidelines</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>
+	</td>
+    <td>
+      <font face="arial,sans-serif"><b><a name="top"></a>Contents</b></font>
+      <p><font size="-1"><a href="#overview"><b>Overview</b></a></font></p>
+<ul>
+  <li><font size="-1"><a href="#gettingstarted">Getting Started</a></font></li>
+  <li><font size="-1"><a href="#devprocess">Development Process Overview</a></font></li>
+  <li><font size="-1"><a href="#sdk">SDK Overview</a></font></li>
+  </ul>
+<p><font size="-1"><b><a href="#eventschemas">Event Schemas</a></b></font></p>
+<p><font size="-1">        <a href="#indexingapi"><b>GD Developer Indexing API</b></a></font></p>
+<ul>
+  <li><font size="-1"><a href="#registering">Registering Indexing Components</a></font></li>
+  <li><font size="-1">          <a href="#creating">Creating and Sending Events</a></font></li>
+  <li><font size="-1"><a href="#handling">        Handling GD Crawler Notifications</a></font></li>
+  <li><font size="-1">        <a href="#howto">Writing and Distributing Your GD Plug-in</a></font></li>
+  </ul>
+<p><code><b><a href="GoogleDesktopAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopAPI.idl</A></b></code></p>
+<p><code><b><a href="schemas.xml" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">schemas.xml</A></b></code></p>
+
+<br><a name="overview" id="overview"></a> <b>Overview</b>  <hr align="left" color="#3399cc" noshade="noshade" size="1">
+  <h4> <a name="gettingstarted"></a>Getting Started </h4>
+  <p> <font size="-1">Google
+Desktop (GD) indexes, caches, and searches content on your
+computer. Through the GD Software Development Kit's APIs, your
+applications can send content to the GD engine for indexing and
+storage. In particular, you can write plug-ins that allow GD to store and search content from
+applications that it doesn't already handle.</font></p>
+  <p><font size="-1"> To integrate your application with GD you will need, in addition to the information in this document: </font></p>
+  <ul>
+    <li><font size="-1">
+Sufficient access to write a plug-in for your application and an
+installer for it and/or an understanding of your application's file
+format. </font></li>
+    <li><font size="-1"> Basic programming knowledge of the Microsoft Windows Component Object Model (COM). </font></li>
+  </ul>
+  <h4> <a name="devprocess" id="devprocess"></a>Development Process Overview </h4>
+  <p> <font size="-1">To develop a GD application, start by downloading the SDK, in particular the </font><code><a href="GoogleDesktopAPI.idl" target="_blank" onClick="return top.js.OpenExtLink(window,event,this)">GoogleDesktopAPI.idl</A></code><font size="-1"> file. We recommend developing your application with Microsoft Visual Studio.</font></p>
+  <p><font size="-1"> You will then need to write code (in any COM compatible language) that uses the GD API to: </font></p>
+  <ul>
+    <li><font size="-1"> Register your application with GD (required). </font></li>
+    <li><font size="-1"> Register with GD to handle one or more file extensions (optional). </font>
+    <ul>
+      <li><font size="-1">
+If you do this registration, the GD crawler will notify your plug-in
+whenever it encounters a file with the registered extension. </font></li>
+    </ul>
+    <li><font size="-1"> One of: </font>
+    <ul>
+      <li><font size="-1"> Create a GD event object from scratch. </font></li>
+      <li><font size="-1"> In response to a GD notification about a file, create a GD event object. </font></li>
+    </ul>
+    <li><font size="-1"> Set the event object's property values, and then send it to GD. </font></li>
+    <li><font size="-1"> Unregister your application with GD when your application uninstalls. </font></li>
+  </ul>
+  <p><font size="-1">
+We recommend that you look over the sample code provided with the SDK,
+as well as the basic GD API operation C++ code templates provided in
+this document. Please note that the sample code examples have their
+GUIDs hardcoded, so if you choose to reuse code from there you must
+change the interfaceIDs, classIDs, and libIDs to ones valid for your
+application.</font></p>  
+  <h4> <a name="sdk"></a>SDK Overview </h4>
+  <p> <font size="-1">The Google Desktop SDK includes the following: </font></p>
+  <ul>
+    <li><font size="-1"> <a href="#eventschemas">Event Schemas</a> </font></li>
+    <li><font size="-1"> <a href="#indexingapi">Developer Indexing API </a></font></li>
+  </ul>
+  <p><font size="-1">
+The GD engine processes event objects sent to it by external
+components. An event object consists of the content data you want the
+engine to index and store, as well as additional meta-information and
+properties about that content or the event object. </font></p>
+  <p><font size="-1"> The Event Schemas specify the allowed event types, and the relevant properties for each event type.</font></p>
+  <p><font size="-1">
+The Developer Indexing API consists of interfaces used to construct
+event objects and send them to GD, register to receive notifications
+from the GD crawler, and for registering your application with GD.</font></p>
+  <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+  <a name="eventschemas" id="eventschemas"></a>
+        <b>Event Schemas </b>        <hr align="left" color="#3399cc" noshade="noshade" size="1">
+        <p><font size="-1">Event objects are all defined by <i>event schemas</i>,
+which specify what information and properties a particular event type
+can contain. The complete set of event schema definitions is in XML (<a href="schemas.xml">download XML file</a>).
+Event schemas are all pre-defined by Google; you cannot
+add to or modify the schema set. There are event schemas for: </font>          
+        </p><ul>
+          <li><font size="-1">Files (with subschemas for text files, web pages, and media files) </font>          
+          </li><li><font size="-1">Email messages </font>
+          </li><li><font size="-1">Calendar entries </font>
+          </li><li><font size="-1">Contacts entries </font>
+          </li><li><font size="-1">Tasks entries </font>
+          </li><li><font size="-1">Notes entries </font>
+          </li><li><font size="-1">Journal entries </font></li>
+        </ul>
+        <p><font size="-1">Each schema contains a set of <i>schema properties</i>. Each property has various attributes such as </font><code>name</code>, <code>type</code>, <code>required</code>,<font size="-1"> etc.</font></p>
+        <p><font size="-1">Schemas
+are organized in a parent-child relationship hierarchy, with children
+inheriting properties from their parent. The current hierarchy consists
+of three levels, with </font><code>Google.Desktop.Indexable</code><font size="-1"> as the base schema. Schemas are identified by their fully qualified name, such as </font><code>Google.Desktop.IM</code>. </p>
+        <p><font size="-1">When
+constructing an event object, you will first choose the appropriate
+schema, create an event object based on that schema, and then set its
+property values. For example, in order to index a text file's content,
+a component will use the</font> <code>Google.Desktop.TextFile</code> <font size="-1">schema to create an event object. The component will then set the event's </font><code>content</code><font size="-1"> property to contain the file's indexable content and specify the content's format (</font><code>text/plain</code><font size="-1"> or </font><code>text/html</code><font size="-1">) in the </font><code>format</code> <font size="-1">property. It will also set the </font><code>uri</code><font size="-1"> property with the file's location and the </font><code>last_modified_time</code><font size="-1">
+property with the file's access time. Those properties are all
+required; the component may or may not set the optional properties,
+such as the </font><code>author</code><font size="-1"> or</font> <code>title</code><font size="-1"> properties. Remember, </font><code>Google.Desktop.TextFile</code><font size="-1"> inherits properties from both its ancestors, </font><code>Google.Desktop.Indexable</code> <font size="-1">and </font><code>Google.Desktop.File</code><font size="-1">.</font></p>
+        <p><font size="-1">Full XML schema descriptions are given <a href="#xmlschemas">here</a>,
+with the property type attributes expressed using the Windows VARIANT
+data types. The following summarizes each schema and its properties,
+including allowed values and whether a property is required as well as
+some usage notes. Remember, in the current release, all other schemas
+inherit properties from </font><code>Google.Desktop.Indexable</code><font size="-1">. In particular, the required </font><code>content</code><font size="-1"> and </font><code>format</code><font size="-1"> properties for every event object are inherited from there.</font></p>
+        <p><code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+        </p><p><font size="-1"><b>Note:</b> This is an abstract schema. You cannot instantiate any event objects of type </font><code>Google.Desktop.Indexable</code><font size="-1">. Use one of its descendent schemas instead. </font></p>
+        <p><font size="-1"><b>Note:</b>
+Event objects cannot exceed a size that varies depending on machine
+characteristics. This averages several hundred thousand KB. If you send
+too large an event object to GD, GD will first truncate the event
+object's </font><code>content</code> <font size="-1">property's value until the total event object size is equal to the maximum allowed size. If all of the </font><code>content</code> <font size="-1">property's value has been removed and the event object is still too big, GD will reject the event object.</font></p>
+
+       <table border="1" cellpadding="3" cellspacing="0" width="90%">
+          <tbody><tr bgcolor="#e8f4f7">
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+            <td><b><font size="-1">Type</font></b></td>
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>content</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Contains
+the content to be indexed. The content must be in a text format (which
+can include HTML or similar markup, although GD will only treat HTML
+markup differently from plain text) not binary data. Note that some
+items may not have any indexable content, such as media files for which
+GD only indexes metadata and email messages with no content in their
+body. For those items, set this property to an empty string.&nbsp;</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>format</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Mime type of the indexable content, allowed values are </font><font face="Arial, Helvetica, sans-serif"><code>text/plain</code></font><font face="Arial, Helvetica, sans-serif" size="-1"> and</font><font face="Arial, Helvetica, sans-serif"> <code>text/html</code></font><font face="Arial, Helvetica, sans-serif" size="-1">. </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>native_size</code> </font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Size
+of the indexable content in bytes. Note that for file types for which
+there is no indexable content but still contain content, such as media
+files, you should set this property to be the size of the content. For
+example, for a 10 Megabyte audio file, you wouldn't put the 10 MB of
+content in an event's </font><font face="Arial, Helvetica, sans-serif"><code>content</code></font><font face="Arial, Helvetica, sans-serif" size="-1"> property, but you should set its </font><font face="Arial, Helvetica, sans-serif"><code>native_size</code></font><font face="Arial, Helvetica, sans-serif" size="-1"> property to </font><font face="Arial, Helvetica, sans-serif"><code>10000000</code></font><font face="Arial, Helvetica, sans-serif" size="-1">. </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI8</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>thumbnail</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Thumbnail
+image of the content. We recommend the image be 109 pixels wide by 75
+pixels tall. Image files of more than 20 KB will be rejected with an
+invalid argument error. If you specify a thumbnail image, you must also
+set a value for the following </font><font face="Arial, Helvetica, sans-serif"><code>thumbnail_format</code></font><font face="Arial, Helvetica, sans-serif" size="-1"> property. </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_ARRAY</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>thumbnail_format</code> </font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Mime type of the thumbnail image, allowed values are </font><font face="Arial, Helvetica, sans-serif"><code>image/gif</code>, <code>image/jpeg</code></font><font face="Arial, Helvetica, sans-serif" size="-1">, and </font><font face="Arial, Helvetica, sans-serif"><code>image/png</code></font><font face="Arial, Helvetica, sans-serif" size="-1">. </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>cookie</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">String cookie used to pass additional information identifying the event.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>cookie_raw</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Binary cookie.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_ARRAY</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>other_data</code>&nbsp;(<i>New</i>)</font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Contains optional indexable content and metadata. 
+            Can be used to index additional data that is separate from the 
+            </font><font face="Arial, Helvetica, sans-serif"><code>content</code></font><font face="Arial, Helvetica, sans-serif" size="-1"> property</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+      </tbody></table>
+      <blockquote><font size="-1"></font>
+<p></p>
+      <p><code><font size="3"><b><br>
+        Google.Desktop.Email</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>       
+      </p><p><font size="-1"><b>Note:</b> In general, you should either only set an email event object's</font> <code>header</code><font size="-1"> property with everything in a message's header, or only set the individual header field properties such as </font><code>subject</code>, <code>to</code>,<font size="-1"> etc. If you set the </font><code>header</code><font size="-1"> property, the GD engine will parse out the separate fields and their contents. If you specify values for both </font><code>header</code> <font size="-1">and individual field properties, the individual field values will take precedence.</font></p>
+      <p><font size="-1"><b>Note: </b>There
+is currently no property for email attachments. Your plug-in can copy
+each attachment on an email message to a location on your file system
+so that the GD crawler will encounter them. Then, if its file
+extension is handled by GD (or a plug-in), each attachment's content
+will be indexed and cached by GD. However, the attachment(s) content
+will not be associated with the email message within either GD or any
+desktop search results.</font></p>
+        <table border="1" cellpadding="3" cellspacing="0" width="85%">
+          <tbody><tr bgcolor="#e8f4f7">
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+            <td><b><font size="-1">Type</font></b></td>
+            <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>mail_header</code></font></td>
+            <td><font size="-1">Message's entire mail header as received in the mail envelope.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>subject</code></font></td>
+            <td><font size="-1">Message's Subject: field contents.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>from</code> </font></td>
+            <td><font size="-1">Message's
+From: field contents as it appears in the mail header (we recommend all
+of it, both address, and if present, the addressee's name). </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>to</code></font></td>
+            <td><font size="-1">Message's To: field contents (we recommend all of it, both address and, if present, the addressee's name). </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>cc</code> </font></td>
+            <td><font size="-1">Message's Cc: field contents (we recommend all of it, both address and, if present, the addressee's name).</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>bcc</code> </font></td>
+            <td><font size="-1">Message's Bcc: field contents (we recommend all of it, both address and, if present, the addressee's name). </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>replyto</code> </font></td>
+            <td><font size="-1">Message's ReplyTo: field contents (we recommend all of it, both address and, if present, the addressee's name). </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>received</code> </font></td>
+            <td><font size="-1">Message's received time in UTC. </font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+          </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code> </font></td>
+            <td><font size="-1">Message's folder name.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>mail_flags</code></font></td>
+            <td><font size="-1">Bit vector flags associated with the email (0x01 = Unread, 0x02 = HasAttachment).</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+        </tbody></table>  
+        <p><br>
+        <code><font size="3"><b>Google.Desktop.IM</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>        </p>
+        <p><font size="-1"><b>Note:</b> </font><font size="-1"> When setting the inherited content property for IM events, each message should be of the form &lt;<i>name of sender</i>&gt;: &lt;<i>msg</i>&gt;. This allows GD to correctly format the content when displaying it as a result. </font></p>
+        
+          <table border="1" cellpadding="3" cellspacing="0" width="85%">
+            <tbody><tr bgcolor="#e8f4f7">
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+              <td><b><font size="-1">Type</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>conversation_id</code></font></td>
+              <td><font size="-1"> Id that can be used to group messages that are part of the same conversation.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>message_time</code></font></td>
+              <td><font size="-1"> Time when the message was received in UTC.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>title</code> </font></td>
+              <td><font size="-1">Title of the Instant Message. This will usually be your choice, as IMs don't usually have actual titles. </font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>user_name</code></font></td>
+              <td><font size="-1">Name or handle of the user who is using the computer on which this event is being generated. </font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>buddy_name</code> </font></td>
+              <td><font size="-1"> Name or handle of the other user in the conversation.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+            </tr>
+        </tbody></table>
+      
+        <p><br>
+        <code><font size="3"><b>Google.Desktop.Contact</b></font></code> <font size="-1"> inherits</font>
+	<code><font size="3"><b>Google.Desktop.Indexable</b></font></code></p>
+
+    <table border="1" cellpadding="3" cellspacing="0" width="85%">
+      <tbody>
+        <tr bgcolor="#e8f4f7">
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+          <td><b><font size="-1">Type</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+          <td><font size="-1">Unique identifier.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+          <td><font size="-1">Time when the contact was last modified.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>assistant</code></font></td>
+          <td><font size="-1">Contact's assistant's name.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>birthday</code></font></td>
+          <td><font size="-1">Contact's birthday.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>business_address</code></font></td>
+          <td><font size="-1">Contact's address at work.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>business_fax</code></font></td>
+          <td><font size="-1">Contact's fax number at work.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>business_home_page</code></font></td>
+          <td><font size="-1">Contact's home page at work.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>business_phone</code></font></td>
+          <td><font size="-1">Contact's phone number at work.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>categories</code></font></td>
+          <td><font size="-1">Whatever categories you want to assign the contact.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>children_names</code></font></td>
+          <td><font size="-1">Contact's children's names.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>company_name</code></font></td>
+          <td><font size="-1">Name of contact's company.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>company_phone</code></font></td>
+          <td><font size="-1">Contact's company's phone number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>country</code></font></td>
+          <td><font size="-1">Contact's country.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>department</code></font></td>
+          <td><font size="-1">Contact's department at work.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>display_name</code></font></td>
+          <td><font size="-1">Name by which the contact is displayed, such as "Tom (landlord)"</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>email1</code></font></td>
+          <td><font size="-1"> Contact's first email address.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>email2</code></font></td>
+          <td><font size="-1"> Contact's second email address.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>email3</code></font></td>
+          <td><font size="-1"> Contact's third email address.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code></font></td>
+          <td><font size="-1"> Name of the folder containing this contact.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>hobbies</code></font></td>
+          <td><font size="-1"> Contact's hobbies.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>home_address</code></font></td>
+          <td><font size="-1"> Contact's home address.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>home_fax</code></font></td>
+          <td><font size="-1"> Contact's home fax number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>home_phone</code></font></td>
+          <td><font size="-1"> Contact's home phone number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>im_address</code></font></td>
+          <td><font size="-1"> Contact's IM address.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>job_title</code></font></td>
+          <td><font size="-1"> Contact's job title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>language</code></font></td>
+          <td><font size="-1">Contact's primary language.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>manager_name</code></font></td>
+          <td><font size="-1">Contact's manager's name.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>mobile_phone</code></font></td>
+          <td><font size="-1">Contact's cell or mobile phone number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>nickname</code></font></td>
+          <td><font size="-1"> Contact's nickname.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>office_location</code></font></td>
+          <td><font size="-1"> Contact's office location.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>other_address</code></font></td>
+          <td><font size="-1">Any alternative address for the Contact.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>other_phone</code></font></td>
+          <td><font size="-1">Contact's other phone number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>pager</code></font></td>
+          <td><font size="-1">Contact's pager.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>personal_home_page</code></font></td>
+          <td><font size="-1">Contact's personal home page.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>primary_fax</code></font></td>
+          <td><font size="-1">Contact's primary fax number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>primary_phone</code></font></td>
+          <td><font size="-1">Contact's primary phone number.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>profession</code></font></td>
+          <td><font size="-1">Contact's profession.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>spouse</code></font></td>
+          <td><font size="-1">Contact's spouse's name.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>title</code></font></td>
+          <td><font size="-1">Contact's title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>web_page</code></font></td>
+          <td><font size="-1">Contact's web page.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>wedding_anniversary</code></font></td>
+          <td><font size="-1">Contact's wedding anniversary.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+      </tbody></table>
+    <br>
+    
+    <a name="0.2_calendar"></a>
+    <p>
+      <code><font size="3"><b>Google.Desktop.Calendar</b></font></code> <font size="-1">
+        inherits</font> <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+    </p>
+
+    <table border="1" cellpadding="3" cellspacing="0" width="85%">
+      <tbody>
+        <tr bgcolor="#e8f4f7">
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+          <td><b><font size="-1">Type</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+          <td><font size="-1">Unique identifier.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+          <td><font size="-1">Time when the appointment was last modified.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>attendees</code></font></td>
+          <td><font size="-1">Names of appointment attendees.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>categories</code></font></td>
+          <td><font size="-1">Whatever categories you want to assign to the appointment.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code></font></td>
+          <td><font size="-1">Name of the folder containing this appointment.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>location</code></font></td>
+          <td><font size="-1">Appointment location.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>organizer</code></font></td>
+          <td><font size="-1">Name of the appointment's organizer.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>start_date</code></font></td>
+          <td><font size="-1">Appointment start time in UTC.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>end_date</code></font></td>
+          <td><font size="-1"> Appointment end time in UTC.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>duration</code></font></td>
+          <td><font size="-1">Appointment duration in minutes.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>recurrence_pattern</code></font></td>
+          <td><font size="-1">A string describing how this task repeats. The format is a list of ISO 8601 intervals, separated by semicolons (e.g. 06-22-2005 11:00:00 / 06-22-2005 12:00:00; 06-24-2005 13:00:00 / 06-24-2005 15:00:00).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>title</code></font></td>
+          <td><font size="-1">Appointment title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+      </tbody></table>
+    <br>
+    
+    <a name="0.2_task"></a>
+    <p>
+      <code><font size="3"><b>Google.Desktop.Task</b></font></code> <font size="-1">inherits</font>
+      <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+    </p>
+
+    <table border="1" cellpadding="3" cellspacing="0" width="85%">
+      <tbody>
+        <tr bgcolor="#e8f4f7">
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+          <td><b><font size="-1">Type</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+          <td><font size="-1">Unique identifier.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+          <td><font size="-1">Time when the task was last modified.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>actual_work</code></font></td>
+          <td><font size="-1"> Actual work completed (in hours).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>categories</code></font></td>
+          <td><font size="-1"> Task categories.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>companies</code></font></td>
+          <td><font size="-1"> Companies.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code> </font></td>
+            <td><font size="-1">Task's folder name.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>date_completed</code></font></td>
+          <td><font size="-1"> Date task completed.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>start_date</code></font></td>
+          <td><font size="-1"> Task start date.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>due_date</code></font></td>
+          <td><font size="-1"> Task due date.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>importance</code></font></td>
+          <td><font size="-1"> Task importance (0=low, 1=normal, 2=high).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>owner</code></font></td>
+          <td><font size="-1"> Owner of the task.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>participants</code></font></td>
+          <td><font size="-1"> Task participants.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>percent_complete</code></font></td>
+          <td><font size="-1"> Task percent complete.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>recurrence_pattern</code></font></td>
+          <td><font size="-1">A string describing how this task repeats. The format is a list of ISO 8601 intervals, separated by semicolons (e.g. 06-22-2005 11:00:00 / 06-22-2005 12:00:00; 06-24-2005 13:00:00 / 06-24-2005 15:00:00).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>total_work</code></font></td>
+          <td><font size="-1"> Task total work (in hours).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>status</code></font></td>
+          <td><font size="-1"> Task status (0=not started, 1=in progress, 2=completed, 3=waiting on others, 4=deferred 5=overdue, 6=rejected).</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>title</code></font></td>
+          <td><font size="-1">Task's title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+
+      </tbody></table>
+    <br>
+    <br>
+    
+    <a name="0.2_note"></a>
+    <p>
+      <code><font size="3"><b>Google.Desktop.Note</b></font></code> <font size="-1">inherits</font>
+      <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+    </p>
+    <table border="1" cellpadding="3" cellspacing="0" width="85%">
+      <tbody>
+        <tr bgcolor="#e8f4f7">
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+          <td><b><font size="-1">Type</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+          <td><font size="-1">Unique identifier.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+          <td><font size="-1">Time when the note was last modified.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>notes</code></font></td>
+          <td><font size="-1"> Notes.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>categories</code></font></td>
+          <td><font size="-1"> Note categories.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>date</code></font></td>
+          <td><font size="-1"> Note date.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+          <tr>
+            <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code> </font></td>
+            <td><font size="-1">Note's folder name.</font></td>
+            <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+            <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+          </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>title</code></font></td>
+          <td><font size="-1">Note's title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+
+      </tbody></table>
+    <br>
+    <br>
+    
+    <a name="0.2_journal"></a>
+    <p>
+      <code><font size="3"><b>Google.Desktop.Journal</b></font></code> <font size="-1">inherits</font>
+      <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+    </p>
+
+    <table border="1" cellpadding="3" cellspacing="0" width="85%">
+      <tbody>
+        <tr bgcolor="#e8f4f7">
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+          <td><b><font size="-1">Type</font></b></td>
+          <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+          <td><font size="-1">Unique identifier.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+          <td><font size="-1">Time when the journal was last modified.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>company</code></font></td>
+          <td><font size="-1"> Journal company. </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>categories</code></font></td>
+          <td><font size="-1"> Journal categories. </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>folder_name</code> </font></td>
+          <td><font size="-1">Journal's folder name.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>start_time</code></font></td>
+          <td><font size="-1"> Journal start time. </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>duration</code></font></td>
+          <td><font size="-1"> Journal duration (in minutes). </font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>title</code></font></td>
+          <td><font size="-1">Journal's title.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+        <tr>
+          <td><font face="Arial, Helvetica, sans-serif"><code>type</code></font></td>
+          <td><font size="-1">Journal's type.</font></td>
+          <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+          <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+        </tr>
+
+      </tbody></table>
+<br>
+        <code><font size="3"><b>Google.Desktop.File</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.Indexable</b></font></code>
+          <table border="1" cellpadding="3" cellspacing="0" width="85%">
+            <tbody><tr bgcolor="#e8f4f7">
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+              <td><b><font size="-1">Type</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>uri</code></font></td>
+              <td><font size="-1">The file's URI.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>last_modified_time</code></font></td>
+              <td><font size="-1">When the file was last modified in UTC.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">Yes</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>title</code> </font></td>
+              <td><font size="-1"> What title you choose to give the file, usually its filename.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>author</code></font></td>
+              <td><font size="-1"> The file's author. </font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+          </tbody></table>
+          <blockquote>
+            <p><code><font size="3"><b><br>
+            Google.Desktop.WebPage</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.File</b></font></code> </p>
+          
+          <table border="1" cellpadding="3" cellspacing="0" width="80%">
+            <tbody><tr bgcolor="#e8f4f7">
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+              <td><b><font size="-1">Type</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>bookmarked</code></font></td>
+              <td><font size="-1">Specifies if this web page is bookmarked.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BOOL</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>interaction_period</code></font></td>
+              <td><font size="-1"> Amount of time the user interacted with the web page.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            </tbody></table>
+		  <p><br>
+		    <code><font size="3"><b>Google.Desktop.TextFile</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.File</b></font></code> </p>
+          <p><font size="-1">No distinctive properties yet.
+</font></p>
+          <p><font size="-1"><br>
+          </font><code><font size="3"><b>Google.Desktop.MediaFile</b></font></code> <font size="-1"> inherits</font> <code><font size="3"><b>Google.Desktop.File</b></font></code> </p>
+          <table border="1" cellpadding="3" cellspacing="0" width="80%">
+            <tbody><tr bgcolor="#e8f4f7">
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Property</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Description</font></b></td>
+              <td><b><font size="-1">Type</font></b></td>
+              <td><b><font face="Arial, Helvetica, sans-serif" size="-1">Required</font></b></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>keywords</code></font></td>
+              <td><font size="-1">Keywords associated with the file.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>width</code></font></td>
+              <td><font size="-1"> Image or video width in pixels.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>height</code></font></td>
+              <td><font size="-1">Image or video height in pixels.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>bit_rate</code></font></td>
+              <td><font size="-1"> Audio content (in either an audio or video file) average bit rate in bits/second.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>data_rate</code></font></td>
+              <td><font size="-1">Data rate for video files in bytes/second.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>channels</code></font></td>
+              <td><font size="-1"> Channel count for audio files.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>comment</code></font></td>
+              <td><font size="-1">Comment about the file and its contents.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>length</code></font></td>
+              <td><font size="-1"> Music or video file time length in nanoseconds.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI8</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>original_date</code></font></td>
+              <td><font size="-1">Original file time stamp from the media device in UTC.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_DATE</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>album_title</code></font></td>
+              <td><font size="-1"> Music file album title.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>artist</code></font></td>
+              <td><font size="-1">Artist who created/performed the content.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+			<tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>genre</code></font></td>
+              <td><font size="-1">Genre category.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>lyrics</code></font></td>
+              <td><font size="-1"> Music file lyrics.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>track_number</code></font></td>
+              <td><font size="-1">Song's track number on its album.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+			    <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>info_tip</code></font></td>
+              <td><font size="-1"> Info tip as reported from the shell.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_BSTR</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+            <tr>
+              <td><font face="Arial, Helvetica, sans-serif"><code>year_published</code></font></td>
+              <td><font size="-1">Year this material was first published.</font></td>
+              <td><font face="Arial, Helvetica, sans-serif"><code>VT_UI4</code></font></td>
+              <td><font face="Arial, Helvetica, sans-serif" size="-1">No</font></td>
+            </tr>
+          </tbody></table>
+        </blockquote>
+      </blockquote>  
+	  
+	  <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+	  <a name="indexingapi" id="indexingapi"></a> <b>GD Developer Indexing API</b>
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+      <h4 id="registering">Registering Indexing Components</h4>
+
+<p><font size="-1">Google Desktop will not accept unregistered components. Indexing 
+        component registration is a one-time process done using the </font><code>IGoogleDesktopRegistrar</code><font size="-1">
+        interface, and should be done during component installation. As part of the 
+        registration process, the component must provide its GUID as well as 
+        information about itself. Please note that indexing components can also use the 
+        older style registration mechanism available through the </font><code>IGoogleDesktopSearchComponentRe<WBR>gister</code><font size="-1">
+        interface, however, it is recommended to use the </font><code>IGoogleDesktopRegistrar</code><font size="-1">
+
+        interface especially if registering more than one plug-in type.</font></p>
+    <p><font size="-1">As part of its own uninstallation process, a component should 
+        unregister itself with GD.</font></p>
+    <font size="-1"><b>Component Registration Interface Summary </b></font>
+    <p><font size="-1">The following summarizes the interfaces and their methods. All 
+        method return values are of type</font> <code>HRESULT</code><font size="-1">. </font>
+    </p>
+
+    <code>interface IGoogleDesktopRegistrar<WBR>: IDispatch</code>
+    <ul>
+      <li>
+        <font size="-1"><b>Note: </b>Components are required to to call this interface to 
+          register themselves with Google Desktop before they can interact with any APIs 
+          or other provided services. </font>
+        <br>
+      <li>
+        <font size="-1"><b>Note: </b>The registration process consists of a call to </font>
+
+        <code>StartComponentRegistration</code><font size="-1"> followed by individual 
+          registrations for various services obtained through </font><code>GetRegistrationInterface</code><font size="-1">
+          and finished by a call to </font><code>FinishComponentRegistration</code>. <font size="-1">
+          For indexing components the registration progid is </font><code>&quot;GoogleDesktop.IndexingRegistrat<WBR>ion&quot;</code><font size="-1">
+          and the interface is </font><code>IGoogleDesktopRegisterIndexingP<WBR>lugin</code>.
+        <br>
+
+      <li>
+        <code>StartComponentRegistration</code><font size="-1">: Must be invoked by any 
+          component to initiate the registration process. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+
+                <code>BSTR component_guid_or_progid</code><font size="-1">: The component's GUID 
+                  or ProgID.</font>
+              <li>
+                <code>VARIANT</code> <font size="-1">component_description: A </font><code>SAFEARRAY</code>
+                <font size="-1">of pairs, where the first element is a descriptive parameter name 
+                  and the second element is that parameter's value. The method expects only the 
+                  following three required parameters, which should be given in this order. </font>
+                <ul>
+
+                  <li>
+                    <font size="-1">&quot;</font><code>Title</code><font size="-1">&quot;: Component title that 
+                      will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">&quot;</font><code>Description</code><font size="-1">&quot;: Component 
+                      description that will be displayed on the GD preferences page. </font>
+                  <li>
+                    <font size="-1">&quot;</font><code>Icon</code><font size="-1">&quot;: A string pointing to 
+                      an ICON resource, of the form &quot;</font><code>c:\program files\boo\comp.dll,23</code><font size="-1">&quot;. 
+                      This icon may be used to indicate the component and its results on various GD 
+                      pages.</font>
+
+                  </li>
+                </ul>
+            </li></ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <code>E_COMPONENT_ALREADY_REGISTERED</code> <font size="-1">if this component has 
+                  already been registered with GD.</font>
+              <li>
+                <font size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </font>
+
+              </li>
+            </li></ul>
+          </li>
+        </li></ul>
+        <br>
+      <li>
+        <code>GetRegistrationInterface</code><font size="-1">: Provides the requested 
+          type of registration interface. </font>
+        <ul>
+
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR registration_type</code><font size="-1">: a stringified CLSID or a 
+                  progid to the type of registration required.</font>
+              <li>
+                <code>[out, retval] IUnknown **registration_interface</code><font size="-1">: </font>
+
+                <font size="-1">provides the requested registration mechanism. </font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+        </li></ul>
+
+        <br>
+      <li>
+        <code>FinishComponentRegistration</code><font size="-1">: Must be invoked to 
+          finish the registration process. </font>
+        <ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+
+              <li>
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure, such as an unregistered component 
+                  classID or appID, component prohibited by policy, etc. </font>
+              </li>
+            </ul>
+
+        </ul>
+        <br>
+      <li>
+        <code>UnregisterComponent</code>
+        <ul>
+          <li>
+            <i><font size="-1">Arguments</font></i><font size="-1">: </font>
+
+            <ul>
+              <li>
+                <code>BSTR component_guid_or_progid</code>: <font size="-1">the same GUID used 
+                  when registering the component. </font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+
+            <ul>
+              <li>
+                <code>S_OK</code><font size="-1"> if successful. </font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+              </li>
+            </ul>
+        </li></ul>
+      </li>
+    </li></li></li></li></li></ul>
+    <code>interface IGoogleDesktopRegisterIndexingPlugin<WBR>: IDispatch</code>
+    <ul>
+      <li>
+        <code>RegisterIndexingPlugin</code><font size="-1">: Must be invoked to register as an
+        indexing component. </font>
+        <ul>
+          <li>
+            <font size="-1"><i>Arguments</i>: </font>
+            <ul>
+              <li>
+                <code>BSTR extension_handled</code><font size="-1">: An extension on which this component 
+                wishes to receive notifications from the crawler.
+                If no interest in handling extensions the parameter must be NULL.</font>
+              </li>
+            </ul>
+          <li>
+            <i><font size="-1">Returns</font></i><font size="-1">: </font>
+            <ul>
+              <li>
+
+                <code>S_OK</code> <font size="-1">if successful. </font>
+              <li>
+                <code>E_EXTENSION_REGISTERED</code> <font size="-1">in case the extension conflicts with an
+                existing registration.</font>
+              <li>
+                <font size="-1">Appropriate error on failure. </font>
+
+              </li>
+            </li></ul>
+          </li>
+        </li>
+        </ul>
+
+    
+    </li></li></ul>    
+    <h5><a name="0.1_crawler_notifications"></a>Crawler Notification Registration
+    </h5>
+    <p><font size="-1">As mentioned above a component can register with GD to handle 
+        files with a particular file extension (or a set of file 
+        extensions). If you do this registration, the GD crawler will notify your 
+        component whenever it encounters a file with the registered extension. </font>
+    </p>
+    <p><font size="-1">For example, a component can register to handle files with the 
+        extension </font><code>.myc</code><font size="-1"> by specifying the extension as 
+        an argument to the </font><code>RegisterIndexingPlugin</code><font size="-1"> method 
+        (see code template below).
+      </font>
+
+    </p>
+    <p><font size="-1"> Only one component at a time can be registered to handle a 
+        particular file extension. If another component has already registered with GD 
+        on this machine to handle your file extension, </font><code>RegisterIndexingPlugin</code><font size="-1">
+        will return the error </font><code>E_EXTENSION_REGISTERED</code><font size="-1">. 
+        To register more than one extension call </font><code>RegisterIndexingPlugin</code><font size="-1">
+        for each extension.</font>
+
+    </p>
+    <p><b><font size="-1">Component Registration Code Template </font></b>
+    </p>
+    <p><font size="-1"> The following template demonstrates how an 
+        indexing component can register with Google Desktop and receives crawler 
+        notifications for .myc files. Note that this registration should only be done 
+        once, not every time the plug-in starts. </font>
+    </p>
+    <p><font size="-1">To register a component:</font><br>
+
+      <font face="Courier New, Courier, mono">
+        <pre>  CComPtr&lt;IGoogleDesktopRegistrar<WBR>&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) {
+    ATLASSERT(spRegistrar != NULL);
+    
+    // Component description is 6 strings
+    CComSafeArray&lt;VARIANT&gt; arr_descr(6);
+
+    arr_descr.SetAt(0, CComVariant(L&quot;Title&quot;));
+    arr_descr.SetAt(1, CComVariant(L&quot;A sample indexing plugin&quot;));
+    arr_descr.SetAt(2, CComVariant(L&quot;Description&quot;));
+    arr_descr.SetAt(3, CComVariant(L&quot;Indexes .myc files&quot;));
+    arr_descr.SetAt(4, CComVariant(L&quot;Icon&quot;));
+    arr_descr.SetAt(5, CComVariant(L&quot;,1&quot;));
+
+    // our CLSID in string format
+    CComBSTR our_clsid(clsid);
+    
+    // Wrap description array in variant
+    CComVariant descr(arr_descr.m_psa);
+
+    // and register
+    hr = spRegistrar-&gt;StartComponentRegi<WBR>stration(our_clsid, descr);
+    if (FAILED(hr))
+      return hr;
+
+    // success, now register as an action component.
+    // This two step registration allows the same plug-in to implement multiple
+    // components
+    CComPtr&lt;IGoogleDesktopRegisterI<WBR>ndexingPlugin&gt; spRegistration;
+
+    CComBSTR registrar_progid(&quot;GoogleDesktop.IndexingRegistrat<WBR>ion&quot;);
+    hr = spRegistrar-&gt;GetRegistrationInt<WBR>erface(registrar_progid,
+      reinterpret_cast&lt;IUnknown**&gt;(<WBR>&amp;spRegistration));
+    ATLASSERT(FAILED(hr) || spRegistration);
+
+    if (SUCCEEDED(hr)) {
+      CComVariant var;
+      var.Clear();
+      hr = spRegistration-&gt;RegisterIndexin<WBR>gPlugin(CComBSTR(L&quot;myc&quot;));
+
+      if (SUCCEEDED(hr)) {
+        hr = spRegistrar-&gt;FinishComponentReg<WBR>istration();
+      }
+    }
+
+</pre>
+      </font>
+    <p></p>
+    <p><font size="-1">To unregister a component:</font><br>
+
+      <font face="Courier New, Courier, mono">
+        <pre>  CComPtr&lt;IGoogleDesktopRegistrar<WBR>&gt; spRegistrar;
+  HRESULT hr;
+  
+  hr = spRegistrar.CoCreateInstance(CLSID_GoogleDesktopRegistrar);
+  
+  if (SUCCEEDED(hr)) { 
+    // our CLSID in string format
+    CComBSTR bstrClsid(clsid);
+  
+    hr = spRegistrar-&gt;UnregisterComponen<WBR>t(bstrClsid);
+  }
+
+</pre>
+      </font>
+
+      <h4><a name="creating" id="creating"></a>Creating and Sending Events</h4>
+      <p><font size="-1">After a successful registration with GD, a component can use the </font><code>CreateEvent</code><font size="-1"> method from the </font><code>IGoogleDesktopEventFactory</code><font size="-1">
+interface to create a GD event object based on any of the defined
+event schemas. Next, set the event object's properties via the </font><code>AddProperty</code><font size="-1"> method from the </font><code>IGoogleDesktopEvent</code><font size="-1"> interface. After setting all the relevant properties, use the</font> <code>Send</code> <font size="-1">method from the same interface to send the event object to GD.</font></p>      
+      <h6><font size="-1">Event Interfaces Summary</font></h6>
+      <p>      
+      <font size="-1">The following summarizes the interfaces and their methods. All method return values are of type</font> <code>HRESULT</code>.
+      </p><p><code>interface IGoogleDesktopEventFactory : IDispatch</code>
+      </p><ul>
+          <li><font size="-1">Creates new event objects. </font>
+          <br>
+          <li><code>CreateEvent</code><font size="-1">: Create a new GD event object based on a specified event schema. </font>
+              <ul>
+                  <li><font size="-1"><i>Arguments</i>: </font>
+                      <ul>
+                            <li><code>BSTR component_guid_or_progid</code><font size="-1">: The creating component's GUID. </font><code>B</code><code>STR schema_name</code><font size="-1">: Fully qualified name of the GD event schema that defines the event (e.g. </font><code>Google.Desktop.IM</code><font size="-1">, not just </font><code>IM</code><font size="-1">). </font>
+                        </li>
+                            <li><code>[</code><code>out, retval] IDispatch **event</code><font size="-1">: Pointer used to return the newly created event object. </font></li>
+                    </ul>
+                  </li>
+                <li><font size="-1"><i>Returns</i>: </font>
+                    <ul>
+                          <li><font size="-1"><code>[</code></font><code>out, retval] IDispatch **event</code><font size="-1"> Pointer to the newly created event object. </font><code>S_OK</code> <font size="-1">on success.</font> <code>E_NO_SUCH_SCHEMA</code><font size="-1"> if an invalid</font> <code>schema_name</code><font size="-1"> value was given. </font>
+                      </li>
+                          <li><font size="-1">Otherwise, an appropriate error code</font></li></ul>
+        </li></ul></li></ul>
+      <code>interface IGoogleDesktopEvent : IDispatch</code>       
+	  <ul>
+        <li><font size="-1"><i>Constants:</i> </font>
+          <ul>
+            <li><code>enum EventFlags</code> 
+                <ul>
+                  <li><code>EventFlagIndexable</code><font size="-1">: Sent to GD with all event objects to indicate an indexable event. Value </font><code>0x00000001</code><font size="-1">. </font>
+                  </li><li><code>EventFlagHistorical</code><font size="-1">:
+Sent to GD when the event is historical (generated from a crawl over
+files or other past created data) rather than created as a real time
+response to a currently happening event. Value </font><code>0x00000010</code><font size="-1">. </font></li>
+                </ul>
+            </li>
+          </ul><br>
+	    </li><li>
+            <code>AddProperty</code><font size="-1">: Adds a property-value pair to the event. </font>
+         
+          <ul> <li><font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li><code>BSTR property_name</code><font size="-1">: Name of the property, which must exist in the event schema or else an error will result. </font>
+                  </li><li><code>VARIANT property_value</code><font size="-1">: Value set for the property, which must be an appropriate type as defined in the event schema. </font></li>
+                </ul>
+            </li><li><font size="-1"><i>Returns</i>: </font>
+                <ul>
+                  <li><code>S_OK</code><font size="-1"> if a success. </font><code>E_NO_SUCH_PROPERTY</code><font size="-1"> if the value specified for </font><code>property_name</code><font size="-1"> does not exist in the schema. Any error returned from </font><code>VariantChangeType</code><font size="-1"> if the value type does not match the event schema specification. </font>
+                  </li><li><font size="-1">Other appropriate error codes. </font></li>
+                </ul>
+            </li>
+          </ul><br>
+        </li><li><code>Send</code><font size="-1">: Sends the event to GD. Once an event has been sent, you cannot resend it or add to or change its properties. </font>
+          <ul>
+            <li><font size="-1"><i>Arguments</i>: </font>
+                <ul>
+                  <li><code>long event_flags</code><font size="-1">: A bitwise OR of the relevant </font><code>EventFlags</code><font size="-1"> enumeration values. See the code template below. </font></li>
+                </ul>
+            </li><li><font size="-1"><i>Returns</i>: </font>
+                <ul>
+                  <li><code>S_OK</code><font size="-1"> if a success. </font></li>
+                  <li><code>E_COMPONENT_DISABLED</code> <font size="-1">if
+this component has been disabled. A user can disable the component from
+their GD Preferences page (i.e. Don't index and store this data type).
+Also, GD may automatically disable a component if the component
+crashes too often.</font></li>
+                  <li><code>S_INDEXING_PAUSED</code><font size="-1"> if the user has temporarily paused GD. While GD is paused, it does not accept any event objects.</font></li>                  
+                  <li><code>E_EVENT_TOO_LARGE</code><font size="-1"> if the total size of the event object is too big, even after the </font><code>content</code><font size="-1"> property has been truncated to 0, GD rejects the event object.</font></li>
+                  <li><code>E_SERVICE_NOT_RUNNING</code><font size="-1"> if GD has been turned off and cannot accept event objects.</font></li>
+                  <li><code>E_INVALID_EVENT_FLAGS</code><font size="-1"> if an event flag other than</font> <code>EventFlagIndexable</code><font size="-1"> or </font><code>EventFlagHistorical</code> <font size="-1"> was sent as an argument.</font></li>
+                  <li><font size="-1">Otherwise, an appropriate error code.</font></li>
+                </ul>
+          </li></ul>
+      </li></ul>
+      <font size="-1"><b>Event Interfaces Code Template</b></font>
+      <p><font size="-1">The following template uses the fictional</font> <code>MyComponent</code><font size="-1">, which deals with</font> <code>.myc</code> <font size="-1">text files. Variable names are prefaced by "mc" for "MyComponent".</font>
+           <font face="Courier New, Courier, mono">
+<pre>
+  // Create an event factory object.
+  CComPtr&lt;IGoogleDesktopEventFactory&gt; mcFactory;
+  HRESULT hr = mcFactory.CoCreateInstance(CLSID_GoogleDesktop, 
+                                          NULL, CLSCTX_INPROC);
+  if (FAILED(hr))
+    return hr;
+      
+  // Use the event factory to create an event object of the desired schema 
+  // type. A pointer to the new event is returned via the final CreateEvent 
+  // parameter.
+  CComPtr&lt;IDispatch&gt; mcEventDisp;
+  hr = mcFactory-&gt;CreateEvent(CComBSTR(CLSID_MyComponent),
+                                 CComBSTR(L"Google.Desktop.TextFile"), 
+                                 &amp;mcEventDisp);
+  if (FAILED(hr))
+    return hr;
+
+  CComQIPtr&lt;IGoogleDesktopEvent&gt; mcEvent(mcEventDisp);
+  ATLASSERT(mcEventDisp &amp;&amp; mcEvent);
+  if (mcEvent == NULL)
+    return hr;
+      
+  // Set the event object's properties.
+  if (SUCCEEDED(hr))
+    // mcFormatType is either "text/plain" or "text/html". This is required 
+    // for all events.  
+    hr = mcEvent-&gt;AddProperty(CComBSTR(L"format"), 
+                                 CComVariant(mcFormatType));
+
+  if (SUCCEEDED(hr))
+  // mcContent is the indexable content from the file. 
+  // This is required for all events.
+    hr = mcEvent-&gt;AddProperty(CComBSTR(L"content"), CComVariant(mcContent));
+      
+  // Set other event properties...
+      
+  if(FAILED(hr))
+    return hr;
+      
+  // If everything has worked so far, send the event object to GD, 
+  // with the type of event flag argument(s).
+  hr = mcEvent-&gt;Send(EventFlagIndexable);
+
+  // If a historical event, do instead
+  // hr = mcEvent-&gt;Send(EventFlagIndexable | EventFlagHistorical);
+  if (FAILED(hr)) 
+    // You may want to add code for handling the send()-specific error codes.
+    return hr;
+</pre>
+</font>
+
+      <h4><a name="handling" id="handling"></a>Handling GD Crawler Notifications</h4>
+      <p><font size="-1"><font size="-1"><font size="-1">Components registered to receive crawler notifications from GD must implement the </font></font></font><code>DGoogleDesktopFileNotify</code><font size="-1"><font size="-1"><font size="-1"> dispinterface.</font></font></font> <code>HandleFile</code><font size="-1"><font size="-1"><font size="-1">
+is invoked when the crawler comes across a file registered to this
+component. The component is then responsible for instantiating the
+event factory and sending the appropriate event objects to GD</font></font></font><font size="-1">.</font></p>      
+      <font size="-1"><b>Crawler Notification Handler Interface Summary </b></font>
+      <p>      
+      <font size="-1">The following summarizes the interface and its method. The method returns an</font> <code>HRESULT</code>.<br>
+      <br>
+
+      <code>dispinterface DGoogleDesktopFileNotify </code> 
+      </p><ul>
+        <li><code>HandleFile</code><font size="-1">: Invoked when the GD crawler encounters a file with an extension registered to this component. </font>
+            <ul>
+              <li><font size="-1"><span style="font-style: italic;">Arguments</span>: </font>
+                  <ul>
+                    <li><code>BSTR full_path_to_file</code><font size="-1">: the file to handle. </font>
+                    </li><li><code>IDispatch *event_factory</code><font size="-1">: an event factory that will be used to create the event objects to send to the GD engine. </font></li>
+                  </ul>
+              </li><li><font size="-1"><span style="font-style: italic;">Returns</span>: </font>
+                  <ul>
+                    <li><code>S_OK</code> <font size="-1">if the file was handled. </font>
+                    </li><li><font size="-1">Otherwise,
+an appropriate error. The crawler may do special handling for certain
+error values, such as retrying its indexing operation for </font><code>HRESULT_FROM_WIN32(ERROR_SHARING_VIOLATION)</code><font size="-1">,
+so components should be accurate when reporting errors. The crawler may
+also use any component returned error info object for logging and
+reporting purposes, so please do not skimp on error reporting through </font><code>SetErrorInfo</code><font size="-1">.</font></li>
+                  </ul>
+        </li></ul>
+      </li></ul>
+  <h6><font size="-1">Crawler Notification Handler Code Template</font></h6>
+<p><font size="-1">The following template uses the fictional </font><code>MyComponent</code><font size="-1">, which deals with </font><code>.myc</code> <font size="-1">text files. The prefix </font><code>mc</code><font size="-1"> is used before variable names to make them </font><code>MyComponent</code><font size="-1"> specific.<br>
+    <br>
+    <font face="Courier New, Courier, mono">STDMETHODIMP MyComponent::HandleFile(BSTR full_path_to_file, IDispatch *event_factory) {<br>
+    <br>
+&nbsp;&nbsp;// Event factory object to handle the passed in pointer from GD.<br>
+&nbsp; CComPtr&lt;IGoogleDesktopEventFactory&gt; mcEventFactory;<br>
+  <br>
+&nbsp;&nbsp;// Used to create an event object for this file to send back to GD.<br>
+&nbsp; CComPtr&lt;IDispatch&gt; mcEventDisp;<br>
+  <br>
+&nbsp; HRESULT hr;<br>
+&nbsp; <br>
+&nbsp; hr&nbsp; = event_factory-&gt;QueryInterface(&amp;mcEventFactory);&nbsp; // Get the event factory<br>
+&nbsp; if (FAILED(hr))<br>
+&nbsp;&nbsp;&nbsp; return Error(L"No event factory", hr);<br>
+  <br>
+&nbsp; // Replace "Google.Desktop.TextFile" with the appropriate schema for your file.<br>
+&nbsp; hr = mcEventFactory-&gt;CreateEvent(CComBSTR(CLSID_MyComponent),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CComBSTR(L"Google.Desktop.TextFile"), &amp;mcEventDisp);<br>
+&nbsp; if (FAILED(hr))<br>
+&nbsp;&nbsp;&nbsp; return Error(L"Unable to create event", hr);<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp; CComQIPtr&lt;IGoogleDesktopEvent&gt; mcEvent(mcEventDisp);<br>
+&nbsp; <br>
+&nbsp; ATLASSERT(mcEventDisp &amp;&amp; mcEvent);<br>
+&nbsp; if (mcEvent == NULL)<br>
+&nbsp;&nbsp;&nbsp; return Error(L"Event does not implement IGoogleDesktopEvent", E_UNEXPECTED);<br>
+  <br>
+&nbsp;&nbsp;// Get indexable content from the file.<br>
+&nbsp;&nbsp;// Set the event object's properties.<br>
+&nbsp;&nbsp;// Send the event object to GD.<br>
+  <br>
+  } </font></font></p>
+<h4><a name="howto" id="howto"></a>Writing and Distributing Your GD Plug-in</h4>
+
+<h5>Developing a GD Plug-in With Visual Studio</h5>
+
+<p><font size="-1">You can use Visual Studio 2003 to create a class
+template for your plug-in, such that you only have to fill in
+registration with GD and, if necessary, how your </font><code>HandleFile</code><font size="-1"> method is implemented.</font></p>
+<p>
+  <font size="-1">The steps needed are:
+  </font>
+<font size="-1">
+<ol>
+  <li>Launch Visual Studio 2003. Select <b>File &gt;New Project</b>. Select <b>ATL project</b>.
+      <ol>
+        <li>Give the project an appropriate name 
+        </li><li>Click <b>OK</b>.</li>
+      </ol></li>
+   <li>Select the <b>Application Settings</b> tab.
+      <ol>
+        <li>De-select <b>Attributed</b>, and leave all other settings alone.
+        </li><li>Click <b>Finish</b>.</li>
+      </ol></li>
+   <li>Your new project will open in a new solution. Right-click your project. 
+      <ol>
+        <li>From the <b>Add</b> submenu, select <b>Add Class</b>.</li>
+        <li>From the resulting dialog, select <b>ATL Simple Object</b>.</li>
+	<li>Click <b>Open</b>.</li>
+        <li>Name your new class, for example <b>MyCrawlPlugin</b>.</li>
+        <li>Select the <b>Options</b> tab.</li>
+	<li>Select threading model <b>Both</b>.</li>
+	<li>Check the checkbox next to <b>ISupportErrorInfo</b> to enable it.</li>
+        <li>Click <b>Finish</b>.</li>
+      </ol></li>
+     <li>Your source file will open in Visual Studio.</li>
+  <li>Go to <b>Class View</b>.
+      <ol>
+        <li>Navigate to your main interface, for example <b>IMyCrawlPlugin</b> for your <b>MyCrawlPlugin</b> class.</li><li>Right click, and from the <b>Add</b> submenu select <b>Add Method</b>.</li><li>Add your <b>HandleFile</b> method, specifying both the <font face="courier">BSTR</font> and <font face="courier">IDispatch</font> arguments.</li>
+        <li>Click <b>Finish</b> when done.</li>
+      </ol>
+  </li>
+</ol>
+</font>
+</p><p><font size="-1">You now have a template for your class, so only GD registration and the implementation of the</font> <code>HandleFile</code> <font size="-1">method remains</font>.</p>
+<h4><font size="-1">Distributing Your Plug-in</font></h4>
+<p><font size="-1">You should write your plug-in such that on user machines its code will be located in</font> <code>C:\Program Files\&lt;Company Name&gt;\&lt;Plug-in name&gt;.&lt;extension&gt;</code>.</p>
+
+<p><font size="-1">To submit your plug-in to Google for possible placement on the
+official GD plug-in download page, click the <a href="pluginsubmit">Submit
+Software</a> link here or in this page's left-side menu. Fill out the form there, which includes an entry for uploading your code.</font></p>
+<div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+
+</td>
+  </tr>
+  <tr valign="top">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - </font><font size="-1"><a href="privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+	</td>
+  </tr>
+</tbody></table>
+</body></html>

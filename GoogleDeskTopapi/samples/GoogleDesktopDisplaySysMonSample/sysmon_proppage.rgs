@@ -1,0 +1,13 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {446A3941-0A4B-4643-8BBC-FE44C52419AD} = s 'SysMonPluginPropPage Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+			}
+			'TypeLib' = s '{0015B480-3A08-43cf-8972-58E8A4532278}'
+		}
+	}
+}

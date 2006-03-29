@@ -1,0 +1,15 @@
+var strTitle = "Tic Tac Toe";
+var strAboutText = "Tic Tac Toe plugin.\n ©2006 Google\nPlay Tic Tac Toe with a friend or the computer.";
+var strPlayAgainstFriend = "Play against a friend";
+var strPlayAgainstComputer = "Play against the computer";
+var strGoToMainMenu = "Go to main menu";
+var strNoFriendsOnline = "No friends are online...";
+var strCancel = "cancel";
+var strWaitingForResponse = "Waiting for response...";
+var strYouWin = "You Win!";
+var strYouLose = "You Lose!";
+var strGameTied = "Game tied!";
+var strWantsToPlay = " wants to play a game.  Would you like to start playing?";
+var strDoesntWantToPlay = " doesn't want to play now";
+var strEndedGame = " ended the game";
+var strConnectionError = "Connection lost";

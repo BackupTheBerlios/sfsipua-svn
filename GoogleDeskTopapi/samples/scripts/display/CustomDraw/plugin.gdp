@@ -1,0 +1,22 @@
+<Plugin 
+  Script='true'
+  Name='Custom Draw'
+  Icon=''
+  Description='Shows how a plugin can create custom drawn items'
+  RequiredGoogleDesktopVersion='3.2005.1111.923'  
+  AboutUrl='http://desktop.google.com/plugins.html'
+  Contact=''
+  UpdateUrl='http://desktop.google.com/plugins.html'
+  CLSID='D6A63BA5-F339-4d16-94D1-3E4E053A91A9'
+  Type='Display'
+  Version='1.0.0'
+  Publisher='Google'
+>
+
+  <File Src='plugin.js' Main='true' />
+  <File Src='1033\strings.js' />
+  <File Src='plugin_small.gif' />
+  <File Src='plugin_large.gif' />
+  <File Src='sky.jpg' />
+
+</Plugin>

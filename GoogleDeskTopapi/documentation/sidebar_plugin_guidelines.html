@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Google Desktop Sidebar Design, UI, and Testing Guidelines</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+BODY {
+	MARGIN-LEFT: 1em; MARGIN-RIGHT: 1em
+}
+TD {FONT-FAMILY: arial,sans-serif}
+DIV {FONT-FAMILY: arial,sans-serif}
+.p {FONT-FAMILY: arial,sans-serif}
+A {FONT-FAMILY: arial,sans-serif}
+DIV {COLOR: #000}
+TD {COLOR: #000}
+.f {COLOR: #6f6f6f}
+.fl:link {COLOR: #6f6f6f}
+A:link {COLOR: #00c}
+.w {COLOR: #00c}
+A.w:link {COLOR: #00c}
+.w A:link {COLOR: #00c}
+A:visited {COLOR: #551a8b}
+.fl:visited {COLOR: #551a8b}
+A:active {COLOR: #f00}
+.fl:active {COLOR: #f00}
+.t A:link {COLOR: #000}
+.t A:active {COLOR: #000}
+.t A:visited {COLOR: #000}
+.t {COLOR: #000}
+.t {BACKGROUND-COLOR: #e5ecf9}
+.k {BACKGROUND-COLOR: #36c}
+.j {WIDTH: 33em}
+.h {COLOR: #36c}
+.i {COLOR: #a90a08}
+.i:link {COLOR: #a90a08}
+.a {COLOR: #008000}
+.a:link {COLOR: #008000}
+DIV.n {MARGIN-TOP: 1ex}
+.n A {FONT-SIZE: 10pt; COLOR: #000}
+.n .i {FONT-WEIGHT: bold; FONT-SIZE: 10pt}
+.q A:visited {COLOR: #00c}
+.q A:link {COLOR: #00c}
+.q A:active {COLOR: #00c}
+.q {COLOR: #00c}
+.b {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #00c}
+.ch {CURSOR: hand}
+.e {MARGIN-TOP: 0.75em; MARGIN-BOTTOM: 0.75em}
+.g {MARGIN-TOP: 1em; MARGIN-BOTTOM: 1em}
+.z {MARGIN-LEFT: 1.25em; MARGIN-RIGHT: 1em}
+.style1 {COLOR: #00c; font-weight: bold;}
+</style></head>
+<body topmargin="2" alink="#ff0000" bgcolor="#ffffff" link="#0000cc" text="#000000" vlink="#800080">
+<table border="0" cellpadding="5" cellspacing="0" width="99%">
+  <tbody><tr>
+    <td width="14%"><a href="/index.html"><img alt="Google Desktop" src="images/logo3.gif" border="0" height="55" vspace="12" width="150"></a></td>
+    <td width="86%">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#3399cc"><img alt="" height="1" width="1"></td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td bgcolor="#e8f4f7" nowrap="nowrap">&nbsp;<font
+	size="+0"><b>Design, User Interface, and Testing Guidelines For Sidebar Plug-in Authors</b></font></td>
+        </tr>
+      </tbody></table>    </td>
+  </tr>
+  <tr valign="top">
+    <td width="16%" nowrap="nowrap">
+	<p><font size="-1"><b>For Users</b><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/plugins/">Download Plug-ins</a> <br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop">Desktop Search Forum</a></font></p>
+    <p><font size="-1"><b>For Developers</b><br />
+	&nbsp;&nbsp;<a href="developer.html">Plug-in Development</a><br>
+	&nbsp;&nbsp;<a href="downloadsdksubmit">Download SDK</a><br>
+	&nbsp;&nbsp;<a href="developerguide.html">Developer Guide</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="indexapi.html">Index API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="queryapi.html">Query API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="displayapi.html">Display API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="script.html">Script API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="communication.html">Communication API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plug-in Design Guidelines<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Plug-in Tutorials</b><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="quickhelper.html">Using Wizard</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="framework.html">Using Helper Framework</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="activex.html">Using ActiveX</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="actionsapi.html">Action API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="eventapi.html">Event API</a><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdpinstaller.html">Plug-in Installer</a><br>
+	&nbsp;&nbsp;<a href="http://desktop.google.com/pluginsubmit">Submit Software</a><br>
+	&nbsp;&nbsp;<a href="http://groups.google.com/group/Google-Desktop-Developer">Developer Forum</a><br />
+	&nbsp;&nbsp;<a href="http://googledesktop.blogspot.com/">Desktop Blog</a></font></p>	</td>
+    <td>
+      <b><a name="top"></a>Contents</b>
+      <p><font size="-1"><a href="#overview"><b>Overview</b></a><br>
+         <a href="#primary"><b>Primary Functionality</b></a><br>
+         <a href="#install"><b>Installation/Uninstallation/Over-installation</b></a><br>
+         <a href="#access"><b>Accessibility</b></a><br>
+         <a href="#boundary"><b>Boundary Tests</b></a><br>
+         <a href="#performance"><b>Performance/Load/Stress</b></a><br>
+         <a href="#ui"><b>User Interface and Usability</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#uioverview"><b>Overview</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#mouse"><b>Mouse Input</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#display"><b>Display</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#graphics"><b>Graphics and Icons</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#colors"><b>Colors</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#text"><b>Text</b></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#layout"><b>Formatting and Layout</b></a></font></p>
+<br>
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <a name="overview"></a><span style="font-size:17px;font-weight:bold;">Overview</span>
+    <p><font size="-1">In order to improve your plug-in's quality and
+    live up to users' trust in its quality, we urge you to
+    follow these guidelines when designing, writing, and testing
+    your plug-in. Also, on the non-technical front, your plug-ins
+    should not violate 
+    <a href="http://desktop.google.com/privacypolicy.html?hl=en"
+    target="_blank">Google's privacy policy</a>.</font></p>
+
+    <p><font size="-1">In the <a href="#ui">User Interface and
+    Usability</a> section, we specify UI standards and expected
+    behavior of various Sidebar UI components, such as the Details
+    View and mouse input. Users expect to be able to interact in
+    a consistent manner with all Sidebar panels, so you should pay
+    particular attention to what behaviors a panel is expected to have
+    and what common visual cues are shared among panels.</font></p>
+
+    <p><font size="-1">While many of the guidelines below are broken
+    up into <i>Design</i> and <i>Testing</i>, keep in mind that you
+    will also need to test that the Design guidelines have been
+    met.</font></p> 
+
+  <hr align="left" color="#3399cc" noshade="noshade" size="1">
+	<a name="primary"></a><span
+	style="font-size:17px;font-weight:bold;">Primary Plug-in Functionality</span>
+
+       <h4>Design</h4>
+        <p><font size="-1"><ul>
+          <li>Mesh well with the rest of the
+            Sidebar; do not slow down Sidebar or other panels' performance or
+	    crash Sidebar.</li>
+         <li>Do not interfere with other plug-ins' operations.</li>
+         <li>Make it easy and straightforward for users to halt
+            your plug-ins.</li>
+         <li>Interaction with users or other programs (such as data sources)
+            should not suffer significant delay; respond quickly to
+            requests or other interaction.</li>
+         <li>Respond to any undesired actions with informative and
+            helpful error messages.</li>
+         <li>Create any temporary files only in the user's temp
+            directory, and delete them once they have fulfilled their
+            purpose.</li>
+        </ul></font></p>
+    
+      <h4>Testing</h4>
+        <p><font size="-1"><ul>
+          <li>Test all user-visible features.</li>
+          <li>Run in conjunction with other plug-ins and 
+              the Sidebar to test for compatability or interaction
+              problems.</li>
+          <li>Test response times, both of your plug-in and others to 
+              determine if you're affecting other Sidebar performance.</li>
+        </ul></font></p>
+ 
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+ <hr align="left" color="#3399cc" noshade="noshade" size="1">
+ 
+    <a name="install"></a><span style="font-size:17px;font-weight:bold;">Installation/Uninstallation/Over-installation</span>
+
+      <h4>Design</h4>
+        <p><font size="-1"><ul>
+          <li>Install and uninstall cleanly, leaving the Sidebar in a consistent
+            state.</li>
+          <li>Do not overwrite Google Desktop files or DLLs.</li>
+          <li>If possible, do not force a system reboot during
+	    installation.</li>
+          <li>Explain clearly to users the installation and uninstallation
+            procedure, with explanatory messages on the
+            installer screens.</li>
+          <li>On install, your plug-in should appear on the Sidebar
+            Add/Remove panel. On uninstall, your plug-in should be 
+            removed from the Add/Remove panel.</li>
+          <li>Consider different user roles for installs and uninstalls
+            from regular usage. For example, you may want only
+            Administrators and your power users to be able to install
+            and/or uninstall plug-ins, while normal users should get 
+            a clear and explanatory error message displayed if they
+            try to install or uninstall.</li>
+          <li>Allow installers to cancel an install midway through. If
+            a midway cancellation occurs, roll back any already performed
+            operations such that there is no trace of the attempted install.</li>
+          <li>Have verbose and informative install logging.</li>
+        </ul></font></p>
+
+      <h4>Testing</h4>
+        <p><font size="-1"><ul>
+          <li>Test overinstalling a new version of a plug-in over any 
+            previous versions.</li>
+          <li>Test that installs and uninstalls are clean, and that
+            the plug-in appears or disappears from the Sidebar
+            Add/Remove panel as appropriate.</li>
+          <li>Cancel an install part way through and confirm that all
+            previous operations are rolled back.</li>
+        </ul></font></p>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+    <hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="boundary"></a><span style="font-size:17px;font-weight:bold;">Boundary Tests (If Applicable)</span>
+	
+      <h4>Design</h4>
+        <p><font size="-1"><ul>
+          <li>Handle files or other data of significant size.</li>
+          <li>Handle special characters, such as @,$,!,%, and
+            DBCS, in the data.</li>
+        </ul></font></p>
+      <h4>Testing</h4>
+        <p><font size="-1"><ul>
+          <li>Test for large files or other data sources.</li>
+          <li>Test for empty files or other data sources.</li>
+          <li>Test for special characters in the data.</li>
+          <li>Test for extended lags or latency in the data.</li>
+        </ul></font></p>
+	
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+	<hr align="left" color="#3399cc" noshade="noshade" size="1">
+    <a name="performance"></a><span style="font-size:17px;font-weight:bold;">Performance/Load/Stress</span>
+	
+      <h4>Design</h4>
+        <p><font size="-1"><ul>
+          <li>Allow for large amounts of data or resource shortages such
+             as memory, CPU, or disk usage.</li>
+        </ul></font></p>
+      <h4>Testing</h4>
+        <p><font size="-1"><ul>
+          <li>Test against large data sets and limited memory, CPU,
+            and disk resources.</li>
+           <li>Test for memory leaks or other loss of data.</li>
+      </ul></font></p>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+<hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+	<a name="ui"></a><span style="font-size:17px;font-weight:bold;">User Interface and Usability</span>
+
+      <p><font size="-1">To start with, keep these general principles in mind:
+      <ul>
+	<li><i>Keep panels simple, clean, and minimal.</i><br>
+	    <br>
+	
+	Sidebar real estate is very limited, so only use what space
+	you really need to display your information. Simple color
+	palettes provide a clearer display and minimize esthetic
+	conflicts with other tiles.</font></li>
+	<font size="-1"><br>
+	
+	<li><i>Test ease of use during development.</i><br>
+	      <br>
+          Have others use your tile as you develop its features. Rethink
+          UI aspects they find confusing or difficult to use. In
+	  particular, ensure your Help content is clear, useful,
+          and comprehensive.</li>
+	</font>
+      </ul></p>
+
+      <p><font size="-1">Users expect their interaction with
+      Sidebar panels to be consistent from panel to panel. The following sections
+      specify common visual cues and actions which should be the same
+      across all Sidebar panels.</font></p>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+<hr align="left" color="#3399cc" noshade="noshade" size="1">
+      <h4>General Design</h4>
+        <p><font size="-1">Your plug-in should provide as many alternatives for
+        actions and information as possible. Specifically:
+	<ul>
+	  <li>Provide both mouse and keyboard alternatives for the
+             plug-in's commands, including keyboard shortcuts for any
+             menu commands.
+          <li>Support tooltips.</li>
+          <li>Have a details view panel, if appropriate, as well as a
+            right click context menu of available actions.</li>
+        </ul></font></p>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+      <a name="mouse"></a><b><h4>Mouse Input</h4></b>
+
+      <font size="-1">Since users interact with most tiles via the mouse, mouse input
+      related UI in particular should be consistent throughout the Sidebar to avoid
+      confusion. The follow visual cues tell users what sort of clicks
+      the three main tile element types support.<br>
+      </font>
+      <ul>
+	<li><font size="-1"><b>Items</b>: Show the tile's main content, such as articles
+            in the news tile.<br>
+	  </font>
+	  <ul>
+	    <li><font size="-1"><i>Single-click</i> selects an item and opens its detail
+	    view.<br>
+	      <img src="images/items_click.gif" alt="" height="64" width="433"></font></li>
+	
+	    <li><font size="-1"><i>Double-click</i> opens the item in a new application
+	       window and also selects it in the Sidebar.</font></li>
+	    <li><font size="-1"><i>Mouseover</i> temporarily highlights the item.<br>
+	        <img src="images/items_mouse.gif" alt="" height="97" width="366"></font></li>
+	  </ul>
+	</li>
+	<li><font size="-1"><b>Widgets</b>: <i>Do</i> something when clicked, such
+	    as buttons, checkboxes, stars, etc.. <br>
+	  </font>
+	  <ul>
+	    <li><font size="-1"><i>Single-click</i> <b>only</b>! We reserve double-clicks
+	        for opening items.</font></li>
+	    <li><font size="-1"><i>Mouseover</i> and <i>mouseclick</i> states look different
+	        than normal states.</font></li>
+	    <li><font size="-1">Should look clickable, such as using a graphic with 3D
+	        shading.</font></li>
+	    <li><font size="-1">Text also serving as a widget should, to differentiate it
+                from normal text:</font>
+	      <ul>
+		<li><font size="-1">Display an icon next to the clickable text (see
+                    the Remove button example below).
+	        </font>
+		<li><font size="-1">Have its mouseover state look clickable or buttonlike.
+		    </font></li>
+                </ul></li>
+	    <li><font size="-1">Widgets are not items or part of items. Clicking a widget
+	        should not open an item's detail view.
+		</font></li>
+	    <li><font size="-1">Create the same button look and feel throughout the Sidebar
+                by using the supported <code>DrawItemBackground</code>
+		(set with different flags) on your text and graphics.</font></li>
+
+	    <li><font size="-1">Widget examples:<br>
+
+	      </font>
+	      <table style="margin: 0.5em;" border="0" cellpadding="6" cellspacing="0">
+		<tbody><tr>
+		  <td>&nbsp;</td>
+		  <td><font size="-1"><b>normal state</b></font></td>
+		  <td><font size="-1"><b>mouseover</b></font></td>
+		  <td><font size="-1"><b>mouse click</b></font></td>
+		</tr>
+
+		<tr>
+		  <td valign="top"><font size="-1">checkbox<br>
+		    (todo panel)</font></td>
+		  <td><font size="-1"><img src="images/widg_1a.gif" alt="normal checkbox" height="38" width="120"></font></td>
+		  <td><font size="-1"><img src="images/widg_1b.gif" alt="mouse over checkbox" height="38" width="120"></font></td>
+		  <td><font size="-1"><img src="images/widg_1c.gif" alt="click checkbox" height="38" width="120"></font></td>
+		</tr>
+
+		<tr>
+		  <td valign="top"><font size="-1">remove button<br>
+		    (details view)</font></td>
+		  <td><font size="-1"><img src="images/widg_2a.gif" alt="remove button" height="52" width="91"></font></td>
+		  <td><font size="-1"><img src="images/widg_2b.gif" alt="mouseover remove button" height="52" width="91"></font></td>
+		  <td><font size="-1"><img src="images/widg_2c.gif" alt="click remove button" height="52" width="91"></font></td>
+		</tr>
+	      </tbody></table>
+	      </li>
+	  </ul>
+	</li>
+	<li><font size="-1"><b>Status Indicators</b>: Icons or graphics that show
+	secondary information. <br>
+	  </font>
+	  <ul>
+	    <li><font size="-1">If part of an item, they inherit all the item's mouse
+	    behaviors</font></li>
+	    <li><font size="-1">The graphic should not change on mouseover or mouseclick
+                since they generally are not clickable.</font></li>
+	    <li><font size="-1">Status examples (after-hours moon, network activity, weather clouds):<br>
+	        <br>
+	        <img src="images/status.gif" alt="" height="72" width="341">
+	    </font></li></ul>
+	</li>
+      </ul>
+
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+      <a name="display"></a><b><font size="3">Display</font></b>
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+      
+
+      <h4 id="graphics">Graphics and Icons</h4>
+      <ul>
+
+	<li><font size="-1">You must provide an icon for your plug-in
+	in 2 sizes. The icon design should be easily understood and
+	appropriate for what your plug-in does.
+ 	  </font>
+	  <ul>
+	    <li><font size="-1">
+	      12x12 pixels: appears in the tile's title bar<br>
+	      <img src="images/icons_ex12.gif" alt="" height="120" width="169"></font></li>
+	    <li><font size="-1">
+	      32x32 pixels: appears in the <i>About this plug-in</i> dialog and
+	      in the Alerts UI (if supported by your plug-in).<br>
+	      <img src="images/icons_ex32.gif" alt="" height="245" width="356"></font></li>
+	  </ul>
+	</li>
+	<li><font size="-1">Icons in the tile should be 12x12 pixels. Use a simple shape
+            and color palette due to the small size and to help people
+            identify the tile quickly.</font></li>
+
+	<li><font size="-1">The following set of 12x12 icons are used in the default set of Sidebar tiles. 
+	  You should match your icons' style to these, which have simple rounded shapes
+	  and mostly consist of shades of a single main color. The image
+	itself is a flat 2D representation of what's in the tile. Each
+	has a 1-pixel border in a shade of its main color.<br>
+        <img src="images/icons_12.gif" alt="" height="43" width="73"></font></li>
+      </ul>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+      <h4 id="colors">Colors</h4>
+      <ul>
+	<li><font size="-1">Use colors sparingly. If a shade of gray would work instead,
+	use that.</font></li>
+	<li><font size="-1">Don't use colors that are too bright, or combinations that are
+        very high or low in contrast. Try to avoid causing eyestrain. For
+        example, the left image shows good color usage, while the one
+        on the right is harder to read.<br>
+	    <img src="images/colors.gif" alt="" height="42" width="341"></font></li>
+	<li><font size="-1">Don't rely only on color to indicate differences, since this
+            can cause problems for your colorblind users. This example
+            indicates stock price change directions both by color
+	    (red/green) and by text (+/-).<br>
+	    <img src="images/colors_2.gif" alt="" style="margin: 0.5em;" align="top" height="39" width="151"></font></li>
+      </ul>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+      <h4 id="text">Text</h4>
+      <ul>
+	<li><font size="-1">The user-specified system font and font size is also used
+            by the Sidebar for its text display.
+	</font>
+	<li><font size="-1">Normal text is black, while less important text is colored
+	    navy [#224499 or rgb(34, 68, 153)] or gray [#666666 or rgb(102,
+	    102, 102)].</font></li>
+	<li><font size="-1">Avoid bolded text, if possible, as it stands out too much from
+	    the rest of the Sidebar.</font></li>
+      </ul>
+      
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+      <a name="layout"></a><b><font size="3">Formatting and Layout</font></b>
+      <hr align="left" color="#3399cc" noshade="noshade" size="1">
+      <font size="-1">Sidebar tiles can have four different views;
+        <i>regular</i>, <i>minimized</i>, <i>expanded</i>, and
+	    <i>detailed</i>.<br>
+      </font>
+      <ul>
+       <li><font size="-1"><b>Regular view</b>: Normal appearance.<br>
+           <br>
+	
+	  If you have a list of items, such as web clips, you can use
+          the API-provided list layout. If displaying only one item,
+          such as a photo, use a one-item list layout. Your tile's
+          purpose should be clear just from looking at this view's
+          contents.<br>
+          <br>
+
+	  Keep in mind that you can show more or less information depending
+          on the Sidebar's width. You should avoid scrollbars when possible
+          and use an item's expanded view instead.<br>
+          <br>
+
+	  Try to clearly and visually represent what kind of item it is.
+	  For example, file items should have the filetype icon next to
+	  the name. Summaries of a larger body of text, such as emails
+          or webpages, should display the title as the first line along
+          with brief details of the item's source and date.<br>
+          <br>
+
+	      <img src="images/view_reg.gif" alt="regular panel view" height="199" width="352"><br>
+	      <br>
+	   </font></li>
+
+	<li><font size="-1"><b>Minimized view</b>: Just the title bar.<br>
+	    <br>
+	Normally, the title bar simply displays your tile's icon and
+        title. Instead of the title, you can also have it show a rotating
+	one-at-a-time display of abbreviated items from the tile, such as
+        your stocks and their prices.<br>
+        <br>
+
+	    <img src="images/view_min.gif" alt="minimized panel view" height="20" width="519"><br>
+	    <br>
+
+	</font></li>
+	<li><font size="-1"><b>Expanded view</b>: Fully maximized view appearing beside
+           the Sidebar.<br>
+           <br>
+	   Usually used to display the full list of all tile items, with
+	   a vertical scroll bar available if there are many items to
+	   display.<br>
+	   <br>
+	   <img src="images/view_exp.gif" alt="expanded panel view" height="379" width="452">
+	  </font></li>
+	
+	<li><font size="-1"><b>Details view</b>: Details of a particular tile item.<br>
+	    <br>
+	  This view can be launched from a tile's regular or expanded views
+	  by single-clicking an item and should show as much information
+          as possible.<br>
+          <br>
+	  Clicking on an item's title launches it in a relevant
+	  application, such as a webpage opening in a browser.<br>
+	  <br>
+	  <img src="images/view_det1.gif" alt="item details view" height="202" width="393"><img src="images/view_det2.gif" alt="item details view" height="174" width="345">
+	</font></li>
+      </a></ul>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+      <br>
+
+	<hr align="left" color="#3399cc" noshade="noshade" size="1">
+
+    <p><font size="-1"><b>Note</b>: We suggest looking at the <a
+      href="http://desktop.google.com/plugins/i/timewarp.html">Timewarp</a>
+      plug-in as an example of a well-designed plug-in.</font></p>
+
+      <div align="right"><font size="-2"><a href="#top">Back to top</a></font></div>
+     
+</font>      </td>
+    </tr>
+    <tr><td colspan="2">
+      <table bgcolor="#e8f4f7" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td align="right" nowrap="nowrap"><div align="center"><font class="p" color="#000000" size="-1">&copy;2006 Google - <a href="/privacypolicy.html">Privacy Policy</a> - <a href="/eula">Terms and Conditions</a> - <a href="/copyrights.html">Copyright Notices</a> </font></div></td>
+        </tr>
+      </tbody></table>
+    </td></tr>
+  </tbody></table>
+</body></html>

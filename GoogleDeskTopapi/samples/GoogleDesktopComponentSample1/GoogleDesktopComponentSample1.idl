@@ -1,0 +1,38 @@
+// GoogleDesktopComponentSample1.idl : IDL source for GoogleDesktopComponentSample1
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (GoogleDesktopComponentSample1.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(452FE2BF-D9C4-43FD-9137-78AE170C3EB3),
+	dual,
+	nonextensible,
+	helpstring("IIndexShortcut Interface"),
+	pointer_default(unique)
+]
+interface IIndexShortcut : IDispatch{
+  [id(1), helpstring("method HandleFile")] 
+  HRESULT HandleFile(BSTR full_path_to_file, IDispatch *event_factory);
+};
+[
+	uuid(3921D68F-6B14-4189-BA5D-2117A9DE67B6),
+	version(1.0),
+	helpstring("GoogleDesktopComponentSample1 1.0 Type Library")
+]
+library sampleLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(95DA1281-AEB5-45A4-A71A-B2E57EA41E0F),
+		helpstring("IndexShortcut Class")
+	]
+	coclass IndexShortcut
+	{
+		[default] interface IIndexShortcut;
+	};
+};

@@ -1,0 +1,78 @@
+// Copyright (c) 2005 Google Inc.
+// All rights reserved
+//
+// Idl file for system monitor plugin
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+// Active Monitor Masks
+enum {
+  ACTIVE_MON_NONE = 0x0000,
+  ACTIVE_MON_CPU = 0x0001,
+  ACTIVE_MON_MEM = 0x0002,
+  ACTIVE_MON_DISK = 0x0004,
+  ACTIVE_MON_NET = 0x0008
+};
+
+enum {
+  DISPID_REFRESH_INTERVAL = 1,
+  DISPID_ACTIVE_MONITORS = 2,
+  DISPID_MAX_DISK_RW_IN_CHART = 3,
+  DISPID_MAX_NET_IO_IN_CHART = 4,
+  DISPID_AUTO_ADJUST_CHART_MAX = 5
+};
+ 
+[
+  object,
+  uuid(2D9590B4-9A68-4d16-AFFF-615B4D3CAE17),
+  dual,
+  nonextensible,
+  helpstring("IGoogleDesktopSysMonPlugin Interface"),
+  pointer_default(unique)
+]
+interface IGoogleDesktopSysMonPlugin : IDispatch {
+  [propget, id(DISPID_REFRESH_INTERVAL)]
+  HRESULT refresh_interval([out, retval] int *interval);
+  [propput, id(DISPID_REFRESH_INTERVAL)]
+  HRESULT refresh_interval([in] int new_interval);
+  [propget, id(DISPID_ACTIVE_MONITORS)]
+  HRESULT active_monitors([out, retval] int *monitors);
+  [propput, id(DISPID_ACTIVE_MONITORS)]
+  HRESULT active_monitors([in] int new_monitors);
+  [propget, id(DISPID_MAX_DISK_RW_IN_CHART)]
+  HRESULT max_disk_rw_in_chart([out, retval] int *max_disk_rw);
+  [propput, id(DISPID_MAX_DISK_RW_IN_CHART)]
+  HRESULT max_disk_rw_in_chart([in] int max_disk_rw);
+  [propget, id(DISPID_MAX_NET_IO_IN_CHART)]
+  HRESULT max_net_io_in_chart([out, retval] int *max_net_io);
+  [propput, id(DISPID_MAX_NET_IO_IN_CHART)]
+  HRESULT max_net_io_in_chart([in] int max_net_io);
+  [propget, id(DISPID_AUTO_ADJUST_CHART_MAX)]
+  HRESULT auto_adjust_chart_max([out, retval] int *auto_adjust);
+  [propput, id(DISPID_AUTO_ADJUST_CHART_MAX)]
+  HRESULT auto_adjust_chart_max([in] int auto_adjust);
+};
+
+[
+  uuid(0015B480-3A08-43cf-8972-58E8A4532278),
+  version(1.0),
+  helpstring("GoogleDesktopDisplaySysMonSample 1.0 Type Library")
+]
+library GoogleDesktopDisplaySysMonSampleLib {
+  importlib("stdole2.tlb");
+  [
+    uuid(DDC969BE-6BD5-4efe-9456-380F19E80041),
+    helpstring("SysMonPlugin Class")
+  ]
+  coclass SysMonPlugin {
+    [default] interface IGoogleDesktopSysMonPlugin;
+  };
+  [
+    uuid(446A3941-0A4B-4643-8BBC-FE44C52419AD),
+    helpstring("SysMonPluginPropPage Class")
+  ]
+  coclass SysMonPluginPropPage {
+    [default] interface IUnknown;
+  };
+};

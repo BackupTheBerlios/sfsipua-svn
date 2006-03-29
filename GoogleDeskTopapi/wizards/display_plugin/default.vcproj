@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject ProjectType="Visual C++" Version="7.10">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32">
+	  	<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName="$(ProjectName).tlb"/>
+		</Configuration>
+		<Configuration Name="Release|Win32">
+  		<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName="$(ProjectName).tlb"/>
+		</Configuration>
+	</Configurations>
+</VisualStudioProject>
+

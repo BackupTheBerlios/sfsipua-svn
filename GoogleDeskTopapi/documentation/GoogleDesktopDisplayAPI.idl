@@ -1,0 +1,1843 @@
+// Copyright 2005 Google Inc.
+// All Rights Reserved
+
+#define _MIDL_DECLARE_WIREM_HANDLE  // this prevents wtypes.idl from declaring HDC
+import "wtypes.idl";
+
+// here we declare HDC as a long so that it gets to VB/C# languages properly
+cpp_quote("#if 0")
+typedef long HDC;
+cpp_quote("#endif")
+
+import "ocidl.idl";
+
+#include "olectl.h"
+
+cpp_quote("#include <winerror.h>")
+
+// GD API specific HRESULTs
+cpp_quote("#define E_TOO_MANY_NOTIFICATIONS         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x8001)")
+cpp_quote("#define E_CANCEL_PLUGIN_LOAD             MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x8002)")
+
+// using enums here instead of #defines for minimal keystrokes
+enum {
+  DISPID_GDD_CI_START = 100,
+  DISPID_GDD_PH_START = 200,
+  DISPID_GDD_DVH_START = 300,
+  DISPID_GDD_NOTIFY_UI_START = 400,
+  DISPID_GDD_SS_START = 500,
+  DISPID_GDD_SS_COLOR_START = 550,
+  DISPID_GDD_SS_FONT_START = 575,
+  DISPID_GDD_CIHND_START = 600,
+  DISPID_GDD_CIHLP_START = 700,
+  DISPID_GDD_UT_START = 800,
+  DISPID_GDD_WND_CTRL_START = 900,
+  DISPID_GDD_WND_START = 1000,
+  DISPID_GDD_MENU_START = 1100,
+  DISPID_GDD_OPTIONS_START = 1200,
+  DISPID_GDD_GRAPHICS_START = 1300,
+  DISPID_GDD_TALK_FRIEND = 1400,
+  DISPID_GDD_TALK_SERVICE = 1500,
+  DISPID_GDD_PERSIST_SMALL_STORAGE_START = 1600,
+  DISPID_GDD_STORAGE_START = 1700,
+};
+
+//--------------------------------------------------------------------------------------
+[
+  uuid(DC3768CC-2A51-4754-ABA3-4A30E709B011),
+  helpstring("Flags passed to the sidebar when showing details view")
+]
+enum GoogleDesktopDisplayDetailsViewFlags {
+  // This flag adds a 'Open in full window' button in the details view toolbar which is usually 
+  // used for launching an external application and viewing the full page/email/information shown 
+  // in the details view. This functionality is the same as clicking on the item in the sidebar.
+  GDD_DETAILS_VIEW_FLAG_NONE         = 0,
+  GDD_DETAILS_VIEW_FLAG_TOOLBAR_OPEN = 1,
+  GDD_DETAILS_VIEW_FLAG_NEGATIVE_FEEDBACK = 2,  // show the 'I dont find this interesting' button
+  GDD_DETAILS_VIEW_FLAG_REMOVE_BUTTON = 4,      // show the 'Remove' button
+  // add a button which will show the friends list and let users share the item with
+  // friends
+  GDD_DETAILS_VIEW_FLAG_SHARE_WITH_BUTTON = 8,  
+};
+typedef enum GoogleDesktopDisplayDetailsViewFlags GoogleDesktopDisplayDetailsViewFlags;
+
+//--------------------------------------------------------------------------------------
+[
+  uuid(6077834D-1125-42D3-B61D-CF7C37201EA2),
+  helpstring("Flags describing features used by the plugin")
+]
+enum GoogleDesktopDisplayPluginFlags {
+  GDD_PLUGIN_FLAG_NONE            = 0,
+  GDD_PLUGIN_FLAG_TOOLBAR_BACK    = 1, // have back button in toolbar
+  GDD_PLUGIN_FLAG_TOOLBAR_FORWARD = 2  // have forward button in toolbar
+};
+typedef enum GoogleDesktopDisplayPluginFlags GoogleDesktopDisplayPluginFlags;
+
+//--------------------------------------------------------------------------------------
+[
+  uuid(4380673B-3A66-4CAE-91B0-12EA9AA6F72C),
+  helpstring("Flags set by the sidebar in the mask member of the structure in GetInfo")
+]
+enum GoogleDesktopDisplayInfoMasks {
+  GDD_INFO_MASK_NONE          = 0,
+  GDD_INFO_MASK_MIN_SIZE      = 1,
+  GDD_INFO_MASK_MAX_SIZE      = 2,
+  GDD_INFO_MASK_IDEAL_SIZE    = 4,
+};
+typedef enum GoogleDesktopDisplayInfoMasks GoogleDesktopDisplayInfoMasks;
+
+cpp_quote("#define GDD_INFO_MASK_ALL (GDD_INFO_MASK_MIN_SIZE | \\")
+cpp_quote("  GDD_INFO_MASK_MAX_SIZE | GDD_INFO_MASK_IDEAL_SIZE)")
+
+//--------------------------------------------------------------------------------------
+[
+  uuid(AA2ADF9B-A6EF-46A2-80A8-D11DDB2DE4BB),
+  helpstring("Commands sent to the plugin for executing menu options/toolbar button selections")
+]
+enum GoogleDesktopDisplayPluginCommand {
+  GDD_CMD_ABOUT_DLG = 1,
+  GDD_CMD_TOOLBAR_BACK,
+  GDD_CMD_TOOLBAR_FORWARD,
+};
+typedef enum GoogleDesktopDisplayPluginCommand GoogleDesktopDisplayPluginCommand;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(2A76C89A-7134-426E-90D5-D2BD32E51742),
+  helpstring("Different methods of doing layout of the content items.")
+]
+enum GoogleDesktopDisplayContentItemLayout {
+  GDD_CONTENT_ITEM_LAYOUT_NOWRAP_ITEMS = 0, // normal list, each item occupies 1 line
+  GDD_CONTENT_ITEM_LAYOUT_NEWS,             // typically 2 lines of heading + time
+  GDD_CONTENT_ITEM_LAYOUT_EMAIL   // typically heading + source + 2 lines of snippets
+};
+typedef enum GoogleDesktopDisplayContentItemLayout GoogleDesktopDisplayContentItemLayout;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(0C0028CC-A1B9-42BD-96BF-D67998F2E5FF),
+  helpstring("Flags applicable to all content items")
+]
+enum GoogleDesktopDisplayContentFlags {
+  GDD_CONTENT_FLAG_NONE            = 0,
+  GDD_CONTENT_FLAG_HAVE_DETAILS    = 1,  // have details for each item
+  GDD_CONTENT_FLAG_PINNABLE        = 2,  // items will have a Pin-icon before them
+  GDD_CONTENT_FLAG_MANUAL_LAYOUT   = 4,  // items specify their own display rects
+  // disable the automatic minsize update calculated based on first item's height
+  GDD_CONTENT_FLAG_NO_AUTO_MIN_SIZE = 8,
+};
+typedef enum GoogleDesktopDisplayContentFlags GoogleDesktopDisplayContentFlags;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(3FDF4CA3-DE7A-42C1-805F-CEC1D658FA42),
+  helpstring("Flags indicating how a particular content item should be rendered")
+]
+enum GoogleDesktopDisplayContentItemFlags {
+  GDD_CONTENT_ITEM_FLAG_NONE           = 0,
+  GDD_CONTENT_ITEM_FLAG_STATIC         = 1,   // not clickable
+  GDD_CONTENT_ITEM_FLAG_HIGHLIGHTED    = 2,
+  GDD_CONTENT_ITEM_FLAG_PINNED         = 4,
+  GDD_CONTENT_ITEM_FLAG_TIME_ABSOLUTE  = 8,   // shown item's time as absolute time
+  GDD_CONTENT_ITEM_FLAG_NEGATIVE_FEEDBACK = 16, // allow users to give negative feedback
+  // on the item, currently used only to enable the negative feedback checkbox in the
+  // default details view
+  GDD_CONTENT_ITEM_FLAG_LEFT_ICON      = 32,  // show item's icon on the left
+  GDD_CONTENT_ITEM_FLAG_NO_REMOVE      = 64,  // Removing this item is not possible
+  GDD_CONTENT_ITEM_FLAG_SHAREABLE      = 128, // Item is shareable using Talk
+  GDD_CONTENT_ITEM_FLAG_SHARED         = 256, // an item that is sent by a friend
+  GDD_CONTENT_ITEM_FLAG_INTERACTED     = 512, // signals that the user has
+  // interacted with this item
+};
+typedef enum GoogleDesktopDisplayContentItemFlags GoogleDesktopDisplayContentItemFlags;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(226B619A-FDE6-4353-88AE-3256B7525E79),
+  helpstring("Display states for a plugin's tile")
+]
+enum GoogleDesktopDisplayTileDisplayState {
+  GDD_TILE_DISPLAY_STATE_HIDDEN = 0,
+  GDD_TILE_DISPLAY_STATE_RESTORED,
+  GDD_TILE_DISPLAY_STATE_MINIMIZED,
+  GDD_TILE_DISPLAY_STATE_POPPED_OUT,
+  GDD_TILE_DISPLAY_STATE_RESIZED, // sent only if using PluginHelper
+};
+typedef enum GoogleDesktopDisplayTileDisplayState
+  GoogleDesktopDisplayTileDisplayState;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(064DC207-9D7A-428A-81B8-3637DB88B5CD),
+  helpstring("The output device where the drawing is done")
+]
+enum GoogleDesktopDisplayTarget {
+  GDD_TARGET_SIDEBAR,
+  GDD_TARGET_NOTIFIER,
+  GDD_TARGET_FLOATING_VIEW,
+};
+typedef enum GoogleDesktopDisplayTarget GoogleDesktopDisplayTarget;
+
+//-------------------------------------------------------------------------------------
+[
+  uuid(3F7FD359-95E5-4DA8-A4B1-62EF72707C78),
+  helpstring("Flags passed to DrawItemBackground")
+]
+enum GoogleDesktopDisplayDrawItemBackgroundFlags {
+  GDD_DIB_FLAG_NONE                      = 0,
+  // no drawing, just calculate rects
+  GDD_DIB_FLAG_ONLY_CALCULATE            = 1,
+  // show item as depressed
+  GDD_DIB_FLAG_ITEM_PRESSED              = 2,
+};
+typedef enum GoogleDesktopDisplayDrawItemBackgroundFlags
+  GoogleDesktopDisplayDrawItemBackgroundFlags;
+
+//-------------------------------------------------------------------------------------
+// This structure is used by GetInfo to pass the tile's size, title, icon etc.
+[
+  uuid(6192F8E7-D08E-4A6D-809A-E5619A727FA5)
+]
+struct GoogleDesktopDisplayTileInfo {
+  [helpstring("Indicates which members are requested/valid.")]
+  GoogleDesktopDisplayInfoMasks mask;
+
+  [helpstring("Size of the host window in pixels, useful for calculating the reqd size for the tile.")]
+  POINT host_window_size;
+
+  [helpstring("Max size for this tile.")]
+  POINT max_size;
+
+  [helpstring("Min size for this tile.")]
+  POINT min_size;
+
+  [helpstring("Ideal size for this tile.")]
+  POINT ideal_size;
+};
+typedef struct GoogleDesktopDisplayTileInfo GoogleDesktopDisplayTileInfo;
+
+//-------------------------------------------------------------------------------------
+
+[
+  uuid(B7F71CC8-8AB9-4072-9AA9-78F91A450A02),
+  helpstring("Valid options for IGoogleDesktopDisplayPluginHelper::AddContentItem")
+]
+enum GoogleDesktopContentItemDisplayOptions {
+  GDD_ITEM_DISPLAY_IN_SIDEBAR = 0x00000001,
+  GDD_ITEM_DISPLAY_IN_SIDEBAR_IF_VISIBLE = 0x00000002,
+  GDD_ITEM_DISPLAY_AS_NOTIFICATION = 0x00000004,
+  GDD_ITEM_DISPLAY_AS_NOTIFICATION_IF_SIDEBAR_HIDDEN = 0x00000008,
+};
+
+typedef enum GoogleDesktopContentItemDisplayOptions GoogleDesktopContentItemDisplayOptions;
+
+//-------------------------------------------------------------------------------------
+
+// Window control classes
+[ 
+  uuid(B1219493-A047-4C32-A59A-35F417E4025D),
+  helpstring("Various classes of controls creatable in a window")
+]
+enum GoogleDesktopDisplayWindowControlClass {
+  GDD_WND_CTRL_CLASS_LABEL = 0,
+  GDD_WND_CTRL_CLASS_EDIT,
+  GDD_WND_CTRL_CLASS_LIST,
+  GDD_WND_CTRL_CLASS_BUTTON,
+};
+typedef enum GoogleDesktopDisplayWindowControlClass GoogleDesktopDisplayWindowControlClass;
+
+// control types
+[ 
+  uuid(0151F726-28E2-417F-86BD-DC2606403B79),
+  helpstring("Subtypes of various controls creatable in a window")
+]
+enum GoogleDesktopDisplayWindowControlType {
+  // List control
+  GDD_WND_CTRL_TYPE_LIST_OPEN = 0,
+  GDD_WND_CTRL_TYPE_LIST_DROP,
+  // Button control
+  GDD_WND_CTRL_TYPE_BUTTON_PUSH,
+  GDD_WND_CTRL_TYPE_BUTTON_CHECK,
+  // Edit box
+  GDD_WND_CTRL_TYPE_EDIT_PASSWORD = 10,
+};
+typedef enum GoogleDesktopDisplayWindowControlType GoogleDesktopDisplayWindowControlType;
+
+// logging levels
+[
+  uuid(BEDFB8F4-4C2C-4C53-8F92-668EB10163E2),
+  helpstring("The various levels of logging messages")
+]
+enum GoogleDesktopPluginLogLevel {
+  GDP_LOG_LEVEL_DEBUG = 0,
+  GDP_LOG_LEVEL_INFO = 100,
+  GDP_LOG_LEVEL_WARNING = 200,
+  GDP_LOG_LEVEL_ERROR = 300,
+};
+typedef enum GoogleDesktopPluginLogLevel GoogleDesktopPluginLogLevel;
+
+//-------------------------------------------------------------------------------------
+
+enum {
+  DISPID_GDD_SS_TITLE = DISPID_GDD_SS_START,
+  DISPID_GDD_SS_ICON,
+  DISPID_GDD_SS_FLAGS,
+  DISPID_GDD_SS_DISPLAY_STATE,
+  DISPID_GDD_SS_DOCK_SIDE,
+  DISPID_GDD_SS_SHOW_DETAILS_VIEW,
+  DISPID_GDD_SS_CLOSE_DETAILS_VIEW,
+  DISPID_GDD_SS_CLOSE_POPOUT_VIEW,
+  DISPID_GDD_SS_DRAW_ITEM_BACKGROUND,
+  DISPID_GDD_SS_WINDOW_VISIBLE,
+  DISPID_GDD_SS_WINDOW_WIDTH,
+  DISPID_GDD_SS_WINDOW_HEIGHT,
+  DISPID_GDD_SS_REMOVE_ME,
+  DISPID_GDD_SS_ENSURE_VISIBLE,
+  DISPID_GDD_SS_SET_MAX_SIZE,
+  DISPID_GDD_SS_SET_MIN_SIZE,
+  DISPID_GDD_SS_SET_IDEAL_SIZE,
+  DISPID_GDD_SS_DISPLAY_TARGET,
+  DISPID_GDD_SS_SHOW_ABOUT_DIALOG,
+  DISPID_GDD_SS_LOG_MESSAGE,
+
+  // The following dispids return the color values for various elements in the sidebar
+  // use these like a propget from IDispatch and the returned value is a VT_I4
+  // DISPID_AMBIENT_FORECOLOR       // normal text
+  // DISPID_AMBIENT_BACKCOLOR       // normal background
+  DISPID_GDD_SS_COLOR_SNIPPET      // item's snippet, eg. first few lines of an email
+    = DISPID_GDD_SS_COLOR_START,
+  DISPID_GDD_SS_COLOR_EXTRA_INFO,  // more info about this item, typically source/time
+
+  // The following dispids return the fonts for various elements in the sidebar
+  // use these like a propget from IDispatch and the returned value is a IFont*
+  // DISPID_AMBIENT_FONT            // normal text
+  DISPID_GDD_SS_FONT_SNIPPET       // item's snippet, eg. first few lines of an email
+    = DISPID_GDD_SS_FONT_START,
+  DISPID_GDD_SS_FONT_EXTRA_INFO,   // more info about this item, typically source/time
+  DISPID_GDD_SS_FONT_ITEM_BOLD,    // bolded item text
+};
+
+//-------------------------------------------------------------------------------------
+// This is the interface exposed by the Sidebar to the plugins. 
+[
+  uuid(E7C0BEB7-446B-43bf-83E3-5EC37A9DBCC8), 
+  oleautomation 
+]
+interface IGoogleDesktopDisplaySite : IDispatch {
+  // Display the tile's details view. The control passed to the function is an activex control
+  // that will be hosted in a sidebar details view frame. Since the plugin is creating the details
+  // activex control it can tell the control what to display.
+  // @param details_control activeX control that displays the details
+  // @param title string to be shown as title for the details view
+  // @param flags combination of flags
+  [id(DISPID_GDD_SS_SHOW_DETAILS_VIEW)]
+  HRESULT ShowDetailsView([in] IUnknown *details_control, [in] BSTR title,
+    [in] GoogleDesktopDisplayDetailsViewFlags flags);
+
+  // Hide and destroy the details view that is being shown now for this tile. This is typically
+  // called by the plugin when the PluginHelper object issues a DetailsViewClosed() callback. It is
+  // not necessary to call this function before issuing another ShowDetailsView() call.
+  [id(DISPID_GDD_SS_CLOSE_DETAILS_VIEW)]
+  HRESULT CloseDetailsView();
+
+  // Close the popout view and put the plugin's tile back in the sidebar.
+  [id(DISPID_GDD_SS_CLOSE_POPOUT_VIEW)]
+  HRESULT ClosePopoutView();
+
+  // Returns if the tile is in minimized mode or not. In minimized mode a plugin's tile 
+  // occupies the minimum required space and if required draws content in a more concise
+  // manner showing minimum information.
+  // Also when the tile's size is actually minimized/restored the plugin's OnCommand is called
+  // with the appropriate command
+  [propget, id(DISPID_GDD_SS_DISPLAY_STATE)]
+  HRESULT display_state([out, retval] GoogleDesktopDisplayTileDisplayState* state);
+
+  [propput, id(DISPID_GDD_SS_DISPLAY_STATE)]
+  HRESULT display_state([in] GoogleDesktopDisplayTileDisplayState state);
+
+  // Gets the side to which the sidebar is docked currently. 0=left, 1=top, 2=right, 3=bottom
+  // @param dock_side holds the value of the docked side upon return
+  [propget, id(DISPID_GDD_SS_DOCK_SIDE)]
+  HRESULT dock_side([out, retval] UINT *dock_side);
+
+  // The title for this plugin's tile
+  [propput, id(DISPID_GDD_SS_TITLE)]
+  HRESULT title([in] BSTR title);
+
+  // Set the icon to be displayed for this tile. Refcount will be incremented by sidebar.
+  // Max allowed size for content inside the icon is 12x12 pixels
+  [propput, id(DISPID_GDD_SS_ICON)]
+  HRESULT icon([in] IPicture *icon);
+
+  // Set the flags indicating the optional features required for this tile
+  [propput, id(DISPID_GDD_SS_FLAGS)]
+  HRESULT flags([in] GoogleDesktopDisplayPluginFlags flags);
+
+  // Draw the smooth shaded background for an item (button, line of clickable text etc)
+  // Can be used by plugins drawing their own UI but still wish to maintain the
+  // familiar look and feel provided by the sidebar. Also can be used to just find out
+  // how big the various parts of the item (such as the details button) should be.
+  // @param hdc DC to draw to
+  // @param bounds area where the drawing/calculations should be done
+  // @param details_button_rect OUT param where the details button rect is stored and
+  //    returned. Can be NULL if not required
+  // @param flags various flags giving more info and indicating the operations to perform
+  [id(DISPID_GDD_SS_DRAW_ITEM_BACKGROUND)]
+  HRESULT DrawItemBackground([in] HDC hdc, [in] const RECT *bounds,
+    [out] RECT *details_button_rect, [in] GoogleDesktopDisplayDrawItemBackgroundFlags flags);
+
+  // Allows the tile to request that the container be visible.  If the container
+  // is currently auto-hidden, it will come out of that state.
+  [id(DISPID_GDD_SS_ENSURE_VISIBLE)]
+  HRESULT EnsureVisible();
+
+  // @Returns VARIANT_TRUE if the container is visible and not auto-hidden.
+  //  Otherwise VARIANT_FALSE.
+  [propget, id(DISPID_GDD_SS_WINDOW_VISIBLE)]
+  HRESULT window_visible([out, retval] VARIANT_BOOL* visible);
+
+  /// @returns the width of the container window
+  [propget, id(DISPID_GDD_SS_WINDOW_WIDTH)]
+  HRESULT window_width([out, retval] long* width);
+
+  /// @returns the height of the container window
+  [propget, id(DISPID_GDD_SS_WINDOW_HEIGHT)]
+  HRESULT window_height([out, retval] long* height);
+
+  // Allows the tile to request to be removed from the sidebar.
+  //
+  // @param save_data Controls whether the sidebar will persist the current state
+  //   of the tile.
+  [id(DISPID_GDD_SS_REMOVE_ME)]
+  HRESULT RemoveMe([in] VARIANT_BOOL save_data);
+
+  /// Used to set the maximum size of the tile
+  [id(DISPID_GDD_SS_SET_MAX_SIZE)]
+  HRESULT SetMaxSize([in] long width, [in] long height);
+
+  /// Used to set the minimum size of the tile
+  [id(DISPID_GDD_SS_SET_MIN_SIZE)]
+  HRESULT SetMinSize([in] long width, [in] long height);
+
+  /// Used to set the ideal size of the tile
+  [id(DISPID_GDD_SS_SET_IDEAL_SIZE)]
+  HRESULT SetIdealSize([in] long width, [in] long height);
+};
+
+// extension of the above
+[
+  uuid(C5006908-0C7A-49E2-85DA-C2675E554F91),
+  oleautomation
+]
+interface IGoogleDesktopDisplaySite2 : IGoogleDesktopDisplaySite {
+  // Get the current display target/container for the plugin
+  [propget, id(DISPID_GDD_SS_DISPLAY_TARGET)]
+  HRESULT display_target([out, retval] GoogleDesktopDisplayTarget *target);
+
+  // Show the standard About dialog with the given information. The title is the same
+  // as what the plugin shows in the sidebar.
+  // @param icon the icon for the dialog
+  // @param text the text shown in the dialog. The first line is the name
+  //   of the plugin, the second line is the copyright message, and the rest are
+  //   the actual description of the plugin
+  [id(DISPID_GDD_SS_SHOW_ABOUT_DIALOG)]
+  HRESULT ShowAboutDialog([in] IPicture *icon, [in] BSTR text);
+
+  // Send the given text to the GD plugin log
+  // @param level severity level of this message
+  // @param category string identifying which category this message belongs to. This
+  //   field is specific to the plugin and the plugin author can define his own list
+  //   of category strings for the various log messages sent by the plugin. For
+  //   simple cases this can be an empty string.
+  // @param text the actual message text
+  [id(DISPID_GDD_SS_LOG_MESSAGE)]
+  HRESULT LogMessage([in] GoogleDesktopPluginLogLevel level, [in] BSTR category,
+    [in] BSTR text);
+};
+
+enum {
+  DISPID_GDD_GTF_NAME = DISPID_GDD_TALK_FRIEND,
+  DISPID_GDD_GTF_USER_ID,
+  DISPID_GDD_GTF_EMAIL_ADDRESS,
+  DISPID_GDD_GTF_SIDEBAR,
+  DISPID_GDD_GTF_STATUS,
+};
+
+[
+  uuid(7597BD72-673D-415f-8C06-1A4C26003D46),
+  helpstring("Enumeration for the status of a friend in Talk")
+]
+enum GoogleDesktopTalkFriendStatus {
+  GDD_FRIEND_STATUS_ONLINE = 0,
+  GDD_FRIEND_STATUS_IDLE,
+  GDD_FRIEND_STATUS_BUSY,
+};
+
+typedef enum GoogleDesktopTalkFriendStatus GoogleDesktopTalkFriendStatus;
+
+[
+  object, uuid(E4853C4B-43EB-41de-A0B1-B5B97C31CB0A),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopTalkFriend : IDispatch {
+  // Gets the friend's user visible name
+  [id(DISPID_GDD_GTF_NAME), propget]
+  HRESULT name([out, retval] BSTR *name);
+
+  // Gets the friend's user id, this is what is passed to SendTalkText and
+  // SendTalkData.
+  [id(DISPID_GDD_GTF_USER_ID), propget]
+  HRESULT user_id([out, retval] BSTR *user_id);
+
+  // Gets the friend's email address
+  [id(DISPID_GDD_GTF_EMAIL_ADDRESS), propget]
+  HRESULT email_address([out, retval] BSTR *email_address);
+
+  // Whether the friend has the Sidebar or not
+  [id(DISPID_GDD_GTF_SIDEBAR), propget]
+  HRESULT has_sidebar([out, retval] VARIANT_BOOL *installed);
+
+  // The status of the friend (i.e. online/idle/busy)
+  [id(DISPID_GDD_GTF_STATUS), propget]
+  HRESULT status([out, retval] GoogleDesktopTalkFriendStatus *status);
+};
+
+
+enum {
+  DISPID_GDD_GTS_SEND_DATA = DISPID_GDD_TALK_SERVICE,
+  DISPID_GDD_GTS_SEND_MESSAGE,
+  DISPID_GDD_GTS_GET_FRIENDS,
+  DISPID_GDD_GTS_ON_RECEIVE_DATA,
+};
+
+// This interface exposes methods for GD display plugins to send/receive data using Google Talk.
+// To get a pointer to this interface, do a QueryInterface on IGoogleDesktopDisplaySite
+// to get IServiceProvider, and call the QueryService method with the IID of this interface
+[
+  object, uuid(817BB97F-AF26-44f0-B1FA-341D5A114AEB),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopPluginTalkService : IDispatch {
+  // Used to send data to the same plugin on a friend's machine.  Before calling
+  // this function, you should have verified that the IGoogleDesktopTalkFriend
+  // where you got the user_id from has the sidebar.  If they don't, then you can
+  // call SendTalk Message to send a text version of the message if applicable.
+  // There is a maximum of 2K on the data size.
+  // @param user_id the user id of the friend to send this message to
+  // @param data the data to send as a string.
+  [id(DISPID_GDD_GTS_SEND_DATA)]
+  HRESULT SendTalkData([in] BSTR user_id, [in] BSTR data);
+
+  // Send a text message to the user.  There is a maximum of 2K characters
+  // on the message size.
+  // @param user_id the user id of the friend to send this message to
+  // @param message the text of the IM that is sent to the user
+  [id(DISPID_GDD_GTS_SEND_MESSAGE)]
+  HRESULT SendTalkText([in] BSTR user_id, [in] BSTR message);
+
+  // Get the list of online friends
+  // @param friends a SAFEARRAY of VARIANTs, each holding an IGoogleDesktopTalkFriend object.
+  [propget, id(DISPID_GDD_GTS_GET_FRIENDS)]
+  HRESULT friends([out, retval] VARIANT* friends);
+
+  // Set the handler for a script plugin to be called when it receives data from the same
+  // plugin in another user's PC. Only used if called from a script plugin. For plugins
+  // written in non-scripting languages, implement IGoogleDesktopPluginTalkHandler.
+  // Handler prototype should be
+  //   OnReceiveTalkData(friend, data)
+  // 'friend' is an object implementing IGoogleDesktopTalkFriend, gives properties of the sender
+  // 'data' is the received data as a string
+  // return false to do default operation, return true or nothing to indicate success
+  [propput, id(DISPID_GDD_GTS_ON_RECEIVE_DATA)]
+  HRESULT onReceiveTalkData([in] VARIANT handler);
+};
+
+// If your plugin does not use the PluginHelper object (i.e. you implement
+// IGoogleDesktopDisplayPlugin and manage the content on your own) you can implement
+// the following interface to be notified when you receive data from the same plugin 
+// running in another user's PC. Your plugin in the other PC should call methods of 
+// IGoogleDesktopPluginTalkService to send the data.
+// If your plugin uses the PluginHelper object, refer to IGoogleDesktopDisplayPluginHandler2
+// to optionally override the default send/receive functionality.
+[
+  uuid(F5D3F8B1-5330-4e22-B2E1-C66C475D9A2D)
+]
+interface IGoogleDesktopPluginTalkHandler : IUnknown {
+  // Callback when a message arrives for your plugin
+  // @param talk_friend an IGoogleDesktopTalkFriend for the sender of the message
+  // @param data the data
+  HRESULT OnReceiveTalkMessage([in] IDispatch *talk_friend,
+                               [in] BSTR data);
+};
+
+// This interface contains event handlers implemented by all display plugins.
+[
+  uuid(047ED090-1514-4731-9452-C1147CF8FC15)
+]
+interface IGoogleDesktopDisplayPluginHandler : IUnknown {
+  // execute the given command
+  // @param command one of the CMD_xxx values
+  HRESULT OnCommand([in] GoogleDesktopDisplayPluginCommand command);
+
+  // inform about changes in the display state of this plugin's tile
+  // @param display_state new display state of this tile
+  HRESULT OnDisplayStateChange([in] GoogleDesktopDisplayTileDisplayState display_state);
+};
+
+// This is an extension of the above interface. Implement this to optionally override
+// the default send/receive functionality.
+[
+  uuid(74C3F045-6808-48ed-BAAC-18F2403F36B1)
+]
+interface IGoogleDesktopDisplayPluginHandler2 : IGoogleDesktopDisplayPluginHandler {
+  // When a content item is shared (i.e. user uses right click "Send to" menu or
+  // drags and drops it), this function is called to serialize the item.  The
+  // data will be send to OnReceiveTalkMessage handler on the friend's machine.
+  // If you're using content item helper, then you can return E_NOTIMPL and let
+  // the plugin helper handle the item.
+  // @param item the IGoogleDesktopDisplayContentItem to serialize
+  // @param data store whatever data you need here to show the item in another sidebar
+  HRESULT GetItemData([in] IUnknown *item, [out, retval] BSTR *data);
+
+  // When a content item is shared with a user who doesn't have the sidebar,
+  // you can send a text version of the item.  If you're using content item
+  // helper, then you can return E_NOTIMPL and let the plugin helper handle the item.
+  HRESULT GetItemText([in] IUnknown *item, [out, retval] BSTR* message);
+
+  // Callback when a message arrives for your plugin.  If you are using the
+  // content item helper, then you can return E_NOTIMPL and let the plugin
+  // helper handle the item.
+  // @param talk_friend an IGoogleDesktopTalkFriend for the sender of the message
+  // @param data the data
+  HRESULT OnReceiveTalkMessage([in] IDispatch *talk_friend, [in] BSTR data);
+
+  // Get notified when the sidebar issues a OnDisplayTargetChange to the plugin. See
+  // IGoogleDesktopDisplayPlugin2::OnDisplayTargetChange for more details
+  HRESULT OnDisplayTargetChange([in] GoogleDesktopDisplayTarget display_target);
+};
+
+// This is the basic interface for sidebar plugins. All plugins aware of the sidebar must
+// implement this interface. The PluginHelper object provided by the API implements this
+// and many other required interfaces so if your plugin aggregates from the PluginHelper
+// you dont have to provide implementations of these interfaces
+[
+  uuid(AF3B7E72-2886-40f7-AB5A-0AF1CF68243D)
+]
+interface IGoogleDesktopDisplayPlugin : IUnknown {
+  // The following methods have same behavior as those defined in 
+  // IGoogleDesktopDisplayPluginHandler and are implemented by the plugin
+  HRESULT OnCommand([in] GoogleDesktopDisplayPluginCommand command);
+
+  HRESULT OnDisplayStateChange([in] GoogleDesktopDisplayTileDisplayState display_state);
+
+  // Get plugin's info.
+  // @param tile_info holds this tile's size and other information upon return
+  HRESULT GetInfo([in, out] GoogleDesktopDisplayTileInfo *tile_info);
+};
+
+// extension of the above interface
+[
+  uuid(38A1833C-175B-4FCE-A513-EC9B8A72336D)
+]
+interface IGoogleDesktopDisplayPlugin2 : IGoogleDesktopDisplayPlugin {
+  // Callback when the plugin is moved from one display target/container to another. E.g. when
+  // the plugin is dragged out of the sidebar into a floating view, or when it is
+  // put back into the sidebar
+  // @param display_target new target area where the plugin is hosted
+  HRESULT OnDisplayTargetChange([in] GoogleDesktopDisplayTarget display_target);
+};
+
+//-------------------------------------------------------------------------------------
+// The plugin helper can display the plugin content and manage clicks on their behalf. The 
+// interface below encapsulates one content item. Typical content items include 
+// an icon, some text and flags indicating how the item should be rendered. For eg. A plugin 
+// showing a list of contacts can have 5 content items (one for each contact) and each of these
+// items show the presence status and the name of the contact. When the user clicks on
+// a content item the plugin will receive a notification in it's ContentHandler interface
+
+// Content item handler
+enum {
+  DISPID_GDD_CIHND_DRAWITEM = DISPID_GDD_CIHND_START,
+  DISPID_GDD_CIHND_GETHEIGHT,
+  DISPID_GDD_CIHND_OPENITEM,
+  DISPID_GDD_CIHND_TOGGLEPINNEDSTATE,
+  DISPID_GDD_CIHND_GETISTOOLTIPREQUIRED,
+  DISPID_GDD_CIHND_ONDETAILSVIEW,
+  DISPID_GDD_CIHND_PROCESSDETAILSVIEWFEEDBACK,
+  DISPID_GDD_CIHND_ONREMOVEITEM,
+};
+
+// This interface handles events related to a content item. The ContentItemHelper
+// object provided by the API implements this interface and provides default
+// implementations for DrawItem and ToggleItemPinnedState methods. If a plugin
+// wishes to handle the other methods or to override the default implementations
+// it can implement this interface in it's ContentItem object and it will be called
+// before the default processing is done. If the plugin's implementation returns
+// E_NOTIMPL then default processing is done for the method.
+[
+  object,uuid(2BF1B7EE-DC5C-4f05-8DFA-273D6C199567),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItemHandler : IUnknown {
+  // Draw the item to the given DC and inside the given rect
+  [id(DISPID_GDD_CIHND_DRAWITEM)]
+  HRESULT DrawItem([in] GoogleDesktopDisplayTarget target, [in] HDC dc,
+    [in] const RECT *bounds);
+
+  // Height of this item in pixels, for the given width in the given DC
+  [id(DISPID_GDD_CIHND_GETHEIGHT)]
+  HRESULT GetHeight([in] GoogleDesktopDisplayTarget display_target, [in] HDC dc,
+    [in] long width, [out, retval] long *height);
+
+  // Item was clicked
+  [id(DISPID_GDD_CIHND_OPENITEM)]
+  HRESULT OpenItem();
+
+  // Item's pin button was clicked
+  [id(DISPID_GDD_CIHND_TOGGLEPINNEDSTATE)]
+  HRESULT ToggleItemPinnedState();
+
+  // Called to check if the item should show tooltips when drawn in the given rect.
+  // Typically called whenever the plugin's area changes in size to determine which
+  // items should show tooltips and which ones should not. Typically items do not
+  // show tooltips if the given rectangle is large enough to show the full item data.
+  // For eg. a news item will only show the tooltip if the news headline could not
+  // be displayed completely in the given rectangle.
+  // @param target device for which the info is requested
+  // @param dc device context to use for attributes/calculations
+  // @param bounds area where the item will be displayed
+  // @param is_required OUT param where the flag indicating if the tooltip should
+  //  be displayed is stored and returned
+  [id(DISPID_GDD_CIHND_GETISTOOLTIPREQUIRED)]
+  HRESULT GetIsTooltipRequired([in] GoogleDesktopDisplayTarget target,
+    [in] HDC dc, [in] const RECT *bounds, [out] VARIANT_BOOL *is_required);
+
+  // Called before the plugin helper shows the default details pane.
+  // This notification gives the handler a chance to change the title
+  // and flags for how the details view will be shown.
+  // The handler can optionally cancel the details view
+  // from being shown in case the handler wants to show it's own details
+  // view.
+  //
+  // @param details_control A pointer to the control used for showing the details.
+  // @param title (in, out) the title used in the details view.
+  // @param flags (in, out) the flags used for the operation.
+  // @param cancel (out) Handler can optionally set this to VARIANT_TRUE if the
+  //   details view shouldn't be shown.
+  [id(DISPID_GDD_CIHND_ONDETAILSVIEW)]
+  HRESULT OnDetailsView([out] BSTR* title,
+                        [out] GoogleDesktopDisplayDetailsViewFlags* flags,
+                        [out] IUnknown** details_control,
+                        [out, retval] VARIANT_BOOL* cancel);
+
+  // Details view is closed and user had given feedback on the item
+  // @param flags combination of DETAILS_VIEW_FLAGS_xxx depending on user's action
+  [id(DISPID_GDD_CIHND_PROCESSDETAILSVIEWFEEDBACK)]
+  HRESULT ProcessDetailsViewFeedback([in] GoogleDesktopDisplayDetailsViewFlags flags);
+
+  // Called when an item is being removed as a result of a user action such
+  // as clicking "Remove" on the item's context menu.
+  // @param cancel The handler can set this variable to VARIANT_TRUE if the item
+  //   should not be removed.  No error message will be displayed to the user
+  //   since that is the responsibility of the handler in this case.
+  [id(DISPID_GDD_CIHND_ONREMOVEITEM)]
+  HRESULT OnRemoveItem([out, retval] VARIANT_BOOL* cancel);
+};
+
+// Content item
+enum {
+  DISPID_GDD_CI_FLAGS = DISPID_GDD_CI_START,
+  DISPID_GDD_CI_TOOLTIP,
+  DISPID_GDD_CI_DRAWITEM,
+  DISPID_GDD_CI_GETHEIGHT,
+  DISPID_GDD_CI_OPENITEM,
+  DISPID_GDD_CI_TOGGLEPINNEDSTATE,
+  DISPID_GDD_CI_GETISTOOLTIPREQUIRED,
+  DISPID_GDD_CI_ONDETAILSVIEW,
+  DISPID_GDD_CI_PROCESSDETAILSVIEWFEEDBACK,
+  DISPID_GDD_CI_ONREMOVEITEM,
+  DISPID_GDD_CI_GETRECT,
+  DISPID_GDD_CI_SENT_TO_NAME,
+};
+
+// This interface is implemented by ContentItems which are given to the PluginHelper
+// for display. A plugin can create COM objects implementing this interface or it
+// can use the helper implementation provided by the ContentItemHelper object.
+// If the object implementing this interface also implements IObjectWithSite, the
+// SetSite method will be called when the item is added with a ContentItemSite object.
+[
+  object, uuid(0F561F9B-1706-43DE-A9BB-4DC5D047A100),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItem : IUnknown {
+  // The following methods have same behavior as those defined in 
+  // IGoogleDesktopDisplayContentItemHandler and are implemented by the ContentItem
+  [id(DISPID_GDD_CI_DRAWITEM)]
+  HRESULT DrawItem([in] GoogleDesktopDisplayTarget target, [in] HDC dc,
+    [in] const RECT *bounds);
+
+  [id(DISPID_GDD_CI_GETHEIGHT)]
+  HRESULT GetHeight([in] GoogleDesktopDisplayTarget display_target, [in] HDC dc,
+    [in] long width, [out, retval] long *height);
+
+  [id(DISPID_GDD_CI_OPENITEM)]
+  HRESULT OpenItem();
+
+  [id(DISPID_GDD_CI_TOGGLEPINNEDSTATE)]
+  HRESULT ToggleItemPinnedState();
+
+  [id(DISPID_GDD_CI_GETISTOOLTIPREQUIRED)]
+  HRESULT GetIsTooltipRequired([in] GoogleDesktopDisplayTarget target,
+    [in] HDC dc, [in] const RECT *bounds, [out] VARIANT_BOOL *is_required);
+
+  [id(DISPID_GDD_CI_ONDETAILSVIEW)]
+  HRESULT OnDetailsView([out] BSTR* title,
+                        [out] GoogleDesktopDisplayDetailsViewFlags* flags,
+                        [out] IUnknown** details_control,
+                        [out, retval] VARIANT_BOOL* cancel);
+
+  [id(DISPID_GDD_CI_PROCESSDETAILSVIEWFEEDBACK)]
+  HRESULT ProcessDetailsViewFeedback([in] GoogleDesktopDisplayDetailsViewFlags flags);
+
+  [id(DISPID_GDD_CI_ONREMOVEITEM)]
+  HRESULT OnRemoveItem([out, retval] VARIANT_BOOL* cancel);
+
+  // Some combination of the content item flags
+  [propget, id(DISPID_GDD_CI_FLAGS)]
+  HRESULT flags([out, retval] GoogleDesktopDisplayContentItemFlags *flags);
+
+  // Tooltip (eg. full path, full headlines)
+  [propget, id(DISPID_GDD_CI_TOOLTIP)]
+  HRESULT tooltip([out, retval] BSTR *tooltip);
+};
+
+// Extension of the above interface. Implement this in your content item if you are
+// using functionality such as manual layout of items
+[
+  object, uuid(E2B5762A-4C8B-4d3d-B448-F74B11D86E7C),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItem2 : IGoogleDesktopDisplayContentItem {
+  // Rect of this item, called if the plugin specified manual layout of items
+  [id(DISPID_GDD_CI_TOOLTIP)]
+  HRESULT GetRect([out] long *x, [out] long *y, [out] long *width, [out] long *height);
+
+  // When this item is sent to a friend, set this property to the friend's name.  This gives
+  // the user a visual notification that the item has been sent.  You should set this back
+  // to an empty string after a short period.
+  [propget, id(DISPID_GDD_CI_SENT_TO_NAME)]
+  HRESULT sent_to_name([out, retval] BSTR *sent_to_name);
+
+  [propput, id(DISPID_GDD_CI_SENT_TO_NAME)]
+  HRESULT sent_to_name([in] BSTR sent_to_name);
+}
+
+// Content item helper, helps in implementing content items
+enum {
+  DISPID_GDD_CIHLP_HEADING = DISPID_GDD_CIHLP_START,
+  DISPID_GDD_CIHLP_SOURCE,
+  DISPID_GDD_CIHLP_SNIPPET,
+  DISPID_GDD_CIHLP_IMAGE,
+  DISPID_GDD_CIHLP_TIME_CREATED,
+  DISPID_GDD_CIHLP_LAYOUT,
+  DISPID_GDD_CIHLP_FLAGS,
+  DISPID_GDD_CIHLP_TOOLTIP,
+  DISPID_GDD_CIHLP_OPEN_COMMAND,
+  DISPID_GDD_CIHLP_NOTIFIER_IMAGE,
+  DISPID_GDD_CIHLP_EDIT_ITEM,
+  DISPID_GDD_CIHLP_ON_DRAWITEM,
+  DISPID_GDD_CIHLP_ON_GETHEIGHT,
+  DISPID_GDD_CIHLP_ON_OPENITEM,
+  DISPID_GDD_CIHLP_ON_TOGGLEPINNEDSTATE,
+  DISPID_GDD_CIHLP_ON_GETISTOOLTIPREQUIRED,
+  DISPID_GDD_CIHLP_ON_DETAILSVIEW,
+  DISPID_GDD_CIHLP_ON_PROCESSDETAILSVIEWFEEDBACK,
+  DISPID_GDD_CIHLP_ON_REMOVEITEM,
+  DISPID_GDD_CIHLP_SETRECT,
+  DISPID_GDD_CIHLP_FRIEND_NAME,
+  DISPID_GDD_CIHLP_ITEM_RECEIVED_TIME,
+};
+
+// To display content using the PluginHelper, plugins need to create COM objects
+// implementing IGoogleDesktopDisplayContentItem. To make life easy here is a
+// helper object that provides methods to get/set item data and provide default
+// implementation for some of the methods. Plugins can create instances of this
+// helper object directly or implement their own objects aggregating from this one
+// to override some of the item handlers (see info on 
+// IGoogleDesktopDisplayContentItemHandler)
+[
+  object, uuid(666677EB-2C7A-4393-ABB1-A5994E8D09CB),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItemHelper : IDispatch {
+  // Image for this item, if required
+  [propput, id(DISPID_GDD_CIHLP_IMAGE)]
+  HRESULT image([in] IPicture *image);
+
+  [propget, id(DISPID_GDD_CIHLP_IMAGE)]
+  HRESULT image([out, retval] IPicture **image);
+
+  // Image shown when this item is shown in the notifier window, if required.
+  // If you use the plugin helper's AddContentItem call to show notifications, it will
+  // automatically set this property to the plugin's large icon (which is shown in
+  // the about dialog)
+  [propput, id(DISPID_GDD_CIHLP_NOTIFIER_IMAGE)]
+  HRESULT notifier_image([in] IPicture *image);
+
+  [propget, id(DISPID_GDD_CIHLP_NOTIFIER_IMAGE)]
+  HRESULT notifier_image([out, retval] IPicture **image);
+
+  // Date & Time to display (in UTC)
+  [propput, id(DISPID_GDD_CIHLP_TIME_CREATED)]
+  HRESULT time_created([in] DATE time_created);
+
+  [propget, id(DISPID_GDD_CIHLP_TIME_CREATED)]
+  HRESULT time_created([out, retval] DATE *time_created);
+
+  // String to display in the first line.
+  [propput, id(DISPID_GDD_CIHLP_HEADING)]
+  HRESULT heading([in] BSTR heading);
+
+  [propget, id(DISPID_GDD_CIHLP_HEADING)]
+  HRESULT heading([out, retval] BSTR *heading);
+
+  // Source (eg. mail id, web address)
+  [propput, id(DISPID_GDD_CIHLP_SOURCE)]
+  HRESULT source([in] BSTR source);
+
+  [propget, id(DISPID_GDD_CIHLP_SOURCE)]
+  HRESULT source([out, retval] BSTR *source);
+
+  // Snippet (eg. first few lines)
+  [propput, id(DISPID_GDD_CIHLP_SNIPPET)]
+  HRESULT snippet([in] BSTR snippet);
+
+  [propget, id(DISPID_GDD_CIHLP_SNIPPET)]
+  HRESULT snippet([out, retval] BSTR *snippet);
+
+  // Command to execute (using ShellExecute) when the item is clicked
+  [propput, id(DISPID_GDD_CIHLP_OPEN_COMMAND)]
+  HRESULT open_command([in] VARIANT open_command);
+
+  [propget, id(DISPID_GDD_CIHLP_OPEN_COMMAND)]
+  HRESULT open_command([out, retval] VARIANT *open_command);
+
+  // Layout of the item indicating the format in which the item should be displayed
+  [propput, id(DISPID_GDD_CIHLP_LAYOUT)]
+  HRESULT layout([in] GoogleDesktopDisplayContentItemLayout layout);
+
+  [propget, id(DISPID_GDD_CIHLP_LAYOUT)]
+  HRESULT layout([out, retval] GoogleDesktopDisplayContentItemLayout *layout);
+
+  // Some combination of the content item flags
+  [propput, id(DISPID_GDD_CIHLP_FLAGS)]
+  HRESULT flags([in] GoogleDesktopDisplayContentItemFlags flags);
+
+  // Tooltip (eg. full path, full headlines)
+  [propput, id(DISPID_GDD_CIHLP_TOOLTIP)]
+  HRESULT tooltip([in] BSTR tooltip);
+};
+
+// Extension of the above interface to allow script plugins specify handlers
+// for various events 
+[
+  object, uuid(EB959B93-5C03-4267-9441-660A05DBB89F),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItemHelper2 : IGoogleDesktopDisplayContentItemHelper {
+  // Set the DrawItem handler. Prototype for the function should be
+  //   DrawItem(item, display_target, graphics, x, y, width, height)
+  [propput, id(DISPID_GDD_CIHLP_ON_DRAWITEM)]
+  HRESULT onDrawItem([in] VARIANT func);
+
+  // Set the GetHeight handler. Prototype for the function should be
+  //   GetHeight(item, display_target, graphics, width)
+  // returns height in pixels
+  [propput, id(DISPID_GDD_CIHLP_ON_GETHEIGHT)]
+  HRESULT onGetHeight([in] VARIANT func);
+
+  // Set the OpenItem handler. Prototype for the function should be
+  //   OpenItem(item)
+  [propput, id(DISPID_GDD_CIHLP_ON_OPENITEM)]
+  HRESULT onOpenItem([in] VARIANT func);
+
+  // Set the ToggleItemPinnedState handler. Prototype for the function should be
+  //   ToggleItemPinnedState(item)
+  [propput, id(DISPID_GDD_CIHLP_ON_TOGGLEPINNEDSTATE)]
+  HRESULT onToggleItemPinnedState([in] VARIANT func);
+
+  // Set the GetIsTooltipRequired handler. Prototype for the function should be
+  //   GetIsTooltipRequired(item, display_target, graphics, x, y, width, height)
+  // returns true to show tooltip, false to not
+  [propput, id(DISPID_GDD_CIHLP_ON_GETISTOOLTIPREQUIRED)]
+  HRESULT onGetIsTooltipRequired([in] VARIANT func);
+
+  // Set the OnDetailsView handler. Prototype for the function should be
+  //   OnDetailsView(item)
+  // set handler and return nothing in handler to not show details view.
+  // To override default behavior or show custom details view, set the handler and
+  // return an object with the following optional properties.
+  //   obj.title - the title to be shown for the details view
+  //   obj.details_control - an activeX control which should be shown in the details view
+  //   obj.flags - flags controlling the details view layout/usage
+  // For more info on each of the above params, see documentation for OnDetailsView in
+  // interface IGoogleDesktopDisplayContentItemHandler
+  [propput, id(DISPID_GDD_CIHLP_ON_DETAILSVIEW)]
+  HRESULT onDetailsView([in] VARIANT func);
+
+  // Set the ProcessDetailsViewFeedback handler. Prototype for the function should be
+  //   ProcessDetailsViewFeedback(item, details_view_flags)
+  [propput, id(DISPID_GDD_CIHLP_ON_PROCESSDETAILSVIEWFEEDBACK)]
+  HRESULT onProcessDetailsViewFeedback([in] VARIANT func);
+
+  // Set the RemoveItem handler. Prototype for the function should be
+  //   RemoveItem(item)
+  // return true to cancel the remove and keep the item, false to remove
+  [propput, id(DISPID_GDD_CIHLP_ON_REMOVEITEM)]
+  HRESULT onRemoveItem([in] VARIANT func);
+
+  // Set the display position of this item. Before setting the position of any item,
+  // enable the MANUAL_LAYOUT flag for the plugin.
+  [id(DISPID_GDD_CIHLP_SETRECT)]
+  HRESULT SetRect([in] long x, [in] long y, [in] long width, [in] long height);
+
+  // If this item was sent by a friend, this contains their name
+  [propget, id(DISPID_GDD_CIHLP_FRIEND_NAME)]
+  HRESULT friend_name([out, retval] BSTR *friend_name);
+
+  [propput, id(DISPID_GDD_CIHLP_FRIEND_NAME)]
+  HRESULT friend_name([in] BSTR friend_name);
+};
+
+// Extension of the above interface
+[
+  object, uuid(A9EC4AB3-7F13-42df-A092-38BDFBC2CC2D),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayContentItemHelper3 : IGoogleDesktopDisplayContentItemHelper2 {
+  // If this item was sent by a friend, contains the date & time item was recieved (in UTC)
+  [propput, id(DISPID_GDD_CIHLP_ITEM_RECEIVED_TIME)]
+  HRESULT time_received([in] DATE time_received);
+
+  [propget, id(DISPID_GDD_CIHLP_ITEM_RECEIVED_TIME)]
+  HRESULT time_received([out, retval] DATE *time_received);
+}
+
+// The sidebar provides this helper object to make plugin development easier
+enum {
+  DISPID_GDD_PH_TITLE = DISPID_GDD_PH_START,
+  DISPID_GDD_PH_ABOUT_TEXT,
+  DISPID_GDD_PH_SETFLAGS,
+  DISPID_GDD_PH_SETICONS,
+  DISPID_GDD_PH_ADDCONTENTITEM,
+  DISPID_GDD_PH_REMOVECONTENTITEM,
+  DISPID_GDD_PH_REMOVEALLCONTENTITEMS,
+  DISPID_GDD_PH_CONTENTITEMS,
+  DISPID_GDD_PH_MAXCONTENTITEMS,
+  DISPID_GDD_PH_WINDOW_WIDTH,
+  DISPID_GDD_PH_WINDOW_HEIGHT,
+  DISPID_GDD_PH_PINIMAGES,
+  DISPID_GDD_PH_ON_SHOWOPTIONSDLG,
+  DISPID_GDD_PH_ON_COMMAND,
+  DISPID_GDD_PH_ON_DISPLAYSTATECHANGE,
+  DISPID_GDD_PH_ON_ADDCUSTOMMENUITEMS,
+  DISPID_GDD_PH_ON_DISPLAYTARGETCHANGE,
+  DISPID_GDD_PH_PLUGIN_FLAGS,
+  DISPID_GDD_PH_CONTENT_FLAGS,
+};
+
+[
+  object,
+  uuid(5E72293F-05C2-4C1A-8E4E-3158EC3D8574),
+  dual,
+  nonextensible,
+  helpstring("IGoogleDesktopDisplayPluginHelper Interface"),
+  pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginHelper : IDispatch {
+  // Set the plugin's title string
+  // @param title string to use for the title
+  [propput, id(DISPID_GDD_PH_TITLE)]
+  HRESULT title([in] BSTR title);
+
+  // Set the plugin's flags that will be passed onto the sidebar when requested and
+  // content flags specifying properties of all content items
+  // @param plugin_flags combination of plugin flags
+  // @param content_flags combination of content flags
+  [id(DISPID_GDD_PH_SETFLAGS)]
+  HRESULT SetFlags([in] GoogleDesktopDisplayPluginFlags plugin_flags,
+    [in] GoogleDesktopDisplayContentFlags content_flags);
+
+  // Set the icons used for this plugin. The small icon is used in the title and
+  // the large icon is used for notifications/about dialog. 
+  // @param small_icon picture to use for small icon, recommended size <= 10x10
+  // @param large_icon picture to use for large icon, recommended size = 32x32
+  [id(DISPID_GDD_PH_SETICONS)]
+  HRESULT SetIcons([in] IPicture *small_icon, [in] IPicture *large_icon);
+
+  // Set the text to display in the plugin's about dialog. If you do
+  // not call this function, the plugin will receive the GDD_CMD_ABOUT_DLG command
+  // when the about dialog is invoked.
+  // The about_text string can contain newlines
+  // @param about_text text to show in the about dialog
+  [propput, id(DISPID_GDD_PH_ABOUT_TEXT)]
+  HRESULT about_text([in] BSTR about_text);
+
+  // Add the given item to the displayed content.
+  // @param items item to add, must implement IGoogleDesktopDisplayContentItem
+  // @param options A set of flags from the @ref GoogleDesktopContentItemDisplayOptions
+  //    enumeration
+  [id(DISPID_GDD_PH_ADDCONTENTITEM)]
+  HRESULT AddContentItem([in] IUnknown *item, 
+                         [in] GoogleDesktopContentItemDisplayOptions options);
+
+  // Removes the item from the displayed content.
+  // @param items item to remove
+  [id(DISPID_GDD_PH_REMOVECONTENTITEM)]
+  HRESULT RemoveContentItem([in] IUnknown *item);
+
+  // Remove all displayed content. Use this with caution as it will remove the content
+  // immediately and might give a bad user experience if the user was working with the
+  // plugin at that time.
+  // @param items item to remove
+  [id(DISPID_GDD_PH_REMOVEALLCONTENTITEMS)]
+  HRESULT RemoveAllContentItems();
+
+  // Returns the current list of items. This list includes both currently displayed
+  // items and those that were added recently and not yet displayed.
+  // @param items OUT parameter where the array of items is stored and returned. The
+  //   variant holds the array of item pointers (as a safearray, each item in the
+  //   array a variant holding 1 item pointer)
+  [propget, id(DISPID_GDD_PH_CONTENTITEMS)]
+  HRESULT content_items([out, retval] VARIANT* items);
+
+  // Clear all previous content and display the given list of items.
+  // @param items Variant holding the array of item pointers (as a safearray of variants)
+  [propput, id(DISPID_GDD_PH_CONTENTITEMS)]
+  HRESULT content_items([in] VARIANT items);
+
+  // get/set methods for the max number of items that this plugin can display. 
+  [propget, id(DISPID_GDD_PH_MAXCONTENTITEMS)]
+  HRESULT max_content_items([out, retval] long *max_items);
+
+  [propput, id(DISPID_GDD_PH_MAXCONTENTITEMS)]
+  HRESULT max_content_items([in] long max_items);
+};
+
+// This is an extension of the plugin helper interface above
+[
+  object, uuid(04D8CD86-CF9C-46c1-9BA0-BA069B3469E7),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginHelper2 : IGoogleDesktopDisplayPluginHelper {
+  /// @returns the width of the container window
+  [propget, id(DISPID_GDD_PH_WINDOW_WIDTH)]
+  HRESULT window_width([out, retval] long* width);
+
+  /// @returns the height of the container window
+  [propget, id(DISPID_GDD_PH_WINDOW_HEIGHT)]
+  HRESULT window_height([out, retval] long* height);
+
+  // Returns the current pin icon state images. 
+  // @param images OUT parameter where the array of images is stored and returned.
+  //   The variant holds the array of 3 image pointers (as a safearray, each 
+  //   item in the array a variant holding 1 image pointer).
+  [propget, id(DISPID_GDD_PH_PINIMAGES)]
+  HRESULT pin_images([out, retval] VARIANT* images);
+
+  // Set the state images for the pin icon.
+  // @param items Variant holding the array of 3 image pointers (as a safearray 
+  //   of variants)
+  [propput, id(DISPID_GDD_PH_PINIMAGES)]
+  HRESULT pin_images([in] VARIANT images);
+
+  // set handler for initializing the options dialog. Function prototype should be
+  //   InitDialog(wnd)
+  // returns false to cancel the dialog, true or nothing to continue and show
+  [propput, id(DISPID_GDD_PH_ON_SHOWOPTIONSDLG)]
+  HRESULT onShowOptionsDlg([in] VARIANT handler);
+
+  // set handler for initializing the plugin menu. Function prototype should be
+  //   AddCustomMenuItems(menu)
+  [propput, id(DISPID_GDD_PH_ON_ADDCUSTOMMENUITEMS)]
+  HRESULT onAddCustomMenuItems([in] VARIANT handler);
+
+  // set handler for processing plugin commands. Function prototype should be
+  //   OnCommand(cmd)
+  // cmd is one of GDD_CMD_xxxxxx
+  [propput, id(DISPID_GDD_PH_ON_COMMAND)]
+  HRESULT onCommand([in] VARIANT handler);
+
+  // set handler for display state changes. Function prototype should be
+  //   OnDisplayStateChange(new_display_state)
+  [propput, id(DISPID_GDD_PH_ON_DISPLAYSTATECHANGE)]
+  HRESULT onDisplayStateChange([in] VARIANT handler);
+};
+
+// This is an extension of the plugin helper interface above
+[
+  object, uuid(C942271F-CEFF-4CF6-8597-050CE76A65B1),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginHelper3 : IGoogleDesktopDisplayPluginHelper2 {
+  // set handler for display target changes. Function prototype should be
+  //   OnDisplayTargetChange(new_display_target)
+  [propput, id(DISPID_GDD_PH_ON_DISPLAYTARGETCHANGE)]
+  HRESULT onDisplayTargetChange([in] VARIANT handler);
+};
+
+// This is an extension of the plugin helper interface above
+[
+  object, uuid(712D5D30-8ACB-4366-AA61-745B3CA5B21C),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginHelper4 : IGoogleDesktopDisplayPluginHelper3 {
+  // The following functions split the original SetFlags method for easy accesss
+  [propput, id(DISPID_GDD_PH_PLUGIN_FLAGS)]
+  HRESULT plugin_flags([in] GoogleDesktopDisplayPluginFlags plugin_flags);
+
+  [propput, id(DISPID_GDD_PH_CONTENT_FLAGS)]
+  HRESULT content_flags([in] GoogleDesktopDisplayContentFlags content_flags);
+};
+
+// The sidebar provides this helper object to show a standard details view window
+enum {
+  DISPID_GDD_DVH_SETCONTENT = DISPID_GDD_DVH_START,
+  DISPID_GDD_DVH_SETCONTENTFROMITEM,
+  DISPID_GDD_DVH_SETFRIENDINFO,
+  DISPID_GDD_DVH_HTMLCONTENT,
+};
+
+[
+  uuid(8D5BE0FC-6761-4db4-A585-9B2BF68BACBA),
+  helpstring("Enumeration for the method to send an item with a friend")
+]
+enum GoogleDesktopSendToType {
+  GDD_SEND_TO_SIDEBAR = 0,
+  GDD_SEND_TO_IM,
+  GDD_SEND_TO_EMAIL,
+};
+
+typedef enum GoogleDesktopSendToType GoogleDesktopSendToType;
+
+// Plugins should implement this interface if they use the DetailsViewHelper object and want
+// to receive notifications and events from the details view.
+[
+  uuid(16B6BE37-A899-4946-9C01-A960B9FC4C47),
+]
+interface IGoogleDesktopDisplayDetailsViewHandler : IUnknown {
+  // Called when the details view shown by this plugin is closed
+  // @param flags combination of GoogleDesktopDisplayDetailsViewFlags indicating why it
+  //    was closed and additional info such as if the user had given negative feedback in
+  //    the details view
+  HRESULT ProcessDetailsViewFeedback(GoogleDesktopDisplayDetailsViewFlags flags);
+};
+
+// Extension of the above interface
+[
+  uuid(F331D352-E085-4496-92F2-754C5D71220C),
+]
+interface IGoogleDesktopDisplayDetailsViewHandler2 : IGoogleDesktopDisplayDetailsViewHandler {
+  // Called when the user chooses to send this this item to a friend, using the send-to
+  // button in the details view
+  // @param talk_friend selected friend to send this item to.
+  // @param type how the user wants the item to be sent
+  HRESULT SendItemToFriend([in] IGoogleDesktopTalkFriend *talk_friend,
+    [in] GoogleDesktopSendToType type);
+};
+
+// Helper object that shows a standard details view with the given information. Plugins that
+// show a details view for content items are recommended to use this object for the details view
+[
+  object,
+  uuid(7DE4137F-B1DF-4786-AEA0-192EA48643C6),
+  dual,
+  helpstring("IGoogleDesktopDisplayDetailsViewHelper Interface"),
+  pointer_default(unique)
+]
+interface IGoogleDesktopDisplayDetailsViewHelper : IDispatch {
+  // Set the content to be displayed in the details view content pane. 
+  // @param source origin of the content, NULL if not relevant
+  // @param time_created time at which the content was created (in UTC)
+  // @param text actual text of the content, without any formatting
+  // @param time_absolute true if the time displayed is in absolute format or relative to current
+  // @param content_layout layout of the details, usually the same layout as plugin content
+  [id(DISPID_GDD_DVH_SETCONTENT)]
+  HRESULT SetContent([in] BSTR source, [in] DATE time_created, [in] BSTR text,
+    [in] VARIANT_BOOL time_absolute, [in] GoogleDesktopDisplayContentItemLayout content_layout);
+
+  //  Set the content to be displayed directly from an item.
+  // @param item item which gives the content, must implement IGoogleDesktopDisplayContentItemHelper
+  [id(DISPID_GDD_DVH_SETCONTENTFROMITEM)]
+  HRESULT SetContentFromItem([in] IUnknown* item);
+};
+
+[
+  uuid(D58AC626-D718-4d5c-BE61-8A3339A2322D),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayDetailsViewHelper2 : IGoogleDesktopDisplayDetailsViewHelper {
+  // Set the information about the friend who sent the item. Use this along with
+  // the SetContentXXXX functions
+  // @param friend_name name of the friend who sent this item, NULL if not sent by a friend
+  // @param time_received the time that this item was received from a friend, ignored if
+  // friend_name is not set
+  [id(DISPID_GDD_DVH_SETFRIENDINFO)]
+  HRESULT SetFriendInfo([in] BSTR friend_name, [in] DATE time_received);
+
+  // Specify if the content given to be displayed is HTML or plain text. Use this in
+  // conjunction with the SetContentXXXX functions
+  // @param is_html true if the given content is html, false if not. Default is false.
+  [propput, id(DISPID_GDD_DVH_HTMLCONTENT)]
+  HRESULT html_content([in] VARIANT_BOOL is_html);
+
+  // get the flag indicating if the content is html or not (this flag must have been
+  // set earlier by the plugin, default is false)
+  [propget, id(DISPID_GDD_DVH_HTMLCONTENT)]
+  HRESULT html_content([out, retval] VARIANT_BOOL *is_html);
+};
+
+enum {
+  DISPID_GDD_NUI_ADD_NOTIFICATION = DISPID_GDD_NOTIFY_UI_START,
+  DISPID_GDD_NUI_ENABLED,
+};
+
+[
+  object, uuid(BBF09E2A-4E2A-4377-A4A7-980CC55F140B),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayNotifier : IDispatch {
+  [id(DISPID_GDD_NUI_ADD_NOTIFICATION),
+   helpstring("Queues a new content item to the notification UI")]
+  HRESULT AddNotification([in] VARIANT component_clsid,
+                          [in] IUnknown* item,
+                          [out, retval] VARIANT_BOOL* added);
+
+  [propget, id(DISPID_GDD_NUI_ENABLED),
+   helpstring("Enables/disables the notification UI")]
+  HRESULT enabled([out, retval] VARIANT_BOOL *enabled);
+
+  [propput, id(DISPID_GDD_NUI_ENABLED),
+   helpstring("Enables/disables the notification UI")]
+  HRESULT enabled([in] VARIANT_BOOL enabled);
+};
+
+// Window control wrapper
+
+enum {
+  DISPID_GDD_WND_CTRL_ID = DISPID_GDD_WND_CTRL_START,
+  DISPID_GDD_WND_CTRL_ENABLED,
+  DISPID_GDD_WND_CTRL_X,
+  DISPID_GDD_WND_CTRL_Y,
+  DISPID_GDD_WND_CTRL_WIDTH,
+  DISPID_GDD_WND_CTRL_HEIGHT,
+  DISPID_GDD_WND_CTRL_TEXT,
+  DISPID_GDD_WND_CTRL_VALUE,
+  DISPID_GDD_WND_CTRL_ON_CHANGED,
+  DISPID_GDD_WND_CTRL_ON_CLICKED,
+};
+
+[
+  object, uuid(19CFBC40-9AF2-4f90-A5E3-1FEFC05403D7),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayWindowControl : IDispatch {
+  // get/put methods for various properties of a control
+  [propget, id(DISPID_GDD_WND_CTRL_ID)] HRESULT id([out, retval] BSTR *val);
+  [propput, id(DISPID_GDD_WND_CTRL_ID)] HRESULT id([in] BSTR val);
+  [propput, id(DISPID_GDD_WND_CTRL_ENABLED)] HRESULT enabled([in] VARIANT_BOOL val);
+  [propget, id(DISPID_GDD_WND_CTRL_ENABLED)] HRESULT enabled([out, retval] VARIANT_BOOL *val);
+
+  // text = the full content of the control. 
+  // for list control it is an array of strings
+  // for others it is the displayed text
+  [propput, id(DISPID_GDD_WND_CTRL_TEXT)] HRESULT text([in] VARIANT val);
+  [propget, id(DISPID_GDD_WND_CTRL_TEXT)] HRESULT text([out, retval] VARIANT *val);
+
+  // value = current value of the control. 
+  // for list control it is the currently selected string
+  // for check box button control it is a boolean indicating the check state (true/false)
+  // for others it is the displayed text
+  [propput, id(DISPID_GDD_WND_CTRL_VALUE)] HRESULT value([in] VARIANT val);
+  [propget, id(DISPID_GDD_WND_CTRL_VALUE)] HRESULT value([out, retval] VARIANT *val);
+
+  // position of the control in pixels
+  [propput, id(DISPID_GDD_WND_CTRL_X)] HRESULT x([in] long val);
+  [propput, id(DISPID_GDD_WND_CTRL_Y)] HRESULT y([in] long val);
+  [propput, id(DISPID_GDD_WND_CTRL_WIDTH)] HRESULT width([in] long val);
+  [propput, id(DISPID_GDD_WND_CTRL_HEIGHT)] HRESULT height([in] long val);
+
+  // set handler for any changes in the control value. Use onClicked for buttons and
+  // onChanged for other controls. Handler function prototype should be
+  //   OnChanged(wnd, ctrl)
+  [propput, id(DISPID_GDD_WND_CTRL_ON_CHANGED)] HRESULT onChanged([in] VARIANT handler);
+  [propput, id(DISPID_GDD_WND_CTRL_ON_CLICKED)] HRESULT onClicked([in] VARIANT handler);
+};
+
+// Window wrapper
+
+enum {
+  DISPID_GDD_WND_GETCONTROL = DISPID_GDD_WND_START,
+  DISPID_GDD_WND_ADDCONTROL,
+  DISPID_GDD_WND_ON_CLOSE,
+};
+
+[
+  object, uuid(225C3090-A83E-446a-A230-3E653D3F5837),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayWindow : IDispatch {
+  // Create a control with the given data and add it to the window
+  // parameters ctrl_id, text, x, y, width & height are just passed to the
+  // control's put methods so the types of these parameters should match as expected
+  // in those put methods
+  [id(DISPID_GDD_WND_ADDCONTROL)]
+  HRESULT AddControl([in] GoogleDesktopDisplayWindowControlClass ctrl_class,
+    [in] GoogleDesktopDisplayWindowControlType ctrl_type,
+    [in] BSTR ctrl_id, [in] VARIANT text,
+    [in] long x, [in] long y, [in] long width, [in] long height,
+    [out, retval] IGoogleDesktopDisplayWindowControl **ctrl);
+
+  // Retrieve the control with the given ID
+  [id(DISPID_GDD_WND_GETCONTROL)]
+  HRESULT GetControl([in] BSTR ctrl_id,
+    [out, retval] IGoogleDesktopDisplayWindowControl **ctrl);
+
+  // Set the handler which is called when the window is closed. Function prototype should be
+  //   OnClose(button_id)
+  // button id is one of the gddIdXXXX defines
+  // return false to keep the dialog open, true or nothing to close it
+  [propput, id(DISPID_GDD_WND_ON_CLOSE)]
+  HRESULT onClose([in] VARIANT handler);
+};
+
+// Menu wrapper
+
+enum {
+  DISPID_GDD_MENU_ADD_ITEM = DISPID_GDD_MENU_START,
+  DISPID_GDD_MENU_SET_ITEM_STYLE,
+  DISPID_GDD_MENU_ADD_POPUP,
+};
+[
+  object, uuid(7B015F1A-B3C2-4c95-9186-A1ED218AB78F),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayMenu : IDispatch {
+  // Add a single menu item. Style is a combination of gddMenuItemFlagXXXX 
+  // Function prototype of the handler should be
+  //   OnMenuItem(menu_text)
+  [id(DISPID_GDD_MENU_ADD_ITEM)]
+  HRESULT AddItem(BSTR item_text, long style, VARIANT handler);
+
+  // Set the style of the given menu item, a combination of gddMenuItemFlagXXXX
+  [id(DISPID_GDD_MENU_SET_ITEM_STYLE)]
+  HRESULT SetItemStyle(BSTR item_text, long style);
+
+  // Add a submenu/popup
+  [id(DISPID_GDD_MENU_ADD_POPUP)]
+  HRESULT AddPopup(BSTR item_text, [out, retval] IDispatch **popup);
+};
+
+// Data store in which the plugin can store its options
+
+enum {
+  DISPID_GDD_OPTIONS_GET_VALUE = DISPID_GDD_OPTIONS_START,
+  DISPID_GDD_OPTIONS_PUT_VALUE,
+  DISPID_GDD_OPTIONS_CLEAR,
+};
+[
+  object, uuid(4F7B07A2-2D63-4520-899E-1F71B5957F3B),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayOptions : IDispatch {
+  // Get the value for the given key
+  [id(DISPID_GDD_OPTIONS_GET_VALUE)]
+  HRESULT GetValue([in] BSTR text, [out, retval] VARIANT *value);
+
+  // Set the value for the given key
+  [id(DISPID_GDD_OPTIONS_PUT_VALUE)]
+  HRESULT PutValue([in] BSTR text, [in] VARIANT value);
+
+  [id(DISPID_GDD_OPTIONS_CLEAR)]
+  HRESULT Clear();
+};
+
+// ssd data store
+
+// TODO(V5:kuan): may move this to more common dir, so that all GD components
+// can use this
+
+enum {
+  DISPID_GDD_STORAGE_INIT = DISPID_GDD_STORAGE_START,
+  DISPID_GDD_STORAGE_TO_SYNC,
+  DISPID_GDD_STORAGE_GET_VALUE,
+  DISPID_GDD_STORAGE_GET_IS_LOCAL_ONLY,
+  DISPID_GDD_STORAGE_PUT_VALUE,
+  DISPID_GDD_STORAGE_PUT_LOCAL_VALUE,
+  DISPID_GDD_STORAGE_REMOVE_ITEM,
+  DISPID_GDD_STORAGE_CLEAR,
+  DISPID_GDD_STORAGE_COPY,
+  DISPID_GDD_STORAGE_IS_EMPTY,
+  DISPID_GDD_STORAGE_LOAD,
+  DISPID_GDD_STORAGE_SAVE,
+  DISPID_GDD_STORAGE_ENCODE_IDENTIFIER,
+  DISPID_GDD_STORAGE_DECODE_IDENTIFIER,
+  DISPID_GDD_STORAGE_GET_EVENT_FROM_SSDITEM,
+  DISPID_GDD_STORAGE_DECODE_EVENT,
+  DISPID_GDD_STORAGE_COMPARE_ENCODE,
+  DISPID_GDD_STORAGE_COMPARE_DECODE,
+  DISPID_GDD_STORAGE_RESOLVE_UPDATE,
+};
+[
+  object, uuid(99E759C2-A9B9-4a98-A3ED-52D3DF9A6F03),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopSmallStorage : IDispatch {
+  // Init with unique identifier used for SSD
+  // @param ssd_identifier: bytes representing the unique SSD identifier
+  // @param identifier_size: number of bytes of ssd_identifier
+  [id(DISPID_GDD_STORAGE_INIT)]
+  HRESULT Init([in] const byte* ssd_identifier, [in] long identifier_size);
+
+  // Sets flag to indicate if storage will be synchronized with server
+  // @param to_sync: VARIANT_TRUE if storage is to be synchronized with server 
+  [propput, id(DISPID_GDD_STORAGE_TO_SYNC)]
+  HRESULT to_synchronize([in] VARIANT_BOOL to_sync);
+
+  // Gets the value of the item with the given name
+  // @param name: name of item
+  // @param value: holds the value of the item upon return
+  [id(DISPID_GDD_STORAGE_GET_VALUE)]
+  HRESULT GetValue([in] BSTR name, [out, retval] VARIANT* value);
+
+  // Gets the local_only flag of the item with the given name
+  // @param name: name of item
+  // @param local_only: true if item is only for local persistency upon return
+  [id(DISPID_GDD_STORAGE_GET_IS_LOCAL_ONLY)]
+  HRESULT GetIsLocalOnly([in] BSTR name,
+    [out, retval] VARIANT_BOOL* local_only);
+
+  // Sets the value of the local and shared item with the given name
+  // @param name: name of item
+  // @param value: value of item
+  [id(DISPID_GDD_STORAGE_PUT_VALUE)]
+  HRESULT PutValue([in] BSTR name, [in] VARIANT value);
+
+  // Sets the value of the local item with the given name
+  // @param name: name of item
+  // @param value: value of item
+  [id(DISPID_GDD_STORAGE_PUT_LOCAL_VALUE)]
+  HRESULT PutLocalValue([in] BSTR name, [in] VARIANT value);
+
+  // Removes the item with the given name
+  // @param name: name of item
+  [id(DISPID_GDD_STORAGE_REMOVE_ITEM)]
+  HRESULT RemoveItem([in] BSTR name);
+
+  // Clears all the items
+  [id(DISPID_GDD_STORAGE_CLEAR)]
+  HRESULT Clear();
+
+  // Copies the contents of one IGoogleDesktopSmallStorage to another
+  // @param source: source IGoogleDesktopSmallStorage to copy from
+  [id(DISPID_GDD_STORAGE_COPY)]
+  HRESULT Copy(IGoogleDesktopSmallStorage* source);
+
+  // Checks if storage has any items
+  // @param is_empty: VARIANT_FALSE if storage has items upon return
+  [id(DISPID_GDD_STORAGE_IS_EMPTY)]
+  HRESULT IsEmpty([out, retval] VARIANT_BOOL* is_empty);
+
+  // TODO(V5:kuan): spilt methods below into an internal interface that
+  // SmallStorage class implements
+
+  // Compares and 2 versions of storage items and encode the differences into
+  // SSD items
+  // @param new_storage: IGoogleDesktopSmallStorage instance to compare with
+  // @param add_items: the array of SsdItems (of type ISsdItemArray) to append
+  //   add ssd events to
+  // @param del_items: the array of SsdItems (of type ISsdItemArray) to append
+  //   del ssd events to
+  [id(DISPID_GDD_STORAGE_COMPARE_ENCODE)]
+  HRESULT CompareAndEncodeIntoSsdEvents(
+    [in] IGoogleDesktopSmallStorage* new_storage,
+    [in] IUnknown* add_items,  // of type ISsdItemArray
+    [in] IUnknown* del_items); // of type ISsdItemArray
+
+  // Gets the event data from the ISsdItem
+  // @param item: the ssd item to get event data from, of type ISsdItem
+  // @param action_type: holds the action type of the ssd item upon return
+  // @param ssd_item_id: holds the unique item_id of the ssd item item upon
+  //    return
+  // @param event_data: holds the decompressed event data of ssd item upon
+  //    return
+  // @param event_data_size: holds the size of event_data upon return
+  [id(DISPID_GDD_STORAGE_GET_EVENT_FROM_SSDITEM)]
+  HRESULT GetEventFromSsdItem([in] IUnknown* item, // of type ISsdItem
+    [out] long* action_type, [out] BSTR* ssd_item_id,
+    [out] SAFEARRAY(byte)* event_data, [out] long* event_data_size);
+
+  // Decodes the downloaded ssd events
+  // @param action_type: action_type of ssd item
+  // @param ssd_item_id: unique item_id of ssd item
+  // @param event_data: decompressed event data of ssd item
+  // @param event_data_size: size of event_data of ssd item
+  // @param taken: holds VARIANT_TRUE if item is taken by storage
+  [id(DISPID_GDD_STORAGE_DECODE_EVENT)]
+  HRESULT DecodeSsdEvent([in] long action_type, [in] BSTR ssd_item_id,
+    [in] const byte* event_data, [in] long event_data_size,
+    [out] VARIANT_BOOL* taken);
+
+  // Resolves the downloaded ssd events and update storage items accordingly,
+  // resolving any conflicts in the process
+  // @param has_changes: VARIANT_TRUE if storage items have changed upon return
+  [id(DISPID_GDD_STORAGE_RESOLVE_UPDATE)]
+  HRESULT ResolveEventsAndUpdateItems(VARIANT_BOOL* has_changes);
+};
+
+// Graphics object give to plugins in draw callbacks
+
+enum {
+  DISPID_GDD_GRAPHICS_DRAWLINE = DISPID_GDD_GRAPHICS_START,
+  DISPID_GDD_GRAPHICS_DRAWRECT,
+  DISPID_GDD_GRAPHICS_DRAWIMAGE,
+  DISPID_GDD_GRAPHICS_DRAWTEXT,
+  DISPID_GDD_GRAPHICS_GETTEXTWIDTH,
+  DISPID_GDD_GRAPHICS_GETTEXTHEIGHT,
+};
+
+[
+  object, uuid(35AD5708-ED56-494b-9866-374DFFDCFF5A),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayGraphics : IDispatch {
+  // Draws a line from x1,y1 to x2,y2 with given color.
+  // Color can be a html color string "#FF00FF" or one of gddColorXXX defines.
+  [id(DISPID_GDD_GRAPHICS_DRAWLINE)]
+  HRESULT DrawLine([in] long x1, [in] long y1, [in] long x2, [in] long y2,
+    [in, optional] VARIANT color);
+
+  // Draws a rect in the given coords with given colors
+  // Color can be a html color string "#FF00FF" or one of gddColorXXX defines.
+  [id(DISPID_GDD_GRAPHICS_DRAWRECT)]
+  HRESULT DrawRect([in] long x, [in] long y, [in] long width, [in] long height, 
+    [in] VARIANT line_color, [in, optional] VARIANT fill_color);
+
+  // Draw the given image at the given rect. If alpha_percent is specified the image
+  // is blended with that alpha (0-100)
+  [id(DISPID_GDD_GRAPHICS_DRAWIMAGE)]
+  HRESULT DrawImage([in] long x, [in] long y, [in] long width, [in] long height, 
+    [in] IPicture *image, [in, optional] VARIANT alpha_percent);
+
+  // Draw the given text at the rect with given color and font.
+  // @param flags combination of text flags gddTextFlagXXX
+  // @param font one of the ids DISPID_GDD_SS_FONT_XXX or leave it empty for default font
+  // @param color can be a html color string "#FF00FF" or one of gddColorXXX defines.
+  [id(DISPID_GDD_GRAPHICS_DRAWTEXT)]
+  HRESULT DrawText([in] long x, [in] long y, [in] long width, [in] long height, 
+    [in] BSTR text, [in, optional] VARIANT color, [in, optional] VARIANT flags,
+    [in, optional] VARIANT font);
+
+  // Calculate the pixel width of the given text if rendered using the given font
+  // @param flags combination of text flags such as DT_xxx / gddTextFlagXXX
+  // @param font one of the ids DISPID_GDD_SS_FONT_XXX or leave it empty for default font
+  [id(DISPID_GDD_GRAPHICS_GETTEXTWIDTH)]
+  HRESULT GetTextWidth([in] BSTR text, [in, optional] VARIANT flags,
+    [in, optional] VARIANT font, [out, retval] long *width);
+
+  // Calculate the pixel width of the given text if rendered using the given font
+  // @param width width in pixels at which the text should be clipped/wrapped
+  // @param flags combination of text flags such as DT_xxx / gddTextFlagXXX
+  // @param font one of the ids DISPID_GDD_SS_FONT_XXX or leave it empty for default font
+  [id(DISPID_GDD_GRAPHICS_GETTEXTHEIGHT)]
+  HRESULT GetTextHeight([in] BSTR text, [in] int width, [in, optional] VARIANT flags,
+    [in, optional] VARIANT font, [out, retval] long *height);
+};
+
+// General utility functions for plugins
+
+enum {
+  DISPID_GDD_UT_LOADIMAGE = DISPID_GDD_UT_START,
+  DISPID_GDD_UT_SETINTERVAL,
+  DISPID_GDD_UT_CLEARINTERVAL,
+  DISPID_GDD_UT_SETTIMEOUT,
+  DISPID_GDD_UT_CLEARTIMEOUT,
+  DISPID_GDD_UT_ALERT,
+  DISPID_GDD_UT_CONFIRM,
+  DISPID_GDD_UT_PROMPT,
+  DISPID_GDD_UT_LOG,
+};
+
+// All members of this interface have the first char as lowercase since they are
+// similar to ones exposed by other script hosts such as a browser
+[
+  object, uuid(E42581BB-17F1-4483-8C66-6066C9CF7686),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginUtils : IDispatch {
+  // Loads and return the given image.
+  // @param image_src can be a local filename, or could be a stream containing the bytes
+  //   of the image. Typical source of a stream is the responseStream property of
+  //   a XMLHttpRequest, which can be used to download and load an image from a URL
+  [id(DISPID_GDD_UT_LOADIMAGE)]
+  HRESULT loadImage([in] VARIANT image_src, [out, retval] IUnknown **image);
+
+  // The following functions are similar to the ones with same names available in 
+  // Javascript/HTML
+  [id(DISPID_GDD_UT_SETINTERVAL)]
+  HRESULT setInterval([in] VARIANT handler, [in] long elapse_ms,
+    [out, retval] long *timer_id);
+
+  [id(DISPID_GDD_UT_CLEARINTERVAL)]
+  HRESULT clearInterval([in] long timer_id);
+
+  [id(DISPID_GDD_UT_SETTIMEOUT)]
+  HRESULT setTimeout([in] VARIANT handler, [in] long elapse_ms,
+    [out, retval] long *timer_id);
+
+  [id(DISPID_GDD_UT_CLEARTIMEOUT)]
+  HRESULT clearTimeout([in] long timer_id);
+
+  [id(DISPID_GDD_UT_ALERT)]
+  HRESULT alert([in] BSTR text);
+
+  [id(DISPID_GDD_UT_CONFIRM)]
+  HRESULT confirm([in] BSTR text, [out, retval] VARIANT_BOOL *ok_pressed);
+
+  [id(DISPID_GDD_UT_PROMPT)]
+  HRESULT prompt([in, optional] VARIANT label, [in, optional] VARIANT def_text, 
+    [out, retval] VARIANT *return_value);
+};
+
+// extension of the above
+[
+  object, uuid(35B2E25C-8095-42F5-A4C7-2CE881A29DFB),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopDisplayPluginUtils2 : IGoogleDesktopDisplayPluginUtils {
+  // Send the given text to the GD plugin log
+  // @param level severity level of this message
+  // @param category string identifying which category this message belongs to. This
+  //   field is specific to the plugin and the plugin author can define his own list
+  //   of category strings for the various log messages sent by the plugin. For
+  //   simple cases this can be an empty string.
+  // @param text the actual message text
+  [id(DISPID_GDD_UT_LOG)]
+  HRESULT log([in] GoogleDesktopPluginLogLevel level, [in] BSTR category,
+    [in] BSTR text);
+};
+
+// interface for plugins to load and save settings via
+// IGoogleDesktopSmallStorage, which works for both local and shared data
+
+enum {
+  DISPID_GDD_PERSIST_SMALL_STORAGE_LOAD=DISPID_GDD_PERSIST_SMALL_STORAGE_START,
+  DISPID_GDD_PERSIST_SMALL_STORAGE_SAVE,
+};
+[
+  object, uuid(7A14E85D-387D-453c-85E6-ED04BB1031BB),
+  dual, pointer_default(unique)
+]
+interface IGoogleDesktopPersistSmallStorage : IUnknown {
+  // load panel settings from IGoogleDesktopSmallStorage
+  [id(DISPID_GDD_PERSIST_SMALL_STORAGE_LOAD)]
+  HRESULT Load([in] IGoogleDesktopSmallStorage *settings);
+
+  // save panel settings into IGoogleDesktopSmallStorage
+  [id(DISPID_GDD_PERSIST_SMALL_STORAGE_SAVE)]
+  HRESULT Save([in] IGoogleDesktopSmallStorage *settings);
+};
+
+//-------------------------------------------------------------------------------------
+// The type lib
+
+// typelib version
+cpp_quote("#define kSidebarLibVerMajor   2")
+cpp_quote("#define kSidebarLibVerMinor   0")
+
+[
+  uuid(E3B60D50-19AB-4a32-A8B1-A09113AB2BA4),
+  version(2.0),
+  helpstring("Google Desktop Display API Type Library")
+]
+
+library GoogleDesktopDisplayLib {
+  importlib("stdole32.tlb");
+  importlib("stdole.tlb"); 
+
+  interface IGoogleDesktopDisplaySite;
+  interface IGoogleDesktopDisplaySite2;
+  interface IGoogleDesktopDisplayPluginHandler;
+  interface IGoogleDesktopDisplayPluginHandler2;
+  interface IGoogleDesktopDisplayPlugin;
+  interface IGoogleDesktopDisplayPlugin2;
+  interface IGoogleDesktopDisplayContentItemHandler;
+  interface IGoogleDesktopDisplayContentItem;
+  interface IGoogleDesktopDisplayContentItemHelper;
+  interface IGoogleDesktopDisplayContentItemHelper2;
+  interface IGoogleDesktopDisplayContentItemHelper3;
+  interface IGoogleDesktopDisplayPluginHelper;
+  interface IGoogleDesktopDisplayPluginHelper2;
+  interface IGoogleDesktopDisplayPluginHelper3;
+  interface IGoogleDesktopDisplayPluginHelper4;
+  interface IGoogleDesktopDisplayContentHandler;
+  interface IGoogleDesktopDisplayDetailsViewHelper;
+  interface IGoogleDesktopDisplayDetailsViewHelper2;
+  interface IGoogleDesktopDisplayDetailsViewHandler;
+  interface IGoogleDesktopDisplayPluginUtils;
+  interface IGoogleDesktopDisplayPluginUtils2;
+  interface IGoogleDesktopDisplayMenu;
+  interface IGoogleDesktopDisplayGraphics;
+  interface IGoogleDesktopDisplayOptions;
+  interface IGoogleDesktopDisplayWindow;
+  interface IGoogleDesktopDisplayWindowControl;
+  interface IGoogleDesktopTalkFriend;
+  interface IGoogleDesktopPluginTalkService;
+  interface IGoogleDesktopPluginTalkHandler;
+  interface IGoogleDesktopSmallStorage;
+  interface IGoogleDesktopPersistSmallStorage;
+
+  // Plugin helper that can be used for the standard UI
+  [
+    uuid(77679773-B804-400F-9C88-598CDD099E2F)
+  ]
+  coclass GoogleDesktopDisplayPluginHelper {
+    [default] interface IGoogleDesktopDisplayPluginHelper3;
+  };
+
+  // Details view helper that can be used for the standard details view
+  [
+    uuid(FACE4234-6A8F-48AB-898A-237F6529C70E)
+  ]
+  coclass GoogleDesktopDisplayDetailsViewHelper {
+    [default] interface IGoogleDesktopDisplayDetailsViewHelper2;
+  };
+
+  // Helper that can be aggregated by content item implementations
+  [
+    uuid(E622966D-28A0-43C2-A5B8-0CAF622A6711)
+  ]
+  coclass GoogleDesktopDisplayContentItemHelper {
+    [default] interface IGoogleDesktopDisplayContentItemHelper3;
+  };
+
+  [uuid(9E7D9E69-FE1E-48ba-985E-A4872E01EC4A)]
+  coclass GoogleDesktopDisplayUINotification {
+    [default] interface IGoogleDesktopDisplayNotifier;
+  };
+
+  [uuid(44B0B5D8-55C9-46b4-9CCA-62842C9B3BFF)]
+  coclass GoogleDesktopSearchPanel {
+    [default] interface IUnknown;
+  };
+
+  [uuid(83ABF9E4-35C1-4cdb-992A-0329EEA71B67)]
+  coclass GoogleDesktopTalkFriend {
+    [default] interface IGoogleDesktopTalkFriend;
+  };
+
+  [uuid(BE9E91D3-19B1-43cd-9E27-1219AE04971E)]
+  coclass GoogleDesktopSmallStorage {
+    [default] interface IGoogleDesktopSmallStorage;
+  }
+}
